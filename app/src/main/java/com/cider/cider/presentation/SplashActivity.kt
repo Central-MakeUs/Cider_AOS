@@ -2,18 +2,14 @@ package com.cider.cider.presentation
 
 import android.Manifest.permission.*
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.cider.cider.R
+import com.cider.cider.presentation.register.LoginActivity
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +43,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun moveToLogin() {
-        val intent = Intent(this@SplashActivity, MainActivity::class.java)
+        val intent = Intent(this@SplashActivity, LoginActivity::class.java)
         startActivity(intent)
     }
 }
