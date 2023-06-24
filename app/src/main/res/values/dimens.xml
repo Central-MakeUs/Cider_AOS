@@ -11,4 +11,17 @@
     <dimen name="text_sm">12sp</dimen>
     <dimen name="text_xs">10sp</dimen>
 
+    <!-- margin size -->
+
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+
+    <dimen name="padding_8">8dp</dimen>
+
+    <!-- button height -->
+    <dimen name="btn_height_48">48dp</dimen>
+
+
+    <dimen name="height_48">48dp</dimen>
+    <dimen name="checkbox_size">24dp</dimen>
 </resources>

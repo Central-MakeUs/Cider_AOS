@@ -1,20 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.register.RegisterFragment">
 
         <TextView
+            android:id="@+id/tv_consent_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_height="wrap_content"
+            android:text="@string/consent_title"
+            android:textSize="@dimen/text_5xl"
+            android:fontFamily="@font/pretendard_bold"
+            android:layout_margin="@dimen/margin_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    </FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_consent_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48"
+            android:layout_marginHorizontal="@dimen/margin_24"
+            android:paddingVertical="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/view_consent_2">
+
+            <CheckBox
+                android:id="@+id/cb_consent_1"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_body1"
+                android:textSize="@dimen/text_lg"
+                android:fontFamily="@font/pretendard_bold"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/cb_consent_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_consent_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48"
+            android:paddingVertical="4dp"
+            app:layout_constraintBottom_toTopOf="@id/view_consent_3"
+            android:layout_marginHorizontal="@dimen/margin_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <CheckBox
+                android:id="@+id/cb_consent_2"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_body2"
+                android:textSize="@dimen/text_lg"
+                android:fontFamily="@font/pretendard_bold"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/cb_consent_2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/btn_consent_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_sub1"
+                android:textSize="@dimen/text_base"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/gray_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_consent_3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48"
+            android:layout_marginHorizontal="@dimen/margin_24"
+            android:paddingVertical="4dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/view_consent_all">
+
+            <CheckBox
+                android:id="@+id/cb_consent_3"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_body3"
+                android:textSize="@dimen/text_lg"
+                android:fontFamily="@font/pretendard_bold"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/cb_consent_3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/btn_consent_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_sub1"
+                android:textSize="@dimen/text_base"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/gray_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_consent_all"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48"
+            android:background="@drawable/shape_rec_round_4"
+            android:backgroundTint="@color/gray_1"
+            android:paddingHorizontal="@dimen/padding_8"
+            android:layout_marginHorizontal="@dimen/margin_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <CheckBox
+                android:id="@+id/cb_consent_all"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_body4"
+                android:textSize="@dimen/text_lg"
+                android:fontFamily="@font/pretendard_bold"
+                app:layout_constraintStart_toEndOf="@+id/cb_consent_all"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_sub3"
+                android:textSize="@dimen/text_base"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/gray_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
