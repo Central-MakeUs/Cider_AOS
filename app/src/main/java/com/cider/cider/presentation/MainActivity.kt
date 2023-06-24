@@ -1,6 +1,7 @@
-package com.cider.cider
+package com.cider.cider.presentation
 
 import android.os.Bundle
+import com.cider.cider.R
 import com.cider.cider.databinding.ActivityMainBinding
 import com.cider.cider.utils.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
