@@ -21,15 +21,25 @@
             android:id="@+id/view_register_tap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/register_tap_margin_top"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_register_tap1"
                 android:layout_width="@dimen/register_tap_width"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_tap_margin_top"
                 android:gravity="center"
                 android:text="@string/register_tap1"
+                android:textColor="@color/selector_text_color_register_tap"
+                android:enabled="true"
+                android:background="@drawable/selector_register_tap"
                 app:layout_constraintEnd_toStartOf="@id/tv_register_tap2"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +50,11 @@
                 android:id="@+id/tv_register_tap2"
                 android:layout_width="@dimen/register_tap_width"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_tap_margin_top"
                 android:gravity="center"
                 android:text="@string/register_tap2"
+                android:textColor="@color/selector_text_color_register_tap"
+                android:enabled="false"
+                android:background="@drawable/selector_register_tap"
                 app:layout_constraintEnd_toStartOf="@id/tv_register_tap3"
                 app:layout_constraintStart_toEndOf="@id/tv_register_tap1"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,9 +64,11 @@
                 android:id="@+id/tv_register_tap3"
                 android:layout_width="@dimen/register_tap_width"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_tap_margin_top"
                 android:gravity="center"
                 android:text="@string/register_tap3"
+                android:textColor="@color/selector_text_color_register_tap"
+                android:enabled="false"
+                android:background="@drawable/selector_register_tap"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_register_tap2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -66,7 +80,7 @@
             android:id="@+id/fl_register"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginVertical="16dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintTop_toBottomOf="@id/view_register_tap"
             app:layout_constraintBottom_toTopOf="@id/btn_register"/>
 
