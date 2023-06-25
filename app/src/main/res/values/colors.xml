@@ -34,4 +34,6 @@
     <color name="error">#B70000</color>
     <color name="warning">#D2712A</color>
     <color name="success">#00970F</color>
+
+    <color name="light_blue">#F3FAFF</color>
 </resources>

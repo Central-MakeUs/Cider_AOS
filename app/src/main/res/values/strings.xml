@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">사이다</string>
 
+    <string name="toolbar_title_register">회원가입</string>
     <!-- 서비스 이용 동의 -->
     <string name="consent_title">서비스 이용에\n동의해주세요</string>
     <string name="consent_body1">만 14세 이상입니다(필수)</string>
@@ -10,5 +11,9 @@
     <string name="consent_sub1">자세히 보기</string>
     <string name="consent_sub2">접기</string>
     <string name="consent_sub3">전체 약관에 동의합니다</string>
+
+    <string name="register_tap1">서비스 동의</string>
+    <string name="register_tap2">정보 입력</string>
+    <string name="register_tap3">키워드 추천</string>
 
 </resources>

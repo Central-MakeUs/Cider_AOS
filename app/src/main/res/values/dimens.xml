@@ -17,11 +17,18 @@
     <dimen name="margin_12">12dp</dimen>
 
     <dimen name="padding_8">8dp</dimen>
+    <dimen name="toolbar_padding">24dp</dimen>
 
     <!-- button height -->
     <dimen name="btn_height_48">48dp</dimen>
 
+    <dimen name="icon_size">24dp</dimen>
+
+    <dimen name="toolbar_height">44dp</dimen>
 
     <dimen name="height_48">48dp</dimen>
     <dimen name="checkbox_size">24dp</dimen>
+
+    <dimen name="register_tap_width">81dp</dimen>
+    <dimen name="register_tap_margin_top">16dp</dimen>
 </resources>
