@@ -3,4 +3,14 @@
     <style name="ImageButtonDefault" parent="Widget.AppCompat.ImageButton">
         <item name="android:backgroundTint">@android:color/transparent</item>
     </style>
+
+    <style name="DefaultButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/selector_btn</item>
+        <item name="android:textColor">@color/selector_btn_text_color</item>
+    </style>
+
+    <style name="TextButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/selector_textbtn</item>
+        <item name="android:textColor">@color/selector_textbtn_text_color</item>
+    </style>
 </resources>

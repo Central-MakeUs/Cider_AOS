@@ -88,6 +88,10 @@
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height_48"
+            android:enabled="false"
+            android:text="@string/register_btn_text"
+            android:textSize="@dimen/text_2xl"
+            android:fontFamily="@font/pretendard_bold"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
