@@ -21,4 +21,9 @@ abstract class BindingFragment<B: ViewDataBinding> (@LayoutRes private val layou
         _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         return binding.root
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
