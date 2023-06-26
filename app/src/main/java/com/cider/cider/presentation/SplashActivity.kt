@@ -25,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
 
         val permissionListener: PermissionListener = object : PermissionListener {
             override fun onPermissionGranted() {
-
+                moveToLogin()
                 finish()
             }
 
