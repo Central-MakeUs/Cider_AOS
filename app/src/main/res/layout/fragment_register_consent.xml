@@ -19,7 +19,6 @@
             android:text="@string/consent_title"
             android:textSize="@dimen/text_5xl"
             android:fontFamily="@font/pretendard_bold"
-            android:layout_margin="@dimen/margin_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

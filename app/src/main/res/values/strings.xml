@@ -24,4 +24,10 @@
     <string name="register_nickname_random">랜덤 닉네임 만들기</string>
     <string name="register_nickname_able">사용 가능한 닉네임입니다</string>
     <string name="register_nickname_disable">중복된 닉네임입니다</string>
+
+    <string name="register_profile_title">성별과 생년월일을\n입력해주세요</string>
+    <string name="register_profile_gender">성별</string>
+    <string name="register_profile_birth">생년월일</string>
+    <string name="register_profile_male">남성</string>
+    <string name="register_profile_female">여성</string>
 </resources>
