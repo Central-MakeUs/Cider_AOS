@@ -35,5 +35,9 @@
     <string name="register_keyword_challenge">관심있는 챌린지</string>
     <string name="register_keyword_keyword">관심 키워드</string>
     <string name="register_keyword_min">최소 2개 선택</string>
-    
+
+    <string name="challenge_investing">재테크</string>
+    <string name="challenge_saving">소비절약</string>
+    <string name="challenge_money_management">돈 관리</string>
+    <string name="challenge_financial_learning">금융학습</string>
 </resources>
