@@ -43,7 +43,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_profile_male"
-                style="@style/TextButtonStyle"
+                style="@style/LineButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:fontFamily="@font/pretendard_regular"
@@ -58,7 +58,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_profile_female"
-                style="@style/TextButtonStyle"
+                style="@style/LineButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:fontFamily="@font/pretendard_regular"
@@ -100,7 +100,9 @@
                 android:textSize="@dimen/text_xl"
                 android:layout_marginTop="8dp"
                 android:padding="12dp"
+                android:gravity="start"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_profile_birth"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

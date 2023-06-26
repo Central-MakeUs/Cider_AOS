@@ -83,12 +83,14 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_random_nickname"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:text="@string/register_nickname_random"
             android:textSize="@dimen/text_lg"
             android:textColor="@color/gray_6"
             android:fontFamily="@font/pretendard_bold"
-            android:padding="12dp"
+            android:paddingHorizontal="12dp"
+            android:drawableStart="@drawable/ic_refresh"
+            style="@style/LineButtonStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
