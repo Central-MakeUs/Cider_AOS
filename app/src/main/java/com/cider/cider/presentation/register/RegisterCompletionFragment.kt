@@ -5,7 +5,6 @@ import com.cider.cider.databinding.FragmentRegisterCompletionBinding
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class RegisterCompletionFragment
     :BindingFragment<FragmentRegisterCompletionBinding>(R.layout.fragment_register_completion) {
 

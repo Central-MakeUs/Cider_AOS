@@ -5,7 +5,6 @@ import com.cider.cider.databinding.FragmentRegisterConsentBinding
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class RegisterConsentFragment
     :BindingFragment<FragmentRegisterConsentBinding>(R.layout.fragment_register_consent) {
 

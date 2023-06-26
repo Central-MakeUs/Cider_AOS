@@ -5,7 +5,6 @@ import com.cider.cider.databinding.FragmentRegisterNicknameBinding
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class RegisterNicknameFragment
     :BindingFragment<FragmentRegisterNicknameBinding>(R.layout.fragment_register_nickname) {
 
