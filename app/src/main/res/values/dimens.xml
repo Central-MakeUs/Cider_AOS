@@ -31,4 +31,8 @@
 
     <dimen name="register_tap_width">81dp</dimen>
     <dimen name="register_tap_margin_top">16dp</dimen>
+
+    <!-- register nickname -->
+    <dimen name="edittext_height_44">44dp</dimen>
+    <dimen name="nickname_maxLength">10</dimen>
 </resources>
