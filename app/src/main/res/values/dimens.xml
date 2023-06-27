@@ -35,4 +35,6 @@
     <!-- register nickname -->
     <dimen name="edittext_height_44">44dp</dimen>
     <dimen name="nickname_maxLength">10</dimen>
+
+    <dimen name="register_service_0dp">0dp</dimen>
 </resources>
