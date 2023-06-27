@@ -17,6 +17,6 @@ class RegisterProfileFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.changeRegisterState(RegisterType.INFORMATION_INPUT)
+        viewModel.changeRegisterState(RegisterType.INFORMATION_INPUT2)
     }
 }
