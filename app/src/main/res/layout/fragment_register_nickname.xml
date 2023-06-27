@@ -46,15 +46,14 @@
                 android:layout_height="@dimen/edittext_height_44"
                 android:background="@drawable/selector_edittext"
                 android:paddingHorizontal="12dp"
-                android:maxLength="@dimen/nickname_maxLength"
+                android:maxLength="10"
                 android:hint="@string/register_nickname_hint"
                 android:textSize="@dimen/text_base"
                 android:fontFamily="@font/pretendard_bold"
                 android:textColorHint="@color/gray_5"
                 android:textColor="@color/text"
                 app:layout_constraintTop_toTopOf="parent"
-                android:autofillHints=""
-                android:inputType="text"/>
+                android:autofillHints=""/>
 
             <TextView
                 android:id="@+id/tv_check_nickname"

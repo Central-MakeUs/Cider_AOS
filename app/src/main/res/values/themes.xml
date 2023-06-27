@@ -10,7 +10,7 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/text</item>
         <item name="imageButtonStyle">@style/ImageButtonDefault</item>
-        
         <item name="buttonStyle">@style/DefaultButtonStyle</item>
+        <item name="checkboxStyle">@style/DefaultCheckBoxStyle</item>
     </style>
 </resources>
