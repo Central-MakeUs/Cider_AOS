@@ -13,7 +13,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
 
         val transaction = supportFragmentManager
         transaction.beginTransaction().apply {
-            add(R.id.fl_login, RegisterFragment(), "Register")
+            add(R.id.fl_login, LoginFragment(), "Login")
             commit()
         }
     }
