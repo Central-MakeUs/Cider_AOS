@@ -26,7 +26,7 @@
     <!-- Component Color -->
     <!-- Component 에 쓰이는 컬러 -->
     <color name="main">#009DFF</color>
-    <color name="sub">#E9F4FF</color>
+    <color name="sub">#F3FAFF</color>
     <color name="icon">#949494</color>
     <color name="divider">#F0F5F8</color>
     <color name="line">#F0F5F8</color>
@@ -34,4 +34,6 @@
     <color name="error">#B70000</color>
     <color name="warning">#D2712A</color>
     <color name="success">#00970F</color>
+
+    <color name="light_blue">#F3FAFF</color>
 </resources>

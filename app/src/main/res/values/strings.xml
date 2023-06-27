@@ -1,3 +1,43 @@
 <resources>
     <string name="app_name">사이다</string>
+
+    <string name="toolbar_title_register">회원가입</string>
+    <!-- 서비스 이용 동의 -->
+    <string name="consent_title">서비스 이용에\n동의해주세요</string>
+    <string name="consent_body1">만 14세 이상입니다(필수)</string>
+    <string name="consent_body2">서비스 이용 약관(필수)</string>
+    <string name="consent_body3">개인정보 처리 방침(필수)</string>
+    <string name="consent_body4">약관 전체 동의</string>
+    <string name="consent_sub1">자세히 보기</string>
+    <string name="consent_sub2">접기</string>
+    <string name="consent_sub3">전체 약관에 동의합니다</string>
+
+    <string name="register_tap1">서비스 동의</string>
+    <string name="register_tap2">정보 입력</string>
+    <string name="register_tap3">키워드 추천</string>
+
+    <string name="register_btn_text">확인했어요</string>
+
+    <string name="register_nickname_title">닉네임을\n입력해주세요</string>
+    <string name="register_nickname_sub">닉네임은 10자 이하로 입력해주세요</string>
+    <string name="register_nickname_hint">2~10자로 입력해주세요</string>
+    <string name="register_nickname_random">랜덤 닉네임 만들기</string>
+    <string name="register_nickname_able">사용 가능한 닉네임입니다</string>
+    <string name="register_nickname_disable">중복된 닉네임입니다</string>
+
+    <string name="register_profile_title">성별과 생년월일을\n입력해주세요</string>
+    <string name="register_profile_gender">성별</string>
+    <string name="register_profile_birth">생년월일</string>
+    <string name="register_profile_male">남성</string>
+    <string name="register_profile_female">여성</string>
+    
+    <string name="register_keyword_title">관심 챌린지와 키워드를\n모두 선택해주세요</string>
+    <string name="register_keyword_challenge">관심있는 챌린지</string>
+    <string name="register_keyword_keyword">관심 키워드</string>
+    <string name="register_keyword_min">최소 2개 선택</string>
+
+    <string name="challenge_investing">재테크</string>
+    <string name="challenge_saving">소비절약</string>
+    <string name="challenge_money_management">돈 관리</string>
+    <string name="challenge_financial_learning">금융학습</string>
 </resources>

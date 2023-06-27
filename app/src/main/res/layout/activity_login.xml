@@ -10,10 +10,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.MainActivity">
-
+        tools:context=".presentation.register.LoginActivity">
+        
         <FrameLayout
-            android:id="@+id/fl_main"
+            android:id="@+id/fl_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
