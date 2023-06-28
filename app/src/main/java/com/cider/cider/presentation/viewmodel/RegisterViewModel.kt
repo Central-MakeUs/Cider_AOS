@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cider.cider.domain.type.ChallengeType
 import com.cider.cider.domain.type.EditTextState
 import com.cider.cider.domain.type.Gender
 import com.cider.cider.domain.type.RegisterType
@@ -41,6 +42,14 @@ class RegisterViewModel @Inject constructor(
 
     private val _genderState = MutableLiveData<Gender>()
     val genderState : LiveData<Gender> get() = _genderState
+
+    private val _challengeState = MutableLiveData<ChallengeType>()
+    val challengeState: LiveData<ChallengeType> get() = _challengeState
+
+    init {
+        _challengeState.value = ChallengeType()
+    }
+
 
     fun changeCheckBox(num: Int) {
         if (_checkBoxState.value != null) {
@@ -109,6 +118,22 @@ class RegisterViewModel @Inject constructor(
     fun changeGender(gender: Gender) {
         _genderState.value = gender
         checkButtonState()
+    }
+
+    fun changeChallengeState(num: Int, state: Boolean) {
+        val currentData = _challengeState.value
+
+        if (currentData != null) {
+            val updatedData = when (num) {
+                0 -> currentData.copy(investing = state)
+                1 -> currentData.copy(saving = state)
+                2 -> currentData.copy(money_management = state)
+                3 -> currentData.copy(financial_learning = state)
+                else -> currentData
+            }
+            _challengeState.value = updatedData
+        }
+        Log.d("DataBindingTest","${_challengeState.value}")
     }
 
 

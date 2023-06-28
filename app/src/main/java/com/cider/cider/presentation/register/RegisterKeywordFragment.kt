@@ -3,20 +3,50 @@ package com.cider.cider.presentation.register
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.cider.cider.R
-import com.cider.cider.databinding.FragmentRegisterBinding
+import com.cider.cider.databinding.FragmentRegisterKeywordBinding
 import com.cider.cider.domain.type.RegisterType
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
-import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 class RegisterKeywordFragment
-    :BindingFragment<FragmentRegisterBinding>(R.layout.fragment_register_keyword) {
+    :BindingFragment<FragmentRegisterKeywordBinding>(R.layout.fragment_register_keyword) {
 
     private val viewModel: RegisterViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.register = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         viewModel.changeRegisterState(RegisterType.KEYWORD_RECOMMENDATION)
+
+        setChallenge()
+        setObserver()
+    }
+
+    private fun setChallenge() {
+        binding.btnChallenge1.setOnClickListener {
+            viewModel.changeChallengeState(0, !binding.btnChallenge1.isSelected)
+        }
+        binding.btnChallenge2.setOnClickListener {
+            viewModel.changeChallengeState(1, !binding.btnChallenge2.isSelected)
+        }
+        binding.btnChallenge3.setOnClickListener {
+            viewModel.changeChallengeState(2, !binding.btnChallenge3.isSelected)
+        }
+        binding.btnChallenge4.setOnClickListener {
+            viewModel.changeChallengeState(3, !binding.btnChallenge4.isSelected)
+        }
+    }
+    private fun setObserver() {
+        viewModel.challengeState.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                binding.btnChallenge1.isSelected = it.investing
+                binding.btnChallenge2.isSelected = it.saving
+                binding.btnChallenge3.isSelected = it.money_management
+                binding.btnChallenge4.isSelected = it.financial_learning
+            }
+        }
     }
 }
