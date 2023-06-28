@@ -33,21 +33,13 @@ class RegisterNicknameFragment
     }
 
     private fun setNickName() {
-        binding.etNickname.addTextChangedListener( object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun afterTextChanged(p0: Editable?) {
-                if (!binding.etNickname.text.isNullOrEmpty()) {
-                    if (binding.etNickname.text!!.isNotEmpty() || binding.etNickname.text!!.length >= 2) {
-                        viewModel.checkNickNameEnable()
-                    } else {
-                        viewModel.checkNickNameEnable()
-                    }
-                }
+        binding.etNickname.setOnFocusChangeListener { view, b ->
+            if (b) {
+                binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_active)
+            } else {
+                viewModel.checkNickNameEnable()
             }
-        })
-
-        binding.etNickname.setOnFocusChangeListener { view, b ->  }
+        }
     }
 
     private fun setObserver() {
@@ -62,22 +54,18 @@ class RegisterNicknameFragment
                 }
             }
         }
-        viewModel.nicknameEnable.observe(viewLifecycleOwner) {
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                if (it) {
-                    binding.tvCheckNickname.text = "사용 가능한 닉네임입니다"
-                } else {
-                    binding.tvCheckNickname.text = "중복된 닉네임입니다"
-                    binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_error)
-                }
-            }
-        }
         viewModel.nicknameState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                 when (viewModel.nicknameState.value) {
                     EditTextState.NONE -> binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_none)
-                    EditTextState.ACTIVE -> binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_active)
-                    EditTextState.ERROR -> binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_error)
+                    EditTextState.ACTIVE -> {
+                        binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_active)
+                        binding.tvCheckNickname.text = "사용 가능한 닉네임입니다"
+                    }
+                    EditTextState.ERROR -> {
+                        binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_error)
+                        binding.tvCheckNickname.text = "중복된 닉네임입니다"
+                    }
                     else -> binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_none)
                 }
             }

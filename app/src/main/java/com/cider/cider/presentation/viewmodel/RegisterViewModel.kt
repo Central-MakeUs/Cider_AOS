@@ -71,8 +71,9 @@ class RegisterViewModel @Inject constructor(
 
     fun createRandomNickName() {
         //NickName 요청
-        nickname.value = "랜덤아이디 생성"
+        nickname.value = "랜덤아이디생성"
         _nicknameEnable.value = true
+        changeNickNameState(EditTextState.ACTIVE)
         checkButtonState()
     }
 
@@ -82,6 +83,10 @@ class RegisterViewModel @Inject constructor(
             //nick 중복 검사
             viewModelScope.launch {
                 _nicknameEnable.value = true
+                changeNickNameState(EditTextState.ACTIVE) //중복 없을 때
+                //_nicknameEnable.value = false
+                //changeNickNameState(EditTextState.ERROR) //중복 있을 때
+
             }
         } else {
             _nicknameEnable.value = false
@@ -89,6 +94,10 @@ class RegisterViewModel @Inject constructor(
 
         nickname.value //를 레포에 전송하고, 받아오기
         checkButtonState()
+    }
+
+    fun changeNickNameState(editTextState: EditTextState) {
+        _nicknameState.value = editTextState
     }
 
     fun clearNickName() {
