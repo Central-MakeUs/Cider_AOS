@@ -4,8 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.cider.cider.domain.type.EditTextState
 import com.cider.cider.domain.type.RegisterType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,10 +30,13 @@ class RegisterViewModel @Inject constructor(
     private val _checkBoxState = MutableLiveData<Int>(1)
     val checkBoxState: LiveData<Int> get() = _checkBoxState
 
-    init {
-        _detailState.value = 0
+    //닉네임 입력 페이지
+    var nickname = MutableLiveData<String>("")
+    private val _nicknameEnable = MutableLiveData<Boolean>(false)
+    val nicknameEnable: LiveData<Boolean> get() = _nicknameEnable
 
-    }
+    private val _nicknameState = MutableLiveData<EditTextState>(EditTextState.NONE)
+    val nicknameState: LiveData<EditTextState> get() = _nicknameState
 
     fun changeCheckBox(num: Int) {
         if (_checkBoxState.value != null) {
@@ -56,8 +62,37 @@ class RegisterViewModel @Inject constructor(
 
     fun changeRegisterState(registerType: RegisterType) {
         _registerState.value = registerType
+        checkButtonState() //화면 넘어갈 때 체크해야 함
+    }
+
+    fun createRandomNickName() {
+        //NickName 요청
+        nickname.value = "랜덤아이디 생성"
+        _nicknameEnable.value = true
         checkButtonState()
     }
+
+    fun checkNickNameEnable() {
+        val nick = nickname.value?:""
+        if (nick.isNotEmpty() && nick.length >= 2) {
+            //nick 중복 검사
+            viewModelScope.launch {
+                _nicknameEnable.value = true
+            }
+        } else {
+            _nicknameEnable.value = false
+        }
+
+        nickname.value //를 레포에 전송하고, 받아오기
+        checkButtonState()
+    }
+
+    fun clearNickName() {
+        nickname.value = ""
+        _nicknameEnable.value = false
+        checkButtonState()
+    }
+
 
     private fun checkButtonState() {
         when (_registerState.value) {
@@ -65,7 +100,7 @@ class RegisterViewModel @Inject constructor(
                 _buttonState.value = (_checkBoxState.value == 30)
             }
             RegisterType.INFORMATION_INPUT1 -> {
-
+                _buttonState.value = _nicknameEnable.value
             }
             RegisterType.INFORMATION_INPUT2 -> {
 
@@ -75,7 +110,6 @@ class RegisterViewModel @Inject constructor(
             }
             else -> {}
         }
-
     }
 
     fun setTermDetail(num: Int) {
