@@ -1,8 +1,10 @@
 package com.cider.cider.presentation.register
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.cider.cider.R
@@ -16,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegisterFragment
     :BindingFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
 
+    private lateinit var callback: OnBackPressedCallback
     private val viewModel: RegisterViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +29,21 @@ class RegisterFragment
 
         setFragment(RegisterConsentFragment(),"RegisterConsent")
         setButton()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                onBackPressed()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 
     fun setFragment(fragment: Fragment, tag: String) {
@@ -58,6 +76,14 @@ class RegisterFragment
         }
 
         binding.toolbar.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun onBackPressed() {
+        if (childFragmentManager.fragments[childFragmentManager.fragments.size-1].tag == "RegisterConsent") {
+            parentFragmentManager.popBackStack()
+        } else {
             childFragmentManager.popBackStack()
         }
     }

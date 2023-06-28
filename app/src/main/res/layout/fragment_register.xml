@@ -17,8 +17,8 @@
         android:paddingBottom="20dp">
 
         <include
-            android:id="@+id/toolbar"
-            layout="@layout/item_toolbar" />
+            layout="@layout/item_toolbar"
+            android:id="@+id/toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view_register_tap"
