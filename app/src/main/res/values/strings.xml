@@ -30,7 +30,7 @@
     <string name="register_profile_birth">생년월일</string>
     <string name="register_profile_male">남성</string>
     <string name="register_profile_female">여성</string>
-    
+
     <string name="register_keyword_title">관심 챌린지와 키워드를\n모두 선택해주세요</string>
     <string name="register_keyword_challenge">관심있는 챌린지</string>
     <string name="register_keyword_keyword">관심 키워드</string>
@@ -40,4 +40,6 @@
     <string name="challenge_saving">소비절약</string>
     <string name="challenge_money_management">돈 관리</string>
     <string name="challenge_financial_learning">금융학습</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cider.cider.domain.type.EditTextState
+import com.cider.cider.domain.type.Gender
 import com.cider.cider.domain.type.RegisterType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -37,6 +38,9 @@ class RegisterViewModel @Inject constructor(
 
     private val _nicknameState = MutableLiveData<EditTextState>(EditTextState.NONE)
     val nicknameState: LiveData<EditTextState> get() = _nicknameState
+
+    private val _genderState = MutableLiveData<Gender>()
+    val genderState : LiveData<Gender> get() = _genderState
 
     fun changeCheckBox(num: Int) {
         if (_checkBoxState.value != null) {
@@ -93,6 +97,11 @@ class RegisterViewModel @Inject constructor(
         checkButtonState()
     }
 
+    fun changeGender(gender: Gender) {
+        _genderState.value = gender
+        checkButtonState()
+    }
+
 
     private fun checkButtonState() {
         when (_registerState.value) {
@@ -103,7 +112,11 @@ class RegisterViewModel @Inject constructor(
                 _buttonState.value = _nicknameEnable.value
             }
             RegisterType.INFORMATION_INPUT2 -> {
-
+                if (_genderState.value != null) {
+                    _buttonState.value = true
+                } else {
+                    _buttonState.value = false
+                }
             }
             RegisterType.KEYWORD_RECOMMENDATION -> {
 
