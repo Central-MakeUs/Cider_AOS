@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cider.cider.domain.type.ChallengeType
-import com.cider.cider.domain.type.EditTextState
-import com.cider.cider.domain.type.Gender
-import com.cider.cider.domain.type.RegisterType
+import com.cider.cider.domain.type.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,11 +40,15 @@ class RegisterViewModel @Inject constructor(
     private val _genderState = MutableLiveData<Gender>()
     val genderState : LiveData<Gender> get() = _genderState
 
+    private val _birth = MutableLiveData<Birth>()
+    val birth: LiveData<Birth> get() = _birth
+
     private val _challengeState = MutableLiveData<ChallengeType>()
     val challengeState: LiveData<ChallengeType> get() = _challengeState
 
     init {
         _challengeState.value = ChallengeType()
+        _birth.value = Birth(0,-1,0)
     }
 
 
@@ -118,6 +119,10 @@ class RegisterViewModel @Inject constructor(
     fun changeGender(gender: Gender) {
         _genderState.value = gender
         checkButtonState()
+    }
+
+    fun changeBirth(birth: Birth) {
+        _birth.value = birth
     }
 
     fun changeChallengeState(num: Int, state: Boolean) {

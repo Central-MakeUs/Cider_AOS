@@ -1,11 +1,13 @@
 package com.cider.cider.presentation.register
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterProfileBinding
+import com.cider.cider.domain.type.Birth
 import com.cider.cider.domain.type.Gender
 import com.cider.cider.domain.type.RegisterType
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
@@ -13,6 +15,7 @@ import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class RegisterProfileFragment
     :BindingFragment<FragmentRegisterProfileBinding>(R.layout.fragment_register_profile) {
@@ -26,6 +29,7 @@ class RegisterProfileFragment
 
         setButton()
         setObserver()
+        setBirth()
     }
 
     private fun setButton() {
@@ -52,6 +56,12 @@ class RegisterProfileFragment
         }
     }
     private fun setBirth() {
-
+        binding.btnProfileBirth.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val data = DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                viewModel.changeBirth(Birth(year, month, day))
+            }
+            DatePickerDialog(requireContext(), data, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
     }
 }
