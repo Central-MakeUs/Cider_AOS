@@ -12,6 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_line_btn"
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginVertical="6dp"
         android:paddingHorizontal="8dp">
 
         <androidx.constraintlayout.utils.widget.ImageFilterView

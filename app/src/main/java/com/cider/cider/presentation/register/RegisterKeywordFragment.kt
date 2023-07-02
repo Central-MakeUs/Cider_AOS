@@ -42,10 +42,14 @@ class RegisterKeywordFragment
             binding.rvKeyword.layoutManager = it
             binding.rvKeyword.adapter = keywordAdapter
         }
+
+        //TODO(array-list 파일로 옮기기)
         val list = arrayListOf(
-            KeyWord("테스트1", false),
-            KeyWord("테스트1", false),
-            KeyWord("테스트1", false),KeyWord("테스트1", false),KeyWord("테스트1", false))
+            KeyWord("짠테크", false),
+            KeyWord("앱테크", false),
+            KeyWord("청년정책", false),
+            KeyWord("소비생활", false),
+            KeyWord("적금", false))
         keywordAdapter.submitList(list)
     }
     private fun setChallenge() {
