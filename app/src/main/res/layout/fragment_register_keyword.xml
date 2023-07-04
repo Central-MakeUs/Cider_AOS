@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="register"
+            type="com.cider.cider.presentation.viewmodel.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,34 +55,68 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_profile_male"
-                style="@style/LineButtonStyle"
+                android:id="@+id/btn_challenge_1"
+                style="@style/LineButtonStyleMint"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
-                android:text="@string/register_profile_male"
+                android:text="@string/challenge_investing"
                 android:textSize="@dimen/text_xl"
                 android:layout_marginEnd="4dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_profile_female"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_refresh"
+                app:layout_constraintEnd_toStartOf="@+id/btn_challenge_2"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_keyword_challenge" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_profile_female"
+                android:id="@+id/btn_challenge_2"
                 style="@style/LineButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
-                android:text="@string/register_profile_female"
+                android:text="@string/challenge_saving"
                 android:textSize="@dimen/text_xl"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btn_profile_male"
+                app:layout_constraintStart_toEndOf="@+id/btn_challenge_1"
                 app:layout_constraintTop_toBottomOf="@id/tv_keyword_challenge" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_challenge_3"
+                style="@style/LineButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/challenge_money_management"
+                android:textSize="@dimen/text_xl"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_refresh"
+                app:layout_constraintEnd_toStartOf="@+id/btn_challenge_4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_challenge_1" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_challenge_4"
+                style="@style/LineButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/challenge_financial_learning"
+                android:textSize="@dimen/text_xl"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_challenge_3"
+                app:layout_constraintTop_toBottomOf="@id/btn_challenge_2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -112,6 +148,16 @@
                 android:gravity="center_vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@id/tv_keyword_keyword"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_keyword"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

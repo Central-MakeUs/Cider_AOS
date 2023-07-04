@@ -18,4 +18,13 @@
         <item name="android:background">@drawable/selector_line_btn</item>
         <item name="android:textColor">@color/selector_line_btn_text_color</item>
     </style>
+
+    <style name="LineButtonStyleMint" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/selector_line_btn_mint</item>
+        <item name="android:textColor">@color/selector_line_btn_text_color</item>
+    </style>
+
+    <style name="DefaultCheckBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:buttonTint">@color/selector_check_box</item>
+    </style>
 </resources>
