@@ -1,6 +1,7 @@
 package com.cider.cider.presentation.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +34,10 @@ class RegisterKeywordFragment
     }
 
     private fun setKeyword() {
-        val keywordAdapter = KeyWordAdapter()
+        val keywordAdapter = KeyWordAdapter(viewModel)
+
+        keywordAdapter.submitList(viewModel.keywordState.value)
+
         FlexboxLayoutManager(requireContext()).apply {
             flexWrap = FlexWrap.WRAP
             flexDirection = FlexDirection.ROW
@@ -43,14 +47,11 @@ class RegisterKeywordFragment
             binding.rvKeyword.adapter = keywordAdapter
         }
 
-        //TODO(array-list 파일로 옮기기)
-        val list = arrayListOf(
-            KeyWord("짠테크", false),
-            KeyWord("앱테크", false),
-            KeyWord("청년정책", false),
-            KeyWord("소비생활", false),
-            KeyWord("적금", false))
-        keywordAdapter.submitList(list)
+        viewModel.keywordState.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                keywordAdapter.submitList(it)
+            }
+        }
     }
     private fun setChallenge() {
         binding.btnChallenge1.setOnClickListener {

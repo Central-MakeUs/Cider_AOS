@@ -1,15 +1,17 @@
 package com.cider.cider.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cider.cider.databinding.ItemKeywordBinding
 import com.cider.cider.domain.type.KeyWord
+import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.ItemDiffCallback
 
 class KeyWordAdapter(
-
+    private val viewModel: RegisterViewModel
 ): ListAdapter<KeyWord, RecyclerView.ViewHolder>(
     ItemDiffCallback<KeyWord>(
         onContentsTheSame = {old, new -> old == new},
@@ -36,6 +38,14 @@ class KeyWordAdapter(
 
         fun bind(item: KeyWord) {
             binding.keyword = item
+
+            binding.layoutKeyword.setOnClickListener {
+                Log.d("KeyWordTest","TEST $item")
+                viewModel.changeKeyWordState(item.title)
+            }
+            binding.layoutKeyword.isSelected = item.state
+            binding.itemTag.isSelected = item.state
+            binding.itemText.isSelected = item.state
         }
     }
 }

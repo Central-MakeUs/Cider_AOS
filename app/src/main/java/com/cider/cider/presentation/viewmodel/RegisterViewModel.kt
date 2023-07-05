@@ -46,10 +46,18 @@ class RegisterViewModel @Inject constructor(
     private val _challengeState = MutableLiveData<ChallengeType>()
     val challengeState: LiveData<ChallengeType> get() = _challengeState
 
+    private val _keywordState = MutableLiveData<List<KeyWord>>()
+    val keywordState: LiveData<List<KeyWord>> get() = _keywordState
+
     init {
         _challengeState.value = ChallengeType()
         _birth.value = Birth(0,-1,0)
-    }
+        _keywordState.value = arrayListOf(
+            KeyWord("짠테크", false),
+            KeyWord("앱테크", false),
+            KeyWord("청년정책", false),
+            KeyWord("소비생활", false),
+            KeyWord("적금", false))    }
 
 
     fun changeCheckBox(num: Int) {
@@ -139,6 +147,25 @@ class RegisterViewModel @Inject constructor(
             _challengeState.value = updatedData
         }
         Log.d("DataBindingTest","${_challengeState.value}")
+    }
+
+    fun changeKeyWordState(title: String) {
+        //title 과 같은 아이템의 state를 !한다
+        val currentData = _keywordState.value
+
+        Log.d("KeyWordTest","? ${_keywordState.value}")
+        if (currentData != null) {
+            val updatedData = ArrayList<KeyWord>()
+            currentData.forEach {
+                if (it.title == title) {
+                    updatedData.add(KeyWord(it.title, !it.state))
+                } else {
+                    updatedData.add(it)
+                }
+            }
+            _keywordState.value = updatedData
+        }
+        Log.d("KeyWordTest","?? ${_keywordState.value}")
     }
 
 
