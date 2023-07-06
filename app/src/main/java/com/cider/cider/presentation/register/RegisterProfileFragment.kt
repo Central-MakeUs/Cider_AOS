@@ -54,6 +54,22 @@ class RegisterProfileFragment
                 }
             }
         }
+        viewModel.birth.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
+                if (it.year != 0) {
+                    if (it.hasPassed14Years()) {
+                        binding.btnProfileBirth.background =
+                            resources.getDrawable(R.drawable.shape_edittext_active)
+                        binding.tvCheckBirth.visibility = View.GONE
+                    } else {
+                        binding.btnProfileBirth.background =
+                            resources.getDrawable(R.drawable.shape_edittext_error)
+                        binding.tvCheckBirth.visibility = View.VISIBLE
+                    }
+                }
+                viewModel.checkButtonState() //TODO(로직 다시 생각해 보기)
+            }
+        }
     }
     private fun setBirth() {
         binding.btnProfileBirth.setOnClickListener {
@@ -61,7 +77,13 @@ class RegisterProfileFragment
             val data = DatePickerDialog.OnDateSetListener { view, year, month, day ->
                 viewModel.changeBirth(Birth(year, month, day))
             }
-            DatePickerDialog(requireContext(), data, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+            val dialog = DatePickerDialog(
+                requireContext(),
+                R.style.SpinnerDatePickerDialogTheme,
+                data,
+                cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
+            dialog.show()
+
         }
     }
 }

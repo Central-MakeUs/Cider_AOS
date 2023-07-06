@@ -30,6 +30,8 @@
     <string name="register_profile_birth">생년월일</string>
     <string name="register_profile_male">남성</string>
     <string name="register_profile_female">여성</string>
+    <string name="register_profile_birth_check">14세 이상으로 선택해주세요</string>
+    <string name="register_profile_gender_check">본인의 성별을 선택해주세요</string>
 
     <string name="register_keyword_title">관심 챌린지와 키워드를\n모두 선택해주세요</string>
     <string name="register_keyword_challenge">관심있는 챌린지</string>

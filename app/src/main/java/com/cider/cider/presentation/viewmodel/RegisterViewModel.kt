@@ -172,7 +172,7 @@ class RegisterViewModel @Inject constructor(
     }
 
 
-    private fun checkButtonState() {
+    fun checkButtonState() {
         when (_registerState.value) {
             RegisterType.SERVICE_AGREEMENT -> {
                 _buttonState.value = (_checkBoxState.value == 30)
@@ -181,7 +181,12 @@ class RegisterViewModel @Inject constructor(
                 _buttonState.value = _nicknameEnable.value
             }
             RegisterType.INFORMATION_INPUT2 -> {
-                _buttonState.value = _genderState.value != null
+                _buttonState.value = (_genderState.value != null) &&
+                        if (_birth.value?.year == 0) {
+                            false
+                        } else {
+                            _birth.value?.hasPassed14Years()?:false
+                        }
             }
             RegisterType.KEYWORD_RECOMMENDATION -> {
                 val trueCountChallenge = listOf(
