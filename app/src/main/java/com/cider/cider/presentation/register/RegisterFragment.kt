@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterBinding
-import com.cider.cider.domain.type.RegisterType
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +20,6 @@ class RegisterFragment
 
     private lateinit var callback: OnBackPressedCallback
     private val viewModel: RegisterViewModel by activityViewModels()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,6 +43,11 @@ class RegisterFragment
     override fun onDetach() {
         super.onDetach()
         callback.remove()
+    }
+
+    override fun onDestroyView() {
+        parentFragmentManager.beginTransaction().remove(RegisterFragment()).commit()
+        super.onDestroyView()
     }
 
     private fun setFragment(fragment: Fragment, tag: String) {

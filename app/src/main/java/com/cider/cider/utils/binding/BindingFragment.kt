@@ -1,11 +1,9 @@
 package com.cider.cider.utils.binding
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -22,10 +20,5 @@ abstract class BindingFragment<B: ViewDataBinding> (@LayoutRes private val layou
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

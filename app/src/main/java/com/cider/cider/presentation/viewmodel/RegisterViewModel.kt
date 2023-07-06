@@ -57,9 +57,8 @@ class RegisterViewModel @Inject constructor(
             KeyWord("앱테크", false),
             KeyWord("청년정책", false),
             KeyWord("소비생활", false),
-            KeyWord("적금", false))    }
-
-
+            KeyWord("적금", false))
+    }
     fun changeCheckBox(num: Int) {
         if (_checkBoxState.value != null) {
             if (num == 30) {
