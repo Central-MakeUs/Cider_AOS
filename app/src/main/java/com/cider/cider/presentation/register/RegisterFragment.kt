@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -68,23 +69,39 @@ class RegisterFragment
                     setFragment(RegisterKeywordFragment(), "RegisterKeyword")
                     Log.d("Fragment Test","3 ${childFragmentManager.fragments}")
                 }
+                "RegisterKeyword" -> {
+                    setFragment(RegisterCompletionFragment(), "RegisterCompletion")
+                    binding.viewRegisterTap.visibility = View.GONE
+                    binding.tvToolbarTitle.text = "회원가입 완료"
+                    //TODO(완료 시 어디로 가지?)
+                    Log.d("Fragment Test","4 ${parentFragmentManager.fragments}")
+                }
+                "RegisterCompletion" -> {
+                    Toast.makeText(requireContext(),"완료",Toast.LENGTH_SHORT).show()
+                }
                 null -> {
-                    Log.d("Fragment Test","4 ${childFragmentManager.fragments}")
+                    Log.d("Fragment Test","5 ${childFragmentManager.fragments}")
                     //TODO(예외 처리)
                 }
             }
         }
 
-        binding.toolbar.setOnClickListener {
+        binding.btnToolbarBack.setOnClickListener {
             onBackPressed()
         }
     }
 
     private fun onBackPressed() {
-        if (childFragmentManager.fragments[childFragmentManager.fragments.size-1].tag == "RegisterConsent") {
-            parentFragmentManager.popBackStack()
-        } else {
-            childFragmentManager.popBackStack()
+        when (childFragmentManager.fragments[childFragmentManager.fragments.size-1].tag) {
+            "RegisterConsent" -> {
+                parentFragmentManager.popBackStack()
+            }
+            "RegisterCompletion" -> {
+                //TODO(None)
+            }
+            else -> {
+                childFragmentManager.popBackStack()
+            }
         }
     }
 }
