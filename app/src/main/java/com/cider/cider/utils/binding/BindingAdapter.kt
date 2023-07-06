@@ -25,5 +25,7 @@ fun setLayoutHeight(view: View, height: Int) {
 @SuppressLint("SetTextI18n")
 @BindingAdapter("textDate")
 fun setTextDate(view: TextView, date: Birth) {
-    view.text = "${date.year}년 ${date.month+1}월 ${date.day}일"
+    view.text = "${(date.year).toString().padStart(4,'0')}년 " +
+            "${(date.month+1).toString().padStart(2,'0')}월 " +
+            "${(date.day).toString().padStart(2,'0')}일"
 }
