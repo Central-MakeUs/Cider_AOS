@@ -196,7 +196,7 @@ class RegisterViewModel @Inject constructor(
 
                 _buttonState.value = trueCountKeyword>=2 && trueCountChallenge>=2
             }
-            RegisterType.KEYWORD_COMPLETION -> {
+            RegisterType.COMPLETION -> {
                 _buttonState.value = true
             }
             else -> {}

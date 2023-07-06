@@ -47,14 +47,14 @@ class RegisterFragment
         callback.remove()
     }
 
-    fun setFragment(fragment: Fragment, tag: String) {
+    private fun setFragment(fragment: Fragment, tag: String) {
         val transaction = childFragmentManager.beginTransaction()
         transaction.replace(R.id.fl_register, fragment, tag)
         transaction.addToBackStack("Register")
         transaction.commit()
     }
 
-    fun setButton() {
+    private fun setButton() {
         binding.btnRegister.setOnClickListener {
             when (childFragmentManager.fragments[childFragmentManager.fragments.size-1].tag) {
                 "RegisterConsent" -> {
