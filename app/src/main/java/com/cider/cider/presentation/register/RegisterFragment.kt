@@ -83,6 +83,7 @@ class RegisterFragment
                     Log.d("Fragment Test","5 ${childFragmentManager.fragments}")
                     //TODO(예외 처리)
                 }
+                else -> {}
             }
         }
 

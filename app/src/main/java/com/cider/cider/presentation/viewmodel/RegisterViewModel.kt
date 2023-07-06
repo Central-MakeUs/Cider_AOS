@@ -147,6 +147,8 @@ class RegisterViewModel @Inject constructor(
             _challengeState.value = updatedData
         }
         Log.d("DataBindingTest","${_challengeState.value}")
+
+        checkButtonState() //버튼 상태 확인
     }
 
     fun changeKeyWordState(title: String) {
@@ -166,6 +168,8 @@ class RegisterViewModel @Inject constructor(
             _keywordState.value = updatedData
         }
         Log.d("KeyWordTest","?? ${_keywordState.value}")
+
+        checkButtonState() //버튼 상태 확인
     }
 
 
@@ -178,14 +182,22 @@ class RegisterViewModel @Inject constructor(
                 _buttonState.value = _nicknameEnable.value
             }
             RegisterType.INFORMATION_INPUT2 -> {
-                if (_genderState.value != null) {
-                    _buttonState.value = true
-                } else {
-                    _buttonState.value = false
-                }
+                _buttonState.value = _genderState.value != null
             }
             RegisterType.KEYWORD_RECOMMENDATION -> {
+                val trueCountChallenge = listOf(
+                    _challengeState.value?.investing?:false,
+                    _challengeState.value?.saving?:false,
+                    _challengeState.value?.money_management?:false,
+                    _challengeState.value?.financial_learning?:false,
+                ).count { it }
 
+                val trueCountKeyword = _keywordState.value?.count {it.state}?:0
+
+                _buttonState.value = trueCountKeyword>=2 && trueCountChallenge>=2
+            }
+            RegisterType.KEYWORD_COMPLETION -> {
+                _buttonState.value = true
             }
             else -> {}
         }
