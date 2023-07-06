@@ -17,6 +17,7 @@
         tools:targetApi="33">
         <activity
             android:name=".presentation.register.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
