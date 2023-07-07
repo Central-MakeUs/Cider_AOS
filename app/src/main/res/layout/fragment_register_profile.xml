@@ -17,11 +17,8 @@
 
         <TextView
             android:id="@+id/tv_profile_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/TextViewTitleStyle"
             android:text="@string/register_profile_title"
-            android:textSize="@dimen/text_5xl"
-            android:fontFamily="@font/pretendard_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -107,6 +104,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_profile_birth"
                 android:background="@drawable/shape_edittext_none"
+                android:backgroundTint="@color/gray_1"
                 android:layout_width="0dp"
                 android:layout_height="44dp"
                 android:fontFamily="@font/pretendard_regular"

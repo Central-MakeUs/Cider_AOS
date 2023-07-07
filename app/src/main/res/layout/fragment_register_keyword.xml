@@ -15,11 +15,8 @@
 
         <TextView
             android:id="@+id/tv_keyword_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/TextViewTitleStyle"
             android:text="@string/register_keyword_title"
-            android:textSize="@dimen/text_5xl"
-            android:fontFamily="@font/pretendard_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -117,6 +114,7 @@
                 app:layout_constraintTop_toBottomOf="@id/btn_challenge_2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!--
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view_keyword"
             android:layout_width="match_parent"
@@ -157,5 +155,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:listitem="@layout/item_keyword"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

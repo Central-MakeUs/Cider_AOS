@@ -16,11 +16,8 @@
 
         <TextView
             android:id="@+id/tv_nickname_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/TextViewTitleStyle"
             android:text="@string/register_nickname_title"
-            android:textSize="@dimen/text_5xl"
-            android:fontFamily="@font/pretendard_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
