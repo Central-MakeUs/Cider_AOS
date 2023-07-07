@@ -2,6 +2,7 @@ package com.cider.cider.presentation.register
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -74,6 +75,11 @@ class RegisterProfileFragment
     private fun setBirth() {
         binding.btnProfileBirth.setOnClickListener {
             val cal = Calendar.getInstance()
+            cal.set( if ((viewModel.birth.value?.year ?: cal.get(Calendar.YEAR)) <= 1900) cal.get(Calendar.YEAR) else viewModel.birth.value?.year?:0,
+                viewModel.birth.value?.month?:Calendar.MONTH,
+                viewModel.birth.value?.day?:Calendar.DAY_OF_MONTH)
+
+            Log.d("TEST","${cal.get(Calendar.YEAR)} / ${cal.get(Calendar.MONTH)} / ${cal.get(Calendar.DAY_OF_MONTH)}")
             val data = DatePickerDialog.OnDateSetListener { view, year, month, day ->
                 viewModel.changeBirth(Birth(year, month, day))
             }

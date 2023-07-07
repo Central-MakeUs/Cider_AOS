@@ -33,10 +33,7 @@ class RegisterFragment
             if (error != null) {
                 Log.e("Kakao Login Test","사용자 정보 요청 실패 $error")
             } else if (user != null) {
-                Log.e("Kakao Login Test","사용자 정보 요청 성공 $user\n" +
-                        "${user.kakaoAccount?.profile?.nickname}\n" +
-                        "${user.kakaoAccount?.birthday}\n" +
-                        "${user.kakaoAccount?.gender}\n" )
+                Log.e("Kakao Login Test","사용자 정보 요청 성공 $user\n" )
                 viewModel.getRegisterData(
                     name = user.kakaoAccount?.profile?.nickname,
                     date = user.kakaoAccount?.birthday?.toInt(),
