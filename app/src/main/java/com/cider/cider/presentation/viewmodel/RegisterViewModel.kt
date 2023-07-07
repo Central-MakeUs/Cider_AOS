@@ -58,6 +58,13 @@ class RegisterViewModel @Inject constructor(
             KeyWord("소비생활", false),
             KeyWord("적금", false))
     }
+
+    fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
+        if (name != null) nickname.value = name!!
+        if (date != null) _birth.value = Birth(0, date/100-1, date%100)
+        if (gender != null) _genderState.value = gender!!
+    }
+
     fun changeCheckBox(num: Int) {
         if (_checkBoxState.value != null) {
             if (num == 30) {

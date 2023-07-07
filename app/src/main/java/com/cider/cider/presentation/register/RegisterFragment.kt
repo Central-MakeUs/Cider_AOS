@@ -14,6 +14,7 @@ import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.kakao.sdk.user.UserApi
 import com.kakao.sdk.user.UserApiClient
+import com.kakao.sdk.user.model.Gender
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,8 +35,14 @@ class RegisterFragment
             } else if (user != null) {
                 Log.e("Kakao Login Test","사용자 정보 요청 성공 $user\n" +
                         "${user.kakaoAccount?.profile?.nickname}\n" +
-                        "${user.kakaoAccount?.birthyear}/${user.kakaoAccount?.birthday}\n" +
+                        "${user.kakaoAccount?.birthday}\n" +
                         "${user.kakaoAccount?.gender}\n" )
+                viewModel.getRegisterData(
+                    name = user.kakaoAccount?.profile?.nickname,
+                    date = user.kakaoAccount?.birthday?.toInt(),
+                    gender = if (user.kakaoAccount?.gender == Gender.MALE) com.cider.cider.domain.type.Gender.MALE
+                            else com.cider.cider.domain.type.Gender.FEMALE
+                )
             }
         }
 
