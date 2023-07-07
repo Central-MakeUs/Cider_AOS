@@ -71,4 +71,7 @@ dependencies {
     implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    //kakao Login
+    implementation 'com.kakao.sdk:v2-user:2.11.0'
 }

@@ -3,12 +3,14 @@ package com.cider.cider.presentation.register
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.cider.cider.R
 import com.cider.cider.databinding.ActivityLoginBinding
 import com.cider.cider.utils.binding.BindingActivity
+import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +26,8 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             add(R.id.fl_login, LoginFragment(), "Login")
             commit()
         }
+
+        Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

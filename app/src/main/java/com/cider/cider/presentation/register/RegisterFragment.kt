@@ -12,6 +12,8 @@ import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterBinding
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
+import com.kakao.sdk.user.UserApi
+import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +27,18 @@ class RegisterFragment
 
         binding.register = viewModel
         binding.lifecycleOwner = this@RegisterFragment
+
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e("Kakao Login Test","사용자 정보 요청 실패 $error")
+            } else if (user != null) {
+                Log.e("Kakao Login Test","사용자 정보 요청 성공 $user\n" +
+                        "${user.kakaoAccount?.profile?.nickname}\n" +
+                        "${user.kakaoAccount?.birthyear}/${user.kakaoAccount?.birthday}\n" +
+                        "${user.kakaoAccount?.gender}\n" )
+            }
+        }
+
 
         setFragment(RegisterConsentFragment(),"RegisterConsent")
         setButton()
