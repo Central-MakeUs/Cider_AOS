@@ -1,11 +1,11 @@
 package com.cider.cider.presentation.register
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import androidx.core.widget.addTextChangedListener
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.cider.cider.R
@@ -14,9 +14,9 @@ import com.cider.cider.domain.type.EditTextState
 import com.cider.cider.domain.type.RegisterType
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 class RegisterNicknameFragment
     :BindingFragment<FragmentRegisterNicknameBinding>(R.layout.fragment_register_nickname) {
@@ -33,12 +33,22 @@ class RegisterNicknameFragment
     }
 
     private fun setNickName() {
-        binding.etNickname.setOnFocusChangeListener { view, b ->
+        binding.etNickname.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_active)
             } else {
                 viewModel.checkNickNameEnable()
             }
+        }
+
+        binding.etNickname.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                binding.etNickname.clearFocus()
+                val imm = requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.etNickname.windowToken, 0)
+                return@setOnEditorActionListener true
+            }
+            false
         }
     }
 
@@ -46,11 +56,9 @@ class RegisterNicknameFragment
         viewModel.nickname.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                 if (it.isNotEmpty()) {
-                    if (it.length >= 2) {
-                        binding.btnDelete.visibility = View.VISIBLE
-                    } else {
-                        binding.btnDelete.visibility = View.GONE
-                    }
+                    binding.btnDelete.visibility = View.VISIBLE
+                } else {
+                    binding.btnDelete.visibility = View.GONE
                 }
             }
         }
@@ -60,10 +68,12 @@ class RegisterNicknameFragment
                     EditTextState.NONE -> binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_none)
                     EditTextState.ACTIVE -> {
                         binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_active)
+                        binding.tvCheckNickname.visibility = View.VISIBLE
                         binding.tvCheckNickname.text = "사용 가능한 닉네임입니다"
                     }
                     EditTextState.ERROR -> {
                         binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_error)
+                        binding.tvCheckNickname.visibility = View.VISIBLE
                         binding.tvCheckNickname.text = "중복된 닉네임입니다"
                     }
                     else -> binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_none)
