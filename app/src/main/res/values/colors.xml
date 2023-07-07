@@ -14,7 +14,7 @@
     <!-- Foundation Color -->
     <!-- UI Depth 를 표현하기 위한 기본 컬러 -->
     <color name="white">#FFFFFFFF</color>
-    <color name="gray_1">#F4F9FC</color>
+    <color name="gray_1">#FCFCFD</color>
     <color name="gray_2">#F0F5F8</color>
     <color name="gray_3">#EAEFF1</color>
     <color name="gray_4">#C1C6CA</color>

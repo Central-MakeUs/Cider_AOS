@@ -1,6 +1,7 @@
 package com.cider.cider.presentation.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.fragment.app.activityViewModels
@@ -36,7 +37,6 @@ class RegisterConsentFragment
 
                 binding.btnConsent2.text = "접기"
                 binding.btnConsent3.text = "자세히 보기"
-
                 binding.layoutService.layoutParams.height = resources.getDimensionPixelSize(R.dimen.register_service_0dp)
             } else {
                 binding.sv1.visibility = View.GONE
@@ -91,12 +91,15 @@ class RegisterConsentFragment
             binding.cbConsent1.isChecked = true
             binding.cbConsent2.isChecked = true
             binding.cbConsent3.isChecked = true
+            binding.viewConsentAll.isSelected = true
         } else if (viewModel.checkBoxState.value == 1) {
             binding.cbConsent1.isChecked = false
             binding.cbConsent2.isChecked = false
             binding.cbConsent3.isChecked = false
+            binding.viewConsentAll.isSelected = false
         } else if (viewModel.checkBoxState.value != 30) {
             binding.cbConsentAll.isChecked = false
+            binding.viewConsentAll.isSelected = false
         }
     }
 }
