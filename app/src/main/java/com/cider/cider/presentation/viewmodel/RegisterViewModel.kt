@@ -180,6 +180,7 @@ class RegisterViewModel @Inject constructor(
         when (_registerState.value) {
             RegisterType.SERVICE_AGREEMENT -> {
                 _buttonState.value = (_checkBoxState.value == 30)
+                _detailState.value = 0
             }
             RegisterType.INFORMATION_INPUT1 -> {
                 _buttonState.value = (_nicknameState.value == EditTextState.ENABLE)
