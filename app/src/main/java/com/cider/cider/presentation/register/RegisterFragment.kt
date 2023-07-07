@@ -1,6 +1,7 @@
 package com.cider.cider.presentation.register
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterBinding
+import com.cider.cider.presentation.MainActivity
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.kakao.sdk.user.UserApi
@@ -64,7 +66,6 @@ class RegisterFragment
     }
 
     override fun onDestroyView() {
-        parentFragmentManager.beginTransaction().remove(RegisterFragment()).commit()
         super.onDestroyView()
     }
 
@@ -99,6 +100,9 @@ class RegisterFragment
                 }
                 "RegisterCompletion" -> {
                     Toast.makeText(requireContext(),"완료",Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
                 }
                 null -> {
                     Log.d("Fragment Test","5 ${childFragmentManager.fragments}")
@@ -119,7 +123,10 @@ class RegisterFragment
                 parentFragmentManager.popBackStack()
             }
             "RegisterCompletion" -> {
-                //TODO(None)
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+                //TODO(??)
             }
             else -> {
                 childFragmentManager.popBackStack()
