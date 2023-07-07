@@ -32,8 +32,6 @@ class RegisterViewModel @Inject constructor(
 
     //닉네임 입력 페이지
     var nickname = MutableLiveData<String>("")
-    private val _nicknameEnable = MutableLiveData<Boolean>(false)
-    val nicknameEnable: LiveData<Boolean> get() = _nicknameEnable
 
     private val _nicknameState = MutableLiveData<EditTextState>(EditTextState.NONE)
     val nicknameState: LiveData<EditTextState> get() = _nicknameState
@@ -90,7 +88,6 @@ class RegisterViewModel @Inject constructor(
     fun createRandomNickName() {
         //NickName 요청
         nickname.value = "랜덤아이디생성"
-        _nicknameEnable.value = true
         changeNickNameState(EditTextState.ACTIVE)
         checkButtonState()
     }
@@ -100,27 +97,26 @@ class RegisterViewModel @Inject constructor(
         if (nick.isNotEmpty() && nick.length >= 2) {
             //nick 중복 검사
             viewModelScope.launch {
-                _nicknameEnable.value = true
                 changeNickNameState(EditTextState.ACTIVE) //중복 없을 때
                 //_nicknameEnable.value = false
                 //changeNickNameState(EditTextState.ERROR) //중복 있을 때
 
             }
         } else {
-            _nicknameEnable.value = false
+            changeNickNameState(EditTextState.ERROR_MIN)
         }
 
         nickname.value //를 레포에 전송하고, 받아오기
         checkButtonState()
     }
 
-    fun changeNickNameState(editTextState: EditTextState) {
+    private fun changeNickNameState(editTextState: EditTextState) {
         _nicknameState.value = editTextState
     }
 
     fun clearNickName() {
         nickname.value = ""
-        _nicknameEnable.value = false
+        changeNickNameState(EditTextState.NONE)
         checkButtonState()
     }
 
@@ -179,7 +175,7 @@ class RegisterViewModel @Inject constructor(
                 _buttonState.value = (_checkBoxState.value == 30)
             }
             RegisterType.INFORMATION_INPUT1 -> {
-                _buttonState.value = _nicknameEnable.value
+                _buttonState.value = (_nicknameState.value == EditTextState.ACTIVE)
             }
             RegisterType.INFORMATION_INPUT2 -> {
                 _buttonState.value = (_genderState.value != null) &&

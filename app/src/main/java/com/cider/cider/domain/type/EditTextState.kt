@@ -3,5 +3,7 @@ package com.cider.cider.domain.type
 enum class EditTextState {
     NONE,
     ACTIVE,
-    ERROR
+    ENABLE,
+    ERROR_DUPLICATION,
+    ERROR_MIN
 }

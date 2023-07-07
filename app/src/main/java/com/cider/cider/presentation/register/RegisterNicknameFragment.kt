@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.cider.cider.R
@@ -70,11 +70,19 @@ class RegisterNicknameFragment
                         binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_active)
                         binding.tvCheckNickname.visibility = View.VISIBLE
                         binding.tvCheckNickname.text = "사용 가능한 닉네임입니다"
+                        binding.tvCheckNickname.setTextColor(ContextCompat.getColor(requireContext(), R.color.main))
                     }
-                    EditTextState.ERROR -> {
+                    EditTextState.ERROR_DUPLICATION -> {
                         binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_error)
                         binding.tvCheckNickname.visibility = View.VISIBLE
                         binding.tvCheckNickname.text = "중복된 닉네임입니다"
+                        binding.tvCheckNickname.setTextColor(ContextCompat.getColor(requireContext(), R.color.error))
+                    }
+                    EditTextState.ERROR_MIN -> {
+                        binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_error)
+                        binding.tvCheckNickname.visibility = View.VISIBLE
+                        binding.tvCheckNickname.text = "2글자 이상이어야 합니다"
+                        binding.tvCheckNickname.setTextColor(ContextCompat.getColor(requireContext(), R.color.error))
                     }
                     else -> binding.etNickname.background = resources.getDrawable(R.drawable.shape_edittext_none)
                 }
