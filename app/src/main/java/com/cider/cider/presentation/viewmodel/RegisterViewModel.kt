@@ -154,7 +154,7 @@ class RegisterViewModel @Inject constructor(
         checkButtonState() //버튼 상태 확인
     }
 
-    fun changeKeyWordState(title: String) {
+/*    fun changeKeyWordState(title: String) {
         //title 과 같은 아이템의 state를 !한다
         val currentData = _keywordState.value
 
@@ -173,7 +173,7 @@ class RegisterViewModel @Inject constructor(
         Log.d("KeyWordTest","?? ${_keywordState.value}")
 
         checkButtonState() //버튼 상태 확인
-    }
+    }*/
 
 
     fun checkButtonState() {
@@ -194,16 +194,7 @@ class RegisterViewModel @Inject constructor(
                         }
             }
             RegisterType.KEYWORD_RECOMMENDATION -> {
-                val trueCountChallenge = listOf(
-                    _challengeState.value?.investing?:false,
-                    _challengeState.value?.saving?:false,
-                    _challengeState.value?.money_management?:false,
-                    _challengeState.value?.financial_learning?:false,
-                ).count { it }
-
-                val trueCountKeyword = _keywordState.value?.count {it.state}?:0
-
-                _buttonState.value = trueCountKeyword>=2 && trueCountChallenge>=2
+                _buttonState.value = true
             }
             RegisterType.COMPLETION -> {
                 _buttonState.value = true

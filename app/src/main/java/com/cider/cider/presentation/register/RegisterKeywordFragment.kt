@@ -38,14 +38,14 @@ class RegisterKeywordFragment
 
         keywordAdapter.submitList(viewModel.keywordState.value)
 
-        FlexboxLayoutManager(requireContext()).apply {
+/*        FlexboxLayoutManager(requireContext()).apply {
             flexWrap = FlexWrap.WRAP
             flexDirection = FlexDirection.ROW
             justifyContent = JustifyContent.CENTER
         }.let {
             binding.rvKeyword.layoutManager = it
             binding.rvKeyword.adapter = keywordAdapter
-        }
+        }*/
 
         viewModel.keywordState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -68,13 +68,13 @@ class RegisterKeywordFragment
         }
     }
     private fun setObserver() {
-        viewModel.challengeState.observe(viewLifecycleOwner) {
+/*        viewModel.challengeState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch {
                 binding.btnChallenge1.isSelected = it.investing
                 binding.btnChallenge2.isSelected = it.saving
                 binding.btnChallenge3.isSelected = it.money_management
                 binding.btnChallenge4.isSelected = it.financial_learning
             }
-        }
+        }*/
     }
 }
