@@ -46,4 +46,12 @@
     <string name="challenge_financial_learning">금융학습</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <!-- Challenge Card -->
+    <string name="challenge_recruiting">모집중</string>
+    <string name="challenge_recruit_complete">모집완료</string>
+    
+    <string name="challenge_reward">리워드</string>
+    <string name="challenge_1week">1주</string>
+    <string name="challenge_official">공식 챌린지</string>
 </resources>

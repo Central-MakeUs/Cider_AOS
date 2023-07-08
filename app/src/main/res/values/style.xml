@@ -76,4 +76,6 @@
         <item name="android:textSize">@dimen/text_5xl</item>
         <item name="android:fontFamily">@font/pretendard_bold</item>
     </style>
+
+
 </resources>
