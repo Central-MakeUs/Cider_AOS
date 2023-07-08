@@ -1,21 +1,14 @@
 package com.cider.cider.presentation.register
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterKeywordBinding
-import com.cider.cider.domain.type.KeyWord
 import com.cider.cider.domain.type.RegisterType
-import com.cider.cider.presentation.adapter.KeyWordAdapter
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import kotlinx.coroutines.launch
 
 class RegisterKeywordFragment
@@ -29,30 +22,9 @@ class RegisterKeywordFragment
         viewModel.changeRegisterState(RegisterType.KEYWORD_RECOMMENDATION)
 
         setChallenge()
-        setKeyword()
         setObserver()
     }
 
-    private fun setKeyword() {
-        val keywordAdapter = KeyWordAdapter(viewModel)
-
-        keywordAdapter.submitList(viewModel.keywordState.value)
-
-/*        FlexboxLayoutManager(requireContext()).apply {
-            flexWrap = FlexWrap.WRAP
-            flexDirection = FlexDirection.ROW
-            justifyContent = JustifyContent.CENTER
-        }.let {
-            binding.rvKeyword.layoutManager = it
-            binding.rvKeyword.adapter = keywordAdapter
-        }*/
-
-        viewModel.keywordState.observe(viewLifecycleOwner) {
-            viewLifecycleOwner.lifecycleScope.launch {
-                keywordAdapter.submitList(it)
-            }
-        }
-    }
     private fun setChallenge() {
         binding.btnChallenge1.setOnClickListener {
             viewModel.changeChallengeState(0, !binding.btnChallenge1.isSelected)

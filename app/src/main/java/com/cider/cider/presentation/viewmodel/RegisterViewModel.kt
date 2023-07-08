@@ -45,18 +45,9 @@ class RegisterViewModel @Inject constructor(
     private val _challengeState = MutableLiveData<ChallengeType>()
     val challengeState: LiveData<ChallengeType> get() = _challengeState
 
-    private val _keywordState = MutableLiveData<List<KeyWord>>()
-    val keywordState: LiveData<List<KeyWord>> get() = _keywordState
-
     init {
         _challengeState.value = ChallengeType()
         _birth.value = Birth(0,-1,0)
-        _keywordState.value = arrayListOf(
-            KeyWord("짠테크", false),
-            KeyWord("앱테크", false),
-            KeyWord("청년정책", false),
-            KeyWord("소비생활", false),
-            KeyWord("적금", false))
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
@@ -153,28 +144,6 @@ class RegisterViewModel @Inject constructor(
 
         checkButtonState() //버튼 상태 확인
     }
-
-/*    fun changeKeyWordState(title: String) {
-        //title 과 같은 아이템의 state를 !한다
-        val currentData = _keywordState.value
-
-        Log.d("KeyWordTest","? ${_keywordState.value}")
-        if (currentData != null) {
-            val updatedData = ArrayList<KeyWord>()
-            currentData.forEach {
-                if (it.title == title) {
-                    updatedData.add(KeyWord(it.title, !it.state))
-                } else {
-                    updatedData.add(it)
-                }
-            }
-            _keywordState.value = updatedData
-        }
-        Log.d("KeyWordTest","?? ${_keywordState.value}")
-
-        checkButtonState() //버튼 상태 확인
-    }*/
-
 
     fun checkButtonState() {
         when (_registerState.value) {
