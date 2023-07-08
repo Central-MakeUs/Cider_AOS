@@ -40,13 +40,13 @@ class RegisterKeywordFragment
         }
     }
     private fun setObserver() {
-/*        viewModel.challengeState.observe(viewLifecycleOwner) {
+        viewModel.challengeState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch {
                 binding.btnChallenge1.isSelected = it.investing
                 binding.btnChallenge2.isSelected = it.saving
                 binding.btnChallenge3.isSelected = it.money_management
                 binding.btnChallenge4.isSelected = it.financial_learning
             }
-        }*/
+        }
     }
 }

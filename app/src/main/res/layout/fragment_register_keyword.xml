@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.cider.cider.domain.type.challenge.Challenge"/>
         <variable
             name="register"
             type="com.cider.cider.presentation.viewmodel.RegisterViewModel" />
