@@ -14,7 +14,6 @@ import com.cider.cider.databinding.FragmentRegisterBinding
 import com.cider.cider.presentation.MainActivity
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
-import com.kakao.sdk.user.UserApi
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.model.Gender
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,22 +80,14 @@ class RegisterFragment
             when (childFragmentManager.fragments[childFragmentManager.fragments.size-1].tag) {
                 "RegisterConsent" -> {
                     setFragment(RegisterNicknameFragment(), "RegisterNickname")
-                    Log.d("Fragment Test","1 ${childFragmentManager.fragments}")
                 }
                 "RegisterNickname" -> {
                     setFragment(RegisterProfileFragment(), "RegisterProfile")
-                    Log.d("Fragment Test","2 ${childFragmentManager.fragments}")
                 }
                 "RegisterProfile" -> {
                     setFragment(RegisterKeywordFragment(), "RegisterKeyword")
-                    Log.d("Fragment Test","3 ${childFragmentManager.fragments}")
-                }
-                "RegisterKeyword" -> {
-                    setFragment(RegisterCompletionFragment(), "RegisterCompletion")
-                    binding.viewRegisterTap.visibility = View.GONE
-                    binding.tvToolbarTitle.text = "회원가입 완료"
-                    //TODO(완료 시 어디로 가지?)
-                    Log.d("Fragment Test","4 ${parentFragmentManager.fragments}")
+                    binding.tvToolbarComplete.visibility = View.VISIBLE
+                    binding.btnRegister.visibility = View.GONE
                 }
                 "RegisterCompletion" -> {
                     Toast.makeText(requireContext(),"완료",Toast.LENGTH_SHORT).show()
@@ -105,11 +96,18 @@ class RegisterFragment
                     activity?.finish()
                 }
                 null -> {
-                    Log.d("Fragment Test","5 ${childFragmentManager.fragments}")
                     //TODO(예외 처리)
                 }
                 else -> {}
             }
+        }
+
+        binding.tvToolbarComplete.setOnClickListener {
+            setFragment(RegisterCompletionFragment(), "RegisterCompletion")
+            binding.viewRegisterTap.visibility = View.INVISIBLE
+            binding.tvToolbarTitle.text = "회원가입 완료"
+            binding.btnRegister.visibility = View.VISIBLE
+            binding.tvToolbarComplete.visibility = View.GONE
         }
 
         binding.btnToolbarBack.setOnClickListener {
@@ -121,6 +119,12 @@ class RegisterFragment
         when (childFragmentManager.fragments[childFragmentManager.fragments.size-1].tag) {
             "RegisterConsent" -> {
                 parentFragmentManager.popBackStack()
+            }
+            "RegisterKeyword" -> {
+                childFragmentManager.popBackStack()
+                binding.tvToolbarComplete.visibility = View.GONE
+                binding.btnRegister.visibility = View.VISIBLE
+                //TODO(완료 시 어디로 가지?)
             }
             "RegisterCompletion" -> {
                 val intent = Intent(requireContext(), MainActivity::class.java)

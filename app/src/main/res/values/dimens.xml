@@ -42,4 +42,7 @@
     <dimen name="challenge_card_width">150dp</dimen>
     <dimen name="challenge_card_image_height">192dp</dimen>
     <dimen name="challenge_card_image_width">150dp</dimen>
+    
+    <dimen name="challenge_icon">36dp</dimen>
+    <dimen name="challenge_btn_margin_bottom">16dp</dimen>
 </resources>

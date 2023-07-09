@@ -34,7 +34,7 @@
     <string name="register_profile_birth_check">14세 이상으로 선택해주세요</string>
     <string name="register_profile_gender_check">본인의 성별을 선택해주세요</string>
 
-    <string name="register_keyword_title">원하는 챌린지 분야를\n선택해주세요</string>
+    <string name="register_keyword_title">원하는 챌린지 분야를\n모두 선택해주세요</string>
     <string name="register_keyword_challenge">관심있는 챌린지</string>
     <string name="register_keyword_keyword">관심 키워드</string>
     <string name="register_keyword_min">최소 2개 선택</string>

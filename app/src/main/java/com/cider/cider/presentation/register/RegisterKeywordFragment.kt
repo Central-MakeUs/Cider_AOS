@@ -26,26 +26,12 @@ class RegisterKeywordFragment
     }
 
     private fun setChallenge() {
-        binding.btnChallenge1.setOnClickListener {
-            viewModel.changeChallengeState(0, !binding.btnChallenge1.isSelected)
-        }
-        binding.btnChallenge2.setOnClickListener {
-            viewModel.changeChallengeState(1, !binding.btnChallenge2.isSelected)
-        }
-        binding.btnChallenge3.setOnClickListener {
-            viewModel.changeChallengeState(2, !binding.btnChallenge3.isSelected)
-        }
-        binding.btnChallenge4.setOnClickListener {
-            viewModel.changeChallengeState(3, !binding.btnChallenge4.isSelected)
-        }
+
     }
     private fun setObserver() {
         viewModel.challengeState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch {
-                binding.btnChallenge1.isSelected = it.investing
-                binding.btnChallenge2.isSelected = it.saving
-                binding.btnChallenge3.isSelected = it.money_management
-                binding.btnChallenge4.isSelected = it.financial_learning
+
             }
         }
     }
