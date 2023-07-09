@@ -12,5 +12,6 @@
         <item name="imageButtonStyle">@style/ImageButtonDefault</item>
         <item name="buttonStyle">@style/DefaultButtonStyle</item>
         <item name="checkboxStyle">@style/DefaultCheckBoxStyle</item>
+        <item name="android:textColorHint">@color/gray_4</item>
     </style>
 </resources>

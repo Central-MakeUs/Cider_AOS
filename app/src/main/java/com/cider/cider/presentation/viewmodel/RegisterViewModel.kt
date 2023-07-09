@@ -39,7 +39,7 @@ class RegisterViewModel @Inject constructor(
     private val _genderState = MutableLiveData<Gender>()
     val genderState : LiveData<Gender> get() = _genderState
 
-    private val _birth = MutableLiveData<Birth>()
+    private val _birth = MutableLiveData<Birth>(Birth(0,-1,0))
     val birth: LiveData<Birth> get() = _birth
 
     private val _challengeState = MutableLiveData<ChallengeType>()
@@ -47,7 +47,6 @@ class RegisterViewModel @Inject constructor(
 
     init {
         _challengeState.value = ChallengeType()
-        _birth.value = Birth(0,-1,0)
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {

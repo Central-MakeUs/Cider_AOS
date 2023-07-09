@@ -54,4 +54,5 @@
     <string name="challenge_reward">리워드</string>
     <string name="challenge_1week">1주</string>
     <string name="challenge_official">공식 챌린지</string>
+    <string name="date_hint">0000년 00월 00일</string>
 </resources>

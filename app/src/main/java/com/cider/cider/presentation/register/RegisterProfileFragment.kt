@@ -59,12 +59,12 @@ class RegisterProfileFragment
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
                 if (it.year != 0) {
                     if (it.hasPassed14Years()) {
-                        binding.btnProfileBirth.background =
-                            resources.getDrawable(R.drawable.shape_edittext_active)
+                        Log.d("TEST birth","true")
+                        binding.btnProfileBirth.setBackgroundResource(R.drawable.shape_edittext_active)
                         binding.tvCheckBirth.visibility = View.GONE
                     } else {
-                        binding.btnProfileBirth.background =
-                            resources.getDrawable(R.drawable.shape_edittext_error)
+                        Log.d("TEST birth","false")
+                        binding.btnProfileBirth.setBackgroundResource(R.drawable.shape_edittext_error)
                         binding.tvCheckBirth.visibility = View.VISIBLE
                     }
                 }

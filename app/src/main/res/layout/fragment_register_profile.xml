@@ -41,12 +41,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <TextView
                 android:id="@+id/tv_profile_gender_check"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:fontFamily="@font/pretendard_bold"
+                android:fontFamily="@font/pretendard_regular"
                 android:text="@string/register_profile_gender_check"
                 android:textSize="@dimen/text_base"
                 android:textColor="@color/icon"
@@ -97,7 +96,6 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:text="@string/register_profile_birth"
                 android:textSize="@dimen/text_xl"
-                android:textColor="@color/gray_4"
                 android:gravity="center_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -105,19 +103,28 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_profile_birth"
                 android:background="@drawable/shape_edittext_none"
-                android:backgroundTint="@color/gray_1"
                 android:layout_width="0dp"
                 android:layout_height="44dp"
-                android:fontFamily="@font/pretendard_regular"
+                android:fontFamily="@font/pretendard_bold"
                 app:textDate="@{register.birth}"
                 android:textColor="@color/text"
-                android:textSize="@dimen/text_xl"
+                android:textSize="@dimen/text_base"
                 android:layout_marginTop="8dp"
                 android:padding="12dp"
                 android:gravity="start"
+                android:hint="@string/date_hint"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_profile_birth"/>
+            
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_calendar_24"
+                app:layout_constraintBottom_toBottomOf="@id/btn_profile_birth"
+                app:layout_constraintTop_toTopOf="@id/btn_profile_birth"
+                app:layout_constraintEnd_toEndOf="@id/btn_profile_birth"/>
 
             <TextView
                 android:id="@+id/tv_check_birth"
