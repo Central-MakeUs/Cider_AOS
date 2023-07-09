@@ -70,7 +70,6 @@ class RegisterNicknameFragment
                     EditTextState.ACTIVE -> {
                         Log.d("TEST background","Background ${binding.etNickname.background}")
                         binding.etNickname.setBackgroundResource(R.drawable.shape_edittext_active)
-
                     }
                     EditTextState.ENABLE -> {
                         binding.etNickname.setBackgroundResource(R.drawable.shape_edittext_active)

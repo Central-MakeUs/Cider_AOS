@@ -51,9 +51,14 @@ class RegisterViewModel @Inject constructor(
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
-        if (name != null) nickname.value = name!!
+        if (name != null) {
+            nickname.value = name?:""
+            //닉네임 검사 이후
+            //TODO(닉네임 중복 검사 이후 자동 진행)
+            checkNickNameEnable()
+        }
         if (date != null) _birth.value = Birth(0, date/100-1, date%100)
-        if (gender != null) _genderState.value = gender!!
+        if (gender != null) _genderState.value = gender?:Gender.MALE
     }
 
     fun changeCheckBox(num: Int) {
