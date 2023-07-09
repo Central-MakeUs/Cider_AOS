@@ -32,6 +32,7 @@
             android:src="@drawable/selector_like"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:select="@{challenge.like}"
             tools:src="@drawable/ic_like_24_false" />
 
         <TextView
@@ -47,7 +48,6 @@
             android:gravity="center"
             android:text="@string/challenge_recruiting"
             android:background="@drawable/shape_challenge_recruiting"
-
             app:layout_constraintTop_toTopOf="@id/iv_challenge_like"
             app:layout_constraintBottom_toBottomOf="@id/iv_challenge_like"
             app:layout_constraintStart_toStartOf="parent" />
@@ -67,6 +67,7 @@
             android:background="@drawable/shape_challenge_chip"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/iv_challenge_info_image"
+            app:challenge="@{challenge.category}"
             tools:text="@string/challenge_investing" />
 
         <TextView
@@ -84,6 +85,7 @@
             android:background="@drawable/shape_challenge_chip"
             app:layout_constraintStart_toEndOf="@id/tv_challenge_category"
             app:layout_constraintBottom_toBottomOf="@id/iv_challenge_info_image"
+            app:duration="@{challenge.duration}"
             tools:text="@string/challenge_1week" />
 
         <TextView
@@ -102,6 +104,7 @@
             android:background="@drawable/shape_challenge_chip"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_challenge_category"
+            app:visible="@{challenge.reward}"
             tools:text="@string/challenge_reward" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,6 +126,7 @@
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:visibleRank="@{challenge.rank}"
                 tools:text="1위" />
 
             <TextView
@@ -131,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:fontFamily="@font/pretendard_bold"
+                android:text="@{challenge.title}"
                 android:textSize="@dimen/text_xl"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_challenge_rank"
@@ -161,6 +166,8 @@
                     android:textColor="@color/gray_5"
                     app:layout_constraintStart_toEndOf="@+id/iv_challenge_community"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:infoPeople="@{challenge.people}"
+                    app:participation="@{challenge.participate}"
                     tools:text="5명 대기중" />
 
                 <TextView
@@ -173,6 +180,7 @@
                     android:textColor="@color/main"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:visibleDay="@{challenge.d_day}"
                     tools:text="D-23" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -181,7 +189,8 @@
                 android:id="@+id/layout_certificate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/layout_community">
+                app:layout_constraintTop_toBottomOf="@id/layout_community"
+                app:visible="@{challenge.official}">
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/iv_challenge_certificate"
@@ -205,7 +214,5 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
