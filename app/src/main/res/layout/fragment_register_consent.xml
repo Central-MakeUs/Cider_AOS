@@ -16,11 +16,8 @@
 
         <TextView
             android:id="@+id/tv_consent_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/TextViewTitleStyle"
             android:text="@string/consent_title"
-            android:textSize="@dimen/text_5xl"
-            android:fontFamily="@font/pretendard_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -38,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_48"
                 android:layout_above="@id/view_consent_2"
-                android:paddingVertical="4dp"
+                android:paddingVertical="12dp"
                 app:layout_constraintBottom_toTopOf="@+id/view_consent_2"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -68,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_48"
                 android:layout_above="@id/sv_1"
-                android:paddingVertical="4dp"
+                android:paddingVertical="12dp"
                 app:layout_constraintBottom_toTopOf="@+id/sv_1"
                 app:layout_constraintTop_toBottomOf="@+id/view_consent_1">
 
@@ -118,7 +115,8 @@
                 android:id="@+id/view_consent_3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_48"
-                android:paddingVertical="4dp"
+                android:paddingVertical="12dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/sv_2"
                 app:layout_constraintTop_toBottomOf="@+id/sv_1">
 
@@ -172,7 +170,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_48"
             android:background="@drawable/shape_rec_round_4"
-            android:backgroundTint="@color/gray_1"
+            android:backgroundTint="@color/selector_agree_color"
             android:paddingHorizontal="@dimen/padding_8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

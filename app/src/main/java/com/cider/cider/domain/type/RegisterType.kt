@@ -4,5 +4,6 @@ enum class RegisterType(val text: String) {
     SERVICE_AGREEMENT("확인했어요"),
     INFORMATION_INPUT1("다음"),
     INFORMATION_INPUT2("다음"),
-    KEYWORD_RECOMMENDATION("완료");
+    KEYWORD_RECOMMENDATION("완료"),
+    COMPLETION("홈으로 이동");
 }

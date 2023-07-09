@@ -37,4 +37,9 @@
     <dimen name="nickname_maxLength">10</dimen>
 
     <dimen name="register_service_0dp">0dp</dimen>
+
+    <!-- challenge info -->
+    <dimen name="challenge_card_width">150dp</dimen>
+    <dimen name="challenge_card_image_height">192dp</dimen>
+    <dimen name="challenge_card_image_width">150dp</dimen>
 </resources>

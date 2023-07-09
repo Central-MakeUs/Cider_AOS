@@ -71,4 +71,11 @@ dependencies {
     implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    //kakao Login
+    implementation 'com.kakao.sdk:v2-user:2.11.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

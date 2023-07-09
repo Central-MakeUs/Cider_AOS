@@ -2,6 +2,7 @@ package com.cider.cider.presentation.register
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -54,14 +55,41 @@ class RegisterProfileFragment
                 }
             }
         }
+        viewModel.birth.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
+                if (it.year != 0) {
+                    if (it.hasPassed14Years()) {
+                        binding.btnProfileBirth.background =
+                            resources.getDrawable(R.drawable.shape_edittext_active)
+                        binding.tvCheckBirth.visibility = View.GONE
+                    } else {
+                        binding.btnProfileBirth.background =
+                            resources.getDrawable(R.drawable.shape_edittext_error)
+                        binding.tvCheckBirth.visibility = View.VISIBLE
+                    }
+                }
+                viewModel.checkButtonState() //TODO(로직 다시 생각해 보기)
+            }
+        }
     }
     private fun setBirth() {
         binding.btnProfileBirth.setOnClickListener {
             val cal = Calendar.getInstance()
+            cal.set( if ((viewModel.birth.value?.year ?: cal.get(Calendar.YEAR)) <= 1900) cal.get(Calendar.YEAR) else viewModel.birth.value?.year?:0,
+                viewModel.birth.value?.month?:Calendar.MONTH,
+                viewModel.birth.value?.day?:Calendar.DAY_OF_MONTH)
+
+            Log.d("TEST","${cal.get(Calendar.YEAR)} / ${cal.get(Calendar.MONTH)} / ${cal.get(Calendar.DAY_OF_MONTH)}")
             val data = DatePickerDialog.OnDateSetListener { view, year, month, day ->
                 viewModel.changeBirth(Birth(year, month, day))
             }
-            DatePickerDialog(requireContext(), data, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+            val dialog = DatePickerDialog(
+                requireContext(),
+                R.style.SpinnerDatePickerDialogTheme,
+                data,
+                cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
+            dialog.show()
+
         }
     }
 }

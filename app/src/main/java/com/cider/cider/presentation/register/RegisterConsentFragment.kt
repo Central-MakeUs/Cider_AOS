@@ -1,6 +1,7 @@
 package com.cider.cider.presentation.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.fragment.app.activityViewModels
@@ -30,35 +31,10 @@ class RegisterConsentFragment
     private fun setButton() {
         binding.btnConsent2.setOnClickListener {
             viewModel.setTermDetail(1)
-            if (viewModel.detailState.value == 1) {
-                binding.sv1.visibility = View.VISIBLE
-                binding.sv2.visibility = View.GONE
-
-                binding.btnConsent2.text = "접기"
-                binding.btnConsent3.text = "자세히 보기"
-
-                binding.layoutService.layoutParams.height = resources.getDimensionPixelSize(R.dimen.register_service_0dp)
-            } else {
-                binding.sv1.visibility = View.GONE
-                binding.btnConsent2.text = "자세히 보기"
-                binding.layoutService.layoutParams.height = LayoutParams.WRAP_CONTENT
-            }
         }
 
         binding.btnConsent3.setOnClickListener {
             viewModel.setTermDetail(2)
-            if (viewModel.detailState.value == 2) {
-                binding.sv2.visibility = View.VISIBLE
-                binding.sv1.visibility = View.GONE
-
-                binding.btnConsent3.text = "접기"
-                binding.btnConsent2.text = "자세히 보기"
-                binding.layoutService.layoutParams.height = resources.getDimensionPixelSize(R.dimen.register_service_0dp)
-            } else {
-                binding.sv2.visibility = View.GONE
-                binding.btnConsent3.text = "자세히 보기"
-                binding.layoutService.layoutParams.height = LayoutParams.WRAP_CONTENT
-            }
         }
     }
 
@@ -83,6 +59,36 @@ class RegisterConsentFragment
                 checkAllCheckBox()
             }
         }
+        viewModel.detailState.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                if (viewModel.detailState.value == 1) {
+                    binding.sv1.visibility = View.VISIBLE
+                    binding.sv2.visibility = View.GONE
+
+                    binding.btnConsent2.text = "접기"
+                    binding.btnConsent3.text = "자세히 보기"
+                    binding.layoutService.layoutParams.height = resources.getDimensionPixelSize(R.dimen.register_service_0dp)
+
+                    binding.tvConsentTitle.visibility = View.GONE
+                } else if (viewModel.detailState.value == 2) {
+                    binding.sv2.visibility = View.VISIBLE
+                    binding.sv1.visibility = View.GONE
+
+                    binding.btnConsent3.text = "접기"
+                    binding.btnConsent2.text = "자세히 보기"
+                    binding.layoutService.layoutParams.height = resources.getDimensionPixelSize(R.dimen.register_service_0dp)
+
+                    binding.tvConsentTitle.visibility = View.GONE
+                } else {
+                    binding.sv2.visibility = View.GONE
+                    binding.btnConsent2.text = "자세히 보기"
+                    binding.btnConsent3.text = "자세히 보기"
+                    binding.layoutService.layoutParams.height = LayoutParams.WRAP_CONTENT
+
+                    binding.tvConsentTitle.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     private fun checkAllCheckBox() {
@@ -91,12 +97,15 @@ class RegisterConsentFragment
             binding.cbConsent1.isChecked = true
             binding.cbConsent2.isChecked = true
             binding.cbConsent3.isChecked = true
+            binding.viewConsentAll.isSelected = true
         } else if (viewModel.checkBoxState.value == 1) {
             binding.cbConsent1.isChecked = false
             binding.cbConsent2.isChecked = false
             binding.cbConsent3.isChecked = false
+            binding.viewConsentAll.isSelected = false
         } else if (viewModel.checkBoxState.value != 30) {
             binding.cbConsentAll.isChecked = false
+            binding.viewConsentAll.isSelected = false
         }
     }
 }

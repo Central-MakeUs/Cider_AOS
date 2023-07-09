@@ -16,11 +16,8 @@
 
         <TextView
             android:id="@+id/tv_nickname_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/TextViewTitleStyle"
             android:text="@string/register_nickname_title"
-            android:textSize="@dimen/text_5xl"
-            android:fontFamily="@font/pretendard_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -31,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/register_nickname_sub"
             android:textSize="@dimen/text_lg"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/pretendard_bold"
             android:textColor="@color/main"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +46,10 @@
                 android:layout_height="@dimen/edittext_height_44"
                 android:background="@drawable/shape_edittext_none"
                 android:paddingHorizontal="12dp"
+                android:imeOptions="actionDone"
                 android:maxLength="10"
+                android:maxLines="1"
+                android:inputType="text"
                 android:hint="@string/register_nickname_hint"
                 android:text="@={register.nickname}"
                 android:textSize="@dimen/text_base"

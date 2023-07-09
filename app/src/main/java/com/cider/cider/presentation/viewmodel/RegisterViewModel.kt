@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cider.cider.domain.repository.RegisterRepository
 import com.cider.cider.domain.type.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-
+    private val repository: RegisterRepository
 ): ViewModel() {
     //탭 상태
     private val _registerState = MutableLiveData<RegisterType>()
@@ -31,8 +32,6 @@ class RegisterViewModel @Inject constructor(
 
     //닉네임 입력 페이지
     var nickname = MutableLiveData<String>("")
-    private val _nicknameEnable = MutableLiveData<Boolean>(false)
-    val nicknameEnable: LiveData<Boolean> get() = _nicknameEnable
 
     private val _nicknameState = MutableLiveData<EditTextState>(EditTextState.NONE)
     val nicknameState: LiveData<EditTextState> get() = _nicknameState
@@ -46,19 +45,16 @@ class RegisterViewModel @Inject constructor(
     private val _challengeState = MutableLiveData<ChallengeType>()
     val challengeState: LiveData<ChallengeType> get() = _challengeState
 
-    private val _keywordState = MutableLiveData<List<KeyWord>>()
-    val keywordState: LiveData<List<KeyWord>> get() = _keywordState
-
     init {
         _challengeState.value = ChallengeType()
         _birth.value = Birth(0,-1,0)
-        _keywordState.value = arrayListOf(
-            KeyWord("짠테크", false),
-            KeyWord("앱테크", false),
-            KeyWord("청년정책", false),
-            KeyWord("소비생활", false),
-            KeyWord("적금", false))    }
+    }
 
+    fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
+        if (name != null) nickname.value = name!!
+        if (date != null) _birth.value = Birth(0, date/100-1, date%100)
+        if (gender != null) _genderState.value = gender!!
+    }
 
     fun changeCheckBox(num: Int) {
         if (_checkBoxState.value != null) {
@@ -90,8 +86,7 @@ class RegisterViewModel @Inject constructor(
     fun createRandomNickName() {
         //NickName 요청
         nickname.value = "랜덤아이디생성"
-        _nicknameEnable.value = true
-        changeNickNameState(EditTextState.ACTIVE)
+        changeNickNameState(EditTextState.ENABLE)
         checkButtonState()
     }
 
@@ -100,14 +95,13 @@ class RegisterViewModel @Inject constructor(
         if (nick.isNotEmpty() && nick.length >= 2) {
             //nick 중복 검사
             viewModelScope.launch {
-                _nicknameEnable.value = true
-                changeNickNameState(EditTextState.ACTIVE) //중복 없을 때
+                changeNickNameState(EditTextState.ENABLE) //중복 없을 때
                 //_nicknameEnable.value = false
                 //changeNickNameState(EditTextState.ERROR) //중복 있을 때
 
             }
         } else {
-            _nicknameEnable.value = false
+            changeNickNameState(EditTextState.ERROR_MIN)
         }
 
         nickname.value //를 레포에 전송하고, 받아오기
@@ -120,7 +114,7 @@ class RegisterViewModel @Inject constructor(
 
     fun clearNickName() {
         nickname.value = ""
-        _nicknameEnable.value = false
+        changeNickNameState(EditTextState.NONE)
         checkButtonState()
     }
 
@@ -147,45 +141,32 @@ class RegisterViewModel @Inject constructor(
             _challengeState.value = updatedData
         }
         Log.d("DataBindingTest","${_challengeState.value}")
+
+        checkButtonState() //버튼 상태 확인
     }
 
-    fun changeKeyWordState(title: String) {
-        //title 과 같은 아이템의 state를 !한다
-        val currentData = _keywordState.value
-
-        Log.d("KeyWordTest","? ${_keywordState.value}")
-        if (currentData != null) {
-            val updatedData = ArrayList<KeyWord>()
-            currentData.forEach {
-                if (it.title == title) {
-                    updatedData.add(KeyWord(it.title, !it.state))
-                } else {
-                    updatedData.add(it)
-                }
-            }
-            _keywordState.value = updatedData
-        }
-        Log.d("KeyWordTest","?? ${_keywordState.value}")
-    }
-
-
-    private fun checkButtonState() {
+    fun checkButtonState() {
         when (_registerState.value) {
             RegisterType.SERVICE_AGREEMENT -> {
                 _buttonState.value = (_checkBoxState.value == 30)
+                _detailState.value = 0
             }
             RegisterType.INFORMATION_INPUT1 -> {
-                _buttonState.value = _nicknameEnable.value
+                _buttonState.value = (_nicknameState.value == EditTextState.ENABLE)
             }
             RegisterType.INFORMATION_INPUT2 -> {
-                if (_genderState.value != null) {
-                    _buttonState.value = true
-                } else {
-                    _buttonState.value = false
-                }
+                _buttonState.value = (_genderState.value != null) &&
+                        if (_birth.value?.year == 0) {
+                            false
+                        } else {
+                            _birth.value?.hasPassed14Years()?:false
+                        }
             }
             RegisterType.KEYWORD_RECOMMENDATION -> {
-
+                _buttonState.value = true
+            }
+            RegisterType.COMPLETION -> {
+                _buttonState.value = true
             }
             else -> {}
         }

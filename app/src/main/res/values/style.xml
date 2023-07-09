@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="ImageButtonDefault" parent="Widget.AppCompat.ImageButton">
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:backgroundTint">@android:color/transparent</item>
     </style>
 
     <style name="DefaultButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/selector_btn</item>
         <item name="android:textColor">@color/selector_btn_text_color</item>
     </style>
 
     <style name="TextButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/selector_textbtn</item>
         <item name="android:textColor">@color/selector_textbtn_text_color</item>
     </style>
 
     <style name="LineButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/selector_line_btn</item>
         <item name="android:textColor">@color/selector_line_btn_text_color</item>
     </style>
 
     <style name="LineButtonStyleMint" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/selector_line_btn_mint</item>
         <item name="android:textColor">@color/selector_line_btn_text_color</item>
     </style>
 
     <style name="LineButtonStylePink" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/selector_line_btn_pink</item>
         <item name="android:textColor">@color/selector_line_btn_text_color</item>
     </style>
 
     <style name="LineButtonStyleYellow" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/selector_line_btn_yellow</item>
         <item name="android:textColor">@color/selector_line_btn_text_color</item>
     </style>
 
     <style name="LineButtonStyleBlue" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/selector_line_btn_blue</item>
         <item name="android:textColor">@color/selector_line_btn_text_color</item>
     </style>
@@ -43,4 +51,31 @@
     <style name="DefaultCheckBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:buttonTint">@color/selector_check_box</item>
     </style>
+
+    <style name="SpinnerDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:datePickerStyle">@style/SpinnerDatePickerStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/SpinnerButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/SpinnerButtonStyle</item>
+    </style>
+
+    <style name="SpinnerDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:padding">24dp</item>
+    </style>
+
+
+    <style name="SpinnerButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    
+    <style name="TextViewTitleStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingExtra">6dp</item>
+        <item name="android:textSize">@dimen/text_5xl</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+
+
 </resources>
