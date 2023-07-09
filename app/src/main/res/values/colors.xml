@@ -36,4 +36,10 @@
     <color name="success">#00970F</color>
 
     <color name="light_blue">#F3FAFF</color>
+
+    <color name="btn_mint">#22DAB5</color>
+    <color name="btn_pink">#FF66B6</color>
+    <color name="btn_purple">#9B5DEC</color>
+    <color name="btn_blue">#43B5FF</color>
+
 </resources>

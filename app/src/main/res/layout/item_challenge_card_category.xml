@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.cider.cider.domain.type.challenge.Challenge"/>
+        <variable
+            name="challenge"
+            type="com.cider.cider.domain.model.ChallengeCardModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/challenge_card_width"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/iv_challenge_info_image"
+            android:layout_width="@dimen/challenge_card_image_width"
+            android:layout_height="@dimen/challenge_card_image_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/ic_test_image" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/iv_challenge_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/selector_like"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:select="@{challenge.like}"
+            tools:src="@drawable/ic_like_24_false" />
+
+        <TextView
+            android:id="@+id/tv_challenge_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@{challenge.title}"
+            android:textSize="@dimen/text_3xl"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_challenge_duration"
+            tools:text="소비습관\n고치기" />
+
+        <TextView
+            android:id="@+id/tv_challenge_recruiting"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="@dimen/text_sm"
+            android:textColor="@color/white"
+            android:layout_marginStart="8dp"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:gravity="center"
+            android:text="@string/challenge_recruiting"
+            android:background="@drawable/shape_challenge_recruiting"
+            app:layout_constraintTop_toTopOf="@id/iv_challenge_like"
+            app:layout_constraintBottom_toBottomOf="@id/iv_challenge_like"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_challenge_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="@dimen/text_sm"
+            android:textColor="@color/gray_8"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:gravity="center"
+            android:background="@drawable/shape_challenge_chip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:duration="@{challenge.duration}"
+            tools:text="@string/challenge_1week" />
+
+        <TextView
+            android:id="@+id/tv_challenge_reward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/challenge_reward"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="@dimen/text_sm"
+            android:textColor="@color/gray_8"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:gravity="center"
+            android:background="@drawable/shape_challenge_chip"
+            app:layout_constraintStart_toEndOf="@id/tv_challenge_duration"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:visible="@{challenge.reward}"
+            tools:text="@string/challenge_reward" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

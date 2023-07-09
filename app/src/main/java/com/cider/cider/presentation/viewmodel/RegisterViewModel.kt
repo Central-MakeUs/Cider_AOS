@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cider.cider.domain.repository.RegisterRepository
 import com.cider.cider.domain.type.*
+import com.cider.cider.domain.type.challenge.Challenge
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,21 +40,24 @@ class RegisterViewModel @Inject constructor(
     private val _genderState = MutableLiveData<Gender>()
     val genderState : LiveData<Gender> get() = _genderState
 
-    private val _birth = MutableLiveData<Birth>()
+    private val _birth = MutableLiveData<Birth>(Birth(0,-1,0))
     val birth: LiveData<Birth> get() = _birth
 
-    private val _challengeState = MutableLiveData<ChallengeType>()
-    val challengeState: LiveData<ChallengeType> get() = _challengeState
+    private val _challengeState = MutableLiveData<ChallengeButtonState>(ChallengeButtonState())
+    val challengeState: LiveData<ChallengeButtonState> get() = _challengeState
 
     init {
-        _challengeState.value = ChallengeType()
-        _birth.value = Birth(0,-1,0)
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
-        if (name != null) nickname.value = name!!
+        if (name != null) {
+            nickname.value = name?:""
+            //닉네임 검사 이후
+            //TODO(닉네임 중복 검사 이후 자동 진행)
+            checkNickNameEnable()
+        }
         if (date != null) _birth.value = Birth(0, date/100-1, date%100)
-        if (gender != null) _genderState.value = gender!!
+        if (gender != null) _genderState.value = gender?:Gender.MALE
     }
 
     fun changeCheckBox(num: Int) {
@@ -127,22 +131,15 @@ class RegisterViewModel @Inject constructor(
         _birth.value = birth
     }
 
-    fun changeChallengeState(num: Int, state: Boolean) {
-        val currentData = _challengeState.value
-
-        if (currentData != null) {
-            val updatedData = when (num) {
-                0 -> currentData.copy(investing = state)
-                1 -> currentData.copy(saving = state)
-                2 -> currentData.copy(money_management = state)
-                3 -> currentData.copy(financial_learning = state)
-                else -> currentData
-            }
-            _challengeState.value = updatedData
+    fun changeChallengeState(challenge: Challenge) {
+        val currentState = _challengeState.value
+        val updateState = when (challenge) {
+            Challenge.INVESTING -> { currentState?.copy(investing = !currentState.investing) }
+            Challenge.FINANCIAL_LEARNING -> { currentState?.copy(financial_learning = !currentState.financial_learning)}
+            Challenge.MONEY_MANAGEMENT -> { currentState?.copy(money_management = !currentState.money_management)}
+            Challenge.SAVING -> { currentState?.copy(saving = !currentState.saving)}
         }
-        Log.d("DataBindingTest","${_challengeState.value}")
-
-        checkButtonState() //버튼 상태 확인
+        _challengeState.value = updateState?:ChallengeButtonState()
     }
 
     fun checkButtonState() {
@@ -161,9 +158,6 @@ class RegisterViewModel @Inject constructor(
                         } else {
                             _birth.value?.hasPassed14Years()?:false
                         }
-            }
-            RegisterType.KEYWORD_RECOMMENDATION -> {
-                _buttonState.value = true
             }
             RegisterType.COMPLETION -> {
                 _buttonState.value = true

@@ -2,6 +2,7 @@
     <string name="app_name">사이다</string>
 
     <string name="toolbar_title_register">회원가입</string>
+    <string name="toolbar_title_register_complete">완료</string>
     <!-- 서비스 이용 동의 -->
     <string name="consent_title">서비스 이용에\n동의해주세요</string>
     <string name="consent_body1">만 14세 이상입니다(필수)</string>
@@ -33,7 +34,7 @@
     <string name="register_profile_birth_check">14세 이상으로 선택해주세요</string>
     <string name="register_profile_gender_check">본인의 성별을 선택해주세요</string>
 
-    <string name="register_keyword_title">관심 챌린지와 키워드를\n모두 선택해주세요</string>
+    <string name="register_keyword_title">원하는 챌린지 분야를\n모두 선택해주세요</string>
     <string name="register_keyword_challenge">관심있는 챌린지</string>
     <string name="register_keyword_keyword">관심 키워드</string>
     <string name="register_keyword_min">최소 2개 선택</string>
@@ -54,4 +55,5 @@
     <string name="challenge_reward">리워드</string>
     <string name="challenge_1week">1주</string>
     <string name="challenge_official">공식 챌린지</string>
+    <string name="date_hint">0000년 00월 00일</string>
 </resources>
