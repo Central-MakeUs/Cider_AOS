@@ -1,6 +1,7 @@
 package com.cider.cider.presentation.register
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.cider.cider.R
 import com.cider.cider.databinding.ActivityLoginBinding
+import com.cider.cider.presentation.MainActivity
 import com.cider.cider.utils.binding.BindingActivity
 import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +28,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             add(R.id.fl_login, LoginFragment(), "Login")
             commit()
         }
-
+        moveToMain()
         Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
     }
 
@@ -39,5 +41,11 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         }
 
         return super.dispatchTouchEvent(ev)
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

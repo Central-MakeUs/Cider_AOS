@@ -56,4 +56,7 @@
     <string name="challenge_1week">1주</string>
     <string name="challenge_official">공식 챌린지</string>
     <string name="date_hint">0000년 00월 00일</string>
+    
+    <!-- Challenge Create -->
+    <string name="challenge_create_select_title">개설을 원하는\n챌린지 분야를\n선택해보세요</string>
 </resources>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.cider.cider.domain.type.challenge.Challenge"/>
+        <variable
+            name="register"
+            type="com.cider.cider.presentation.viewmodel.RegisterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="52dp">
+
+        <TextView
+            android:id="@+id/tv_keyword_title"
+            style="@style/TextViewTitleStyle"
+            android:text="@string/challenge_create_select_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_challenge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_investing"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/selector_line_btn_mint"
+                android:layout_marginBottom="@dimen/challenge_btn_margin_bottom"
+                app:layout_constraintBottom_toTopOf="@id/btn_money_management"
+                app:select="@{true}">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/icon_investing"
+                    android:layout_width="@dimen/challenge_icon"
+                    android:layout_height="@dimen/challenge_icon"
+                    android:src="@drawable/selector_icon_investing"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_investing"
+                    app:layout_constraintHorizontal_chainStyle="packed"/>
+
+                <TextView
+                    android:id="@+id/tv_investing"
+                    android:text="@string/challenge_investing"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon_investing"
+                    style="@style/ChallengeTextView"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_money_management"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/selector_line_btn_blue"
+                android:layout_marginBottom="@dimen/challenge_btn_margin_bottom"
+                app:layout_constraintBottom_toTopOf="@id/btn_financial_learning"
+                app:select="@{true}">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/icon_money_management"
+                    android:layout_width="@dimen/challenge_icon"
+                    android:layout_height="@dimen/challenge_icon"
+                    android:src="@drawable/selector_icon_money_management"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_money_management"
+                    app:layout_constraintHorizontal_chainStyle="packed"/>
+
+                <TextView
+                    android:id="@+id/tv_money_management"
+                    android:text="@string/challenge_money_management"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon_money_management"
+                    style="@style/ChallengeTextView"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_financial_learning"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/selector_line_btn_purple"
+                android:layout_marginBottom="@dimen/challenge_btn_margin_bottom"
+                app:layout_constraintBottom_toTopOf="@id/btn_saving"
+                app:select="@{true}">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/icon_financial_learning"
+                    android:layout_width="@dimen/challenge_icon"
+                    android:layout_height="@dimen/challenge_icon"
+                    android:src="@drawable/selector_icon_financial_learning"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_financial_learning"
+                    app:layout_constraintHorizontal_chainStyle="packed"/>
+
+                <TextView
+                    android:id="@+id/tv_financial_learning"
+                    android:text="@string/challenge_financial_learning"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon_financial_learning"
+                    style="@style/ChallengeTextView"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_saving"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/selector_line_btn_pink"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:select="@{true}">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/icon_saving"
+                    android:layout_width="@dimen/challenge_icon"
+                    android:layout_height="@dimen/challenge_icon"
+                    android:src="@drawable/selector_icon_saving"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_saving"
+                    app:layout_constraintHorizontal_chainStyle="packed"/>
+
+                <TextView
+                    android:id="@+id/tv_saving"
+                    android:text="@string/challenge_saving"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon_saving"
+                    style="@style/ChallengeTextView"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
