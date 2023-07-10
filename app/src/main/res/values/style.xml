@@ -77,7 +77,7 @@
         <item name="android:fontFamily">@font/pretendard_bold</item>
     </style>
 
-
+    <!-- 챌린지 버튼 텍스트 -->
     <style name="ChallengeTextView" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -86,6 +86,56 @@
         <item name="android:textColor">@color/selector_challenge_btn_text_color</item>
         <item name="android:layout_marginStart">8dp</item>
     </style>
+    
+    <!-- 챌린지 개설 제목 스타일 -->
+    <style name="ChallengeCreateTitleStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">@dimen/text_2xl</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
 
+    <style name="ChallengeCreateImportantStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">@dimen/text_2xl</item>
+        <item name="android:textColor">@color/main</item>
+        <item name="android:text">*</item>
+    </style>
+
+    <!-- EditText 스타일 -->
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColorHint">@color/gray_4</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">@dimen/text_base</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
+    </style>
+
+    <!-- 글자 수 세기 -->
+    <style name="CountTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/gray_5</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+    </style>
+
+    <style name="SubTextViewStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">@dimen/text_base</item>
+        <item name="android:textColor">@color/icon</item>
+    </style>
+    
+    <style name="AlertTextViewStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/error</item>
+    </style>
 
 </resources>
