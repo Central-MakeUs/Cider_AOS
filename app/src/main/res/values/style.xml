@@ -120,8 +120,23 @@
         <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
     </style>
 
+    <style name="TextBoxButtonStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">@dimen/text_base</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:background">@drawable/shape_line_btn</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
+    </style>
+
     <!-- 글자 수 세기 -->
     <style name="CountTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
         <item name="android:fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/gray_5</item>
         <item name="android:textSize">@dimen/text_sm</item>
@@ -138,6 +153,7 @@
     <style name="AlertTextViewStyle" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
         <item name="android:textSize">@dimen/text_sm</item>
         <item name="android:fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/error</item>
