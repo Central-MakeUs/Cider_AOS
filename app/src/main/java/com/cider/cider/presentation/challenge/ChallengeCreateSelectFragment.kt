@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCreateBinding
 import com.cider.cider.databinding.FragmentChallengeCreateSelectBinding
@@ -35,12 +36,14 @@ class ChallengeCreateSelectFragment: BindingFragment<FragmentChallengeCreateSele
         binding.btnMoneyManagement.setOnClickListener {
             nextFragment()
         }
+        binding.btnToolbarBack.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
     private fun nextFragment() {
-        val navController = view?.findNavController()
-
-        navController?.navigate(
+        findNavController().navigate(
             R.id.action_challengeCreateSelectFragment_to_challengeCreateDetailFragment
         )
     }
@@ -57,6 +60,8 @@ class ChallengeCreateSelectFragment: BindingFragment<FragmentChallengeCreateSele
     }
 
     private fun onBackPressed() {
-        Log.d("TEST BackPress","CreateSelect")
+        val parentNavController = requireActivity().findNavController(R.id.fl_main)
+        parentNavController.popBackStack()
+
     }
 }

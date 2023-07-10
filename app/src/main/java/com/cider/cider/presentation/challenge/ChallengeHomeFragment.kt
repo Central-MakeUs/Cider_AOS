@@ -2,14 +2,11 @@ package com.cider.cider.presentation.challenge
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
-import com.cider.cider.presentation.register.LoginFragment
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +33,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
     private fun setButton() {
         binding.btnTest.setOnClickListener {
-            view?.findNavController()?.navigate(
+            findNavController().navigate(
                 R.id.action_challengeHomeFragment_to_challengeCreateFragment
             )
         }

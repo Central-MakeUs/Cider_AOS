@@ -8,5 +8,82 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/btn_toolbar_back"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/ic_left_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/challenge_create_toolbar_title"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="@dimen/text_2xl"
+                android:textColor="@color/black"
+                android:layout_marginStart="14dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_toolbar_back" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/tv_toolbar_home"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/ic_home_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/TextViewTitleStyle"
+            android:text="@string/challenge_create_complete_title"
+            android:layout_marginTop="52dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+        <TextView
+            android:id="@+id/tv_challenge_complete_text1"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="@dimen/text_xl"
+            android:text="@string/challenge_create_complete_text1"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_challenge_complete_text2"/>
+
+        <TextView
+            android:id="@+id/tv_challenge_complete_text2"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="@dimen/text_xl"
+            android:text="@string/challenge_create_complete_text2"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_challenge_check"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_challenge_check"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height_48"
+            android:text="@string/challenge_create_complete_button"
+            android:textSize="@dimen/text_2xl"
+            android:fontFamily="@font/pretendard_bold"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

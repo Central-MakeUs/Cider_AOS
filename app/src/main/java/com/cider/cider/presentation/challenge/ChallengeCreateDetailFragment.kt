@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCreateDetailBinding
-import com.cider.cider.databinding.FragmentChallengeCreateSelectBinding
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,15 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
     }
 
     private fun setButton() {
+        binding.tvToolbarComplete.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_challengeCreateDetailFragment_to_challengeCreateCompleteFragment
+            )
+        }
 
+        binding.btnToolbarBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private lateinit var callback: OnBackPressedCallback
@@ -36,6 +44,6 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
     }
 
     private fun onBackPressed() {
-        Log.d("TEST BackPress","CreateSDetail")
+        findNavController().popBackStack()
     }
 }
