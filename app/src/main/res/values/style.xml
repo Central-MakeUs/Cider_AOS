@@ -102,16 +102,21 @@
         <item name="android:fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">@dimen/text_2xl</item>
         <item name="android:textColor">@color/main</item>
+        <item name="android:layout_marginStart">4dp</item>
         <item name="android:text">*</item>
     </style>
 
     <!-- EditText 스타일 -->
     <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColorHint">@color/gray_4</item>
         <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:paddingVertical">12dp</item>
         <item name="android:fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">@dimen/text_base</item>
         <item name="android:textColor">@color/text</item>
+        <item name="android:background">@drawable/shape_edittext_none</item>
         <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
     </style>
 
