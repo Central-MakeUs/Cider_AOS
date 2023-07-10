@@ -81,7 +81,7 @@
     <string name="challenge_challenge_period_sub">최소 1주부터 8주까지 가능합니다</string>
     <string name="challenge_authentication_hint">인증샷 모드에서 10,000원이 적힌 화면 인증</string>
 
-    <string name="challenge_title_alert_min">최대 30자까지 입력할 수 있습니다</string>
+    <string name="challenge_title_alert_min">최소 5자부터 입력할 수 있습니다</string>
     <string name="challenge_introduction_alert_min">최소 30자부터 입력할 수 있습니다</string>
     <string name="challenge_authentication_alert_min">최소 5자부터 입력할 수 있습니다</string>
 
