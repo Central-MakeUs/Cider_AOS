@@ -3,6 +3,9 @@
 
     <string name="toolbar_title_register">회원가입</string>
     <string name="toolbar_title_register_complete">완료</string>
+
+    <string name="on_boarding_title">금융과 소비를\n시원하게 연결하다\n사이다</string>
+    <string name="kakao_register">카카오톡으로 시작</string>
     <!-- 서비스 이용 동의 -->
     <string name="consent_title">서비스 이용에\n동의해주세요</string>
     <string name="consent_body1">만 14세 이상입니다(필수)</string>
