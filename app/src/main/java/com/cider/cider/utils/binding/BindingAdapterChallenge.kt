@@ -56,3 +56,9 @@ fun setParticipationStatus(view: View, status: ParticipationStatus) {
 fun setDuration(view: TextView, duration: Int) {
     view.text = "${duration}주"
 }
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("countText", "maxCount", requireAll = true)
+fun setTextCount(view: TextView, text: String, max: Int) {
+    view.text = "${text.length}/${max}"
+}

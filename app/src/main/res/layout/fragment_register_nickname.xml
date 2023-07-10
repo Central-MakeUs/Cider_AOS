@@ -79,6 +79,14 @@
                 app:layout_constraintTop_toTopOf="@id/et_nickname"
                 app:layout_constraintBottom_toBottomOf="@id/et_nickname"
                 tools:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/tv_nick_count"
+                style="@style/CountTextStyle"
+                app:countText="@{register.nickname}"
+                app:maxCount="@{10}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_nickname"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
