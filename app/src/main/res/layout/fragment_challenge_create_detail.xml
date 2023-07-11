@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="challenge"
+            type="com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,6 +83,9 @@
                         android:paddingStart="12dp"
                         android:paddingEnd="45dp"
                         android:hint="@string/challenge_title_hint"
+                        android:text="@={challenge.challengeTitle}"
+                        android:maxLength="30"
+                        android:maxLines="1"
                         app:layout_constraintTop_toBottomOf="@id/tv_challenge_title"
                         app:layout_constraintStart_toStartOf="parent"
                         android:autofillHints=""
@@ -93,9 +98,11 @@
                         android:layout_marginEnd="12dp"
                         android:src="@drawable/ic_delete_box"
                         android:visibility="gone"
+                        android:onClick="@{()->challenge.clearTitle()}"
                         app:layout_constraintEnd_toEndOf="@id/et_challenge_title"
                         app:layout_constraintTop_toTopOf="@id/et_challenge_title"
                         app:layout_constraintBottom_toBottomOf="@id/et_challenge_title"
+                        app:visible="@{challenge.challengeTitle.length()>0}"
                         tools:visibility="visible"/>
 
                     <TextView
@@ -104,15 +111,17 @@
                         android:visibility="invisible"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_challenge_title"
-                        tools:text="@string/challenge_title_alert_min"
+                        android:text="@string/challenge_title_alert_min"
                         tools:visibility="visible"/>
 
                     <TextView
                         android:id="@+id/tv_challenge_title_count"
                         style="@style/CountTextStyle"
-                        android:text="0/30"
+                        app:countText="@{challenge.challengeTitle}"
+                        app:maxCount="@{30}"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_challenge_title"/>
+                        app:layout_constraintTop_toBottomOf="@id/et_challenge_title"
+                        tools:text="0/30"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -143,10 +152,12 @@
                         android:layout_marginTop="8dp"
                         android:gravity="top"
                         android:lineSpacingExtra="3dp"
+                        android:text="@={challenge.challengeIntroduction}"
                         android:hint="@string/challenge_introduction_hint"
                         app:layout_constraintTop_toBottomOf="@id/tv_challenge_introduction"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:autofillHints=""/>
+                        android:autofillHints=""
+                        android:inputType="textMultiLine"/>
 
                     <TextView
                         android:id="@+id/tv_challenge_introduction_alert"
@@ -154,15 +165,17 @@
                         android:visibility="invisible"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_challenge_introduction"
-                        tools:text="@string/challenge_introduction_alert_min"
+                        android:text="@string/challenge_introduction_alert_min"
                         tools:visibility="visible"/>
 
                     <TextView
                         android:id="@+id/tv_challenge_introduction_count"
                         style="@style/CountTextStyle"
-                        android:text="0/1000"
+                        app:countText="@{challenge.challengeIntroduction}"
+                        app:maxCount="@{1000}"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_challenge_introduction"/>
+                        app:layout_constraintTop_toBottomOf="@id/et_challenge_introduction"
+                        tools:text="0/1000"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -191,10 +204,11 @@
                         android:layout_height="44dp"
                         style="@style/TextBoxButtonStyle"
                         android:layout_marginTop="8dp"
-                        android:text="3명"
+                        android:text="@{String.valueOf(challenge.capacity)+'명'}"
                         app:layout_constraintTop_toBottomOf="@id/tv_challenge_capacity"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:autofillHints=""/>
+                        android:autofillHints=""
+                        tools:text="3명"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterButton
                         android:id="@+id/btn_challenge_capacity_people"
@@ -242,10 +256,11 @@
                         android:layout_height="44dp"
                         style="@style/TextBoxButtonStyle"
                         android:layout_marginTop="8dp"
-                        android:text="1일"
+                        android:text="@{String.valueOf(challenge.recruitmentPeriod)+'일'}"
                         app:layout_constraintTop_toBottomOf="@id/tv_challenge_recruitment_period"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:autofillHints=""/>
+                        android:autofillHints=""
+                        tools:text="1일"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterButton
                         android:id="@+id/btn_challenge_recruitment_period_down"
@@ -293,10 +308,11 @@
                         android:layout_height="44dp"
                         style="@style/TextBoxButtonStyle"
                         android:layout_marginTop="8dp"
-                        android:text="3명"
+                        android:text="@{String.valueOf(challenge.challengePeriod)+'주'}"
                         app:layout_constraintTop_toBottomOf="@id/tv_challenge_challenge_period"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:autofillHints=""/>
+                        android:autofillHints=""
+                        tools:text="3주"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterButton
                         android:id="@+id/btn_challenge_challenge_period_down"
@@ -347,9 +363,14 @@
                         android:paddingStart="12dp"
                         android:paddingEnd="45dp"
                         android:hint="@string/challenge_authentication_hint"
+                        android:text="@={challenge.challengeAuthentication}"
+                        android:maxLength="30"
                         app:layout_constraintTop_toBottomOf="@id/tv_challenge_authentication"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:autofillHints=""/>
+                        android:autofillHints=""
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterButton
                         android:id="@+id/btn_challenge_authentication_delete"
@@ -358,9 +379,11 @@
                         android:layout_marginEnd="12dp"
                         android:src="@drawable/ic_delete_box"
                         android:visibility="gone"
+                        android:onClick="@{()->challenge.clearTitle()}"
                         app:layout_constraintEnd_toEndOf="@id/et_challenge_authentication"
                         app:layout_constraintTop_toTopOf="@id/et_challenge_authentication"
                         app:layout_constraintBottom_toBottomOf="@id/et_challenge_authentication"
+                        app:visible="@{challenge.challengeAuthentication.length()>0}"
                         tools:visibility="visible"/>
 
                     <TextView
@@ -369,15 +392,17 @@
                         android:visibility="invisible"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_challenge_authentication"
-                        tools:text="@string/challenge_authentication_alert_min"
+                        android:text="@string/challenge_authentication_alert_min"
                         tools:visibility="visible"/>
 
                     <TextView
                         android:id="@+id/tv_challenge_authentication_count"
                         style="@style/CountTextStyle"
-                        android:text="0/30"
+                        app:countText="@{challenge.challengeTitle}"
+                        app:maxCount="@{30}"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_challenge_authentication"/>
+                        app:layout_constraintTop_toBottomOf="@id/et_challenge_authentication"
+                        tools:text="0/30"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
