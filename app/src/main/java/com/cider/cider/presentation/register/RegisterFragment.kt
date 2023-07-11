@@ -39,8 +39,11 @@ class RegisterFragment
                 viewModel.getRegisterData(
                     name = user.kakaoAccount?.profile?.nickname,
                     date = user.kakaoAccount?.birthday?.toInt(),
-                    gender = if (user.kakaoAccount?.gender == Gender.MALE) com.cider.cider.domain.type.Gender.MALE
-                            else com.cider.cider.domain.type.Gender.FEMALE
+                    gender = when (user.kakaoAccount?.gender) {
+                        Gender.MALE -> com.cider.cider.domain.type.Gender.MALE
+                        Gender.FEMALE -> com.cider.cider.domain.type.Gender.FEMALE
+                        else -> null
+                    }
                 )
             }
         }

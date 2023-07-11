@@ -46,9 +46,6 @@ class RegisterViewModel @Inject constructor(
     private val _challengeState = MutableLiveData<ChallengeButtonState>(ChallengeButtonState())
     val challengeState: LiveData<ChallengeButtonState> get() = _challengeState
 
-    init {
-    }
-
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
         if (name != null) {
             nickname.value = name?:""

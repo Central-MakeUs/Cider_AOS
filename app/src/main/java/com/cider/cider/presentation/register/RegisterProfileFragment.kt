@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -52,7 +53,7 @@ class RegisterProfileFragment
                 if (it == Gender.MALE) {
                     binding.btnProfileMale.isSelected = true
                     binding.btnProfileFemale.isSelected = false
-                } else {
+                } else if (it == Gender.FEMALE){
                     binding.btnProfileMale.isSelected = false
                     binding.btnProfileFemale.isSelected = true
                 }
@@ -61,15 +62,16 @@ class RegisterProfileFragment
         viewModel.birth.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
                 if (it.year != 0) {
+                    binding.btnProfileBirth.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
                     if (it.hasPassed14Years()) {
-                        Log.d("TEST birth","true")
                         binding.btnProfileBirth.setBackgroundResource(R.drawable.shape_edittext_active)
                         binding.tvCheckBirth.visibility = View.GONE
                     } else {
-                        Log.d("TEST birth","false")
                         binding.btnProfileBirth.setBackgroundResource(R.drawable.shape_edittext_error)
                         binding.tvCheckBirth.visibility = View.VISIBLE
                     }
+                } else {
+                    binding.btnProfileBirth.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_4))
                 }
                 viewModel.checkButtonState() //TODO(로직 다시 생각해 보기)
             }
@@ -80,8 +82,8 @@ class RegisterProfileFragment
         binding.btnProfileBirth.setOnClickListener {
             val cal = Calendar.getInstance()
             cal.set( if ((viewModel.birth.value?.year ?: cal.get(Calendar.YEAR)) <= 1900) cal.get(Calendar.YEAR) else viewModel.birth.value?.year?:0,
-                viewModel.birth.value?.month?:Calendar.MONTH,
-                viewModel.birth.value?.day?:Calendar.DAY_OF_MONTH)
+                viewModel.birth.value?.month?:cal.get(Calendar.MONTH),
+                viewModel.birth.value?.day?:cal.get(Calendar.DAY_OF_MONTH))
 
             Log.d("TEST","${cal.get(Calendar.YEAR)} / ${cal.get(Calendar.MONTH)} / ${cal.get(Calendar.DAY_OF_MONTH)}")
             val data = DatePickerDialog.OnDateSetListener { view, year, month, day ->
