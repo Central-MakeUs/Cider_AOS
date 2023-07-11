@@ -14,13 +14,14 @@ import com.cider.cider.databinding.FragmentRegisterBinding
 import com.cider.cider.presentation.MainActivity
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
+import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.model.Gender
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment
-    :BindingFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
+    :BindingFragmentNoNavi<FragmentRegisterBinding>(R.layout.fragment_register) {
 
     private lateinit var callback: OnBackPressedCallback
     private val viewModel: RegisterViewModel by activityViewModels()
@@ -62,10 +63,6 @@ class RegisterFragment
     override fun onDetach() {
         super.onDetach()
         callback.remove()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     private fun setFragment(fragment: Fragment, tag: String) {

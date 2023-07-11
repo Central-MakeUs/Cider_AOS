@@ -6,16 +6,18 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterConsentBinding
 import com.cider.cider.domain.type.RegisterType
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
+import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterConsentFragment
-    :BindingFragment<FragmentRegisterConsentBinding>(R.layout.fragment_register_consent) {
+    :BindingFragmentNoNavi<FragmentRegisterConsentBinding>(R.layout.fragment_register_consent) {
 
     private val viewModel: RegisterViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -33,19 +33,8 @@ class ChallengeCreateCompleteFragment: BindingFragment<FragmentChallengeCreateCo
         }
     }
 
-    private lateinit var callback: OnBackPressedCallback
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                onBackPressed()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
-    private fun onBackPressed() {
+    override fun onBackPressed() {
+        super.onBackPressed()
         val parentNavController = requireActivity().findNavController(R.id.fl_main)
         parentNavController.popBackStack()
     }

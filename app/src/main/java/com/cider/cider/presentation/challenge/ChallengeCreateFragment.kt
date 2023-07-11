@@ -15,23 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ChallengeCreateFragment: BindingFragment<FragmentChallengeCreateBinding>(R.layout.fragment_challenge_create) {
 
-    private lateinit var callback: OnBackPressedCallback
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                onBackPressed()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
-    private fun onBackPressed() {
+    override fun onBackPressed() {
+        super.onBackPressed()
         Log.d("TEST BackPress","Create")
     }
 }

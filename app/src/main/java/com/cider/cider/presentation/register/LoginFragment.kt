@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,8 +54,6 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             } else {
                 UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = mCallBack)
             }
-
-
         }
     }
 
