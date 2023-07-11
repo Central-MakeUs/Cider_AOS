@@ -20,7 +20,7 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
     }
 
     private fun setButton() {
-        binding.tvToolbarComplete.setOnClickListener {
+        binding.btnChallengeCreate.setOnClickListener {
             findNavController().navigate(
                 R.id.action_challengeCreateDetailFragment_to_challengeCreateCompleteFragment
             )
