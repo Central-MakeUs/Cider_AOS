@@ -9,6 +9,7 @@ import com.cider.cider.domain.repository.RegisterRepository
 import com.cider.cider.domain.type.*
 import com.cider.cider.domain.type.challenge.Challenge
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -45,6 +46,12 @@ class RegisterViewModel @Inject constructor(
 
     private val _challengeState = MutableLiveData<ChallengeButtonState>(ChallengeButtonState())
     val challengeState: LiveData<ChallengeButtonState> get() = _challengeState
+
+    fun login(header: String) {
+        viewModelScope.launch {
+            Log.d("TEST API","${repository.postLogin(header)}")
+        }
+    }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
         if (name != null) {
@@ -85,10 +92,12 @@ class RegisterViewModel @Inject constructor(
     }
 
     fun createRandomNickName() {
-        //NickName 요청
-        nickname.value = "랜덤아이디생성"
-        changeNickNameState(EditTextState.ENABLE)
-        checkButtonState()
+        viewModelScope.launch(Dispatchers.Main) {
+            nickname.value = repository.getRandomNickName()
+            Log.d("TEST Retrofit2","${nickname.value}")
+            changeNickNameState(EditTextState.ENABLE)
+            checkButtonState()
+        }
     }
 
     fun checkNickNameEnable() {

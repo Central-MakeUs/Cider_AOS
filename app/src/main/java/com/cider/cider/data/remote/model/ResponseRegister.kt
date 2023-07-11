@@ -1,6 +1,6 @@
 package com.cider.cider.data.remote.model
 
-data class ResponseLogin(
+data class ResponseLoginModel(
     val accessToken: String,
     val refreshToken: String,
     val isNewMember: Boolean,
@@ -8,4 +8,8 @@ data class ResponseLogin(
     val memberName: String,
     val birthday: String,
     val gender: String
+)
+
+data class ResponseRandomNickNameModel(
+    val randomName: String
 )

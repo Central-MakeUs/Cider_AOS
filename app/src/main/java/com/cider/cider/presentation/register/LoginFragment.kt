@@ -3,8 +3,10 @@ package com.cider.cider.presentation.register
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentLoginBinding
+import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
@@ -15,6 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+
+    private val viewModel: RegisterViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +48,9 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                         //다른 오류
                     } else if (token != null) {
                         Log.e("Kakao Login Test","로그인 성공 ${token?.accessToken}")
+
+                        viewModel.login(token.accessToken)
+
                         parentFragmentManager.beginTransaction().apply {
                             replace(R.id.fl_login, RegisterFragment(), "Register")
                             addToBackStack("Register")
