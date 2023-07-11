@@ -142,6 +142,7 @@
                         style="@style/EditTextStyle"
                         android:layout_marginTop="8dp"
                         android:gravity="top"
+                        android:lineSpacingExtra="3dp"
                         android:hint="@string/challenge_introduction_hint"
                         app:layout_constraintTop_toBottomOf="@id/tv_challenge_introduction"
                         app:layout_constraintStart_toStartOf="parent"
