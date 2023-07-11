@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="18dp"/>
-    <solid android:color="@color/gray_6"/>
+    <size android:width="2dp" />
+    <solid android:color="@color/text" /> <!-- 원하는 색상으로 변경 -->
 </shape>

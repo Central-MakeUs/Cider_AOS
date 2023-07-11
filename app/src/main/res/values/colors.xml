@@ -37,9 +37,11 @@
 
     <color name="light_blue">#F3FAFF</color>
 
-    <color name="btn_mint">#22DAB5</color>
-    <color name="btn_pink">#FF66B6</color>
-    <color name="btn_purple">#9B5DEC</color>
-    <color name="btn_blue">#43B5FF</color>
+    <color name="btn_mint">#1BAE91</color>
+    <color name="btn_pink">#CC5292</color>
+    <color name="btn_purple">#7C4ABD</color>
+    <color name="btn_blue">#3691CC</color>
+
+    <color name="kakao">#FFEB3B</color>
 
 </resources>

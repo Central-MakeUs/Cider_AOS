@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_challenge_create"
+    app:startDestination="@id/challengeHomeFragment">
+    <fragment
+        android:id="@+id/challengeHomeFragment"
+        android:name="com.cider.cider.presentation.challenge.ChallengeHomeFragment"
+        android:label="ChallengeHomeFragment" >
+        <action
+            android:id="@+id/action_challengeHomeFragment_to_challengeCreateFragment"
+            app:destination="@id/challengeCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/challengeCreateFragment"
+        android:name="com.cider.cider.presentation.challenge.ChallengeCreateFragment"
+        android:label="ChallengeCreateFragment" >
+        <action
+            android:id="@+id/action_challengeCreateFragment_to_challengeHomeFragment"
+            app:destination="@id/challengeHomeFragment" />
+    </fragment>
+</navigation>
