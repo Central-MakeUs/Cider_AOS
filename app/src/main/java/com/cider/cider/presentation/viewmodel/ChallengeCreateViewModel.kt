@@ -23,10 +23,10 @@ class ChallengeCreateViewModel @Inject constructor(
     private val _capacity = MutableLiveData<Int>(3)
     val capacity: LiveData<Int> get() = _capacity
 
-    private val _recruitmentPeriod = MutableLiveData<Int>(3)
+    private val _recruitmentPeriod = MutableLiveData<Int>(1)
     val recruitmentPeriod: LiveData<Int> get() = _recruitmentPeriod
 
-    private val _challengePeriod = MutableLiveData<Int>(3)
+    private val _challengePeriod = MutableLiveData<Int>(1)
     val challengePeriod: LiveData<Int> get() = _challengePeriod
 
 
@@ -42,4 +42,10 @@ class ChallengeCreateViewModel @Inject constructor(
     fun clearMission() {
         challengeAuthentication.value = ""
     }
+
+    fun checkChallengeInput(): Boolean {
+        return !challengeAuthentication.value.isNullOrEmpty() ||
+        !challengeIntroduction.value.isNullOrEmpty() ||
+        !challengeTitle.value.isNullOrEmpty()
+    } //값이 하나 라도 있으면 true
 }

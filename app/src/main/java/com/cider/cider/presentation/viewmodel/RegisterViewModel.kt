@@ -77,7 +77,6 @@ class RegisterViewModel @Inject constructor(
         } else {
             _checkBoxState.value = 1
         }
-        Log.d("CheckBoxTest","${_checkBoxState.value}")
         checkButtonState()
     }
 
@@ -93,7 +92,6 @@ class RegisterViewModel @Inject constructor(
             }
             else -> {}
         }
-        Log.e("TEST ViewModel","changeRegisterState 화면 변경")
     } //화면 넘어갈 때 체크
 
     fun createRandomNickName() {
@@ -104,7 +102,6 @@ class RegisterViewModel @Inject constructor(
     }
 
     suspend fun checkNickNameEnable() {
-        Log.e("TEST ViewModel","checkNickNameEnable 닉네임 체크")
         val nick = nickname.value?:""
         if (nick.isNotEmpty() && nick.length >= 2) {
             if (repository.getNickNameExist(nick)) {
@@ -120,7 +117,6 @@ class RegisterViewModel @Inject constructor(
     }
 
     fun changeNickNameState(editTextState: EditTextState) {
-        Log.e("TEST ViewModel","changeNickNameState ${editTextState}")
         _nicknameState.value = editTextState
         checkButtonState()
     }

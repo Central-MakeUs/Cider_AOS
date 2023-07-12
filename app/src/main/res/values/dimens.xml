@@ -48,4 +48,7 @@
     
     <dimen name="challenge_icon">36dp</dimen>
     <dimen name="challenge_btn_margin_bottom">16dp</dimen>
+
+    <!-- dialog -->
+    <dimen name="dialog_width">235dp</dimen>
 </resources>
