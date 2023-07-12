@@ -63,7 +63,7 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
     private fun setButton() {
         binding.btnChallengeCreate.setOnClickListener {
             findNavController().navigate(
-                R.id.action_challengeCreateDetailFragment_to_challengeCreateCompleteFragment
+                R.id.action_challengeCreateDetailFragment_to_challengeCreateCheckFragment
             )
         }
 
