@@ -96,7 +96,6 @@ class RegisterViewModel @Inject constructor(
     fun createRandomNickName() {
         viewModelScope.launch(Dispatchers.Main) {
             nickname.value = repository.getRandomNickName()
-            Log.d("TEST Retrofit2","${nickname.value}")
             changeNickNameState(EditTextState.ENABLE)
             checkButtonState()
         }
@@ -157,8 +156,10 @@ class RegisterViewModel @Inject constructor(
                 _detailState.value = 0
             }
             RegisterType.INFORMATION_INPUT1 -> {
-                _buttonState.value = (_nicknameState.value == EditTextState.ENABLE)
-                Log.e("TEST API","여기를 지나서 2 ${_buttonState.value}")
+                viewModelScope.launch(Dispatchers.Main) {
+                    checkNickNameEnable()
+                    _buttonState.value = (_nicknameState.value == EditTextState.ENABLE)
+                }
             }
             RegisterType.INFORMATION_INPUT2 -> {
                 _buttonState.value = (_genderState.value != null) &&
