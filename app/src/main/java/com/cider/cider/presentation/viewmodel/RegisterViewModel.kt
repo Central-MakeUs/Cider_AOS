@@ -58,7 +58,9 @@ class RegisterViewModel @Inject constructor(
             nickname.value = name?:""
             //닉네임 검사 이후
             //TODO(닉네임 중복 검사 이후 자동 진행)
-            checkNickNameEnable()
+            viewModelScope.launch(Dispatchers.Main) {
+                checkNickNameEnable()
+            }
         }
         if (date != null) _birth.value = Birth(0, date/100-1, date%100)
         if (gender != null) _genderState.value = gender?:Gender.MALE
@@ -100,15 +102,15 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    fun checkNickNameEnable() {
+    suspend fun checkNickNameEnable() {
         val nick = nickname.value?:""
         if (nick.isNotEmpty() && nick.length >= 2) {
-            //nick 중복 검사
-            viewModelScope.launch {
+            if (repository.getNickNameExist(nick)) {
                 changeNickNameState(EditTextState.ENABLE) //중복 없을 때
-                //_nicknameEnable.value = false
-                //changeNickNameState(EditTextState.ERROR) //중복 있을 때
-
+                Log.e("TEST API","여기를 지나서 1")
+            }
+            else {
+                changeNickNameState(EditTextState.ERROR_DUPLICATION) //중복 있을 때
             }
         } else {
             changeNickNameState(EditTextState.ERROR_MIN)
@@ -156,6 +158,7 @@ class RegisterViewModel @Inject constructor(
             }
             RegisterType.INFORMATION_INPUT1 -> {
                 _buttonState.value = (_nicknameState.value == EditTextState.ENABLE)
+                Log.e("TEST API","여기를 지나서 2 ${_buttonState.value}")
             }
             RegisterType.INFORMATION_INPUT2 -> {
                 _buttonState.value = (_genderState.value != null) &&

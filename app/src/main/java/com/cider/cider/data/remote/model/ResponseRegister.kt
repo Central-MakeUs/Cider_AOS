@@ -13,3 +13,7 @@ data class ResponseLoginModel(
 data class ResponseRandomNickNameModel(
     val randomName: String
 )
+
+data class ResponseNicknameExist(
+    val message: String,
+)

@@ -2,6 +2,8 @@ package com.cider.cider.presentation.register
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -9,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterNicknameBinding
@@ -41,7 +44,9 @@ class RegisterNicknameFragment
             if (b) {
                 viewModel.changeNickNameState(EditTextState.ACTIVE)
             } else {
-                viewModel.checkNickNameEnable()
+                viewModel.viewModelScope.launch(Dispatchers.Main) {
+                    viewModel.checkNickNameEnable()
+                }
             }
         }
 
@@ -54,6 +59,19 @@ class RegisterNicknameFragment
             }
             false
         }
+
+        binding.etNickname.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Log.d("TEST TextWatcher","???")
+                viewModel.changeNickNameState(EditTextState.ACTIVE)
+                viewModel.checkButtonState()
+            }
+
+            override fun afterTextChanged(s: Editable?) { }
+
+        })
     }
 
     private fun setObserver() {
@@ -71,8 +89,8 @@ class RegisterNicknameFragment
                 when (viewModel.nicknameState.value) {
                     EditTextState.NONE -> binding.etNickname.setBackgroundResource(R.drawable.shape_edittext_none)
                     EditTextState.ACTIVE -> {
-                        Log.d("TEST background","Background ${binding.etNickname.background}")
                         binding.etNickname.setBackgroundResource(R.drawable.shape_edittext_active)
+                        binding.tvCheckNickname.visibility = View.INVISIBLE
                     }
                     EditTextState.ENABLE -> {
                         binding.etNickname.setBackgroundResource(R.drawable.shape_edittext_active)

@@ -12,20 +12,25 @@ class RegisterRepositoryImpl @Inject constructor(
 
     override suspend fun postLogin(header: String): Any {
         val n = apiService.postLogin(RequestLoginModel())
-        Log.d("TEST API", "${n.isSuccessful}\n${n.code()}\n${n.errorBody()?.string()}")
         return "a"
     }
 
     override suspend fun getRandomNickName(): String {
-        val n = apiService.getRandomNickname()
-
-        Log.d("TEST API","${n.code()}\n${n.body()}\n${n.errorBody()?.string()}")
-
         return try {
             apiService.getRandomNickname().body()?.randomName?:""
         } catch (e: Exception) {
             e.printStackTrace()
             ""
+        }
+    }
+
+    override suspend fun getNickNameExist(nickname: String): Boolean {
+        Log.d("TEST API","${apiService.getNicknameExist(nickname).body()?.message == "사용할 수 있는 닉네임입니다."}")
+        return try {
+            apiService.getNicknameExist(nickname).body()?.message == "사용할 수 있는 닉네임입니다."
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
         }
     }
 
