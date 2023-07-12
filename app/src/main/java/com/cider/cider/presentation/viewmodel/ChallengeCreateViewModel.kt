@@ -29,10 +29,18 @@ class ChallengeCreateViewModel @Inject constructor(
     private val _challengePeriod = MutableLiveData<Int>(1)
     val challengePeriod: LiveData<Int> get() = _challengePeriod
 
+    fun onClear() {
+        challengeTitle.value = ""
+        challengeIntroduction.value = ""
+        challengeAuthentication.value = ""
+        _capacity.value = 3
+        _recruitmentPeriod.value = 1
+        _challengePeriod.value = 1
+        Log.d("TEST asdf","$123")
+    }
 
     fun changeChallenge(challenge: Challenge) {
         _challengeSelect.value = challenge
-        Log.d("TEST change challenge","$challenge")
     }
 
     fun clearTitle() {
