@@ -104,4 +104,8 @@
     
     <string name="challenge_create_btn">챌린지 개설 신청하기</string>
 
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_select">선택</string>
+
+
 </resources>

@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCreateDetailBinding
+import com.cider.cider.presentation.dialog.CapacityBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,25 +68,29 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
             )
         }
 
-        binding.etChallengeCapacity.setOnClickListener {
+        binding.btnChallengeCapacityPeople.setOnClickListener {
             hideKeyBoard()
-            //TODO(Bottom Sheet)
+            showCapacityBottomSheetDialog()
         }
 
-        binding.etChallengeChallengePeriod.setOnClickListener {
+        binding.btnChallengeRecruitmentPeriodDown.setOnClickListener {
             hideKeyBoard()
-            //TODO(Bottom Sheet)
+            showCapacityBottomSheetDialog()
         }
 
-        binding.etChallengeRecruitmentPeriod.setOnClickListener {
+        binding.btnChallengeChallengePeriodDown.setOnClickListener {
             hideKeyBoard()
-            //TODO(Bottom Sheet)
+            showCapacityBottomSheetDialog()
         }
-
 
         binding.btnToolbarBack.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun showCapacityBottomSheetDialog() {
+        val dialog = CapacityBottomSheetDialog()
+        dialog.show(parentFragmentManager, "Capacity")
     }
 
     override fun onBackPressed() {

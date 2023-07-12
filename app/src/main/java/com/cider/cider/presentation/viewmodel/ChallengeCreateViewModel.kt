@@ -29,6 +29,8 @@ class ChallengeCreateViewModel @Inject constructor(
     private val _challengePeriod = MutableLiveData<Int>(1)
     val challengePeriod: LiveData<Int> get() = _challengePeriod
 
+    val arrayList1 = arrayListOf<Int>(30)
+
     fun onClear() {
         challengeTitle.value = ""
         challengeIntroduction.value = ""

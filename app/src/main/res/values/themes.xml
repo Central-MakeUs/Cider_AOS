@@ -12,5 +12,7 @@
         <item name="buttonStyle">@style/DefaultButtonStyle</item>
         <item name="checkboxStyle">@style/DefaultCheckBoxStyle</item>
         <item name="android:textColorHint">@color/gray_4</item>
+
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 </resources>
