@@ -24,7 +24,9 @@ class RegisterFragment
     :BindingFragmentNoNavi<FragmentRegisterBinding>(R.layout.fragment_register) {
 
     private lateinit var callback: OnBackPressedCallback
+
     private val viewModel: RegisterViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

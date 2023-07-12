@@ -65,7 +65,6 @@ class RegisterNicknameFragment
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.changeNickNameState(EditTextState.ACTIVE)
-                viewModel.checkButtonState()
             }
 
             override fun afterTextChanged(s: Editable?) { }

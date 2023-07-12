@@ -20,6 +20,7 @@ class RegisterConsentFragment
     :BindingFragmentNoNavi<FragmentRegisterConsentBinding>(R.layout.fragment_register_consent) {
 
     private val viewModel: RegisterViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.register = viewModel

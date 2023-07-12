@@ -73,7 +73,6 @@ class RegisterProfileFragment
                 } else {
                     binding.btnProfileBirth.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_4))
                 }
-                viewModel.checkButtonState() //TODO(로직 다시 생각해 보기)
             }
         }
     }

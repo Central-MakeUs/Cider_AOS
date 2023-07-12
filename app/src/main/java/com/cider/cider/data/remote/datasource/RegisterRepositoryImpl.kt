@@ -25,7 +25,6 @@ class RegisterRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getNickNameExist(nickname: String): Boolean {
-        Log.d("TEST API","${apiService.getNicknameExist(nickname).body()?.message == "사용할 수 있는 닉네임입니다."}")
         return try {
             apiService.getNicknameExist(nickname).body()?.message == "사용할 수 있는 닉네임입니다."
         } catch (e: Exception) {
