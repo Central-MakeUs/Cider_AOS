@@ -41,17 +41,21 @@
 
     <dimen name="register_service_0dp">0dp</dimen>
 
-    <!-- challenge info -->
+    <!-- challenge card -->
     <dimen name="challenge_card_width">150dp</dimen>
     <dimen name="challenge_card_image_height">192dp</dimen>
     <dimen name="challenge_card_image_width">150dp</dimen>
-    
+    <dimen name="challenge_card_between">12dp</dimen>
+    <dimen name="challenge_card_bottom_margin">32dp</dimen>
+
     <dimen name="challenge_icon">36dp</dimen>
     <dimen name="challenge_btn_margin_bottom">16dp</dimen>
+
 
     <!-- dialog -->
     <dimen name="dialog_width">235dp</dimen>
     
     <!-- viewpager -->
     <dimen name="viewpager_height">260dp</dimen>
+    <dimen name="bottom_navi_height">49dp</dimen>
 </resources>
