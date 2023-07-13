@@ -4,7 +4,6 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/main</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/sub</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -13,5 +12,7 @@
         <item name="buttonStyle">@style/DefaultButtonStyle</item>
         <item name="checkboxStyle">@style/DefaultCheckBoxStyle</item>
         <item name="android:textColorHint">@color/gray_4</item>
+
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 </resources>

@@ -17,11 +17,19 @@
         android:name="com.cider.cider.presentation.challenge.ChallengeCreateDetailFragment"
         android:label="ChallengeCreateDetailFragment" >
         <action
-            android:id="@+id/action_challengeCreateDetailFragment_to_challengeCreateCompleteFragment"
-            app:destination="@id/challengeCreateCompleteFragment" />
+            android:id="@+id/action_challengeCreateDetailFragment_to_challengeCreateCheckFragment"
+            app:destination="@id/challengeCreateCheckFragment" />
     </fragment>
     <fragment
         android:id="@+id/challengeCreateCompleteFragment"
         android:name="com.cider.cider.presentation.challenge.ChallengeCreateCompleteFragment"
         android:label="ChallengeCreateCompleteFragment" />
+    <fragment
+        android:id="@+id/challengeCreateCheckFragment"
+        android:name="com.cider.cider.presentation.challenge.ChallengeCreateCheckFragment"
+        android:label="ChallengeCreateCheckFragment" >
+        <action
+            android:id="@+id/action_challengeCreateCheckFragment_to_challengeCreateCompleteFragment"
+            app:destination="@id/challengeCreateCompleteFragment" />
+    </fragment>
 </navigation>

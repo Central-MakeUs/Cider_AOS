@@ -62,9 +62,16 @@
     
     <!-- Challenge Create -->
     <string name="challenge_create_toolbar_title">챌린지 개설</string>
+    <string name="challenge_create_toolbar_check_title">챌린지 검토</string>
+    <string name="challenge_create_toolbar_complete_title">챌린지 신청 완료</string>
     <string name="challenge_create_toolbar_complete">완료</string>
 
     <string name="challenge_create_select_title">개설을 원하는\n챌린지 분야를\n선택해보세요</string>
+
+    <string name="challenge_create_check_title">마지막으로\n내용을 한번 더\n확인해주세요</string>
+    <string name="challenge_create_check_text1">내용 추가</string>
+    <string name="challenge_create_check_text2">내용 추가</string>
+
     <string name="challenge_create_complete_title">챌린지 신청이\n완료되었습니다</string>
     <string name="challenge_create_complete_text1">심사는 최소 5일에서 얼마 소요되어요</string>
     <string name="challenge_create_complete_text2">챌린지의 몇프로 참여 안하면 참여 실패해요</string>
@@ -96,5 +103,9 @@
     <string name="challenge_example_fail">인증 실패 사진 예시를 올려주세요</string>
     
     <string name="challenge_create_btn">챌린지 개설 신청하기</string>
+
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_select">선택</string>
+
 
 </resources>

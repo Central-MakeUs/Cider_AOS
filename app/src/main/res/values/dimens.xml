@@ -13,6 +13,8 @@
 
     <!-- margin size -->
 
+    <dimen name="layout_padding">24dp</dimen>
+
     <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_12">12dp</dimen>
 
@@ -46,4 +48,7 @@
     
     <dimen name="challenge_icon">36dp</dimen>
     <dimen name="challenge_btn_margin_bottom">16dp</dimen>
+
+    <!-- dialog -->
+    <dimen name="dialog_width">235dp</dimen>
 </resources>

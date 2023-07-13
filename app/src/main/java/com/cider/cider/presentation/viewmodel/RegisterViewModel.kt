@@ -9,6 +9,7 @@ import com.cider.cider.domain.repository.RegisterRepository
 import com.cider.cider.domain.type.*
 import com.cider.cider.domain.type.challenge.Challenge
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -46,16 +47,14 @@ class RegisterViewModel @Inject constructor(
     private val _challengeState = MutableLiveData<ChallengeButtonState>(ChallengeButtonState())
     val challengeState: LiveData<ChallengeButtonState> get() = _challengeState
 
-    init {
+    fun login(header: String) {
+        viewModelScope.launch {
+            Log.d("TEST API","${repository.postLogin(header)}")
+        }
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
-        if (name != null) {
-            nickname.value = name?:""
-            //닉네임 검사 이후
-            //TODO(닉네임 중복 검사 이후 자동 진행)
-            checkNickNameEnable()
-        }
+        if (name != null) nickname.value = name?:""
         if (date != null) _birth.value = Birth(0, date/100-1, date%100)
         if (gender != null) _genderState.value = gender?:Gender.MALE
     }
@@ -78,48 +77,53 @@ class RegisterViewModel @Inject constructor(
         } else {
             _checkBoxState.value = 1
         }
-        Log.d("CheckBoxTest","${_checkBoxState.value}")
         checkButtonState()
     }
 
     fun changeRegisterState(registerType: RegisterType) {
         _registerState.value = registerType
         checkButtonState() //화면 넘어갈 때 체크해야 함
-    }
+        when (registerType) {
+            RegisterType.INFORMATION_INPUT1 -> {
+                viewModelScope.launch(Dispatchers.Main) { checkNickNameEnable() }
+            }
+            RegisterType.INFORMATION_INPUT2 -> {
+
+            }
+            else -> {}
+        }
+    } //화면 넘어갈 때 체크
 
     fun createRandomNickName() {
-        //NickName 요청
-        nickname.value = "랜덤아이디생성"
-        changeNickNameState(EditTextState.ENABLE)
-        checkButtonState()
+        viewModelScope.launch(Dispatchers.Main) {
+            nickname.value = repository.getRandomNickName()
+            changeNickNameState(EditTextState.ENABLE)
+        }
     }
 
-    fun checkNickNameEnable() {
+    suspend fun checkNickNameEnable() {
         val nick = nickname.value?:""
         if (nick.isNotEmpty() && nick.length >= 2) {
-            //nick 중복 검사
-            viewModelScope.launch {
+            if (repository.getNickNameExist(nick)) {
                 changeNickNameState(EditTextState.ENABLE) //중복 없을 때
-                //_nicknameEnable.value = false
-                //changeNickNameState(EditTextState.ERROR) //중복 있을 때
-
+            }
+            else {
+                changeNickNameState(EditTextState.ERROR_DUPLICATION) //중복 있을 때
             }
         } else {
             changeNickNameState(EditTextState.ERROR_MIN)
         }
-
         nickname.value //를 레포에 전송하고, 받아오기
-        checkButtonState()
     }
 
     fun changeNickNameState(editTextState: EditTextState) {
         _nicknameState.value = editTextState
+        checkButtonState()
     }
 
     fun clearNickName() {
         nickname.value = ""
         changeNickNameState(EditTextState.NONE)
-        checkButtonState()
     }
 
     fun changeGender(gender: Gender) {
@@ -129,6 +133,7 @@ class RegisterViewModel @Inject constructor(
 
     fun changeBirth(birth: Birth) {
         _birth.value = birth
+        checkButtonState()
     }
 
     fun changeChallengeState(challenge: Challenge) {
@@ -142,22 +147,21 @@ class RegisterViewModel @Inject constructor(
         _challengeState.value = updateState?:ChallengeButtonState()
     }
 
-    fun checkButtonState() {
+    private fun checkButtonState() {
         when (_registerState.value) {
             RegisterType.SERVICE_AGREEMENT -> {
                 _buttonState.value = (_checkBoxState.value == 30)
                 _detailState.value = 0
             }
             RegisterType.INFORMATION_INPUT1 -> {
-                _buttonState.value = (_nicknameState.value == EditTextState.ENABLE)
+                viewModelScope.launch(Dispatchers.Main) {
+                    _buttonState.value = (_nicknameState.value == EditTextState.ENABLE)
+                }
             }
             RegisterType.INFORMATION_INPUT2 -> {
                 _buttonState.value = (_genderState.value != null) &&
-                        if (_birth.value?.year == 0) {
-                            false
-                        } else {
-                            _birth.value?.hasPassed14Years()?:false
-                        }
+                        if (_birth.value?.year == 0) false
+                        else _birth.value?.hasPassed14Years()?:false
             }
             RegisterType.COMPLETION -> {
                 _buttonState.value = true
@@ -173,6 +177,5 @@ class RegisterViewModel @Inject constructor(
         else if (_detailState.value == num) {
             _detailState.value = 0
         }
-        Log.d("TermTest","${_detailState.value}")
     }
 }

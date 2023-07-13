@@ -14,16 +14,19 @@ import com.cider.cider.databinding.FragmentRegisterBinding
 import com.cider.cider.presentation.MainActivity
 import com.cider.cider.presentation.viewmodel.RegisterViewModel
 import com.cider.cider.utils.binding.BindingFragment
+import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.model.Gender
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment
-    :BindingFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
+    :BindingFragmentNoNavi<FragmentRegisterBinding>(R.layout.fragment_register) {
 
     private lateinit var callback: OnBackPressedCallback
+
     private val viewModel: RegisterViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,8 +41,11 @@ class RegisterFragment
                 viewModel.getRegisterData(
                     name = user.kakaoAccount?.profile?.nickname,
                     date = user.kakaoAccount?.birthday?.toInt(),
-                    gender = if (user.kakaoAccount?.gender == Gender.MALE) com.cider.cider.domain.type.Gender.MALE
-                            else com.cider.cider.domain.type.Gender.FEMALE
+                    gender = when (user.kakaoAccount?.gender) {
+                        Gender.MALE -> com.cider.cider.domain.type.Gender.MALE
+                        Gender.FEMALE -> com.cider.cider.domain.type.Gender.FEMALE
+                        else -> null
+                    }
                 )
             }
         }
@@ -62,10 +68,6 @@ class RegisterFragment
     override fun onDetach() {
         super.onDetach()
         callback.remove()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     private fun setFragment(fragment: Fragment, tag: String) {

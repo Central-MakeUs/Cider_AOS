@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_register"
+    app:startDestination="@id/registerConsentFragment">
+    <fragment
+        android:id="@+id/registerConsentFragment"
+        android:name="com.cider.cider.presentation.register.RegisterConsentFragment"
+        android:label="RegisterConsentFragment" >
+        <action
+            android:id="@+id/action_registerConsentFragment_to_registerNicknameFragment"
+            app:destination="@id/registerNicknameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerNicknameFragment"
+        android:name="com.cider.cider.presentation.register.RegisterNicknameFragment"
+        android:label="RegisterNicknameFragment" >
+        <action
+            android:id="@+id/action_registerNicknameFragment_to_registerProfileFragment"
+            app:destination="@id/registerProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerProfileFragment"
+        android:name="com.cider.cider.presentation.register.RegisterProfileFragment"
+        android:label="RegisterProfileFragment" >
+        <action
+            android:id="@+id/action_registerProfileFragment_to_registerKeywordFragment"
+            app:destination="@id/registerKeywordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerKeywordFragment"
+        android:name="com.cider.cider.presentation.register.RegisterKeywordFragment"
+        android:label="RegisterKeywordFragment" >
+        <action
+            android:id="@+id/action_registerKeywordFragment_to_registerCompletionFragment"
+            app:destination="@id/registerCompletionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerCompletionFragment"
+        android:name="com.cider.cider.presentation.register.RegisterCompletionFragment"
+        android:label="RegisterCompletionFragment" />
+</navigation>
