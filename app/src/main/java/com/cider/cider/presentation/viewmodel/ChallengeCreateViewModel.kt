@@ -30,11 +30,11 @@ class ChallengeCreateViewModel @Inject constructor(
     private val _challengePeriod = MutableLiveData<Int>(1)
     val challengePeriod: LiveData<Int> get() = _challengePeriod
 
-    private val _successImageList: MutableLiveData<MutableList<ImageCardModel>> = MutableLiveData()
-    val successImageList: LiveData<MutableList<ImageCardModel>> = _successImageList
+    private val _successImageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
+    val successImageList: LiveData<List<ImageCardModel>> = _successImageList
 
-    private val _failImageList: MutableLiveData<MutableList<ImageCardModel>> = MutableLiveData()
-    val failImageList: LiveData<MutableList<ImageCardModel>> = _failImageList
+    private val _failImageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
+    val failImageList: LiveData<List<ImageCardModel>> = _failImageList
 
     init {
         _successImageList.value = mutableListOf()
@@ -71,20 +71,21 @@ class ChallengeCreateViewModel @Inject constructor(
     } //값이 하나 라도 있으면 true
 
     fun addImageSuccess(imageCardModel: ImageCardModel) {
-        val currentList = _successImageList.value ?: mutableListOf()
+        val currentList = _successImageList.value?.toMutableList() ?: mutableListOf()
         if (currentList.size >= 2) {
             currentList.removeAt(0)
         }
         currentList.add(imageCardModel)
-        _successImageList.postValue(currentList)
+        _successImageList.value = (currentList)
     }
 
     fun addImageFail(imageCardModel: ImageCardModel) {
-        val currentList = _failImageList.value ?: mutableListOf()
+        val currentList = _failImageList.value?.toMutableList() ?: mutableListOf()
         if (currentList.size >= 2) {
             currentList.removeAt(0)
         }
         currentList.add(imageCardModel)
+        _failImageList.value = (currentList)
         _failImageList.postValue(currentList)
     }
 
