@@ -1,10 +1,13 @@
 package com.cider.cider.utils.binding
 
 import android.annotation.SuppressLint
+import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 
@@ -61,4 +64,14 @@ fun setDuration(view: TextView, duration: Int) {
 @BindingAdapter("countText", "maxCount", requireAll = true)
 fun setTextCount(view: TextView, text: String, max: Int) {
     view.text = "${text.length}/${max}"
+}
+
+@BindingAdapter("imageUri")
+fun setImageUri(imageView: ImageView, imageUri: Uri?) {
+    Log.d("TEST image","bindingAdapter")
+    if (imageUri != null) {
+        Glide.with(imageView)
+            .load(imageUri)
+            .into(imageView)
+    }
 }
