@@ -107,5 +107,9 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_select">선택</string>
 
+    <string name="challenge_home_title">챌린지</string>
+    <string name="challenge_popular">인기 챌린지</string>
+    <string name="challenge_more">더보기</string>
+
 
 </resources>

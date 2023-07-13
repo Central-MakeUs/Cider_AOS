@@ -51,4 +51,7 @@
 
     <!-- dialog -->
     <dimen name="dialog_width">235dp</dimen>
+    
+    <!-- viewpager -->
+    <dimen name="viewpager_height">260dp</dimen>
 </resources>
