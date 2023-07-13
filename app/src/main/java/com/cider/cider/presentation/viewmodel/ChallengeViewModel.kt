@@ -17,6 +17,12 @@ class ChallengeViewModel @Inject constructor(
     private val _officialChallenge = MutableLiveData<List<ChallengeCardModel>>()
     val officialChallenge: LiveData<List<ChallengeCardModel>> get() = _officialChallenge
 
+    private val _categoryChallenge = MutableLiveData<List<ChallengeCardModel>>()
+    val categoryChallenge: LiveData<List<ChallengeCardModel>> get() = _categoryChallenge
+
+    private val _feed = MutableLiveData<List<ChallengeCardModel>>()
+    val feed: LiveData<List<ChallengeCardModel>> get() = _feed
+
     init {
         testItem()
     }
@@ -74,5 +80,7 @@ class ChallengeViewModel @Inject constructor(
 
         _popularChallenge.value = list
         _officialChallenge.value = list
+        _categoryChallenge.value = list
+        _feed.value = list
     }
 }
