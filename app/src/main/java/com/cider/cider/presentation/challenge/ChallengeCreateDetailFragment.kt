@@ -26,6 +26,7 @@ import com.cider.cider.domain.type.challenge.ImageType
 import com.cider.cider.presentation.adapter.ImageListAdapter
 import com.cider.cider.presentation.dialog.CapacityBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
+import com.cider.cider.utils.ItemSpacingDecoration
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -136,6 +137,7 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         val imageListAdapter1 = ImageListAdapter()
         binding.rvSuccessImage.apply {
             adapter = imageListAdapter1
+            addItemDecoration(ItemSpacingDecoration(0,0,resources.getDimensionPixelSize(R.dimen.challenge_card_between),0))
             layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
         }
         viewModel.successImageList.observe(viewLifecycleOwner) {
@@ -149,6 +151,7 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         val imageListAdapter = ImageListAdapter()
         binding.rvFailImage.apply {
             adapter = imageListAdapter
+            addItemDecoration(ItemSpacingDecoration(0,0,resources.getDimensionPixelSize(R.dimen.challenge_card_between),0))
             layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
         }
 
