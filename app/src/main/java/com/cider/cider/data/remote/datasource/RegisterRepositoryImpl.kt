@@ -11,8 +11,7 @@ class RegisterRepositoryImpl @Inject constructor(
 ): RegisterRepository {
 
     override suspend fun postLogin(header: String): Any {
-        val n = apiService.postLogin(RequestLoginModel())
-        return "a"
+        return apiService.postLogin(header,RequestLoginModel())
     }
 
     override suspend fun getRandomNickName(): String {

@@ -28,7 +28,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             add(R.id.fl_login, LoginFragment(), "Login")
             commit()
         }
-moveToMain()
+
         Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
     }
 
