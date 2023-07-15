@@ -73,10 +73,10 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setScrollEvent() {
-        binding.scrollView.setOnRefreshListener {
+/*        binding.scrollView.setOnRefreshListener {
             //TODO(로딩할 때 이거 쓰면 됨)
             binding.scrollView.isRefreshing = false
-        }
+        }*/
     }
 
 
