@@ -101,7 +101,22 @@ fun setImageDrawableWithType(imageView: ImageView, challenge: Challenge) {
             imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_financial_learning))
         }
     }
+}
 
-
-
+@BindingAdapter("textColorChallenge")
+fun setTextColorChallenge(view: TextView, challenge: Challenge) {
+    when (challenge) {
+        Challenge.INVESTING -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_mint))
+        }
+        Challenge.MONEY_MANAGEMENT -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_blue))
+        }
+        Challenge.SAVING -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_pink))
+        }
+        Challenge.FINANCIAL_LEARNING -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_purple))
+        }
+    }
 }

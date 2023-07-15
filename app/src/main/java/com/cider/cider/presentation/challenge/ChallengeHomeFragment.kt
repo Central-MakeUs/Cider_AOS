@@ -16,6 +16,7 @@ import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
 import com.cider.cider.presentation.adapter.ChallengeCardCategoryAdapter
+import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.adapter.ImageListAdapter
 import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeViewModel
@@ -124,16 +125,18 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val categoryCardAdapter = ChallengeCardCategoryAdapter()
+        val feedAdapter = FeedAdapter(viewModel)
+
+        viewModel.testFeed(requireContext())
+
         binding.rvRecommendFeed.apply {
-            adapter = categoryCardAdapter
-            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
+            adapter = feedAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
         viewModel.feed.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                categoryCardAdapter.submitList(it)
+                feedAdapter.submitList(it)
             }
         }
     }
