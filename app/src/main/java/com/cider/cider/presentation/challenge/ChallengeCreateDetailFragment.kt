@@ -137,7 +137,7 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         val imageListAdapter1 = ImageListAdapter()
         binding.rvSuccessImage.apply {
             adapter = imageListAdapter1
-            addItemDecoration(ItemSpacingDecoration(0,0,resources.getDimensionPixelSize(R.dimen.challenge_card_between),0))
+            addItemDecoration(ItemSpacingDecoration(requireContext(),  resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
             layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
         }
         viewModel.successImageList.observe(viewLifecycleOwner) {
@@ -151,7 +151,7 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         val imageListAdapter = ImageListAdapter()
         binding.rvFailImage.apply {
             adapter = imageListAdapter
-            addItemDecoration(ItemSpacingDecoration(0,0,resources.getDimensionPixelSize(R.dimen.challenge_card_between),0))
+            addItemDecoration(ItemSpacingDecoration(requireContext(),  resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
             layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
         }
 

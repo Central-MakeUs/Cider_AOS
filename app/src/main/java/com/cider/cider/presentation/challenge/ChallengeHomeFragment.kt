@@ -29,7 +29,6 @@ import kotlinx.coroutines.launch
 class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.layout.fragment_challenge_home) {
 
     private val viewModel: ChallengeViewModel by activityViewModels()
-    private var isLoading = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,7 +83,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         val popularCardAdapter = ChallengeCardAdapter()
         binding.rvPopularChallenge.apply {
             adapter = popularCardAdapter
-            addItemDecoration(ItemSpacingDecoration(0,0,resources.getDimensionPixelSize(R.dimen.challenge_card_between),0))
+            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
@@ -99,7 +98,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         val officialCardAdapter = ChallengeCardAdapter()
         binding.rvOfficialChallenge.apply {
             adapter = officialCardAdapter
-            addItemDecoration(ItemSpacingDecoration(0,0,resources.getDimensionPixelSize(R.dimen.challenge_card_between),0))
+            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
@@ -113,7 +112,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         val categoryCardAdapter = ChallengeCardCategoryAdapter()
         binding.rvCategoryChallenge.apply {
             adapter = categoryCardAdapter
-            addItemDecoration(ItemSpacingDecoration(0,0,resources.getDimensionPixelSize(R.dimen.challenge_card_between),0))
+            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
@@ -128,7 +127,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         val categoryCardAdapter = ChallengeCardCategoryAdapter()
         binding.rvRecommendFeed.apply {
             adapter = categoryCardAdapter
-            addItemDecoration(ItemSpacingDecoration(0,0,0,resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
+            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
             layoutManager = LinearLayoutManager(requireContext())
         }
 

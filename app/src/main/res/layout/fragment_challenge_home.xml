@@ -68,14 +68,14 @@
                             layout="@layout/item_toolbar_more"/>
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_popular_challenge"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingHorizontal="24dp"
-                            android:layout_marginBottom="@dimen/challenge_card_bottom_margin"
-                            app:layout_constraintTop_toBottomOf="@id/toolbar_popular_challenge"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"/>
+                                android:id="@+id/rv_popular_challenge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/challenge_card_bottom_margin"
+                                app:layout_constraintTop_toBottomOf="@id/toolbar_popular_challenge"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"/>
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,7 +91,6 @@
                             android:id="@+id/rv_official_challenge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/layout_padding"
                             android:layout_marginBottom="@dimen/challenge_card_bottom_margin"
                             app:layout_constraintTop_toBottomOf="@id/toolbar_official_challenge"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -111,7 +110,6 @@
                             android:id="@+id/rv_category_challenge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/layout_padding"
                             android:layout_marginBottom="@dimen/challenge_card_bottom_margin"
                             app:layout_constraintTop_toBottomOf="@id/toolbar_category_challenge"
                             app:layout_constraintStart_toStartOf="parent"/>
@@ -130,7 +128,6 @@
                             android:id="@+id/rv_recommend_feed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/layout_padding"
                             app:layout_constraintTop_toBottomOf="@id/toolbar_recommend_feed"
                             app:layout_constraintStart_toStartOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
