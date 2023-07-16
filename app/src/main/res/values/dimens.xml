@@ -47,6 +47,7 @@
     <dimen name="challenge_card_image_width">150dp</dimen>
     <dimen name="challenge_card_between">12dp</dimen>
     <dimen name="challenge_card_start">24dp</dimen>
+    <dimen name="challenge_card_bottom">24dp</dimen>
     <dimen name="challenge_card_bottom_margin">32dp</dimen>
 
     <dimen name="challenge_icon">36dp</dimen>

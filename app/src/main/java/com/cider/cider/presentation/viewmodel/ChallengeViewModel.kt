@@ -83,6 +83,38 @@ class ChallengeViewModel @Inject constructor(
                 official = false, d_day = null
             )
         )
+        list.add(
+            ChallengeCardModel(
+                id = 7, participate = ParticipationStatus.RECRUITING,
+                like = true, reward = false, category = Challenge.INVESTING,
+                duration = 1, rank = null, title = "소비습관 고치기", people = 23,
+                official = true, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 8, participate = ParticipationStatus.RECRUITING,
+                like = true, reward = true, category = Challenge.SAVING,
+                duration = 1, rank = null, title = "소비습관 고치기", people = 3,
+                official = false, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 9, participate = ParticipationStatus.RECRUITING,
+                like = false, reward = false, category = Challenge.SAVING,
+                duration = 8, rank = null, title = "소비습관 고치기", people = 7,
+                official = false, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 10, participate = ParticipationStatus.RECRUITING,
+                like = false, reward = false, category = Challenge.SAVING,
+                duration = 8, rank = null, title = "소비습관 고치기", people = 7,
+                official = false, d_day = null
+            )
+        )
 
         _popularChallenge.value = list
         _officialChallenge.value = list

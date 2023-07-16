@@ -26,7 +26,6 @@ import com.cider.cider.domain.type.challenge.ImageType
 import com.cider.cider.presentation.adapter.ImageListAdapter
 import com.cider.cider.presentation.dialog.CapacityBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
-import com.cider.cider.utils.ItemSpacingDecoration
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers

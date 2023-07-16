@@ -1,26 +1,19 @@
 package com.cider.cider.presentation.challenge
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
 import com.cider.cider.presentation.adapter.ChallengeCardCategoryAdapter
 import com.cider.cider.presentation.adapter.FeedAdapter
-import com.cider.cider.presentation.adapter.ImageListAdapter
-import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeViewModel
-import com.cider.cider.utils.ItemSpacingDecoration
+import com.cider.cider.utils.decoration.ItemSpacingDecoration
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +39,9 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
         binding.toolbarPopularChallenge.toolbarTitle.text = "인기 챌린지"
         binding.toolbarPopularChallenge.btnMore.setOnClickListener {
-            //TODO(fragment 변경)
+            findNavController().navigate(
+                R.id.action_challengeHomeFragment_to_challengeListFragment
+            )
         }
 
         binding.toolbarOfficialChallenge.toolbarTitle.text = "바로 참여 가능! 공식 챌린지"

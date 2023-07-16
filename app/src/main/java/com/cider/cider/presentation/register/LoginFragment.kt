@@ -27,9 +27,9 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
 
             val mCallBack: (OAuthToken?, Throwable?) -> Unit = { token, error ->
                 if (error != null) {
-                    Log.e("Kakao Login Test","로그인 실패 $error")
+                    Log.e("Kakao Login","로그인 실패 $error")
                 } else {
-                    Log.e("Kakao Login Test","로그인 성공 ${token?.accessToken}")
+                    Log.e("Kakao Login","로그인 성공 ${token?.accessToken}")
                 }
             }
 
@@ -38,7 +38,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                 //카카오톡 로그인
                 UserApiClient.instance.loginWithKakaoTalk(requireContext()) { token, error ->
                     if (error != null) {
-                        Log.e("Kakao Login Test","로그인 실패 $error")
+                        Log.e("Kakao Login","로그인 실패 $error")
                         //사용자가 취소
                         if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                             return@loginWithKakaoTalk
@@ -47,9 +47,9 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                         }
                         //다른 오류
                     } else if (token != null) {
-                        Log.e("Kakao Login Test","로그인 성공 ${token?.accessToken}")
+                        Log.e("Kakao Login","로그인 성공 ${token?.accessToken}")
 
-                        viewModel.login(token.accessToken)
+                        //viewModel.login(token.accessToken)
 
                         parentFragmentManager.beginTransaction().apply {
                             replace(R.id.fl_login, RegisterFragment(), "Register")
