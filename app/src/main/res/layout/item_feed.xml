@@ -157,10 +157,12 @@
                 android:id="@+id/vp_image"
                 android:layout_width="@dimen/feed_image_size"
                 android:layout_height="@dimen/feed_image_size"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:background="@drawable/shape_rec_round_8"/>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/shape_rec_round_8" />
 
             <TextView
                 android:id="@+id/tv_page_indicator"
