@@ -42,11 +42,10 @@ class FeedAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FeedModel) {
             val feedImageAdapter = FeedImageAdapter()
+
             binding.feed = item
             binding.viewmodel = viewModel
             binding.executePendingBindings()
-
-            binding.tvPageIndicator.text = "1 / ${item.imageList?.size}"
 
             binding.tvMoreText.setOnClickListener {
                 if (binding.tvMoreText.text == "자세히 보기") {
@@ -63,22 +62,24 @@ class FeedAdapter(
                 feedImageAdapter.submitList(item.imageList)
             }
 
-            binding.vpImage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                    Log.d("TEST onPageScrolled", position.toString())
-                }
+            val current = 1
+            val total = feedImageAdapter.itemCount
 
+            val indicator = "$current / $total"
+
+            binding.tvPageIndicator.text = indicator
+
+            binding.vpImage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    Log.d("TEST onPageSelected", position.toString())
-                    binding.tvPageIndicator.text = "${position + 1} / ${item.imageList?.size}"
+                    val currentPage = position + 1
+                    val totalPages = feedImageAdapter.itemCount
+
+                    val indicatorText = "$currentPage / $totalPages"
+                    binding.tvPageIndicator.text = indicatorText
                 }
             })
+
+            binding.vpImage.offscreenPageLimit = 2
         }
     }
 }

@@ -171,7 +171,7 @@
                 android:backgroundTint="#CC222222"
                 android:paddingHorizontal="4dp"
                 android:paddingVertical="2dp"
-                android:text="0 / 0"
+                tools:text="0 / 0"
                 android:fontFamily="@font/pretendard_regular"
                 android:textColor="@color/gray_1"
                 android:textSize="@dimen/text_base"
