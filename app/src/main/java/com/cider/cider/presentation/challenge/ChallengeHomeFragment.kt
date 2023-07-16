@@ -40,20 +40,30 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
         binding.toolbarPopularChallenge.toolbarTitle.text = "인기 챌린지"
         binding.toolbarPopularChallenge.btnMore.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("type","popular")
+            }
             findNavController().navigate(
-                R.id.action_challengeHomeFragment_to_challengeListFragment
+                R.id.action_challengeHomeFragment_to_challengeListFragment, bundle
             )
         }
 
         binding.toolbarOfficialChallenge.toolbarTitle.text = "바로 참여 가능! 공식 챌린지"
         binding.toolbarOfficialChallenge.btnMore.setOnClickListener {
-            //TODO(fragment 변경)
+            val bundle = Bundle().apply {
+                putString("type","official")
+            }
+            findNavController().navigate(
+                R.id.action_challengeHomeFragment_to_challengeListFragment, bundle
+            )
         }
 
         binding.toolbarCategoryChallenge.toolbarTitle.text = "카테고리"
         binding.toolbarCategoryChallenge.tvMore.text = "전체 챌린지 보기"
         binding.toolbarCategoryChallenge.btnMore.setOnClickListener {
-            //TODO(fragment 변경)
+            findNavController().navigate(
+                R.id.action_challengeHomeFragment_to_challengeListFragment
+            )
         }
 
         binding.toolbarRecommendFeed.toolbarTitle.text = "추천 피드"

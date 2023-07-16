@@ -27,11 +27,15 @@ class ChallengeViewModel @Inject constructor(
     private val _categoryChallenge = MutableLiveData<List<ChallengeCardModel>>()
     val categoryChallenge: LiveData<List<ChallengeCardModel>> get() = _categoryChallenge
 
+    private val _challenge = MutableLiveData<List<ChallengeCardModel>>()
+    val challenge: LiveData<List<ChallengeCardModel>> get() = _challenge
+
     private val _feed = MutableLiveData<List<FeedModel>>()
     val feed: LiveData<List<FeedModel>> get() = _feed
 
     init {
         testItem()
+        getChallenge()
     }
 
     private fun testItem() {
@@ -175,5 +179,92 @@ class ChallengeViewModel @Inject constructor(
             }
         }
         _feed.value = updatedFeedList
+    }
+
+    fun getChallenge() {
+        val list: MutableList<ChallengeCardModel> = mutableListOf()
+
+        Log.d("TEST Challenge","${challenge.hashCode()}")
+        list.add(
+            ChallengeCardModel(
+                id = 1, participate = ParticipationStatus.RECRUITING,
+                like = false, reward = true, category = Challenge.SAVING,
+                duration = 1, rank = 1, title = "소비습관 고치기", people = 5,
+                official = true, d_day = 23
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 2, participate = ParticipationStatus.ON_GOING,
+                like = true, reward = false, category = Challenge.FINANCIAL_LEARNING,
+                duration = 1, rank = 2, title = "소비습관 고치기", people = 25,
+                official = true, d_day = 23
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 3, participate = ParticipationStatus.COMPLETED,
+                like = false, reward = false, category = Challenge.MONEY_MANAGEMENT,
+                duration = 1, rank = 3, title = "소비습관 고치기", people = 15,
+                official = true, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 4, participate = ParticipationStatus.RECRUITING,
+                like = true, reward = false, category = Challenge.INVESTING,
+                duration = 1, rank = null, title = "소비습관 고치기", people = 23,
+                official = true, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 5, participate = ParticipationStatus.RECRUITING,
+                like = true, reward = true, category = Challenge.SAVING,
+                duration = 1, rank = null, title = "소비습관 고치기", people = 3,
+                official = false, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 6, participate = ParticipationStatus.RECRUITING,
+                like = false, reward = false, category = Challenge.SAVING,
+                duration = 8, rank = null, title = "소비습관 고치기", people = 7,
+                official = false, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 7, participate = ParticipationStatus.RECRUITING,
+                like = true, reward = false, category = Challenge.INVESTING,
+                duration = 1, rank = null, title = "소비습관 고치기", people = 23,
+                official = true, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 8, participate = ParticipationStatus.RECRUITING,
+                like = true, reward = true, category = Challenge.SAVING,
+                duration = 1, rank = null, title = "소비습관 고치기", people = 3,
+                official = false, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 9, participate = ParticipationStatus.RECRUITING,
+                like = false, reward = false, category = Challenge.SAVING,
+                duration = 8, rank = null, title = "소비습관 고치기", people = 7,
+                official = false, d_day = null
+            )
+        )
+        list.add(
+            ChallengeCardModel(
+                id = 10, participate = ParticipationStatus.RECRUITING,
+                like = false, reward = false, category = Challenge.SAVING,
+                duration = 8, rank = null, title = "소비습관 고치기", people = 7,
+                official = false, d_day = null
+            )
+        )
+        _challenge.value = list
     }
 }

@@ -22,20 +22,53 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bundle = arguments
+
+        val data = bundle?.getString("type")
+        setToolbar(data)
         setRecyclerView()
+
+        setButton()
+
+    }
+
+    private fun setToolbar(data: String?) {
+        when (data) {
+            "popular" -> {
+                binding.toolbar.tvToolbarTitle.text = "인기 챌린지"
+            }
+            "official" -> {
+                binding.toolbar.tvToolbarTitle.text = "공식 챌린지"
+            }
+            else -> {
+                binding.toolbar.tvToolbarTitle.text = "전체 챌린지"
+                binding.vpBanner.visibility = View.GONE
+            }
+        }
+        binding.toolbar.btnToolbarBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setRecyclerView() {
-        val popularCardAdapter = ChallengeCardAdapter()
+        val cardAdapter = ChallengeCardAdapter()
         binding.rvChallengeList.apply {
-            adapter = popularCardAdapter
+            adapter = cardAdapter
             addItemDecoration(ChallengeListSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
         }
 
-        viewModel.popularChallenge.observe(viewLifecycleOwner) {
+        viewModel.challenge.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                popularCardAdapter.submitList(it)
+                cardAdapter.submitList(it)
             }
+        }
+    }
+
+    private fun setButton() {
+        binding.btnChallengeAdd.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_challengeListFragment_to_challengeCreateFragment
+            )
         }
     }
 

@@ -21,7 +21,7 @@
 
             <include
                 android:id="@+id/toolbar"
-                layout="@layout/item_toolbar" />
+                layout="@layout/item_toolbar_challenge"/>
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
@@ -29,8 +29,9 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vp_banner"
                     android:layout_width="match_parent"
-                    android:layout_height="260dp" />
+                    android:layout_height="200dp" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -39,10 +40,31 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <com.google.android.material.tabs.TabLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/gray_1"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="12dp">
+                    
+                    <TextView
+                        android:id="@+id/tv_filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="최신순"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textSize="@dimen/text_2xl"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.constraintlayout.utils.widget.ImageFilterButton
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/line_arrow_down_24"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_filter"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

@@ -25,5 +25,9 @@
     <fragment
         android:id="@+id/challengeListFragment"
         android:name="com.cider.cider.presentation.challenge.ChallengeListFragment"
-        android:label="ChallengeListFragment" />
+        android:label="ChallengeListFragment" >
+        <action
+            android:id="@+id/action_challengeListFragment_to_challengeCreateFragment"
+            app:destination="@id/challengeCreateFragment" />
+    </fragment>
 </navigation>
