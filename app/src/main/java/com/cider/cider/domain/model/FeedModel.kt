@@ -12,7 +12,7 @@ data class FeedModel(
     val date: String,
     val title: String,
     val content: String,
-    val imageList: List<Uri>?,
+    val imageList: List<ImageCardModel>?,
     val challengeModel: ChallengeModel,
     val like: Int,
     val likeCheck: Boolean = false

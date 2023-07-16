@@ -10,6 +10,7 @@ import com.cider.cider.R
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.model.ChallengeModel
 import com.cider.cider.domain.model.FeedModel
+import com.cider.cider.domain.model.ImageCardModel
 import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 import com.cider.cider.utils.getResourceUri
@@ -124,30 +125,39 @@ class ChallengeViewModel @Inject constructor(
 
     fun testFeed(context: Context) {
         val list: MutableList<FeedModel> = mutableListOf()
-        val image: MutableList<Uri> = mutableListOf()
+        val image: MutableList<ImageCardModel> = mutableListOf()
 
-        image.add(R.drawable.image_financial_learning.getResourceUri(context))
-        image.add(R.drawable.image_investing.getResourceUri(context))
-        image.add(R.drawable.image_saving.getResourceUri(context))
-        image.add(R.drawable.image_money_management.getResourceUri(context))
+        image.add(ImageCardModel(R.drawable.image_saving.getResourceUri(context)))
+        image.add(ImageCardModel(R.drawable.image_saving.getResourceUri(context)))
+        image.add(ImageCardModel(R.drawable.image_saving.getResourceUri(context)))
+        image.add(ImageCardModel(R.drawable.image_saving.getResourceUri(context)))
+
+
+        val image2: MutableList<ImageCardModel> = mutableListOf()
+
+        image2.add(ImageCardModel(R.drawable.image_investing.getResourceUri(context)))
+        image2.add(ImageCardModel(R.drawable.image_financial_learning.getResourceUri(context)))
+        image2.add(ImageCardModel(R.drawable.image_saving.getResourceUri(context)))
+        image2.add(ImageCardModel(R.drawable.image_money_management.getResourceUri(context)))
+
 
         list.add(
             FeedModel(
-                id = 1, profile = null, nickname = "오늘챌린지화이팅", lv = 1,
+                id = 1, profile = null, nickname = "오늘챌린지팅", lv = 1,
                 date = "23.05.15 14:45", title = "오늘 챌린지 인증하는데", content = "하루 만보 걷기 챌린지는 쉽고 재미있게 만보를 걸을 수있는 챌린지로, 제가 맨날 일하다가 한번 입원하고 나서 심각성을 느끼고 만들게 된 멋진 챌린지",
                 imageList = image, challengeModel = ChallengeModel(id = 1, challengeType = Challenge.SAVING, title = "소비습관 하루에 열심히 해 화이팅 챌린지", people = 86), like = 346, likeCheck = false)
             )
         list.add(
             FeedModel(
-                id = 2, profile = null, nickname = "오늘챌린지화이팅", lv = 1,
+                id = 2, profile = null, nickname = "오늘챌린지화팅", lv = 2,
                 date = "23.05.15 14:45", title = "오늘 챌린지 인증하는데", content = "하루 만보 걷기 챌린지는 쉽고 재미있게 만보를 걸을 수있는 챌린지로, 제가 맨날 일하다가 한번 입원하고 나서 심각성을 느끼고 만들게 된 멋진 챌린지",
-                imageList = null, challengeModel = ChallengeModel(id = 1, challengeType = Challenge.SAVING, title = "소비습관 하루에 열심히 해 화이팅 챌린지", people = 86), like = 346, likeCheck = false)
+                imageList = image2, challengeModel = ChallengeModel(id = 1, challengeType = Challenge.INVESTING, title = "소비습관 하루에 열심히 해 화이팅 챌린지", people = 86), like = 36, likeCheck = false)
         )
         list.add(
             FeedModel(
-                id = 3, profile = null, nickname = "오늘챌린지화이팅", lv = 1,
+                id = 3, profile = null, nickname = "오늘챌린지화이팅", lv = 3,
                 date = "23.05.15 14:45", title = "오늘 챌린지 인증하는데", content = "하루 만보 걷기 챌린지는 쉽고 재미있게 만보를 걸을 수있는 챌린지로, 제가 맨날 일하다가 한번 입원하고 나서 심각성을 느끼고 만들게 된 멋진 챌린지",
-                imageList = null, challengeModel = ChallengeModel(id = 1, challengeType = Challenge.SAVING, title = "소비습관 하루에 열심히 해 화이팅 챌린지", people = 86), like = 346, likeCheck = false)
+                imageList = null, challengeModel = ChallengeModel(id = 1, challengeType = Challenge.MONEY_MANAGEMENT, title = "소비습관 하루에 열심히 해 화이팅 챌린지", people = 86), like = 46, likeCheck = false)
         )
         _feed.value = list
     }

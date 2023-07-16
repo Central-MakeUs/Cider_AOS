@@ -154,14 +154,16 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/banner_home"
+                android:id="@+id/vp_image"
                 android:layout_width="@dimen/feed_image_size"
                 android:layout_height="@dimen/feed_image_size"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:background="@drawable/shape_rec_round_8"/>
 
             <TextView
+                android:id="@+id/tv_page_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
@@ -173,8 +175,8 @@
                 android:fontFamily="@font/pretendard_regular"
                 android:textColor="@color/gray_1"
                 android:textSize="@dimen/text_base"
-                app:layout_constraintTop_toTopOf="@+id/banner_home"
-                app:layout_constraintEnd_toEndOf="@id/banner_home"/>
+                app:layout_constraintTop_toTopOf="@+id/vp_image"
+                app:layout_constraintEnd_toEndOf="@id/vp_image"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         
         <androidx.constraintlayout.widget.ConstraintLayout
