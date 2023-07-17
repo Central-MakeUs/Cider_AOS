@@ -73,8 +73,6 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
     private fun setRecyclerView () {
         setPopularChallenge()
-        setOfficialChallenge()
-        setCategoryChallenge()
         setFeedList()
     }
 
@@ -87,46 +85,11 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
 
     private fun setPopularChallenge() {
-        val popularCardAdapter = ChallengeCardAdapter()
-        binding.rvPopularChallenge.apply {
-            adapter = popularCardAdapter
-            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        }
-
-        viewModel.popularChallenge.observe(viewLifecycleOwner) {
-            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                popularCardAdapter.submitList(it)
-            }
-        }
-    }
-
-    private fun setOfficialChallenge() {
-        val officialCardAdapter = ChallengeCardAdapter()
-        binding.rvOfficialChallenge.apply {
-            adapter = officialCardAdapter
-            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        }
-
-        viewModel.officialChallenge.observe(viewLifecycleOwner) {
-            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                officialCardAdapter.submitList(it)
-            }
-        }
-    }
-    private fun setCategoryChallenge() {
-        val categoryCardAdapter = ChallengeCardCategoryAdapter()
-        binding.rvCategoryChallenge.apply {
-            adapter = categoryCardAdapter
-            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        }
-
-        viewModel.categoryChallenge.observe(viewLifecycleOwner) {
-            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                categoryCardAdapter.submitList(it)
-            }
+        childFragmentManager.beginTransaction().apply {
+            add(R.id.fl_popular_challenge, ChallengeListViewFragment())
+            add(R.id.fl_official_challenge, ChallengeListViewFragment())
+            add(R.id.fl_category_challenge, ChallengeListViewFragment())
+            commit()
         }
     }
 
