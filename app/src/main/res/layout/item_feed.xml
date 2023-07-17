@@ -9,7 +9,7 @@
             type="com.cider.cider.domain.model.FeedModel" />
         <variable
             name="viewmodel"
-            type="com.cider.cider.presentation.viewmodel.ChallengeViewModel" />
+            type="com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

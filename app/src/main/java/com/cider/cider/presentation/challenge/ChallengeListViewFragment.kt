@@ -1,12 +1,14 @@
 package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListViewBinding
+import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
 import com.cider.cider.presentation.viewmodel.ChallengeViewModel
 import com.cider.cider.utils.binding.BindingFragment
@@ -20,7 +22,25 @@ class ChallengeListViewFragment: BindingFragment<FragmentChallengeListViewBindin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val bundle = arguments
 
+        when (bundle?.getString("type")) {
+            Challenge.INVESTING.text -> {
+                Log.d("TEST Tab", "investing")
+            }
+            Challenge.SAVING.text -> {
+                Log.d("TEST Tab", "saving")
+            }
+            Challenge.MONEY_MANAGEMENT.text -> {
+                Log.d("TEST Tab", "money_management")
+            }
+            Challenge.FINANCIAL_LEARNING.text -> {
+                Log.d("TEST Tab", "financial_learning")
+            }
+            else -> {
+                Log.d("TEST Tab", "else ")
+            }
+        }
         setChallengeView()
     }
 
@@ -35,7 +55,7 @@ class ChallengeListViewFragment: BindingFragment<FragmentChallengeListViewBindin
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
-        viewModel.popularChallenge.observe(viewLifecycleOwner) {
+        viewModel.challenge.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 cardAdapter.submitList(it)
             }

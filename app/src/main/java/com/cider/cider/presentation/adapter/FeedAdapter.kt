@@ -12,12 +12,13 @@ import com.cider.cider.databinding.ItemFeedBinding
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.model.ChallengeModel
 import com.cider.cider.domain.model.FeedModel
+import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeViewModel
 import com.cider.cider.utils.ImageSliderTransformer
 import com.cider.cider.utils.ItemDiffCallback
 
 class FeedAdapter(
-    private val viewModel: ChallengeViewModel
+    private val viewModel: ChallengeHomeViewModel
     ): ListAdapter<FeedModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<FeedModel>(
         onContentsTheSame = {old, new -> old == new},

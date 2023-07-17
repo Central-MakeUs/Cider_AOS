@@ -10,11 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
-import com.cider.cider.presentation.adapter.ChallengeCardAdapter
-import com.cider.cider.presentation.adapter.ChallengeCardCategoryAdapter
+import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.presentation.adapter.FeedAdapter
-import com.cider.cider.presentation.viewmodel.ChallengeViewModel
-import com.cider.cider.utils.decoration.ItemSpacingDecoration
+import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -23,14 +21,20 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.layout.fragment_challenge_home) {
 
-    private val viewModel: ChallengeViewModel by activityViewModels()
+    private val viewModel: ChallengeHomeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
+
         setAppBar()
         setButton()
         setRecyclerView()
         setScrollEvent()
+        setCategory()
     }
 
     private fun setAppBar() {
@@ -72,7 +76,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setRecyclerView () {
-        setPopularChallenge()
+        setChallengeList()
         setFeedList()
     }
 
@@ -84,12 +88,45 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
 
-    private fun setPopularChallenge() {
+    private fun setChallengeList() {
         childFragmentManager.beginTransaction().apply {
             add(R.id.fl_popular_challenge, ChallengeListViewFragment())
             add(R.id.fl_official_challenge, ChallengeListViewFragment())
             add(R.id.fl_category_challenge, ChallengeListViewFragment())
             commit()
+        }
+    }
+
+    private fun setCategory() {
+        viewModel.tabState.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
+                when (it) {
+                    Challenge.INVESTING -> {
+                        setCategoryFragment(it)
+                    }
+                    Challenge.FINANCIAL_LEARNING -> {
+                        setCategoryFragment(it)
+                    }
+                    Challenge.MONEY_MANAGEMENT -> {
+                        setCategoryFragment(it)
+                    }
+                    Challenge.SAVING -> {
+                        setCategoryFragment(it)
+                    } //TODO(입력 값 다르게 호출하는 api가 각각 다름)
+                }
+            }
+        }
+
+    }
+    private fun setCategoryFragment(challenge: Challenge) {
+        val bundle = Bundle()
+        bundle.putString("type",challenge.text)
+        val fragment = ChallengeListViewFragment()
+        fragment.arguments = bundle
+
+        childFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_category_challenge, fragment)
+            commit() //TODO(데이터 부를 때마다 초기화 되는 문제 해결)
         }
     }
 

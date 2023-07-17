@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.cider.cider.domain.type.challenge.Challenge"/>
+        <variable
+            name="viewmodel"
+            type="com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -97,11 +100,184 @@
                     <include android:id="@+id/toolbar_category_challenge"
                         layout="@layout/item_toolbar_more"/>
 
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/tab_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/layout_padding"
+                        app:layout_constraintTop_toBottomOf="@id/toolbar_category_challenge">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_category_investing"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewmodel.tabSelect(Challenge.INVESTING)}"
+                            android:background="@drawable/shape_category_button"
+                            android:paddingVertical="@dimen/challenge_category_btn_padding_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/selector_challenge_category_button_mint"
+                            app:select="@{viewmodel.tabState == Challenge.INVESTING}">
+
+                            <androidx.constraintlayout.utils.widget.ImageFilterView
+                                android:id="@+id/iv_challenge_investing"
+                                android:layout_width="@dimen/challenge_icon"
+                                android:layout_height="@dimen/challenge_icon"
+                                android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
+                                android:src="@drawable/ic_investing"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{Challenge.INVESTING.text}"
+                                android:textSize="@dimen/text_sm"
+                                android:textColor="@color/selector_challenge_category_text_color"
+                                app:select="@{viewmodel.tabState == Challenge.INVESTING}"
+                                app:fontFamilyTab="@{viewmodel.tabState == Challenge.INVESTING}"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_challenge_investing"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_category_money_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewmodel.tabSelect(Challenge.MONEY_MANAGEMENT)}"
+                            android:background="@drawable/shape_category_button"
+                            android:paddingVertical="@dimen/challenge_category_btn_padding_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/selector_challenge_category_button_blue"
+                            app:select="@{viewmodel.tabState == Challenge.MONEY_MANAGEMENT}">
+
+                            <androidx.constraintlayout.utils.widget.ImageFilterView
+                                android:id="@+id/iv_challenge_money_management"
+                                android:layout_width="@dimen/challenge_icon"
+                                android:layout_height="@dimen/challenge_icon"
+                                android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
+                                android:src="@drawable/ic_money_management"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{Challenge.MONEY_MANAGEMENT.text}"
+                                android:textSize="@dimen/text_sm"
+                                android:textColor="@color/selector_challenge_category_text_color"
+                                app:select="@{viewmodel.tabState == Challenge.MONEY_MANAGEMENT}"
+                                app:fontFamilyTab="@{viewmodel.tabState == Challenge.MONEY_MANAGEMENT}"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_challenge_money_management"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_category_financial_learning"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_category_button"
+                            android:onClick="@{()->viewmodel.tabSelect(Challenge.FINANCIAL_LEARNING)}"
+                            android:paddingVertical="@dimen/challenge_category_btn_padding_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/selector_challenge_category_button_purple"
+                            app:select="@{viewmodel.tabState == Challenge.FINANCIAL_LEARNING}">
+
+                            <androidx.constraintlayout.utils.widget.ImageFilterView
+                                android:id="@+id/iv_challenge_financial_learning"
+                                android:layout_width="@dimen/challenge_icon"
+                                android:layout_height="@dimen/challenge_icon"
+                                android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
+                                android:src="@drawable/ic_financial_learning"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{Challenge.FINANCIAL_LEARNING.text}"
+                                android:textSize="@dimen/text_sm"
+                                android:textColor="@color/selector_challenge_category_text_color"
+                                app:select="@{viewmodel.tabState == Challenge.FINANCIAL_LEARNING}"
+                                app:fontFamilyTab="@{viewmodel.tabState == Challenge.FINANCIAL_LEARNING}"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_challenge_financial_learning"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_category_saving"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_category_button"
+                            android:onClick="@{()->viewmodel.tabSelect(Challenge.SAVING)}"
+                            android:paddingVertical="@dimen/challenge_category_btn_padding_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/selector_challenge_category_button_pink"
+                            app:select="@{viewmodel.tabState == Challenge.SAVING}">
+
+                            <androidx.constraintlayout.utils.widget.ImageFilterView
+                                android:id="@+id/iv_challenge_saving"
+                                android:layout_width="@dimen/challenge_icon"
+                                android:layout_height="@dimen/challenge_icon"
+                                android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
+                                android:src="@drawable/ic_saving"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{Challenge.SAVING.text}"
+                                android:textSize="@dimen/text_sm"
+                                android:textColor="@color/selector_challenge_category_text_color"
+                                app:select="@{viewmodel.tabState == Challenge.SAVING}"
+                                app:fontFamilyTab="@{viewmodel.tabState == Challenge.SAVING}"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_challenge_saving"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    
+                    <TextView
+                        android:id="@+id/tv_category_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_rec_round_4"
+                        android:layout_marginHorizontal="@dimen/layout_padding"
+                        android:layout_marginTop="10dp"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="8dp"
+                        android:gravity="center"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textSize="@dimen/text_base"
+                        android:textColor="@color/white"
+                        app:categoryTextView="@{viewmodel.tabState}"
+                        app:layout_constraintTop_toBottomOf="@id/tab_category"/>
+
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/fl_category_challenge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/toolbar_category_challenge"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_category_content"
                         app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

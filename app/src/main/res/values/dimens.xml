@@ -53,6 +53,10 @@
     <dimen name="challenge_icon">36dp</dimen>
     <dimen name="challenge_btn_margin_bottom">16dp</dimen>
 
+    <dimen name="challenge_category_btn_height">32dp</dimen>
+    <dimen name="challenge_category_btn_padding_vertical">8dp</dimen>
+    <dimen name="challenge_category_btn_padding_horizontal">18dp</dimen>
+    <dimen name="challenge_category_text_height">32dp</dimen>
     <!-- dialog -->
     <dimen name="dialog_width">235dp</dimen>
     
