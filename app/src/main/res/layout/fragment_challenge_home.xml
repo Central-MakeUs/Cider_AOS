@@ -23,7 +23,23 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_top"
+            android:layout_width="@dimen/fab_size"
+            android:layout_height="@dimen/fab_size"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/line_position_up_24"
+            android:background="@drawable/shape_fab_background"
+            android:backgroundTint="@color/white"
+            app:fabCustomSize="@dimen/fab_size"
+            app:borderWidth="0dp"
+            app:layout_anchor="@id/btn_test"
+            app:layout_anchorGravity="top|end"/>
+        
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">

@@ -153,6 +153,10 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
                 R.id.action_challengeHomeFragment_to_challengeCreateFragment
             )
         }
+
+        binding.fabTop.setOnClickListener {
+            binding.scrollView.scrollY = 0
+        }
     }
 
     override fun onBackPressed() {
