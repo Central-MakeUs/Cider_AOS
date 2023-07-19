@@ -59,10 +59,11 @@
     <dimen name="challenge_category_text_height">32dp</dimen>
     <!-- dialog -->
     <dimen name="dialog_width">235dp</dimen>
+    <dimen name="dialog_height">161dp</dimen>
     
     <!-- viewpager -->
     <dimen name="viewpager_height">260dp</dimen>
-    <dimen name="bottom_navi_height">49dp</dimen>
+    <dimen name="bottom_navi_height">54dp</dimen>
 
     <!-- Feed -->
     <dimen name="profile_size">36dp</dimen>

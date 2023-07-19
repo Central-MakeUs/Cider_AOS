@@ -42,6 +42,7 @@
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bottom_navi_height"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -354,12 +355,13 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btn_test"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_navi_height"
-            android:text="Bottom Navigation Section"
             android:layout_gravity="bottom"
+            app:menu="@menu/home_menu"
+            app:labelVisibilityMode="labeled"
             app:layout_insetEdge="bottom"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -22,9 +22,10 @@ import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCreateDetailBinding
 import com.cider.cider.domain.model.ImageCardModel
+import com.cider.cider.domain.type.BottomSheetType
 import com.cider.cider.domain.type.challenge.ImageType
 import com.cider.cider.presentation.adapter.ImageListAdapter
-import com.cider.cider.presentation.dialog.CapacityBottomSheetDialog
+import com.cider.cider.presentation.dialog.NumPickerBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,17 +89,17 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
 
         binding.btnChallengeCapacityPeople.setOnClickListener {
             hideKeyBoard()
-            showCapacityBottomSheetDialog()
+            showCapacityBottomSheetDialog(BottomSheetType.CAPACITY,30,3,viewModel.capacity.value?:3)
         }
 
         binding.btnChallengeRecruitmentPeriodDown.setOnClickListener {
             hideKeyBoard()
-            showCapacityBottomSheetDialog()
+            showCapacityBottomSheetDialog(BottomSheetType.RECRUITMENT_PERIOD,7,1,viewModel.recruitmentPeriod.value?:1)
         }
 
         binding.btnChallengeChallengePeriodDown.setOnClickListener {
             hideKeyBoard()
-            showCapacityBottomSheetDialog()
+            showCapacityBottomSheetDialog(BottomSheetType.CHALLENGE_PERIOD,8,1,viewModel.challengePeriod.value?:1)
         }
 
         binding.btnToolbarBack.setOnClickListener {
@@ -116,8 +117,26 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         }
     }
 
-    private fun showCapacityBottomSheetDialog() {
-        val dialog = CapacityBottomSheetDialog()
+    private fun showCapacityBottomSheetDialog(type: BottomSheetType?,max: Int, min: Int, value: Int) {
+        val dialog = NumPickerBottomSheetDialog(type)
+        val bundle = Bundle()
+        bundle.putInt("maxValue",max)
+        bundle.putInt("minValue",min)
+        bundle.putInt("value",value)
+        dialog.arguments = bundle
+
+        dialog.setOnValueChangedListener(object : NumPickerBottomSheetDialog.OnValueChangedListener {
+            override fun onValueUpdated(newValue: Int, type: BottomSheetType?) {
+                Log.d("TEST Button","$newValue")
+                when (type) {
+                    BottomSheetType.CAPACITY -> viewModel.changeCapacity(newValue)
+                    BottomSheetType.CHALLENGE_PERIOD -> viewModel.changeChallengePeriod(newValue)
+                    BottomSheetType.RECRUITMENT_PERIOD -> viewModel.changeRecruitmentPeriod(newValue)
+                    else -> { }
+                }
+            }
+
+        })
         dialog.show(parentFragmentManager, "Capacity")
     }
 

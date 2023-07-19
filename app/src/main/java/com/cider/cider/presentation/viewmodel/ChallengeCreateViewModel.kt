@@ -89,4 +89,16 @@ class ChallengeCreateViewModel @Inject constructor(
         _failImageList.postValue(currentList)
     }
 
+    fun changeCapacity(value: Int) {
+        _capacity.value = value
+    }
+
+    fun changeRecruitmentPeriod(value: Int) {
+        _recruitmentPeriod.value = value
+    }
+
+    fun changeChallengePeriod(value: Int) {
+        _challengePeriod.value = value
+    }
+
 }

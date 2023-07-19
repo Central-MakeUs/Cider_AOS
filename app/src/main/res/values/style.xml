@@ -167,4 +167,13 @@
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+
+    <style name="numberPickerCustomSize">
+        <!--Display textSize-->
+        <item name="android:textSize">16sp</item>
+        <!--Display textColor-->
+        <item name="android:editTextColor">@color/text</item>
+        <item name="colorControlNormal">@color/gray_6</item>
+    </style>
 </resources>
