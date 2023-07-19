@@ -6,7 +6,7 @@
     <data>
         <variable
             name="register"
-            type="com.cider.cider.presentation.viewmodel.RegisterViewModel" />
+            type="com.cider.cider.presentation.viewmodel.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

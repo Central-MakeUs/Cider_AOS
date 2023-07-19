@@ -4,7 +4,6 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -12,13 +11,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterNicknameBinding
 import com.cider.cider.domain.type.EditTextState
 import com.cider.cider.domain.type.RegisterType
-import com.cider.cider.presentation.viewmodel.RegisterViewModel
-import com.cider.cider.utils.binding.BindingFragment
+import com.cider.cider.presentation.viewmodel.LoginViewModel
 import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +24,7 @@ import kotlinx.coroutines.launch
 class RegisterNicknameFragment
     :BindingFragmentNoNavi<FragmentRegisterNicknameBinding>(R.layout.fragment_register_nickname) {
 
-    private val viewModel: RegisterViewModel by activityViewModels()
+    private val viewModel: LoginViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

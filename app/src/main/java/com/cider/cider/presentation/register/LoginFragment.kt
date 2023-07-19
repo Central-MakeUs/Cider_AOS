@@ -6,10 +6,9 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentLoginBinding
-import com.cider.cider.presentation.viewmodel.RegisterViewModel
+import com.cider.cider.presentation.viewmodel.LoginViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
@@ -18,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
-    private val viewModel: RegisterViewModel by activityViewModels()
+    private val viewModel: LoginViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
