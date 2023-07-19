@@ -21,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:imageDrawableWithType="@{challenge.category}"
             tools:src="@drawable/ic_test_image" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -161,7 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:fontFamily="@font/pretendard_bold"
+                    android:fontFamily="@font/pretendard_regular"
                     android:textSize="@dimen/text_sm"
                     android:textColor="@color/gray_5"
                     app:layout_constraintStart_toEndOf="@+id/iv_challenge_community"
@@ -205,12 +206,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:fontFamily="@font/pretendard_bold"
+                    android:fontFamily="@font/pretendard_regular"
                     android:textSize="@dimen/text_sm"
                     android:textColor="@color/gray_5"
                     app:layout_constraintStart_toEndOf="@+id/iv_challenge_certificate"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="공식 챌린지" />
+                    android:text="공식 챌린지" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

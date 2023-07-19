@@ -1,10 +1,16 @@
 package com.cider.cider.utils.binding
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.cider.cider.R
 import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 
@@ -61,4 +67,56 @@ fun setDuration(view: TextView, duration: Int) {
 @BindingAdapter("countText", "maxCount", requireAll = true)
 fun setTextCount(view: TextView, text: String, max: Int) {
     view.text = "${text.length}/${max}"
+}
+
+@BindingAdapter("imageUri")
+fun setImageUri(imageView: ImageView, imageUri: Uri?) {
+    if (imageUri != null) {
+        Glide.with(imageView)
+            .load(imageUri)
+            .into(imageView)
+    }
+}
+
+@BindingAdapter("imageDrawable")
+fun setImageDrawable(imageView: ImageView, drawable: Drawable?) {
+    if (drawable != null) {
+        imageView.setImageDrawable(drawable)
+    }
+}
+
+@BindingAdapter("imageDrawableWithType")
+fun setImageDrawableWithType(imageView: ImageView, challenge: Challenge) {
+    when (challenge) {
+        Challenge.INVESTING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_investing))
+        }
+        Challenge.MONEY_MANAGEMENT -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_money_management))
+        }
+        Challenge.SAVING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_saving))
+        }
+        Challenge.FINANCIAL_LEARNING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_financial_learning))
+        }
+    }
+}
+
+@BindingAdapter("textColorChallenge")
+fun setTextColorChallenge(view: TextView, challenge: Challenge) {
+    when (challenge) {
+        Challenge.INVESTING -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_mint))
+        }
+        Challenge.MONEY_MANAGEMENT -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_blue))
+        }
+        Challenge.SAVING -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_pink))
+        }
+        Challenge.FINANCIAL_LEARNING -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_purple))
+        }
+    }
 }

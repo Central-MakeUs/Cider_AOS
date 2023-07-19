@@ -4,6 +4,7 @@ import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 
 data class ChallengeCardModel(
+    val id: Int,
     val participate: ParticipationStatus,
     val like: Boolean = false,
     val reward: Boolean = false,

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cider.cider.domain.model.ImageCardModel
 import com.cider.cider.domain.type.ChallengeButtonState
 import com.cider.cider.domain.type.challenge.Challenge
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +30,15 @@ class ChallengeCreateViewModel @Inject constructor(
     private val _challengePeriod = MutableLiveData<Int>(1)
     val challengePeriod: LiveData<Int> get() = _challengePeriod
 
-    val arrayList1 = arrayListOf<Int>(30)
+    private val _successImageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
+    val successImageList: LiveData<List<ImageCardModel>> = _successImageList
+
+    private val _failImageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
+    val failImageList: LiveData<List<ImageCardModel>> = _failImageList
+
+    init {
+        _successImageList.value = mutableListOf()
+    }
 
     fun onClear() {
         challengeTitle.value = ""
@@ -38,6 +47,8 @@ class ChallengeCreateViewModel @Inject constructor(
         _capacity.value = 3
         _recruitmentPeriod.value = 1
         _challengePeriod.value = 1
+        _successImageList.value = arrayListOf()
+        _failImageList.value = arrayListOf()
         Log.d("TEST asdf","$123")
     }
 
@@ -58,4 +69,36 @@ class ChallengeCreateViewModel @Inject constructor(
         !challengeIntroduction.value.isNullOrEmpty() ||
         !challengeTitle.value.isNullOrEmpty()
     } //값이 하나 라도 있으면 true
+
+    fun addImageSuccess(imageCardModel: ImageCardModel) {
+        val currentList = _successImageList.value?.toMutableList() ?: mutableListOf()
+        if (currentList.size >= 2) {
+            currentList.removeAt(0)
+        }
+        currentList.add(imageCardModel)
+        _successImageList.value = (currentList)
+    }
+
+    fun addImageFail(imageCardModel: ImageCardModel) {
+        val currentList = _failImageList.value?.toMutableList() ?: mutableListOf()
+        if (currentList.size >= 2) {
+            currentList.removeAt(0)
+        }
+        currentList.add(imageCardModel)
+        _failImageList.value = (currentList)
+        _failImageList.postValue(currentList)
+    }
+
+    fun changeCapacity(value: Int) {
+        _capacity.value = value
+    }
+
+    fun changeRecruitmentPeriod(value: Int) {
+        _recruitmentPeriod.value = value
+    }
+
+    fun changeChallengePeriod(value: Int) {
+        _challengePeriod.value = value
+    }
+
 }

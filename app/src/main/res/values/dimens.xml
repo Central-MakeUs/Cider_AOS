@@ -41,14 +41,34 @@
 
     <dimen name="register_service_0dp">0dp</dimen>
 
-    <!-- challenge info -->
+    <!-- challenge card -->
     <dimen name="challenge_card_width">150dp</dimen>
     <dimen name="challenge_card_image_height">192dp</dimen>
     <dimen name="challenge_card_image_width">150dp</dimen>
-    
+    <dimen name="challenge_card_between">12dp</dimen>
+    <dimen name="challenge_card_start">24dp</dimen>
+    <dimen name="challenge_card_bottom">24dp</dimen>
+    <dimen name="challenge_card_bottom_margin">32dp</dimen>
+
     <dimen name="challenge_icon">36dp</dimen>
     <dimen name="challenge_btn_margin_bottom">16dp</dimen>
 
+    <dimen name="challenge_category_btn_height">32dp</dimen>
+    <dimen name="challenge_category_btn_padding_vertical">8dp</dimen>
+    <dimen name="challenge_category_btn_padding_horizontal">18dp</dimen>
+    <dimen name="challenge_category_text_height">32dp</dimen>
     <!-- dialog -->
     <dimen name="dialog_width">235dp</dimen>
+    <dimen name="dialog_height">161dp</dimen>
+    
+    <!-- viewpager -->
+    <dimen name="viewpager_height">260dp</dimen>
+    <dimen name="bottom_navi_height">54dp</dimen>
+
+    <!-- Feed -->
+    <dimen name="profile_size">36dp</dimen>
+    <dimen name="feed_image_size">268dp</dimen>
+
+    <!-- FAB -->
+    <dimen name="fab_size">48dp</dimen>
 </resources>

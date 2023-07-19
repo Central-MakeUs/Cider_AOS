@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_challenge"
+        android:enabled="true"
+        android:icon="@drawable/filled_noti_24"
+        android:title="챌린지"/>
+
+    <item
+        android:id="@+id/item_write"
+        android:enabled="true"
+        android:icon="@drawable/filled_plus_24"
+        android:title="글쓰기"/>
+
+    <item
+        android:id="@+id/item_my"
+        android:enabled="true"
+        android:icon="@drawable/filled_profile_24"
+        android:title="마이"/>
+</menu>

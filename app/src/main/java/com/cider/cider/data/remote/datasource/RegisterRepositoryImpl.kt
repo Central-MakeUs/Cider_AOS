@@ -11,13 +11,19 @@ class RegisterRepositoryImpl @Inject constructor(
 ): RegisterRepository {
 
     override suspend fun postLogin(header: String): Any {
-        val n = apiService.postLogin(RequestLoginModel())
-        return "a"
+        return apiService.postLogin(header,RequestLoginModel())
     }
 
     override suspend fun getRandomNickName(): String {
         return try {
-            apiService.getRandomNickname().body()?.randomName?:""
+            val data = apiService.getRandomNickname()
+            data.run {
+                when( code() ){
+                    200 -> {data.body()?.randomName?:""}
+                    400 -> {data.errorBody()?.string()?:"" }
+                    else -> {""}
+                }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             ""
