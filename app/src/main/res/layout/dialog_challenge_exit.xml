@@ -14,37 +14,15 @@
         android:backgroundTint="@color/white"
         android:padding="12dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/appbar_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/icon_1"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/icon_2"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:src="@drawable/line_delete_24" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/icon_dialog"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar_dialog"
-            tools:src="@drawable/line_caution_24" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/line_caution_24" />
 
         <TextView
             android:id="@+id/tv_dialog_title"
@@ -59,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/icon_dialog"
-            tools:text="챌린지 개설을 종료할까요?" />
+            android:text="챌린지 개설을 종료할까요?" />
 
         <TextView
             android:id="@+id/tv_dialog_content"
@@ -74,15 +52,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_dialog_title"
-            tools:text="지금 나가면 작성하는 내용이 사라져요" />
+            android:text="지금 나가면 작성하는 내용이 사라져요" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
             android:layout_marginTop="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_dialog_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="12dp">
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_negative"

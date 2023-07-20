@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCreateSelectBinding
 import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.presentation.dialog.ChallengeExitDialog
 import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,9 +57,16 @@ class ChallengeCreateSelectFragment: BindingFragment<FragmentChallengeCreateSele
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        val parentNavController = requireActivity().findNavController(R.id.fl_main)
-        parentNavController.popBackStack()
+        if (viewModel.checkChallengeInput()) {
+            showDialog()
+        } else {
+            val parentNavController = requireActivity().findNavController(R.id.fl_main)
+            parentNavController.popBackStack()
+        }
+    }
 
+    private fun showDialog() {
+        val dialog = ChallengeExitDialog()
+        dialog.show(parentFragmentManager,null)
     }
 }
