@@ -31,11 +31,19 @@ class ChallengeCreateViewModel @Inject constructor(
     val challengePeriod: LiveData<Int> get() = _challengePeriod
 
     private val _successImageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
-    val successImageList: LiveData<List<ImageCardModel>> = _successImageList
+    val successImageList: LiveData<List<ImageCardModel>> get() = _successImageList
 
     private val _failImageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
-    val failImageList: LiveData<List<ImageCardModel>> = _failImageList
+    val failImageList: LiveData<List<ImageCardModel>> get() = _failImageList
 
+    private val _checkList = MutableLiveData<BooleanArray>(BooleanArray(4))
+    val checkList: LiveData<BooleanArray> get() = _checkList
+
+    private val _buttonState = MutableLiveData<Boolean>()
+    val buttonState: LiveData<Boolean> get() = _buttonState
+
+    private val _buttonState2 = MutableLiveData<Boolean>()
+    val buttonState2: LiveData<Boolean> get() = _buttonState2
     init {
         _successImageList.value = mutableListOf()
     }
@@ -72,7 +80,7 @@ class ChallengeCreateViewModel @Inject constructor(
 
     fun addImageSuccess(imageCardModel: ImageCardModel) {
         val currentList = _successImageList.value?.toMutableList() ?: mutableListOf()
-        if (currentList.size >= 2) {
+        if (currentList.size >= 1) {
             currentList.removeAt(0)
         }
         currentList.add(imageCardModel)
@@ -81,7 +89,7 @@ class ChallengeCreateViewModel @Inject constructor(
 
     fun addImageFail(imageCardModel: ImageCardModel) {
         val currentList = _failImageList.value?.toMutableList() ?: mutableListOf()
-        if (currentList.size >= 2) {
+        if (currentList.size >= 1) {
             currentList.removeAt(0)
         }
         currentList.add(imageCardModel)
@@ -101,4 +109,20 @@ class ChallengeCreateViewModel @Inject constructor(
         _challengePeriod.value = value
     }
 
+    fun changeCheckState(num: Int) {
+        val array = _checkList.value?: BooleanArray(4){false}
+        array[num] = !array[num]
+        _checkList.value = array
+
+        checkButtonState2()
+    }
+
+    private fun checkButtonState() {
+        _buttonState.value = (!challengeTitle.value.isNullOrEmpty() &&
+        !challengeIntroduction.value.isNullOrEmpty() && !challengeAuthentication.value.isNullOrEmpty())
+    }
+
+    private fun checkButtonState2() {
+        _buttonState2.value = _checkList.value?.all { it }
+    }
 }

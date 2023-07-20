@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewmodel" type="com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel"/>
 
     </data>
 
@@ -43,31 +45,132 @@
 
         <TextView
             style="@style/TextViewTitleStyle"
-            android:text="@string/challenge_create_check_title"
             android:layout_marginTop="52dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/challenge_create_check_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <TextView
-            android:id="@+id/tv_challenge_check_text1"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_consent_1"
             android:layout_width="match_parent"
-            android:fontFamily="@font/pretendard_bold"
-            android:textSize="@dimen/text_xl"
-            android:text="@string/challenge_create_check_text1"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@id/tv_challenge_check_text2"/>
+            android:layout_height="@dimen/height_48"
+            android:paddingVertical="12dp"
+            app:layout_constraintBottom_toTopOf="@id/view_consent_2">
 
-        <TextView
-            android:id="@+id/tv_challenge_check_text2"
-            android:layout_height="wrap_content"
+            <CheckBox
+                android:id="@+id/cb_create_1"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
+                android:checked="@{viewmodel.checkList[0]}"
+                android:onClick="@{()->viewmodel.changeCheckState(0)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/challenge_create_check_text1"
+                android:textSize="@dimen/text_lg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cb_create_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_consent_2"
             android:layout_width="match_parent"
-            android:fontFamily="@font/pretendard_bold"
-            android:textSize="@dimen/text_xl"
-            android:text="@string/challenge_create_check_text2"
-            android:layout_marginBottom="30dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_challenge_check"/>
+            android:layout_height="@dimen/height_48"
+            android:paddingVertical="12dp"
+            app:layout_constraintBottom_toTopOf="@id/view_consent_3">
+
+            <CheckBox
+                android:id="@+id/cb_create_2"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
+                android:checked="@{viewmodel.checkList[1]}"
+                android:onClick="@{()->viewmodel.changeCheckState(1)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/challenge_create_check_text2"
+                android:textSize="@dimen/text_lg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cb_create_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_consent_3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48"
+            android:paddingVertical="12dp"
+            app:layout_constraintBottom_toTopOf="@id/view_consent_4">
+
+            <CheckBox
+                android:id="@+id/cb_create3"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
+                android:checked="@{viewmodel.checkList[2]}"
+                android:onClick="@{()->viewmodel.changeCheckState(2)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/challenge_create_check_text3"
+                android:textSize="@dimen/text_lg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cb_create3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_consent_4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48"
+            android:paddingVertical="12dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_challenge_check">
+
+            <CheckBox
+                android:id="@+id/cb_create_4"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
+                android:checked="@{viewmodel.checkList[3]}"
+                android:onClick="@{()->viewmodel.changeCheckState(3)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/challenge_create_check_text4"
+                android:textSize="@dimen/text_lg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cb_create_4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_challenge_check"
@@ -77,6 +180,7 @@
             android:textSize="@dimen/text_2xl"
             android:fontFamily="@font/pretendard_bold"
             android:layout_marginBottom="20dp"
+            android:enabled="@{viewmodel.buttonState2}"
             app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

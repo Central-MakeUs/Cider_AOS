@@ -68,13 +68,15 @@
 
     <string name="challenge_create_select_title">개설을 원하는\n챌린지 분야를\n선택해보세요</string>
 
-    <string name="challenge_create_check_title">마지막으로\n내용을 한번 더\n확인해주세요</string>
-    <string name="challenge_create_check_text1">내용 추가</string>
-    <string name="challenge_create_check_text2">내용 추가</string>
+    <string name="challenge_create_check_title">챌린지 신청하기 전\n유의해주세요</string>
+    <string name="challenge_create_check_text1">인증샷 검토는 호스트가 직접 관리해요</string>
+    <string name="challenge_create_check_text2">챌린지 승인 후 챌린지 삭제는 불가능해요</string>
+    <string name="challenge_create_check_text3">최소 참여 인원 3명 미충족시 진행이 불가능해요</string>
+    <string name="challenge_create_check_text4">모집과 시작은 승인일 기준 다음날 자정에 시작해요</string>
 
     <string name="challenge_create_complete_title">챌린지 신청이\n완료되었습니다</string>
-    <string name="challenge_create_complete_text1">심사는 최소 5일에서 얼마 소요되어요</string>
-    <string name="challenge_create_complete_text2">챌린지의 몇프로 참여 안하면 참여 실패해요</string>
+    <string name="challenge_create_complete_text1">심사는 최소 1일에서 최대 7일까지 소요되어요</string>
+    <string name="challenge_create_complete_text2">규칙에 어긋나는 내용이 있을시 반려될 수 있어요</string>
     <string name="challenge_create_complete_button">확인했어요</string>
 
     <string name="challenge_title_title">챌린지 제목</string>
