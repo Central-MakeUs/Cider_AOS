@@ -51,7 +51,7 @@ LoginViewModel @Inject constructor(
 
     fun loginFirst(header: String) {
         viewModelScope.launch {
-            Log.d("TEST API","${repository.postLoginFirst(header)}")
+            repository.postLoginFirst(header)
         }
     }
 

@@ -12,18 +12,25 @@ class LoginRepositoryImpl @Inject constructor(
 ): LoginRepository {
 
     override suspend fun postLoginFirst(header: String): Any {
-        val data = apiService.postLogin(header,RequestLoginModel("KAKAO"))
+        val data = apiService.postLogin(header,RequestLoginModel())
         Log.d("TEST Login","${data}")
         return data
     }
 
     override suspend fun postLogin() {
         val accessToken = App.prefs.getString("accessToken","")
-        try {
-            val data = apiService.postLogin(accessToken, RequestLoginModel())
-            Log.d("Test Login2","${data}")
-        } catch (e: Exception) {
-            e.printStackTrace()
+        if (accessToken.isNotEmpty()) {
+            try {
+                val data = apiService.postLogin(accessToken, RequestLoginModel())
+                Log.d(
+                    "Test Login2",
+                    "${data}\n${data.message()}\n${data.body()}\n${
+                        data.errorBody()?.string()
+                    }\n${data.isSuccessful}"
+                )
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
