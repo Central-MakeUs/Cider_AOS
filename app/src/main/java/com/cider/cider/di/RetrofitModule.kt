@@ -1,9 +1,8 @@
 package com.cider.cider.di
 
 import com.cider.cider.App
-import com.cider.cider.BuildConfig
 import com.cider.cider.data.remote.api.ChallengeApi
-import com.cider.cider.data.remote.api.RegisterApi
+import com.cider.cider.data.remote.api.LoginApi
 import com.cider.cider.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -24,12 +23,12 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRegisterApiService(): RegisterApi {
+    fun provideRegisterApiService(): LoginApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(RegisterApi::class.java)
+            .create(LoginApi::class.java)
     }
 
     @Provides

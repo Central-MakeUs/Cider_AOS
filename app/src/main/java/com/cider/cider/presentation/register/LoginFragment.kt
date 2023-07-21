@@ -29,6 +29,9 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                     Log.e("Kakao Login","로그인 실패 $error")
                 } else {
                     Log.e("Kakao Login","로그인 성공 ${token?.accessToken}")
+
+                    if (token != null)
+                        viewModel.loginFirst(token.accessToken)
                 }
             }
 
@@ -48,7 +51,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                     } else if (token != null) {
                         Log.e("Kakao Login","로그인 성공 ${token?.accessToken}")
 
-                        //viewModel.login(token.accessToken)
+                        viewModel.loginFirst(token.accessToken)
 
                         parentFragmentManager.beginTransaction().apply {
                             replace(R.id.fl_login, RegisterFragment(), "Register")

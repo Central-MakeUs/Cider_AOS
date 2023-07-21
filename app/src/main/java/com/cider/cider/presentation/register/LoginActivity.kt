@@ -32,8 +32,9 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             add(R.id.fl_login, LoginFragment(), "Login")
             commit()
         }
-moveToMain()
-        Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
+
+        if (viewModel.login()) moveToMain() //성공 시에는 메인으로 간다
+        //Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

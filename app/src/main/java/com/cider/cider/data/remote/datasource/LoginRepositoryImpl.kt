@@ -1,17 +1,30 @@
 package com.cider.cider.data.remote.datasource
 
 import android.util.Log
-import com.cider.cider.data.remote.api.RegisterApi
+import com.cider.cider.App
+import com.cider.cider.data.remote.api.LoginApi
 import com.cider.cider.data.remote.model.RequestLoginModel
-import com.cider.cider.domain.repository.RegisterRepository
+import com.cider.cider.domain.repository.LoginRepository
 import javax.inject.Inject
 
-class RegisterRepositoryImpl @Inject constructor(
-    private val apiService: RegisterApi
-): RegisterRepository {
+class LoginRepositoryImpl @Inject constructor(
+    private val apiService: LoginApi
+): LoginRepository {
 
-    override suspend fun postLogin(header: String): Any {
-        return apiService.postLogin(header,RequestLoginModel())
+    override suspend fun postLoginFirst(header: String): Any {
+        val data = apiService.postLogin(header,RequestLoginModel("KAKAO"))
+        Log.d("TEST Login","${data}")
+        return data
+    }
+
+    override suspend fun postLogin() {
+        val accessToken = App.prefs.getString("accessToken","")
+        try {
+            val data = apiService.postLogin(accessToken, RequestLoginModel())
+            Log.d("Test Login2","${data}")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override suspend fun getRandomNickName(): String {
