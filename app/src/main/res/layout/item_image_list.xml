@@ -25,5 +25,14 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:backgroundTint="@color/design_default_color_error"/>
 
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/shape_rec_round_4"
+            android:backgroundTint="#08000000"
+            app:layout_constraintStart_toStartOf="@id/iv_image"
+            app:layout_constraintTop_toTopOf="@id/iv_image"
+            app:layout_constraintBottom_toBottomOf="@id/iv_image"
+            app:layout_constraintEnd_toEndOf="@id/iv_image"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

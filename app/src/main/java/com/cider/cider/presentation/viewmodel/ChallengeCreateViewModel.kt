@@ -80,21 +80,26 @@ class ChallengeCreateViewModel @Inject constructor(
 
     fun addImageSuccess(imageCardModel: ImageCardModel) {
         val currentList = _successImageList.value?.toMutableList() ?: mutableListOf()
-        if (currentList.size >= 1) {
-            currentList.removeAt(0)
+        if (currentList.size > 0) {
+            currentList[0] =imageCardModel
+        } else {
+            currentList.add(imageCardModel)
         }
-        currentList.add(imageCardModel)
         _successImageList.value = (currentList)
     }
 
     fun addImageFail(imageCardModel: ImageCardModel) {
         val currentList = _failImageList.value?.toMutableList() ?: mutableListOf()
-        if (currentList.size >= 1) {
-            currentList.removeAt(0)
+        if (currentList.size > 0) {
+            currentList[0] = imageCardModel
+        } else {
+            currentList.add(imageCardModel)
         }
-        currentList.add(imageCardModel)
         _failImageList.value = (currentList)
-        _failImageList.postValue(currentList)
+    }
+
+    fun replaceImageSuccess(imageCardModel: ImageCardModel) {
+
     }
 
     fun changeCapacity(value: Int) {

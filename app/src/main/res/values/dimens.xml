@@ -71,4 +71,6 @@
 
     <!-- FAB -->
     <dimen name="fab_size">48dp</dimen>
+
+    <dimen name="corner_4dp">4dp</dimen>
 </resources>

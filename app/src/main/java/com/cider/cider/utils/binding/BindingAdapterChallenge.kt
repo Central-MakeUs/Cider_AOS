@@ -1,15 +1,20 @@
 package com.cider.cider.utils.binding
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.Log
+import android.view.RoundedCorner
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.cider.cider.R
 import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.domain.type.challenge.ParticipationStatus
@@ -74,6 +79,7 @@ fun setImageUri(imageView: ImageView, imageUri: Uri?) {
     if (imageUri != null) {
         Glide.with(imageView)
             .load(imageUri)
+            .apply(RequestOptions().transform(RoundedCorners(((4f) * Resources.getSystem().displayMetrics.density).toInt())))
             .into(imageView)
     }
 }

@@ -158,10 +158,21 @@
                 android:layout_width="@dimen/feed_image_size"
                 android:layout_height="@dimen/feed_image_size"
                 android:background="@drawable/shape_rec_round_4"
+                android:backgroundTint="#08000000"
                 app:imageUri="@{feed.imageList.uri}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="@dimen/feed_image_size"
+                android:layout_height="@dimen/feed_image_size"
+                android:background="@drawable/shape_rec_round_4"
+                android:backgroundTint="#08000000"
+                app:layout_constraintStart_toStartOf="@id/iv_image"
+                app:layout_constraintTop_toTopOf="@id/iv_image"
+                app:layout_constraintBottom_toBottomOf="@id/iv_image"
+                app:layout_constraintEnd_toEndOf="@id/iv_image"/>
 <!--
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_image"
