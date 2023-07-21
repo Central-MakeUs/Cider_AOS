@@ -10,8 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
+import com.cider.cider.domain.type.BottomSheetType
+import com.cider.cider.domain.type.WriteType
 import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.presentation.adapter.FeedAdapter
+import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +38,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         setRecyclerView()
         setScrollEvent()
         setCategory()
+        setBottomNavi()
     }
 
     private fun setAppBar() {
@@ -157,6 +161,44 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         binding.fabTop.setOnClickListener {
             binding.scrollView.scrollY = 0
         }
+    }
+
+    private fun setBottomNavi() {
+        binding.btnTest.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.item_challenge -> {
+                    true
+                }
+                R.id.item_write -> {
+                    showWriteBottomSheetDialog()
+                    false
+                }
+                R.id.item_my -> {
+                    false
+                }
+                else -> {false}
+            }
+        }
+    }
+
+    private fun showWriteBottomSheetDialog() {
+        val dialog = WriteBottomSheetDialog()
+
+        dialog.setOnValueChangedListener(object : WriteBottomSheetDialog.OnValueChangedListener {
+
+            override fun onValueUpdated(type: WriteType) {
+                when (type) {
+                    WriteType.CREATE -> {
+                        findNavController().navigate(
+                            R.id.action_challengeHomeFragment_to_challengeCreateFragment
+                        )
+                    }
+                    WriteType.AUTH -> {}
+                }
+            }
+
+        })
+        dialog.show(parentFragmentManager, "Capacity")
     }
 
     override fun onBackPressed() {

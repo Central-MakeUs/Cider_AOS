@@ -12,7 +12,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface RegisterApi {
+interface LoginApi {
     @Headers("Content-Type: application/json")
     @POST("/api/oauth/login")
     suspend fun postLogin(

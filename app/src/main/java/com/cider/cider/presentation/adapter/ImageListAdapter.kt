@@ -16,6 +16,13 @@ class ImageListAdapter (
         onItemsTheSame = {old, new -> old.uri == new.uri}
     )
 ) {
+
+    private var onItemClickListener: (() -> Unit)? = null
+
+    fun setOnItemClickListener(listener: () -> Unit) {
+        onItemClickListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ImageViewHolder(ItemImageListBinding.inflate(inflater, parent, false))
@@ -33,6 +40,14 @@ class ImageListAdapter (
     inner class ImageViewHolder(
         private val binding: ItemImageListBinding,
     ): RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                val item = getItem(adapterPosition)
+                onItemClickListener?.invoke()
+            }
+        }
+
         fun bind(item: ImageCardModel) {
             binding.image = item
             binding.executePendingBindings()

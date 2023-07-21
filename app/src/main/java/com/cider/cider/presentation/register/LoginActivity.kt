@@ -2,15 +2,16 @@ package com.cider.cider.presentation.register
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.viewModels
 import com.cider.cider.R
 import com.cider.cider.databinding.ActivityLoginBinding
 import com.cider.cider.presentation.MainActivity
+import com.cider.cider.presentation.viewmodel.LoginViewModel
 import com.cider.cider.utils.binding.BindingActivity
 import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_login) {
     private lateinit var imm: InputMethodManager
+
+    private val viewModel: LoginViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,8 +32,9 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             add(R.id.fl_login, LoginFragment(), "Login")
             commit()
         }
-moveToMain()
-        Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
+
+        if (viewModel.login()) moveToMain() //성공 시에는 메인으로 간다
+        //Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cider.cider.domain.repository.RegisterRepository
+import com.cider.cider.App
+import com.cider.cider.domain.repository.LoginRepository
 import com.cider.cider.domain.type.*
 import com.cider.cider.domain.type.challenge.Challenge
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,8 +15,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(
-    private val repository: RegisterRepository
+class
+LoginViewModel @Inject constructor(
+    private val repository: LoginRepository
 ): ViewModel() {
     //탭 상태
     private val _registerState = MutableLiveData<RegisterType>()
@@ -47,10 +49,17 @@ class RegisterViewModel @Inject constructor(
     private val _challengeState = MutableLiveData<ChallengeButtonState>(ChallengeButtonState())
     val challengeState: LiveData<ChallengeButtonState> get() = _challengeState
 
-    fun login(header: String) {
+    fun loginFirst(header: String) {
         viewModelScope.launch {
-            Log.d("TEST API","${repository.postLogin(header)}")
+            repository.postLoginFirst(header)
         }
+    }
+
+    fun login(): Boolean {
+        viewModelScope.launch {
+            repository.postLogin() //402일 때 다시 요청 어쩌구
+        }
+        return false
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {

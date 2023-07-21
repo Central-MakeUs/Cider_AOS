@@ -7,7 +7,7 @@
         <import type="com.cider.cider.domain.type.challenge.Challenge"/>
         <variable
             name="register"
-            type="com.cider.cider.presentation.viewmodel.RegisterViewModel" />
+            type="com.cider.cider.presentation.viewmodel.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

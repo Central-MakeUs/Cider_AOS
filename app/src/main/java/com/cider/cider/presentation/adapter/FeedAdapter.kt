@@ -44,8 +44,6 @@ class FeedAdapter(
         private val binding: ItemFeedBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FeedModel) {
-            val feedImageAdapter = FeedImageAdapter()
-
             binding.feed = item
             binding.viewmodel = viewModel
             binding.executePendingBindings()
@@ -60,6 +58,7 @@ class FeedAdapter(
                 }
             }
 
+/*            val feedImageAdapter = FeedImageAdapter()
             binding.vpImage.adapter = feedImageAdapter
             if (item.imageList != null) {
                 feedImageAdapter.submitList(item.imageList)
@@ -85,7 +84,7 @@ class FeedAdapter(
             binding.vpImage.apply {
                 offscreenPageLimit = 4
                 setPageTransformer(ImageSliderTransformer(4))
-            }
+            }*/
 
         }
     }

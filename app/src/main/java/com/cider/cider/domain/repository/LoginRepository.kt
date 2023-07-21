@@ -1,8 +1,8 @@
 package com.cider.cider.domain.repository
 
-interface RegisterRepository {
-    suspend fun postLogin(header: String): Any
-
+interface LoginRepository {
+    suspend fun postLoginFirst(header: String): Any
+    suspend fun postLogin()
     suspend fun getRandomNickName(): String
     suspend fun getNickNameExist(nickname: String): Boolean
 }

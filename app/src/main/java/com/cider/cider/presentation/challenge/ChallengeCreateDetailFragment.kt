@@ -46,6 +46,7 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         setButton()
         setEditText()
         setRecyclerView()
+        setObserve()
     }
 
     private fun setEditText() {
@@ -77,6 +78,24 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
                 return@setOnEditorActionListener true
             }
             false
+        }
+    }
+
+    private fun setObserve() {
+        viewModel.challengeTitle.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                viewModel.checkButtonState()
+            }
+        }
+        viewModel.challengeAuthentication.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                viewModel.checkButtonState()
+            }
+        }
+        viewModel.challengeIntroduction.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                viewModel.checkButtonState()
+            }
         }
     }
 
@@ -157,9 +176,15 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
             adapter = imageListAdapter1
             layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
         }
+
+        imageListAdapter1.setOnItemClickListener {
+            imageType = ImageType.SUCCESS
+            requestPermission()
+        }
+
         viewModel.successImageList.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                if (it.size >= 2) binding.btnImageAddSuccess.visibility = View.GONE
+                if (it.isNotEmpty()) binding.btnImageAddSuccess.visibility = View.GONE
                 else binding.btnImageAddSuccess.visibility = View.VISIBLE
                 imageListAdapter1.submitList(it)
                 Log.d("TEST image","asd")
@@ -171,9 +196,14 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
             layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
         }
 
+        imageListAdapter.setOnItemClickListener {
+            imageType = ImageType.FAIL
+            requestPermission()
+        }
+
         viewModel.failImageList.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                if (it.size >= 2) binding.btnImageAddFail.visibility = View.GONE
+                if (it.isNotEmpty()) binding.btnImageAddFail.visibility = View.GONE
                 else binding.btnImageAddFail.visibility = View.VISIBLE
                 imageListAdapter.submitList(it)
             }

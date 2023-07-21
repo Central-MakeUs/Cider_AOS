@@ -151,6 +151,7 @@
                         style="@style/EditTextStyle"
                         android:layout_marginTop="8dp"
                         android:gravity="top"
+                        android:scrollbars="vertical"
                         android:lineSpacingExtra="3dp"
                         android:text="@={challenge.challengeIntroduction}"
                         android:hint="@string/challenge_introduction_hint"
@@ -398,7 +399,7 @@
                     <TextView
                         android:id="@+id/tv_challenge_authentication_count"
                         style="@style/CountTextStyle"
-                        app:countText="@{challenge.challengeTitle}"
+                        app:countText="@{challenge.challengeAuthentication}"
                         app:maxCount="@{30}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_challenge_authentication"
@@ -485,7 +486,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/pretendard_regular"
-                                android:text='@{String.valueOf(challenge.successImageList.size) + "/2"}'
+                                android:text='@{String.valueOf(challenge.successImageList.size) + "/1"}'
                                 android:textColor="@color/gray_5"
                                 android:textSize="@dimen/text_base"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -569,7 +570,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/pretendard_regular"
-                                android:text='@{String.valueOf(challenge.failImageList.size) + "/2"}'
+                                android:text='@{String.valueOf(challenge.failImageList.size) + "/1"}'
                                 android:textColor="@color/gray_5"
                                 android:textSize="@dimen/text_base"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -591,6 +592,7 @@
                     android:textSize="@dimen/text_base"
                     android:fontFamily="@font/pretendard_bold"
                     android:layout_marginBottom="20dp"
+                    android:enabled="@{challenge.buttonState}"
                     app:layout_constraintTop_toBottomOf="@id/layout_image"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
