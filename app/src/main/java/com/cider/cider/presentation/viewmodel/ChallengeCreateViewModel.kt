@@ -39,7 +39,7 @@ class ChallengeCreateViewModel @Inject constructor(
     private val _checkList = MutableLiveData<BooleanArray>(BooleanArray(4))
     val checkList: LiveData<BooleanArray> get() = _checkList
 
-    private val _buttonState = MutableLiveData<Boolean>()
+    private val _buttonState = MutableLiveData<Boolean>(false)
     val buttonState: LiveData<Boolean> get() = _buttonState
 
     private val _buttonState2 = MutableLiveData<Boolean>()
@@ -117,9 +117,9 @@ class ChallengeCreateViewModel @Inject constructor(
         checkButtonState2()
     }
 
-    private fun checkButtonState() {
-        _buttonState.value = (!challengeTitle.value.isNullOrEmpty() &&
-        !challengeIntroduction.value.isNullOrEmpty() && !challengeAuthentication.value.isNullOrEmpty())
+    fun checkButtonState() {
+        _buttonState.value = (challengeTitle.value?.length!! >= 5 &&
+        challengeIntroduction.value?.length!! >= 30 && challengeAuthentication.value?.length!! >= 5)
     }
 
     private fun checkButtonState2() {

@@ -399,7 +399,7 @@
                     <TextView
                         android:id="@+id/tv_challenge_authentication_count"
                         style="@style/CountTextStyle"
-                        app:countText="@{challenge.challengeTitle}"
+                        app:countText="@{challenge.challengeAuthentication}"
                         app:maxCount="@{30}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_challenge_authentication"
@@ -592,6 +592,7 @@
                     android:textSize="@dimen/text_base"
                     android:fontFamily="@font/pretendard_bold"
                     android:layout_marginBottom="20dp"
+                    android:enabled="@{challenge.buttonState}"
                     app:layout_constraintTop_toBottomOf="@id/layout_image"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 

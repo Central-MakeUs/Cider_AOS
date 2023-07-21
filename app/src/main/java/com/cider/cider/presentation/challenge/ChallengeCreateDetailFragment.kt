@@ -46,6 +46,7 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         setButton()
         setEditText()
         setRecyclerView()
+        setObserve()
     }
 
     private fun setEditText() {
@@ -77,6 +78,24 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
                 return@setOnEditorActionListener true
             }
             false
+        }
+    }
+
+    private fun setObserve() {
+        viewModel.challengeTitle.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                viewModel.checkButtonState()
+            }
+        }
+        viewModel.challengeAuthentication.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                viewModel.checkButtonState()
+            }
+        }
+        viewModel.challengeIntroduction.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                viewModel.checkButtonState()
+            }
         }
     }
 
