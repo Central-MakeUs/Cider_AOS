@@ -116,4 +116,13 @@
     <string name="challenge_add">챌린지 직접 만들기</string>
     <string name="detail_view">자세히 보기</string>
     <string name="simply_view">자세히 보기</string>
+
+    <string name="challenge_review_tap1">심사중</string>
+    <string name="challenge_review_tap2">반려/실패</string>
+    <string name="challenge_review_tap3">심사완료</string>
+
+    <string name="challenge_delete">챌린지 삭제</string>
+    <string name="challenge_review_success">심사 완료</string>
+    <string name="challenge_review_return">반려 사유</string>
+    <string name="challenge_review_fail">실패 사유</string>
 </resources>
