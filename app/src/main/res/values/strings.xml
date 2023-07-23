@@ -125,4 +125,9 @@
     <string name="challenge_review_success">심사 완료</string>
     <string name="challenge_review_return">반려 사유</string>
     <string name="challenge_review_fail">실패 사유</string>
+    
+    <string name="challenge_ongoing_title">진행중인 챌린지</string>
+    <string name="challenge_finish_title">최근 종료된 챌린지</string>
+    <string name="challenge_review_title">심사중인 챌린지</string>
+    <string name="challenge_review_complete">심사완료</string>
 </resources>
