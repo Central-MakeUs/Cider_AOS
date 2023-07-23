@@ -5,6 +5,9 @@
 
     <data>
         <import type="com.cider.cider.domain.type.challenge.Challenge"/>
+        <variable
+            name="challenge"
+            type="com.cider.cider.domain.model.OngoingChallengeModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="소비습관 고치기"
+            android:text="@{challenge.title}"
             android:textColor="@color/gray_7"
             android:textSize="@dimen/text_lg"
             android:fontFamily="@font/pretendard_bold"
@@ -32,6 +36,7 @@
             android:layout_height="wrap_content"
             tools:text="소비절약"
             tools:textColor="@color/btn_pink"
+            android:text="@{challenge.challenge.text}"
             android:textSize="@dimen/text_sm"
             android:fontFamily="@font/pretendard_bold"
             android:background="@drawable/shape_challenge_chip"
