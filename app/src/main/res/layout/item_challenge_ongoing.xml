@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             tools:text="소비절약"
             tools:textColor="@color/btn_pink"
+            app:textColorChallenge="@{challenge.challenge}"
             android:text="@{challenge.challenge.text}"
             android:textSize="@dimen/text_sm"
             android:fontFamily="@font/pretendard_bold"
@@ -50,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="챌린지 진행 + 10일"
+            android:text='@{"챌린지 진행 +"+String.valueOf(challenge.during)}'
             android:textColor="@color/gray_5"
             android:textSize="@dimen/text_sm"
             android:fontFamily="@font/pretendard_bold"
@@ -62,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="30회 중 24회 달성"
+            android:text='@{String.valueOf(challenge.total)+"회 중 "+String.valueOf(challenge.current)+"회 달성"}'
             tools:textColor="@color/gray_6"
             android:textSize="@dimen/text_xs"
             android:fontFamily="@font/pretendard_bold"
