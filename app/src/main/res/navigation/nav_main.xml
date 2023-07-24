@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_challengeHomeFragment_to_challengeListFragment"
             app:destination="@id/challengeListFragment" />
+        <action
+            android:id="@+id/action_challengeHomeFragment_to_challengeMyFragment"
+            app:destination="@id/challengeMyFragment" />
     </fragment>
     <fragment
         android:id="@+id/challengeCreateFragment"
@@ -28,6 +31,14 @@
         android:label="ChallengeListFragment" >
         <action
             android:id="@+id/action_challengeListFragment_to_challengeCreateFragment"
+            app:destination="@id/challengeCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/challengeMyFragment"
+        android:name="com.cider.cider.presentation.challenge.ChallengeMyFragment"
+        android:label="ChallengeMyFragment" >
+        <action
+            android:id="@+id/action_challengeMyFragment_to_challengeCreateFragment"
             app:destination="@id/challengeCreateFragment" />
     </fragment>
 </navigation>
