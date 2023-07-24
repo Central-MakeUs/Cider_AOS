@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.cider.cider.domain.type.challenge.Challenge"/>
+        <variable
+            name="challenge"
+            type="com.cider.cider.domain.model.ChallengeReviewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +22,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{challenge.title}"
             tools:text="소비습관 고치기"
             android:textColor="@color/gray_7"
             android:textSize="@dimen/text_lg"
@@ -30,6 +34,8 @@
             android:id="@+id/tv_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{challenge.challenge.text}"
+            android:textColor="@{challenge.challenge.colorResId}"
             tools:text="소비절약"
             tools:textColor="@color/btn_pink"
             android:textSize="@dimen/text_sm"

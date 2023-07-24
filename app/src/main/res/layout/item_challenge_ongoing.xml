@@ -7,7 +7,7 @@
         <import type="com.cider.cider.domain.type.challenge.Challenge"/>
         <variable
             name="challenge"
-            type="com.cider.cider.domain.model.OngoingChallengeModel" />
+            type="com.cider.cider.domain.model.ChallengeOngoingModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

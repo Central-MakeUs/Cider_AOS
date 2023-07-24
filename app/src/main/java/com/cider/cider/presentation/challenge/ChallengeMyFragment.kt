@@ -1,27 +1,28 @@
 package com.cider.cider.presentation.challenge
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
-import com.cider.cider.databinding.FragmentChallengeCreateBinding
 import com.cider.cider.databinding.FragmentMyChallengeBinding
-import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
+import com.cider.cider.presentation.adapter.ChallengeCardFinishAdapter
+import com.cider.cider.presentation.adapter.ChallengeOngoingAdapter
+import com.cider.cider.presentation.adapter.ChallengeReviewAdapter
+import com.cider.cider.presentation.viewmodel.MyChallengeViewModel
 import com.cider.cider.utils.binding.BindingFragment
+import com.cider.cider.utils.decoration.ChallengeListSpacingDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.fragment_my_challenge) {
 
-    private val viewModel: ChallengeCreateViewModel by activityViewModels()
+    private val viewModel: MyChallengeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +40,41 @@ class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.
     }
 
     private fun setRecyclerView() {
+        val finishAdapter = ChallengeCardFinishAdapter()
+        binding.rvFinishChallenge.apply {
+            adapter = finishAdapter
+            addItemDecoration(ChallengeListSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+        viewModel.challengeFinish.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
+                finishAdapter.submitList(it)
+            }
+        }
 
+        val ongoingAdapter = ChallengeOngoingAdapter()
+        binding.rvOngoingChallenge.apply {
+            adapter = ongoingAdapter
+            addItemDecoration(ChallengeListSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+        viewModel.challengeOngoing.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
+                ongoingAdapter.submitList(it)
+
+            }
+        }
+
+        val reviewAdapter = ChallengeReviewAdapter()
+        binding.rvReviewChallenge.apply {
+            adapter = reviewAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+        viewModel.challengeReview.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
+                reviewAdapter.submitList(it)
+            }
+        }
     }
 
     private fun setButton() {
@@ -57,6 +92,5 @@ class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.onClear()
     }
 }
