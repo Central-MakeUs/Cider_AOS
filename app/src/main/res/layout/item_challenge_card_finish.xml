@@ -46,8 +46,9 @@
             android:paddingHorizontal="6dp"
             android:paddingVertical="2dp"
             android:gravity="center"
-            android:text="@string/challenge_recruiting"
-            android:background="@drawable/shape_challenge_recruiting"
+            android:text='@{challenge.success==true ? "성공" : "실패"}'
+            android:background="@drawable/selector_success_fail"
+            app:select="@{challenge.success}"
             app:layout_constraintTop_toTopOf="@id/iv_challenge_trash"
             app:layout_constraintBottom_toBottomOf="@id/iv_challenge_trash"
             app:layout_constraintStart_toStartOf="parent" />
