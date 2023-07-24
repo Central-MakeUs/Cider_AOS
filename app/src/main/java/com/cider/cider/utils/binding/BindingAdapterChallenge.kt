@@ -10,12 +10,15 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.cider.cider.R
+import com.cider.cider.domain.type.ReviewTapState
+import com.cider.cider.domain.type.ReviewType
 import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 
@@ -125,4 +128,68 @@ fun setTextColorChallenge(view: TextView, challenge: Challenge) {
             view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_purple))
         }
     }
+}
+
+@BindingAdapter("tapState", "tapCurrent", requireAll = true)
+fun setTapResource(view: TextView, tapState: ReviewType, tapCurrent: ReviewType) {
+    when (tapCurrent) {
+        ReviewType.REVIEW -> {
+            when (tapState) {
+                ReviewType.REVIEW -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_bold)
+                    view.setBackgroundResource(R.drawable.shape_tap_active)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.white))
+                }
+                ReviewType.REJECTED, ReviewType.FAILED -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_regular)
+                    view.setBackgroundResource(R.drawable.shape_tap_disable)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.gray_5))
+                }
+                ReviewType.APPROVED -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_regular)
+                    view.setBackgroundResource(R.drawable.shape_tap_disable)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.gray_5))
+                }
+            }
+        }
+        ReviewType.REJECTED, ReviewType.FAILED -> {
+            when (tapState) {
+                ReviewType.REVIEW -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_regular)
+                    view.setBackgroundResource(R.drawable.shape_tap_complete)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.white))
+                }
+                ReviewType.REJECTED, ReviewType.FAILED -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_bold)
+                    view.setBackgroundResource(R.drawable.shape_tap_active)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.white))
+                }
+                ReviewType.APPROVED -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_regular)
+                    view.setBackgroundResource(R.drawable.shape_tap_disable)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.gray_5))
+                }
+            }
+        }
+        ReviewType.APPROVED -> {
+            when (tapState) {
+                ReviewType.REVIEW -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_regular)
+                    view.setBackgroundResource(R.drawable.shape_tap_complete)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.white))
+                }
+                ReviewType.REJECTED, ReviewType.FAILED -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_regular)
+                    view.setBackgroundResource(R.drawable.shape_tap_complete)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.white))
+                }
+                ReviewType.APPROVED -> {
+                    view.typeface = ResourcesCompat.getFont(view.context, R.font.pretendard_bold)
+                    view.setBackgroundResource(R.drawable.shape_tap_active)
+                    view.setTextColor(ContextCompat.getColor(view.context, R.color.white))
+                }
+            }
+        }
+    }
+
 }

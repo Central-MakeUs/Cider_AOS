@@ -8,6 +8,7 @@ import com.cider.cider.domain.model.ChallengeCardFinishModel
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.model.ChallengeOngoingModel
 import com.cider.cider.domain.model.ChallengeReviewModel
+import com.cider.cider.domain.type.ReviewTapState
 import com.cider.cider.domain.type.ReviewType
 import com.cider.cider.domain.type.challenge.Challenge
 import com.cider.cider.domain.type.challenge.ParticipationStatus
