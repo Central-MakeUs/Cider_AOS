@@ -26,6 +26,10 @@ class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.challenge = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         setRecyclerView()
         setToolbar()
         setButton()
