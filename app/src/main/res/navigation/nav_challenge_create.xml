@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/challengeCreateSelectFragment"
-        android:name="com.cider.cider.presentation.challenge.ChallengeCreateSelectFragment"
+        android:name="com.cider.cider.presentation.challenge.create.ChallengeCreateSelectFragment"
         android:label="ChallengeCreateSelectFragment" >
         <action
             android:id="@+id/action_challengeCreateSelectFragment_to_challengeCreateDetailFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/challengeCreateDetailFragment"
-        android:name="com.cider.cider.presentation.challenge.ChallengeCreateDetailFragment"
+        android:name="com.cider.cider.presentation.challenge.create.ChallengeCreateDetailFragment"
         android:label="ChallengeCreateDetailFragment" >
         <action
             android:id="@+id/action_challengeCreateDetailFragment_to_challengeCreateCheckFragment"
@@ -22,11 +22,11 @@
     </fragment>
     <fragment
         android:id="@+id/challengeCreateCompleteFragment"
-        android:name="com.cider.cider.presentation.challenge.ChallengeCreateCompleteFragment"
+        android:name="com.cider.cider.presentation.challenge.create.ChallengeCreateCompleteFragment"
         android:label="ChallengeCreateCompleteFragment" />
     <fragment
         android:id="@+id/challengeCreateCheckFragment"
-        android:name="com.cider.cider.presentation.challenge.ChallengeCreateCheckFragment"
+        android:name="com.cider.cider.presentation.challenge.create.ChallengeCreateCheckFragment"
         android:label="ChallengeCreateCheckFragment" >
         <action
             android:id="@+id/action_challengeCreateCheckFragment_to_challengeCreateCompleteFragment"

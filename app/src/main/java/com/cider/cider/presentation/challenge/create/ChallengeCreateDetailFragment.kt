@@ -1,4 +1,4 @@
-package com.cider.cider.presentation.challenge
+package com.cider.cider.presentation.challenge.create
 
 import android.Manifest
 import android.app.Activity

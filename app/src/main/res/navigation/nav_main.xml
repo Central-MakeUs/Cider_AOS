@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/challengeCreateFragment"
-        android:name="com.cider.cider.presentation.challenge.ChallengeCreateFragment"
+        android:name="com.cider.cider.presentation.challenge.create.ChallengeCreateFragment"
         android:label="ChallengeCreateFragment" >
         <action
             android:id="@+id/action_challengeCreateFragment_to_challengeHomeFragment"
