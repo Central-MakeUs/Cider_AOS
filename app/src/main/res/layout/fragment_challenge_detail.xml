@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main">
+
+        <include
+            android:id="@+id/bottom_sheet"
+            layout="@layout/fragment_challenge_detail_bottom_sheet" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

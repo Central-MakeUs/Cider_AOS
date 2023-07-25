@@ -180,6 +180,10 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
                     false
                 }
                 R.id.item_my -> {
+                    //TODO("Test용")
+                    findNavController().navigate(
+                        R.id.action_challengeHomeFragment_to_challengeDetailFragment
+                    )
                     false
                 }
                 else -> {false}
