@@ -26,19 +26,14 @@ class ChallengeListViewFragment: BindingFragment<FragmentChallengeListViewBindin
 
         when (bundle?.getString("type")) {
             Challenge.INVESTING.text -> {
-                Log.d("TEST Tab", "investing")
             }
             Challenge.SAVING.text -> {
-                Log.d("TEST Tab", "saving")
             }
             Challenge.MONEY_MANAGEMENT.text -> {
-                Log.d("TEST Tab", "money_management")
             }
             Challenge.FINANCIAL_LEARNING.text -> {
-                Log.d("TEST Tab", "financial_learning")
             }
             else -> {
-                Log.d("TEST Tab", "else ")
             }
         }
         setChallengeView()

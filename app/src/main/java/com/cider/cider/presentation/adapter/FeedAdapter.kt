@@ -18,7 +18,6 @@ import com.cider.cider.utils.ImageSliderTransformer
 import com.cider.cider.utils.ItemDiffCallback
 
 class FeedAdapter(
-    private val viewModel: ChallengeHomeViewModel
     ): ListAdapter<FeedModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<FeedModel>(
         onContentsTheSame = {old, new -> old == new},
@@ -45,7 +44,6 @@ class FeedAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FeedModel) {
             binding.feed = item
-            binding.viewmodel = viewModel
             binding.executePendingBindings()
 
             binding.tvMoreText.setOnClickListener {

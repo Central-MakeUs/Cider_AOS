@@ -141,7 +141,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val feedAdapter = FeedAdapter(viewModel)
+        val feedAdapter = FeedAdapter()
 
         viewModel.testFeed(requireContext())
 

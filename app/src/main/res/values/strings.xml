@@ -145,7 +145,7 @@
     <string name="challenge_detail_success">인증 기준</string>
     <string name="challenge_detail_fail">실패 기준</string>
     <string name="challenge_detail_mission_success">이렇게 인증하면 성공</string>
-    <string name="challenge_detail_mission_fail">이렇게 인증하면 성공</string>
+    <string name="challenge_detail_mission_fail">이렇게 인증하면 실패</string>
     <string name="challenge_detail_host">챌린지 호스트</string>
     <string name="challenge_detail_caution">유의사항</string>
 </resources>
