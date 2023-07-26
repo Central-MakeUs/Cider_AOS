@@ -7,7 +7,7 @@
         <import type="com.cider.cider.domain.type.challenge.Challenge"/>
         <variable
             name="challenge"
-            type="com.cider.cider.domain.model.ChallengeCardModel" />
+            type="com.cider.cider.domain.model.ChallengeCardFinishModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,8 +46,9 @@
             android:paddingHorizontal="6dp"
             android:paddingVertical="2dp"
             android:gravity="center"
-            android:text="@string/challenge_recruiting"
-            android:background="@drawable/shape_challenge_recruiting"
+            android:text='@{challenge.success==true ? "성공" : "실패"}'
+            android:background="@drawable/selector_success_fail"
+            app:select="@{challenge.success}"
             app:layout_constraintTop_toTopOf="@id/iv_challenge_trash"
             app:layout_constraintBottom_toBottomOf="@id/iv_challenge_trash"
             app:layout_constraintStart_toStartOf="parent" />
@@ -169,19 +170,6 @@
                     app:infoPeople="@{challenge.people}"
                     app:participation="@{challenge.participate}"
                     tools:text="5명 대기중" />
-
-                <TextView
-                    android:id="@+id/tv_d_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textSize="@dimen/text_sm"
-                    android:textColor="@color/main"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:visibleDay="@{challenge.d_day}"
-                    tools:text="D-23" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

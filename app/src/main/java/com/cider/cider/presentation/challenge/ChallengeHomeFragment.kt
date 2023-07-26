@@ -46,6 +46,12 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         binding.toolbar.btnToolbarBack.visibility = View.INVISIBLE
         binding.toolbar.btnToolbarIcon1.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.line_my_24))
 
+        binding.toolbar.btnToolbarIcon1.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_challengeHomeFragment_to_challengeMyFragment
+            )
+        }
+
         binding.toolbarPopularChallenge.toolbarTitle.text = "인기 챌린지"
         binding.toolbarPopularChallenge.btnMore.setOnClickListener {
             val bundle = Bundle().apply {
@@ -174,6 +180,10 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
                     false
                 }
                 R.id.item_my -> {
+                    //TODO("Test용")
+                    findNavController().navigate(
+                        R.id.action_challengeHomeFragment_to_challengeDetailFragment
+                    )
                     false
                 }
                 else -> {false}

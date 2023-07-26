@@ -27,6 +27,7 @@
     <!-- Component 에 쓰이는 컬러 -->
     <color name="main">#009DFF</color>
     <color name="sub">#F3FAFF</color>
+    <color name="secondary">#FF7C00</color>
     <color name="icon">#949494</color>
     <color name="divider">#F0F5F8</color>
     <color name="line">#F0F5F8</color>

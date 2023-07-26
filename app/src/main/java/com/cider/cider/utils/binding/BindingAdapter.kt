@@ -39,12 +39,6 @@ fun setSelect(view: View, isSelected: Boolean) {
     view.isSelected = isSelected
 }
 
-@BindingAdapter("selectTab")
-fun setSelectTab(view: View, challenge: Challenge) {
-
-}
-
-
 @BindingAdapter("categoryTextView")
 fun setCategoryTextView(view: TextView, challenge: Challenge) {
     view.text = challenge.comment

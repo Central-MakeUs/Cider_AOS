@@ -1,4 +1,4 @@
-package com.cider.cider.presentation.challenge
+package com.cider.cider.presentation.challenge.create
 
 import android.os.Bundle
 import android.view.View

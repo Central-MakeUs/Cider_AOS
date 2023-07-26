@@ -32,8 +32,8 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             add(R.id.fl_login, LoginFragment(), "Login")
             commit()
         }
-
-        if (viewModel.login()) moveToMain() //성공 시에는 메인으로 간다
+        moveToMain()
+        //if (viewModel.login()) moveToMain() //성공 시에는 메인으로 간다
         //Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
     }
 
