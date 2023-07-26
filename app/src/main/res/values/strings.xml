@@ -130,4 +130,22 @@
     <string name="challenge_finish_title">최근 종료된 챌린지</string>
     <string name="challenge_review_title">심사중인 챌린지</string>
     <string name="challenge_review_complete">심사완료</string>
+    
+    <string name="challenge_detail_current">챌린지 현황</string>
+    <string name="challenge_detail_intro">챌린지 소개</string>
+    <string name="challenge_detail_info">챌린지 정보</string>
+    <string name="challenge_detail_recruit_period">모집 기간</string>
+    <string name="challenge_detail_challenge_period">챌린지 기간</string>
+    <string name="challenge_detail_recruit_count">모집 인원</string>
+    <string name="challenge_detail_mission_count">인증 횟수</string>
+    <string name="challenge_detail_mission_time">인증 시간</string>
+    <string name="challenge_detail_reward">리워드</string>
+    <string name="challenge_detail_rule">챌린지 규칙</string>
+    <string name="challenge_detail_mission">인증 미션</string>
+    <string name="challenge_detail_success">인증 기준</string>
+    <string name="challenge_detail_fail">실패 기준</string>
+    <string name="challenge_detail_mission_success">이렇게 인증하면 성공</string>
+    <string name="challenge_detail_mission_fail">이렇게 인증하면 성공</string>
+    <string name="challenge_detail_host">챌린지 호스트</string>
+    <string name="challenge_detail_caution">유의사항</string>
 </resources>
