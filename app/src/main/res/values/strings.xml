@@ -148,4 +148,6 @@
     <string name="challenge_detail_mission_fail">이렇게 인증하면 실패</string>
     <string name="challenge_detail_host">챌린지 호스트</string>
     <string name="challenge_detail_caution">유의사항</string>
+    
+    <string name="my_authentication">나의 인증글</string>
 </resources>
