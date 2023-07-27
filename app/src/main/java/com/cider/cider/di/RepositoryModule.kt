@@ -4,7 +4,7 @@ import com.cider.cider.data.remote.api.ChallengeApi
 import com.cider.cider.data.remote.datasource.LoginRepositoryImpl
 import com.cider.cider.data.remote.api.LoginApi
 import com.cider.cider.data.remote.datasource.ChallengeRepositoryImpl
-import com.cider.cider.domain.repository.ChallengeReposiory
+import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.repository.LoginRepository
 import dagger.Module
 import dagger.Provides
@@ -22,5 +22,5 @@ object RepositoryModule {
     @Provides
     fun provideChallengeRepository (
         challengeApi: ChallengeApi
-    ): ChallengeReposiory = ChallengeRepositoryImpl(challengeApi)
+    ): ChallengeRepository = ChallengeRepositoryImpl(challengeApi)
 }

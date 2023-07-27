@@ -19,3 +19,8 @@ data class ResponseRandomNickNameModel(
 data class ResponseNicknameExist(
     val message: String,
 )
+
+data class ResponseMe(
+    val memberId: Int,
+    val memberName: String,
+)

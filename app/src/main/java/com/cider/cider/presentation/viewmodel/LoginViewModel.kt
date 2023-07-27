@@ -55,11 +55,16 @@ LoginViewModel @Inject constructor(
         }
     }
 
-    fun login(): Boolean {
-        viewModelScope.launch {
-            repository.postLogin() //402일 때 다시 요청 어쩌구
-        }
-        return false
+    /**
+     * 앱 실행 시 로그인 시도
+     * accessToken 을 가지고 me 호출
+     * repository 에서 200 일 경우, 로그인 성공
+     * 200 이외의 400 일 경우 로그인 실패로 간주
+     *
+     * 402 의 경우 토큰 만료 -> 만료 시 재로그인해야하기에 로그인 화면으로 넘어가면 됨
+     */
+    suspend fun login(): Boolean {
+        return repository.getLoginMe()
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {

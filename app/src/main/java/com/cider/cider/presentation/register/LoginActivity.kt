@@ -8,6 +8,8 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.cider.cider.R
 import com.cider.cider.databinding.ActivityLoginBinding
 import com.cider.cider.presentation.MainActivity
@@ -15,6 +17,7 @@ import com.cider.cider.presentation.viewmodel.LoginViewModel
 import com.cider.cider.utils.binding.BindingActivity
 import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -33,7 +36,12 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             commit()
         }
         moveToMain()
-        //if (viewModel.login()) moveToMain() //성공 시에는 메인으로 간다
+
+        lifecycleScope.launch {
+            if (viewModel.login()) {
+                moveToMain()
+            }
+        }
         //Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
     }
 
