@@ -100,9 +100,9 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
     private fun setChallengeList() {
         childFragmentManager.beginTransaction().apply {
-            add(R.id.fl_popular_challenge, ChallengeListViewFragment())
-            add(R.id.fl_official_challenge, ChallengeListViewFragment())
-            add(R.id.fl_category_challenge, ChallengeListViewFragment())
+            replace(R.id.fl_popular_challenge, ChallengeListViewFragment("popular"))
+            replace(R.id.fl_official_challenge, ChallengeListViewFragment("official"))
+            replace(R.id.fl_category_challenge, ChallengeListViewFragment(Challenge.INVESTING.text))
             commit()
         }
     }
@@ -129,11 +129,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
     }
     private fun setCategoryFragment(challenge: Challenge) {
-        val bundle = Bundle()
-        bundle.putString("type",challenge.text)
-        val fragment = ChallengeListViewFragment()
-        fragment.arguments = bundle
-
+        val fragment = ChallengeListViewFragment(challenge.text)
         childFragmentManager.beginTransaction().apply {
             replace(R.id.fl_category_challenge, fragment)
             commit() //TODO(데이터 부를 때마다 초기화 되는 문제 해결)

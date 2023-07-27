@@ -2,14 +2,15 @@ package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListBinding
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
+import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeViewModel
-import com.cider.cider.utils.decoration.ItemSpacingDecoration
 import com.cider.cider.utils.binding.BindingFragment
 import com.cider.cider.utils.decoration.ChallengeListSpacingDecoration
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +39,7 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
         when (data) {
             "popular" -> {
                 binding.toolbar.tvToolbarTitle.text = "인기 챌린지"
+
             }
             "official" -> {
                 binding.toolbar.tvToolbarTitle.text = "공식 챌린지"

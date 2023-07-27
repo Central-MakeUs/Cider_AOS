@@ -1,6 +1,5 @@
 package com.cider.cider.data.remote.datasource
 
-import android.util.Log
 import com.cider.cider.data.remote.api.ChallengeApi
 import com.cider.cider.data.remote.model.ResponseChallengeItem
 import com.cider.cider.domain.model.ChallengeCardModel
@@ -27,16 +26,28 @@ class ChallengeRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getChallengeHomeCategory(challenge: Challenge): List<ChallengeCardModel>? {
-        TODO("Not yet implemented")
+    override suspend fun getChallengeCategory(challenge: Challenge): List<ChallengeCardModel>? {
+        val data = apiService.getChallengeCategory(category = challenge.api)
+        return when (data.code()) {
+            200 -> mapResponseToChallengeCardModel(data.body())
+            else -> null
+        }
     }
 
     override suspend fun getChallengeOfficial(filter: Filter): List<ChallengeCardModel>? {
-        TODO("Not yet implemented")
+        val data = apiService.getChallengeOfficial(filter = Filter.LATEST.string)
+        return when (data.code()) {
+            200 -> mapResponseToChallengeCardModel(data.body())
+            else -> null
+        }
     }
 
     override suspend fun getChallengePopular(filter: Filter): List<ChallengeCardModel>? {
-        TODO("Not yet implemented")
+        val data = apiService.getChallengePopular(filter = Filter.LATEST.string)
+        return when (data.code()) {
+            200 -> mapResponseToChallengeCardModel(data.body())
+            else -> null
+        }
     }
 
 

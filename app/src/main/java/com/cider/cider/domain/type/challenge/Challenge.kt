@@ -2,39 +2,43 @@ package com.cider.cider.domain.type.challenge
 
 import com.cider.cider.R
 
-enum class Challenge(val text: String, val colorResId: Int, val imageResId: Int, val comment: String) {
+enum class Challenge(val text: String, val colorResId: Int, val imageResId: Int, val comment: String, val api: String) {
     INVESTING(
         "재테크",
         R.color.btn_mint,
         R.drawable.ic_investing,
-        "돈을 버는 습관을 길러주는 재테크 챌린지를 소개해요"
+        "돈을 버는 습관을 길러주는 재테크 챌린지를 소개해요",
+        "T"
     ),
     SAVING(
         "소비절약",
         R.color.btn_pink,
         R.drawable.ic_saving,
-        "돈을 버는 습관을 길러주는 소비절약 챌린지를 소개해요"
+        "돈을 버는 습관을 길러주는 소비절약 챌린지를 소개해요",
+        "C"
     ),
     MONEY_MANAGEMENT(
         "돈 관리",
         R.color.btn_blue,
         R.drawable.ic_money_management,
-        "돈을 버는 습관을 길러주는 돈관리 챌린지를 소개해요"
+        "돈을 버는 습관을 길러주는 돈관리 챌린지를 소개해요",
+        "M"
     ),
     FINANCIAL_LEARNING(
         "금융학습",
         R.color.btn_purple,
         R.drawable.ic_financial_learning,
-        "돈을 버는 습관을 길러주는 금융학습 챌린지를 소개해요"
+        "돈을 버는 습관을 길러주는 금융학습 챌린지를 소개해요",
+        "L"
     ),
 }
 
 fun getChallengeCategory(interestField: String): Challenge {
     return when (interestField) {
-        "재태크"-> Challenge.INVESTING
-        "돈관리"-> Challenge.MONEY_MANAGEMENT
-        "금융학습"-> Challenge.FINANCIAL_LEARNING
-        "소비절약"-> Challenge.SAVING
+        "TECHNOLOGY"-> Challenge.INVESTING
+        "MONEY"-> Challenge.MONEY_MANAGEMENT
+        "LEARNING"-> Challenge.FINANCIAL_LEARNING
+        "SAVING"-> Challenge.SAVING
         else -> Challenge.INVESTING
     }
 }

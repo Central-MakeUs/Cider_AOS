@@ -8,7 +8,7 @@ interface ChallengeRepository {
     suspend fun getChallengeList(filter: Filter): List<ChallengeCardModel>?
     suspend fun getCertifyHomeFeed()
 
-    suspend fun getChallengeHomeCategory(challenge: Challenge): List<ChallengeCardModel>?
+    suspend fun getChallengeCategory(challenge: Challenge): List<ChallengeCardModel>?
     suspend fun getChallengeOfficial(filter: Filter): List<ChallengeCardModel>?
     suspend fun getChallengePopular(filter: Filter): List<ChallengeCardModel>?
 
