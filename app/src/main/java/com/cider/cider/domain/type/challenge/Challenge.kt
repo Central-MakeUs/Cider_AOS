@@ -28,3 +28,13 @@ enum class Challenge(val text: String, val colorResId: Int, val imageResId: Int,
         "돈을 버는 습관을 길러주는 금융학습 챌린지를 소개해요"
     ),
 }
+
+fun getChallengeCategory(interestField: String): Challenge {
+    return when (interestField) {
+        "재태크"-> Challenge.INVESTING
+        "돈관리"-> Challenge.MONEY_MANAGEMENT
+        "금융학습"-> Challenge.FINANCIAL_LEARNING
+        "소비절약"-> Challenge.SAVING
+        else -> Challenge.INVESTING
+    }
+}

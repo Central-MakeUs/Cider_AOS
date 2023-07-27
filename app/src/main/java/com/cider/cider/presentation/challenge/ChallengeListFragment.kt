@@ -12,9 +12,11 @@ import com.cider.cider.presentation.viewmodel.ChallengeViewModel
 import com.cider.cider.utils.decoration.ItemSpacingDecoration
 import com.cider.cider.utils.binding.BindingFragment
 import com.cider.cider.utils.decoration.ChallengeListSpacingDecoration
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.layout.fragment_challenge_list) {
 
     private val viewModel: ChallengeViewModel by viewModels()

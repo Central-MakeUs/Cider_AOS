@@ -13,9 +13,11 @@ import com.cider.cider.presentation.adapter.ChallengeCardAdapter
 import com.cider.cider.presentation.viewmodel.ChallengeViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.cider.cider.utils.decoration.ItemSpacingDecoration
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ChallengeListViewFragment: BindingFragment<FragmentChallengeListViewBinding>(R.layout.fragment_challenge_list_view) {
 
     private val viewModel: ChallengeViewModel by viewModels()
