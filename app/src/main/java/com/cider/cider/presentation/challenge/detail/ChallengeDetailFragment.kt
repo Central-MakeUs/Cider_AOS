@@ -1,9 +1,11 @@
 package com.cider.cider.presentation.challenge.detail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
@@ -11,6 +13,7 @@ import com.cider.cider.databinding.FragmentChallengeDetailBinding
 import com.cider.cider.presentation.adapter.ChallengeDetailViewPagerAdapter
 import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
 import com.cider.cider.utils.binding.BindingFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R.layout.fragment_challenge_detail) {
@@ -26,7 +29,32 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
     }
 
     private fun setBehavior() {
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
 
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_DRAGGING, BottomSheetBehavior.STATE_COLLAPSED -> {
+                        binding.appbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_blue))
+                        binding.btnToolbarBack.setColorFilter(ContextCompat.getColor(requireContext(),R.color.white))
+                        binding.btnToolbarIcon.setColorFilter(ContextCompat.getColor(requireContext(),R.color.white))
+                        binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_blue))
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        binding.appbar.setBackgroundColor(Color.WHITE)
+                        binding.btnToolbarBack.setColorFilter(ContextCompat.getColor(requireContext(),R.color.black))
+                        binding.btnToolbarIcon.setColorFilter(ContextCompat.getColor(requireContext(),R.color.black))
+                        binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+                    }
+                    // Handle other states if necessary
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+
+        })
     }
 
     private fun setBottomSheet() {
