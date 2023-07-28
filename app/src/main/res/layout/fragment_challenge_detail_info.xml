@@ -48,8 +48,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="30회 중 6회 진행"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textSize="@dimen/text_2xl"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:textSize="@dimen/text_base"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_challenge_current"
                     app:layout_constraintBottom_toBottomOf="@id/tv_challenge_current"/>
