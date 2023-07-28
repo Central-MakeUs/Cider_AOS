@@ -21,7 +21,12 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setBehavior()
         setBottomSheet()
+    }
+
+    private fun setBehavior() {
+
     }
 
     private fun setBottomSheet() {
