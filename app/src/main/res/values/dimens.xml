@@ -75,4 +75,6 @@
     <dimen name="corner_4dp">4dp</dimen>
     
     <dimen name="challenge_review_tap_width">60dp</dimen>
+
+    <dimen name="progressbar_height">21dp</dimen>
 </resources>

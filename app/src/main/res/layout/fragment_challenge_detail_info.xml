@@ -54,6 +54,77 @@
                     app:layout_constraintTop_toTopOf="@id/tv_challenge_current"
                     app:layout_constraintBottom_toBottomOf="@id/tv_challenge_current"/>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/section_average_current"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_challenge_current">
+
+                    <TextView
+                        android:id="@+id/tv_average_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="2dp"
+                        android:paddingHorizontal="4dp"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textSize="@dimen/text_sm"
+                        android:textColor="@color/main"
+                        android:background="@drawable/shape_rec_round_4"
+                        android:backgroundTint="@color/light_blue"
+                        android:layout_marginStart="6dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@string/challenge_detail_average_current"/>
+
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/progress_average_current"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/progressbar_height"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_average_current"
+                        app:layout_constraintTop_toTopOf="@id/tv_average_current"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_average_current"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/section_my_current"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/section_average_current">
+
+                    <TextView
+                        android:id="@+id/tv_my_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="2dp"
+                        android:paddingHorizontal="4dp"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textSize="@dimen/text_sm"
+                        android:textColor="@color/secondary"
+                        android:background="@drawable/shape_rec_round_4"
+                        android:backgroundTint="@color/gray_1"
+                        android:layout_marginStart="6dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@string/challenge_detail_my_current"/>
+
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/progress_my_current"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/progressbar_height"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_my_current"
+                        app:layout_constraintTop_toTopOf="@id/tv_my_current"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_my_current"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
