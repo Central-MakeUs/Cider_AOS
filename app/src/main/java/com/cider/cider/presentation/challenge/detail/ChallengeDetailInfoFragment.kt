@@ -22,6 +22,10 @@ class ChallengeDetailInfoFragment: BindingFragment<FragmentChallengeDetailInfoBi
 
         setCaution()
         setBalloon()
+        setProgressView()
+    }
+
+    private fun setProgressView() {
     }
 
     private fun setBalloon() {
