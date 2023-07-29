@@ -1,5 +1,6 @@
 package com.cider.cider.data.remote.datasource
 
+import android.util.Log
 import com.cider.cider.data.remote.api.ChallengeApi
 import com.cider.cider.data.remote.model.ResponseChallengeItem
 import com.cider.cider.domain.model.ChallengeCardModel
@@ -28,6 +29,7 @@ class ChallengeRepositoryImpl @Inject constructor(
 
     override suspend fun getChallengeCategory(challenge: Challenge): List<ChallengeCardModel>? {
         val data = apiService.getChallengeCategory(category = challenge.api)
+        Log.d("TEST API","${data.body()}")
         return when (data.code()) {
             200 -> mapResponseToChallengeCardModel(data.body())
             else -> null
@@ -60,12 +62,12 @@ class ChallengeRepositoryImpl @Inject constructor(
                 like = responseItem.isLike,
                 reward = responseItem.isReward,
                 category = getChallengeCategory(responseItem.interestField),
-                duration = responseItem.recruitLeft, // 또는 challengeStatus와의 연관에 따라 적절한 값을 설정해야 합니다.
+                duration = responseItem.challengePeriod, // 또는 challengeStatus와의 연관에 따라 적절한 값을 설정해야 합니다.
                 rank = null, // 이 부분은 여기서 정의한 로직에 따라서 값을 지정하셔야 합니다.
                 title = responseItem.challengeName,
                 people = responseItem.participateNum,
                 official = responseItem.isOfficial,
-                d_day = null // 이 부분은 여기서 정의한 로직에 따라서 값을 지정하셔야 합니다.
+                d_day = responseItem.recruitLeft // 이 부분은 여기서 정의한 로직에 따라서 값을 지정하셔야 합니다.
             )
         }
     }
