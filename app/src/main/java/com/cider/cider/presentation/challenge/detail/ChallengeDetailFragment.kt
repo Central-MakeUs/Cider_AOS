@@ -39,12 +39,14 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
                         binding.btnToolbarBack.setColorFilter(ContextCompat.getColor(requireContext(),R.color.white))
                         binding.btnToolbarIcon.setColorFilter(ContextCompat.getColor(requireContext(),R.color.white))
                         binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_blue))
+                        binding.viewProfile.visibility = View.VISIBLE
                     }
                     BottomSheetBehavior.STATE_EXPANDED -> {
                         binding.appbar.setBackgroundColor(Color.WHITE)
                         binding.btnToolbarBack.setColorFilter(ContextCompat.getColor(requireContext(),R.color.black))
                         binding.btnToolbarIcon.setColorFilter(ContextCompat.getColor(requireContext(),R.color.black))
                         binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+                        binding.viewProfile.visibility = View.GONE
                     }
                     // Handle other states if necessary
                 }
