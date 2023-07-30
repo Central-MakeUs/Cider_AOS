@@ -53,7 +53,7 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
+                binding.viewProfile.animate().scaleX(1-slideOffset).scaleY(1-slideOffset).setDuration(0).start();
             }
 
         })
