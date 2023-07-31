@@ -162,4 +162,6 @@
     <string name="challenge_authentication_content">내용</string>
     <string name="challenge_authentication_content_hint">인증에 대한 이야기와 다양한 생각들, 사진에 대한 설명을 작성해보세요! </string>
     <string name="challenge_authentication_btn">인증 완료하기</string>
+
+    <string name="my_page">마이페이지</string>
 </resources>

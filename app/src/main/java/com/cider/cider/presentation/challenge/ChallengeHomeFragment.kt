@@ -178,7 +178,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
                 R.id.item_my -> {
                     //TODO("Test용")
                     findNavController().navigate(
-                        R.id.action_challengeHomeFragment_to_challengeDetailFragment
+                        R.id.action_challengeHomeFragment_to_myPageFragment
                     )
                     false
                 }
