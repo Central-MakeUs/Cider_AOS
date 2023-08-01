@@ -1,14 +1,12 @@
 package com.cider.cider.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cider.cider.App
 import com.cider.cider.domain.repository.LoginRepository
 import com.cider.cider.domain.type.*
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -150,13 +148,13 @@ LoginViewModel @Inject constructor(
         checkButtonState()
     }
 
-    fun changeChallengeState(challenge: Challenge) {
+    fun changeChallengeState(challenge: Category) {
         val currentState = _challengeState.value
         val updateState = when (challenge) {
-            Challenge.INVESTING -> { currentState?.copy(investing = !currentState.investing) }
-            Challenge.FINANCIAL_LEARNING -> { currentState?.copy(financial_learning = !currentState.financial_learning)}
-            Challenge.MONEY_MANAGEMENT -> { currentState?.copy(money_management = !currentState.money_management)}
-            Challenge.SAVING -> { currentState?.copy(saving = !currentState.saving)}
+            Category.INVESTING -> { currentState?.copy(investing = !currentState.investing) }
+            Category.FINANCIAL_LEARNING -> { currentState?.copy(financial_learning = !currentState.financial_learning)}
+            Category.MONEY_MANAGEMENT -> { currentState?.copy(money_management = !currentState.money_management)}
+            Category.SAVING -> { currentState?.copy(saving = !currentState.saving)}
         }
         _challengeState.value = updateState?:ChallengeButtonState()
     }

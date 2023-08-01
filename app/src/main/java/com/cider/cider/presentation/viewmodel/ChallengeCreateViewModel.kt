@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cider.cider.domain.model.ImageCardModel
-import com.cider.cider.domain.type.ChallengeButtonState
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -14,8 +13,8 @@ import javax.inject.Inject
 class ChallengeCreateViewModel @Inject constructor(
 
 ):ViewModel() {
-    private val _challengeSelect = MutableLiveData<Challenge>()
-    val challengeSelect: LiveData<Challenge> get() = _challengeSelect
+    private val _challengeSelect = MutableLiveData<Category>()
+    val challengeSelect: LiveData<Category> get() = _challengeSelect
 
     val challengeTitle = MutableLiveData<String>("")
     val challengeIntroduction = MutableLiveData<String>("")
@@ -60,7 +59,7 @@ class ChallengeCreateViewModel @Inject constructor(
         Log.d("TEST asdf","$123")
     }
 
-    fun changeChallenge(challenge: Challenge) {
+    fun changeChallenge(challenge: Category) {
         _challengeSelect.value = challenge
     }
 

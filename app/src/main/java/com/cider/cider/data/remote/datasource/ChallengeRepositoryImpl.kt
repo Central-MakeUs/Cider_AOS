@@ -6,7 +6,7 @@ import com.cider.cider.data.remote.model.ResponseChallengeItem
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.getChallengeCategory
 import com.cider.cider.domain.type.challenge.getParticipationStatus
 import javax.inject.Inject
@@ -27,7 +27,7 @@ class ChallengeRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getChallengeCategory(challenge: Challenge): List<ChallengeCardModel>? {
+    override suspend fun getChallengeCategory(challenge: Category): List<ChallengeCardModel>? {
         val data = apiService.getChallengeCategory(category = challenge.api)
         Log.d("TEST API","${data.body()}")
         return when (data.code()) {

@@ -1,7 +1,6 @@
 package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -10,9 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
-import com.cider.cider.domain.type.BottomSheetType
 import com.cider.cider.domain.type.WriteType
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
@@ -102,7 +100,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         childFragmentManager.beginTransaction().apply {
             replace(R.id.fl_popular_challenge, ChallengeListViewFragment("popular"))
             replace(R.id.fl_official_challenge, ChallengeListViewFragment("official"))
-            replace(R.id.fl_category_challenge, ChallengeListViewFragment(Challenge.INVESTING.text))
+            replace(R.id.fl_category_challenge, ChallengeListViewFragment(Category.INVESTING.text))
             commit()
         }
     }
@@ -111,16 +109,16 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         viewModel.tabState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 when (it) {
-                    Challenge.INVESTING -> {
+                    Category.INVESTING -> {
                         setCategoryFragment(it)
                     }
-                    Challenge.FINANCIAL_LEARNING -> {
+                    Category.FINANCIAL_LEARNING -> {
                         setCategoryFragment(it)
                     }
-                    Challenge.MONEY_MANAGEMENT -> {
+                    Category.MONEY_MANAGEMENT -> {
                         setCategoryFragment(it)
                     }
-                    Challenge.SAVING -> {
+                    Category.SAVING -> {
                         setCategoryFragment(it)
                     } //TODO(입력 값 다르게 호출하는 api가 각각 다름)
                 }
@@ -128,7 +126,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         }
 
     }
-    private fun setCategoryFragment(challenge: Challenge) {
+    private fun setCategoryFragment(challenge: Category) {
         val fragment = ChallengeListViewFragment(challenge.text)
         childFragmentManager.beginTransaction().apply {
             replace(R.id.fl_category_challenge, fragment)

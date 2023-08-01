@@ -2,7 +2,7 @@ package com.cider.cider.domain.type.challenge
 
 import com.cider.cider.R
 
-enum class Challenge(val text: String, val colorResId: Int, val imageResId: Int, val comment: String, val api: String) {
+enum class Category(val text: String, val colorResId: Int, val imageResId: Int, val comment: String, val api: String) {
     INVESTING(
         "재테크",
         R.color.btn_mint,
@@ -33,12 +33,12 @@ enum class Challenge(val text: String, val colorResId: Int, val imageResId: Int,
     ),
 }
 
-fun getChallengeCategory(interestField: String): Challenge {
+fun getChallengeCategory(interestField: String): Category {
     return when (interestField) {
-        "TECHNOLOGY"-> Challenge.INVESTING
-        "MONEY"-> Challenge.MONEY_MANAGEMENT
-        "LEARNING"-> Challenge.FINANCIAL_LEARNING
-        "SAVING"-> Challenge.SAVING
-        else -> Challenge.INVESTING
+        "TECHNOLOGY"-> Category.INVESTING
+        "MONEY"-> Category.MONEY_MANAGEMENT
+        "LEARNING"-> Category.FINANCIAL_LEARNING
+        "SAVING"-> Category.SAVING
+        else -> Category.INVESTING
     }
 }

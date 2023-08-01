@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,7 +37,7 @@ class ChallengeViewModel @Inject constructor(
         }
     }
 
-    fun getChallengeCategory(challenge: Challenge) {
+    fun getChallengeCategory(challenge: Category) {
         viewModelScope.launch {
             _challenge.value = repository.getChallengeCategory(challenge)
         }

@@ -2,8 +2,6 @@ package com.cider.cider.utils.binding
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.graphics.Typeface
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import android.widget.TextView
@@ -12,7 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.cider.cider.R
 import com.cider.cider.domain.type.Birth
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 
 
 @BindingAdapter("android:layout_height")
@@ -40,7 +38,7 @@ fun setSelect(view: View, isSelected: Boolean) {
 }
 
 @BindingAdapter("categoryTextView")
-fun setCategoryTextView(view: TextView, challenge: Challenge) {
+fun setCategoryTextView(view: TextView, challenge: Category) {
     view.text = challenge.comment
     val color = ContextCompat.getColor(view.context, challenge.colorResId)
     view.backgroundTintList = ColorStateList.valueOf(color)

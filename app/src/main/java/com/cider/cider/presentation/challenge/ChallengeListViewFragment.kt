@@ -3,17 +3,14 @@ package com.cider.cider.presentation.challenge
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListViewBinding
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
-import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeViewModel
-import com.cider.cider.utils.binding.BindingFragment
 import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import com.cider.cider.utils.decoration.ItemSpacingDecoration
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,17 +27,17 @@ class ChallengeListViewFragment(private val type: String): BindingFragmentNoNavi
 
         Log.d("TEST ListView",type)
         when (type) {
-            Challenge.INVESTING.text -> {
-                viewModel.getChallengeCategory(Challenge.INVESTING)
+            Category.INVESTING.text -> {
+                viewModel.getChallengeCategory(Category.INVESTING)
             }
-            Challenge.SAVING.text -> {
-                viewModel.getChallengeCategory(Challenge.SAVING)
+            Category.SAVING.text -> {
+                viewModel.getChallengeCategory(Category.SAVING)
             }
-            Challenge.MONEY_MANAGEMENT.text -> {
-                viewModel.getChallengeCategory(Challenge.MONEY_MANAGEMENT)
+            Category.MONEY_MANAGEMENT.text -> {
+                viewModel.getChallengeCategory(Category.MONEY_MANAGEMENT)
             }
-            Challenge.FINANCIAL_LEARNING.text -> {
-                viewModel.getChallengeCategory(Challenge.FINANCIAL_LEARNING)
+            Category.FINANCIAL_LEARNING.text -> {
+                viewModel.getChallengeCategory(Category.FINANCIAL_LEARNING)
             }
             "popular" -> {
                 viewModel.getChallengePopular()

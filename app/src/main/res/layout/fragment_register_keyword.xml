@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.cider.cider.domain.type.challenge.Challenge"/>
+        <import type="com.cider.cider.domain.type.challenge.Category"/>
         <variable
             name="register"
             type="com.cider.cider.presentation.viewmodel.LoginViewModel" />
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/selector_line_btn_mint"
-                android:onClick="@{()->register.changeChallengeState(Challenge.INVESTING)}"
+                android:onClick="@{()->register.changeChallengeState(Category.INVESTING)}"
                 android:layout_marginBottom="@dimen/challenge_btn_margin_bottom"
                 app:layout_constraintBottom_toTopOf="@id/btn_money_management"
                 app:select="@{register.challengeState.investing}">
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/selector_line_btn_blue"
-                android:onClick="@{()->register.changeChallengeState(Challenge.MONEY_MANAGEMENT)}"
+                android:onClick="@{()->register.changeChallengeState(Category.MONEY_MANAGEMENT)}"
                 android:layout_marginBottom="@dimen/challenge_btn_margin_bottom"
                 app:layout_constraintBottom_toTopOf="@id/btn_financial_learning"
                 app:select="@{register.challengeState.money_management}">
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/selector_line_btn_purple"
-                android:onClick="@{()->register.changeChallengeState(Challenge.FINANCIAL_LEARNING)}"
+                android:onClick="@{()->register.changeChallengeState(Category.FINANCIAL_LEARNING)}"
                 android:layout_marginBottom="@dimen/challenge_btn_margin_bottom"
                 app:layout_constraintBottom_toTopOf="@id/btn_saving"
                 app:select="@{register.challengeState.financial_learning}">
@@ -127,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/selector_line_btn_pink"
-                android:onClick="@{()->register.changeChallengeState(Challenge.SAVING)}"
+                android:onClick="@{()->register.changeChallengeState(Category.SAVING)}"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:select="@{register.challengeState.saving}">

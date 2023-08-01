@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.util.Log
-import android.view.RoundedCorner
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,12 +12,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.cider.cider.R
-import com.cider.cider.domain.type.ReviewTapState
 import com.cider.cider.domain.type.ReviewType
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 
 
@@ -52,7 +48,7 @@ fun setTextInfoPeople(view: TextView, people: Int, participation: ParticipationS
 }
 
 @BindingAdapter("challenge")
-fun setChallengeText(view: TextView, challenge: Challenge) {
+fun setChallengeText(view: TextView, challenge: Category) {
     view.text = challenge.text
 }
 
@@ -95,36 +91,36 @@ fun setImageDrawable(imageView: ImageView, drawable: Drawable?) {
 }
 
 @BindingAdapter("imageDrawableWithType")
-fun setImageDrawableWithType(imageView: ImageView, challenge: Challenge) {
+fun setImageDrawableWithType(imageView: ImageView, challenge: Category) {
     when (challenge) {
-        Challenge.INVESTING -> {
+        Category.INVESTING -> {
             imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_investing))
         }
-        Challenge.MONEY_MANAGEMENT -> {
+        Category.MONEY_MANAGEMENT -> {
             imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_money_management))
         }
-        Challenge.SAVING -> {
+        Category.SAVING -> {
             imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_saving))
         }
-        Challenge.FINANCIAL_LEARNING -> {
+        Category.FINANCIAL_LEARNING -> {
             imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_financial_learning))
         }
     }
 }
 
 @BindingAdapter("textColorChallenge")
-fun setTextColorChallenge(view: TextView, challenge: Challenge) {
+fun setTextColorChallenge(view: TextView, challenge: Category) {
     when (challenge) {
-        Challenge.INVESTING -> {
+        Category.INVESTING -> {
             view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_mint))
         }
-        Challenge.MONEY_MANAGEMENT -> {
+        Category.MONEY_MANAGEMENT -> {
             view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_blue))
         }
-        Challenge.SAVING -> {
+        Category.SAVING -> {
             view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_pink))
         }
-        Challenge.FINANCIAL_LEARNING -> {
+        Category.FINANCIAL_LEARNING -> {
             view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_purple))
         }
     }

@@ -1,8 +1,6 @@
 package com.cider.cider.domain.model
 
 import android.net.Uri
-import com.cider.cider.domain.type.challenge.Challenge
-import dagger.multibindings.IntoMap
 
 data class FeedModel(
     val id: Int,
