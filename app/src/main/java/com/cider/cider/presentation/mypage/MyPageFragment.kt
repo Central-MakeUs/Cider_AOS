@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListViewBinding
 import com.cider.cider.databinding.FragmentMyPageBinding
@@ -19,6 +20,7 @@ class MyPageFragment: BindingFragmentNoNavi<FragmentMyPageBinding>(R.layout.frag
         super.onViewCreated(view, savedInstanceState)
 
         setBottomSheet()
+        setButton()
     }
 
     private fun setBottomSheet() {
@@ -34,5 +36,31 @@ class MyPageFragment: BindingFragmentNoNavi<FragmentMyPageBinding>(R.layout.frag
             }
 
         })
+    }
+
+    private fun setButton() {
+        binding.btnMyCertify.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_myPageFragment_to_myCertifyFragment
+            )
+        }
+
+        binding.btnInterest.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_myPageFragment_to_challengeInterestFragment
+            )
+        }
+
+        binding.btnChallengeCurrent.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_myPageFragment_to_challengeMyFragment
+            )
+        }
+
+        binding.ivProfileEdit.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_myPageFragment_to_profileEditFragment
+            )
+        }
     }
 }

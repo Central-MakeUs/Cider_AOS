@@ -54,5 +54,30 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="com.cider.cider.presentation.mypage.MyPageFragment"
-        android:label="MyPageFragment" />
+        android:label="MyPageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_challengeMyFragment"
+            app:destination="@id/challengeMyFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_myCertifyFragment"
+            app:destination="@id/myCertifyFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_challengeInterestFragment"
+            app:destination="@id/challengeInterestFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myCertifyFragment"
+        android:name="com.cider.cider.presentation.mypage.MyCertifyFragment"
+        android:label="MyCertifyFragment" />
+    <fragment
+        android:id="@+id/challengeInterestFragment"
+        android:name="com.cider.cider.presentation.mypage.ChallengeInterestFragment"
+        android:label="ChallengeInterestFragment" />
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.cider.cider.presentation.mypage.ProfileEditFragment"
+        android:label="ProfileEditFragment" />
 </navigation>
