@@ -2,15 +2,13 @@ package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListBinding
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
-import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
-import com.cider.cider.presentation.viewmodel.ChallengeViewModel
+import com.cider.cider.presentation.viewmodel.ChallengeListViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.cider.cider.utils.decoration.ChallengeListSpacingDecoration
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +18,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.layout.fragment_challenge_list) {
 
-    private val viewModel: ChallengeViewModel by viewModels()
+    private val viewModel: ChallengeListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

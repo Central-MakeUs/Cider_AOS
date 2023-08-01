@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ChallengeViewModel @Inject constructor(
+class ChallengeListViewModel @Inject constructor(
     private val repository: ChallengeRepository
 ): ViewModel() {
     private val _challenge = MutableLiveData<List<ChallengeCardModel>>()
