@@ -148,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:visible="@{false}"
+            app:visible="@{certify.certifyImage != null}"
             app:layout_constraintTop_toBottomOf="@id/section_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -159,16 +159,18 @@
                 android:layout_height="@dimen/feed_image_size"
                 android:background="@drawable/shape_rec_round_4"
                 android:backgroundTint="#08000000"
-                app:imageUri="@{null}"
+                app:imageUri="@{certify.certifyImage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:layout_width="@dimen/feed_image_size"
                 android:layout_height="@dimen/feed_image_size"
                 android:background="@drawable/shape_rec_round_4"
                 android:backgroundTint="#08000000"
+                android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="@id/iv_image"
                 app:layout_constraintTop_toTopOf="@id/iv_image"
                 app:layout_constraintBottom_toBottomOf="@id/iv_image"

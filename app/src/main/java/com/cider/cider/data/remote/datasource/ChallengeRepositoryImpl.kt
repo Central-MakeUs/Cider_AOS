@@ -114,7 +114,7 @@ class ChallengeRepositoryImpl @Inject constructor(
                 memberLevel = response.simpleMemberResponseDto.memberLevel,
                 memberName = response.simpleMemberResponseDto.memberName,
                 profilePath = Uri.parse(response.simpleMemberResponseDto.profilePath),
-                certifyImage = null
+                certifyImage = if (response.certifyImageUrl != null ) Uri.parse(response.certifyImageUrl) else null
             )
         }
     }
