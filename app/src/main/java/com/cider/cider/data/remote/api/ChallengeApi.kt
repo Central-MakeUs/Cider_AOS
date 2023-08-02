@@ -1,5 +1,6 @@
 package com.cider.cider.data.remote.api
 
+import com.cider.cider.data.remote.model.ResponseCertifyItem
 import com.cider.cider.data.remote.model.ResponseChallengeItem
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,9 +14,8 @@ interface ChallengeApi {
     ): Response<ArrayList<ResponseChallengeItem>>
 
     @GET("/api/certify/home")
-    suspend fun getCertifyHomeFeed(
-        @Path("filter") filter: String,
-    ): Response<ArrayList<ResponseChallengeItem>>
+    suspend fun getCertifyHome(
+    ): Response<ArrayList<ResponseCertifyItem>>
 
     @GET("/api/challenge/home/{category}")
     suspend fun getChallengeCategory(

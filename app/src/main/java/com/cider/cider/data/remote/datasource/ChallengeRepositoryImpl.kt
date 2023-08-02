@@ -1,8 +1,11 @@
 package com.cider.cider.data.remote.datasource
 
+import android.net.Uri
 import android.util.Log
 import com.cider.cider.data.remote.api.ChallengeApi
+import com.cider.cider.data.remote.model.ResponseCertifyItem
 import com.cider.cider.data.remote.model.ResponseChallengeItem
+import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
@@ -23,8 +26,15 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCertifyHomeFeed() {
-        TODO("Not yet implemented")
+    override suspend fun getCertifyHome(): List<CertifyModel>? {
+        val data = apiService.getCertifyHome()
+        return when (data.code()) {
+            200 -> {
+                Log.d("Test certify","${data.body()}")
+                mapToCertifyModelList(data.body())
+            }
+            else -> null
+        }
     }
 
     override suspend fun getChallengeCategory(challenge: Category): List<ChallengeCardModel>? {
@@ -68,6 +78,25 @@ class ChallengeRepositoryImpl @Inject constructor(
                 people = responseItem.participateNum,
                 official = responseItem.isOfficial,
                 d_day = responseItem.recruitLeft // 이 부분은 여기서 정의한 로직에 따라서 값을 지정하셔야 합니다.
+            )
+        }
+    }
+
+    private fun mapToCertifyModelList(responseList: List<ResponseCertifyItem>?): List<CertifyModel>? {
+        return responseList?.map { response ->
+            CertifyModel(
+                certifyContent = response.certifyContent,
+                certifyLike = response.certifyLike,
+                certifyName = response.certifyName,
+                createdDate = response.createdDate,
+                isLike = response.isLike,
+                challengeBranch = getChallengeCategory(response.simpleChallengeResponseDto.challengeBranch),
+                challengeName = response.simpleChallengeResponseDto.challengeName,
+                participateNum = response.simpleChallengeResponseDto.participateNum,
+                memberLevel = response.simpleMemberResponseDto.memberLevel,
+                memberName = response.simpleMemberResponseDto.memberName,
+                profilePath = Uri.parse(response.simpleMemberResponseDto.profilePath),
+                certifyImage = null
             )
         }
     }

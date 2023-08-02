@@ -11,6 +11,7 @@ import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
 import com.cider.cider.domain.type.WriteType
 import com.cider.cider.domain.type.challenge.Category
+import com.cider.cider.presentation.adapter.CertifyAdapter
 import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
@@ -135,18 +136,16 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val feedAdapter = FeedAdapter()
-
-        viewModel.testFeed(requireContext())
+        val certifyAdapter = CertifyAdapter()
 
         binding.rvRecommendFeed.apply {
-            adapter = feedAdapter
+            adapter = certifyAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        viewModel.feed.observe(viewLifecycleOwner) {
+        viewModel.certify.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                feedAdapter.submitList(it)
+                certifyAdapter.submitList(it)
             }
         }
     }

@@ -13,6 +13,24 @@ data class ResponseChallengeItem(
     val isReward: Boolean,
 )
 
-data class ResponseChallengeList(
-    val challengeList: ArrayList<ResponseChallengeItem>
+data class ResponseCertifyItem(
+    val certifyContent: String,
+    val certifyLike: Int,
+    val certifyName: String,
+    val createdDate: String,
+    val isLike: Boolean,
+    val simpleChallengeResponseDto: SimpleChallengeResponseDto,
+    val simpleMemberResponseDto: SimpleMemberResponseDto
+)
+
+data class SimpleChallengeResponseDto(
+    val challengeBranch: String,
+    val challengeName: String,
+    val participateNum: Int
+)
+
+data class SimpleMemberResponseDto(
+    val memberLevel: Int,
+    val memberName: String,
+    val profilePath: String
 )
