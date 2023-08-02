@@ -3,6 +3,7 @@ package com.cider.cider.data.remote.datasource
 import android.net.Uri
 import android.util.Log
 import com.cider.cider.data.remote.api.ChallengeApi
+import com.cider.cider.data.remote.model.RequestCertifyLike
 import com.cider.cider.data.remote.model.ResponseCertifyItem
 import com.cider.cider.data.remote.model.ResponseChallengeItem
 import com.cider.cider.domain.model.CertifyModel
@@ -59,6 +60,22 @@ class ChallengeRepositoryImpl @Inject constructor(
         return when (data.code()) {
             200 -> mapResponseToChallengeCardModel(data.body())
             else -> null
+        }
+    }
+
+    override suspend fun postCertifyLike(id: Int): Boolean {
+        val data = apiService.postCertifyLike(RequestCertifyLike(id))
+        return when (data.code()) {
+            200 -> true
+            else -> false
+        }
+    }
+
+    override suspend fun deleteCertifyLike(id: Int): Boolean {
+        val data = apiService.deleteCertifyLike(id)
+        return when (data.code()) {
+            200 -> true
+            else -> false
         }
     }
 

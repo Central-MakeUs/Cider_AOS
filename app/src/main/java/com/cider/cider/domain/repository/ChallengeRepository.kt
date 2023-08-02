@@ -13,4 +13,7 @@ interface ChallengeRepository {
     suspend fun getChallengeOfficial(filter: Filter): List<ChallengeCardModel>?
     suspend fun getChallengePopular(filter: Filter): List<ChallengeCardModel>?
 
+    suspend fun postCertifyLike(id: Int): Boolean
+    suspend fun deleteCertifyLike(id: Int): Boolean
+
 }

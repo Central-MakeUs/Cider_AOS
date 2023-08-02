@@ -35,3 +35,7 @@ data class SimpleMemberResponseDto(
     val memberName: String,
     val profilePath: String
 )
+
+data class ResponseCertifyLike(
+    val message: String,
+)

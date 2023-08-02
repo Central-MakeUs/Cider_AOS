@@ -35,9 +35,15 @@ class CertifyViewModel @Inject constructor(
             _certify.value =  beforeList.map {
                 if (it.id == targetId) {
                     if (it.isLike) { //true 였다면 false 로 변경
-                        it.copy(isLike = false, certifyLike = it.certifyLike - 1)
+                        if (repository.deleteCertifyLike(targetId))
+                            it.copy(isLike = false, certifyLike = it.certifyLike - 1)
+                        else
+                            it
                     } else { //false 였다면 true 로 변경
-                        it.copy(isLike = true, certifyLike = it.certifyLike + 1)
+                        if (repository.postCertifyLike(targetId))
+                            it.copy(isLike = true, certifyLike = it.certifyLike + 1)
+                        else
+                            it
                     }
                 } else {
                     it
