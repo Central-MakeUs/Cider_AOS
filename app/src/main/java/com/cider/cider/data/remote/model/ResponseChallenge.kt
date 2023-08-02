@@ -14,6 +14,7 @@ data class ResponseChallengeItem(
 )
 
 data class ResponseCertifyItem(
+    val certifyId: Int,
     val certifyContent: String,
     val certifyLike: Int,
     val certifyName: String,

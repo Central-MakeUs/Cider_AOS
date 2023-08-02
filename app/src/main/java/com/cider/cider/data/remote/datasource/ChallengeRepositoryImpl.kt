@@ -85,6 +85,7 @@ class ChallengeRepositoryImpl @Inject constructor(
     private fun mapToCertifyModelList(responseList: List<ResponseCertifyItem>?): List<CertifyModel>? {
         return responseList?.map { response ->
             CertifyModel(
+                id = response.certifyId,
                 certifyContent = response.certifyContent,
                 certifyLike = response.certifyLike,
                 certifyName = response.certifyName,

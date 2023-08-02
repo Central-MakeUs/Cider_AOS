@@ -8,9 +8,11 @@ import com.cider.cider.databinding.ItemCertifyBinding
 import com.cider.cider.databinding.ItemFeedBinding
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.FeedModel
+import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.utils.ItemDiffCallback
 
 class CertifyAdapter(
+    val viewModel: CertifyViewModel
     ): ListAdapter<CertifyModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<CertifyModel>(
         onContentsTheSame = {old, new -> old == new},
@@ -37,6 +39,7 @@ class CertifyAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CertifyModel) {
             binding.certify = item
+            binding.vm = viewModel
             binding.executePendingBindings()
 
             binding.tvMoreText.setOnClickListener {

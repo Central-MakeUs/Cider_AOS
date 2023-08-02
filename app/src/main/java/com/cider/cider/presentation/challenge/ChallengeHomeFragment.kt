@@ -1,9 +1,11 @@
 package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.presentation.adapter.CertifyAdapter
 import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
+import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +27,7 @@ import kotlinx.coroutines.launch
 class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.layout.fragment_challenge_home) {
 
     private val viewModel: ChallengeHomeViewModel by activityViewModels()
+    private val certify: CertifyViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -136,16 +140,17 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val certifyAdapter = CertifyAdapter()
+        val certifyAdapter = CertifyAdapter(certify)
 
         binding.rvRecommendFeed.apply {
             adapter = certifyAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        viewModel.certify.observe(viewLifecycleOwner) {
+        certify.certify.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 certifyAdapter.submitList(it)
+                Log.e("TEST 변경","$it")
             }
         }
     }

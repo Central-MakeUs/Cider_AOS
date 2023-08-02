@@ -8,8 +8,8 @@
             name="certify"
             type="com.cider.cider.domain.model.CertifyModel" />
         <variable
-            name="viewmodel"
-            type="com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel" />
+            name="vm"
+            type="com.cider.cider.presentation.viewmodel.CertifyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -346,6 +346,7 @@
                     android:layout_width="@dimen/icon_size_16"
                     android:layout_height="@dimen/icon_size_16"
                     android:background="@drawable/selector_like"
+                    android:onClick="@{() -> vm.changeLike(certify.id)}"
                     app:select="@{certify.isLike}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_like"

@@ -26,26 +26,17 @@ class ChallengeHomeViewModel @Inject constructor(
     private val _feed = MutableLiveData<List<FeedModel>>()
     val feed: LiveData<List<FeedModel>> get() = _feed
 
-    private val _certify = MutableLiveData<List<CertifyModel>>()
-    val certify: LiveData<List<CertifyModel>> get() = _certify
-
     private val _tabState = MutableLiveData<Category>()
     val tabState: LiveData<Category> get() = _tabState
 
     init {
         _tabState.value = Category.INVESTING
-        getCertify()
     }
 
     fun tabSelect(challenge: Category) {
         _tabState.value = challenge
     }
 
-    private fun getCertify() {
-        viewModelScope.launch {
-            _certify.value = repository.getCertifyHome()
-        }
-    }
 
     fun changeFeedLike(targetId: Int) {
         val originalFeedList = _feed.value?: mutableListOf() // 이전 feed 리스트 가져오기
