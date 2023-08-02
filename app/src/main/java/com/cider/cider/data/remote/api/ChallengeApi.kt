@@ -1,9 +1,11 @@
 package com.cider.cider.data.remote.api
 
 import com.cider.cider.data.remote.model.RequestCertifyLike
+import com.cider.cider.data.remote.model.RequestChallengeLike
 import com.cider.cider.data.remote.model.ResponseCertifyItem
 import com.cider.cider.data.remote.model.ResponseCertifyLike
 import com.cider.cider.data.remote.model.ResponseChallengeItem
+import com.cider.cider.data.remote.model.ResponseChallengeLike
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -51,4 +53,14 @@ interface ChallengeApi {
     suspend fun deleteCertifyLike(
         @Path("certifyId") id: Int,
     ): Response<ResponseCertifyLike>
+
+    @POST("/api/challenge/like")
+    suspend fun postChallengeLike(
+        @Body param: RequestChallengeLike
+    ): Response<ResponseChallengeLike>
+
+    @DELETE("/api/challenge/like/{challengeId}")
+    suspend fun deleteChallengeLike(
+        @Path("challengeId") id: Int,
+    ): Response<ResponseChallengeLike>
 }

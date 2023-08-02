@@ -40,3 +40,7 @@ data class SimpleMemberResponseDto(
 data class ResponseCertifyLike(
     val message: String,
 )
+
+data class ResponseChallengeLike(
+    val message: String,
+)

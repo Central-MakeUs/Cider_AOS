@@ -16,4 +16,7 @@ interface ChallengeRepository {
     suspend fun postCertifyLike(id: Int): Boolean
     suspend fun deleteCertifyLike(id: Int): Boolean
 
+    suspend fun postChallengeLike(id: Int): Boolean
+    suspend fun deleteChallengeLike(id: Int): Boolean
+
 }

@@ -37,7 +37,6 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
         when (data) {
             "popular" -> {
                 binding.toolbar.tvToolbarTitle.text = "인기 챌린지"
-
             }
             "official" -> {
                 binding.toolbar.tvToolbarTitle.text = "공식 챌린지"
@@ -53,7 +52,7 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
     }
 
     private fun setRecyclerView() {
-        val cardAdapter = ChallengeCardAdapter()
+        val cardAdapter = ChallengeCardAdapter(viewModel)
         binding.rvChallengeList.apply {
             adapter = cardAdapter
             addItemDecoration(ChallengeListSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))

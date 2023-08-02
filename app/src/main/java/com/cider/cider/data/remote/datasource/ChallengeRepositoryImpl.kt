@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.cider.cider.data.remote.api.ChallengeApi
 import com.cider.cider.data.remote.model.RequestCertifyLike
+import com.cider.cider.data.remote.model.RequestChallengeLike
 import com.cider.cider.data.remote.model.ResponseCertifyItem
 import com.cider.cider.data.remote.model.ResponseChallengeItem
 import com.cider.cider.domain.model.CertifyModel
@@ -73,6 +74,23 @@ class ChallengeRepositoryImpl @Inject constructor(
 
     override suspend fun deleteCertifyLike(id: Int): Boolean {
         val data = apiService.deleteCertifyLike(id)
+        return when (data.code()) {
+            200 -> true
+            else -> false
+        }
+    }
+
+    override suspend fun postChallengeLike(id: Int): Boolean {
+        val data = apiService.postChallengeLike(RequestChallengeLike(id))
+        Log.d("TEST api","$data")
+        return when (data.code()) {
+            200 -> true
+            else -> false
+        }
+    }
+
+    override suspend fun deleteChallengeLike(id: Int): Boolean {
+        val data = apiService.deleteChallengeLike(id)
         return when (data.code()) {
             200 -> true
             else -> false

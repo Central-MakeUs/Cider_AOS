@@ -8,6 +8,9 @@
         <variable
             name="challenge"
             type="com.cider.cider.domain.model.ChallengeCardModel" />
+        <variable
+            name="vm"
+            type="com.cider.cider.presentation.viewmodel.ChallengeListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,16 +27,18 @@
             app:imageDrawableWithType="@{challenge.category}"
             tools:src="@drawable/ic_test_image" />
 
-        <androidx.constraintlayout.utils.widget.ImageFilterView
+        <CheckBox
             android:id="@+id/iv_challenge_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/selector_like"
+            android:button="@null"
+            android:background="@drawable/custom_checkbox_like"
+            android:checked="@={challenge.like}"
+            android:onClick="@{()->vm.changeLike(challenge.id)}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:select="@{challenge.like}"
             tools:src="@drawable/ic_like_24_false" />
 
         <TextView

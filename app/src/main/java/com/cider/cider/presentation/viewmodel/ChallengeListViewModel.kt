@@ -1,5 +1,6 @@
 package com.cider.cider.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,6 +41,32 @@ class ChallengeListViewModel @Inject constructor(
     fun getChallengeCategory(challenge: Category) {
         viewModelScope.launch {
             _challenge.value = repository.getChallengeCategory(challenge)
+        }
+    }
+
+    fun changeLike(targetId: Int) {
+        val beforeList = _challenge.value?: mutableListOf()
+        viewModelScope.launch {
+            beforeList.map {
+                if (it.id == targetId) {
+
+                    Log.d("TEST API", "Before repo ${it.like}")
+
+                    if (it.like) { //true 였다면 false 로 변경
+                        if (repository.postChallengeLike(targetId))
+                            it
+                        else
+                            it.copy(like = true)
+                    } else { //false 였다면 true 로 변경
+                        if (repository.deleteChallengeLike(targetId))
+                            it
+                        else
+                            it.copy(like = false)
+                    }
+                } else {
+                    it
+                }
+            }
         }
     }
 }

@@ -51,7 +51,7 @@ class ChallengeListViewFragment(private val type: String): BindingFragmentNoNavi
 
     private fun setChallengeView() {
         //List 요청을 bundle 받아서 다르게
-        val cardAdapter = ChallengeCardAdapter()
+        val cardAdapter = ChallengeCardAdapter(viewModel)
 
         binding.rvChallenge.apply {
             adapter = cardAdapter
