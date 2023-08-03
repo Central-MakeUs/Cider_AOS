@@ -37,13 +37,16 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
         when (data) {
             "popular" -> {
                 binding.toolbar.tvToolbarTitle.text = "인기 챌린지"
+                viewModel.getChallengePopular()
             }
             "official" -> {
                 binding.toolbar.tvToolbarTitle.text = "공식 챌린지"
+                viewModel.getChallengeOfficial()
             }
             else -> {
                 binding.toolbar.tvToolbarTitle.text = "전체 챌린지"
                 binding.vpBanner.visibility = View.GONE
+                viewModel.getChallenge()
             }
         }
         binding.toolbar.btnToolbarBack.setOnClickListener {
