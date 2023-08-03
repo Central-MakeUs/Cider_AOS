@@ -26,6 +26,10 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         super.onViewCreated(view, savedInstanceState)
         setBehavior()
         setBottomSheet()
+        setBanner()
+    }
+
+    private fun setBanner() {
     }
 
     private fun setBehavior() {

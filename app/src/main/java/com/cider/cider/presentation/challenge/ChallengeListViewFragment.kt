@@ -3,8 +3,10 @@ package com.cider.cider.presentation.challenge
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListViewBinding
@@ -53,6 +55,13 @@ class ChallengeListViewFragment(private val type: String): BindingFragmentNoNavi
     private fun setChallengeView() {
         //List 요청을 bundle 받아서 다르게
         val cardAdapter = ChallengeCardAdapter(viewModel)
+
+        cardAdapter.setOnItemClickListener(object : ChallengeCardAdapter.OnItemClickListener {
+            override fun onItemClick(id: Int) {
+                val bundle = bundleOf()
+                findNavController().navigate(R.id.action_challengeHomeFragment_to_challengeDetailFragment)
+            }
+        })
 
         binding.rvChallenge.apply {
             adapter = cardAdapter

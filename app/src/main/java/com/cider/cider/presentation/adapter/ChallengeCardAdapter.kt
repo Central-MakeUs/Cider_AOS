@@ -36,6 +36,20 @@ class ChallengeCardAdapter(private val viewModel : ChallengeListViewModel): List
         fun bind(item: ChallengeCardModel) {
             binding.challenge = item
             binding.vm = viewModel
+
+            itemView.setOnClickListener {
+                listener?.onItemClick(item.id)
+            }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(id:Int)
+    }
+
+    private var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
 }
