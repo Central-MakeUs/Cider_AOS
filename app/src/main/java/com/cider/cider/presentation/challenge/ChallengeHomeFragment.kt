@@ -168,7 +168,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setBottomNavi() {
-        binding.btnTest.setOnNavigationItemSelectedListener {
+        binding.btnTest.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.item_challenge -> {
                     true
