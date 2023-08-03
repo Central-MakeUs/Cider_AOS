@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListViewBinding
+import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
 import com.cider.cider.presentation.viewmodel.ChallengeListViewModel
@@ -40,10 +41,10 @@ class ChallengeListViewFragment(private val type: String): BindingFragmentNoNavi
                 viewModel.getChallengeCategory(Category.FINANCIAL_LEARNING)
             }
             "popular" -> {
-                viewModel.getChallengePopular()
+                viewModel.getChallengePopular(Filter.LATEST)
             }
             "official" -> {
-                viewModel.getChallengeOfficial()
+                viewModel.getChallengeOfficial(Filter.LATEST)
             }
         }
         setChallengeView()

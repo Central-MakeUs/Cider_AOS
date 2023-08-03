@@ -20,21 +20,21 @@ class ChallengeListViewModel @Inject constructor(
     private val _challenge = MutableLiveData<List<ChallengeCardModel>>()
     val challenge: LiveData<List<ChallengeCardModel>> get() = _challenge
 
-    fun getChallenge() {
+    fun getChallenge(filter: Filter) {
         viewModelScope.launch {
-            _challenge.value = repository.getChallengeList(filter = Filter.LATEST)
+            _challenge.value = repository.getChallengeList(filter = filter)
         }
     }
 
-    fun getChallengePopular() {
+    fun getChallengePopular(filter: Filter) {
         viewModelScope.launch {
-            _challenge.value = repository.getChallengePopular(filter = Filter.LATEST)
+            _challenge.value = repository.getChallengePopular(filter = filter)
         }
     }
 
-    fun getChallengeOfficial() {
+    fun getChallengeOfficial(filter: Filter) {
         viewModelScope.launch {
-            _challenge.value = repository.getChallengeOfficial(filter = Filter.LATEST)
+            _challenge.value = repository.getChallengeOfficial(filter = filter)
         }
     }
 

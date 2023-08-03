@@ -58,6 +58,7 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterButton
+                        android:id="@+id/btn_filter"
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
                         android:layout_marginStart="4dp"

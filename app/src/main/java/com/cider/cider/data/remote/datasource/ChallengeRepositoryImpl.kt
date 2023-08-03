@@ -21,7 +21,7 @@ class ChallengeRepositoryImpl @Inject constructor(
 ): ChallengeRepository {
 
     override suspend fun getChallengeList(filter: Filter): List<ChallengeCardModel>? {
-        val data = apiService.getChallengeList(filter = Filter.LATEST.string)
+        val data = apiService.getChallengeList(filter = filter.string)
         return when (data.code()) {
             200 -> mapResponseToChallengeCardModel(data.body())
             else -> null
@@ -49,7 +49,7 @@ class ChallengeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getChallengeOfficial(filter: Filter): List<ChallengeCardModel>? {
-        val data = apiService.getChallengeOfficial(filter = Filter.LATEST.string)
+        val data = apiService.getChallengeOfficial(filter = filter.string)
         return when (data.code()) {
             200 -> mapResponseToChallengeCardModel(data.body())
             else -> null
@@ -57,7 +57,7 @@ class ChallengeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getChallengePopular(filter: Filter): List<ChallengeCardModel>? {
-        val data = apiService.getChallengePopular(filter = Filter.LATEST.string)
+        val data = apiService.getChallengePopular(filter = filter.string)
         return when (data.code()) {
             200 -> mapResponseToChallengeCardModel(data.body())
             else -> null
