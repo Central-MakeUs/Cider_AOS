@@ -10,6 +10,7 @@ import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeDetailFeedBinding
 import com.cider.cider.databinding.FragmentChallengeDetailInfoBinding
 import com.cider.cider.presentation.adapter.FeedAdapter
+import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import kotlinx.coroutines.Dispatchers
@@ -17,13 +18,14 @@ import kotlinx.coroutines.launch
 
 class ChallengeDetailFeedFragment: BindingFragment<FragmentChallengeDetailFeedBinding>(R.layout.fragment_challenge_detail_feed) {
 
-    private val viewModel: ChallengeHomeViewModel by activityViewModels()
+    private val viewModel: ChallengeDetailViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFeedList()
     }
     private fun setFeedList() {
-        val feedAdapter = FeedAdapter(viewModel)
+        val feedAdapter = FeedAdapter()
 
         viewModel.testFeed(requireContext())
 

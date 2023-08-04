@@ -5,57 +5,38 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.cider.cider.R
-import com.cider.cider.domain.model.ChallengeCardModel
+import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeModel
 import com.cider.cider.domain.model.FeedModel
 import com.cider.cider.domain.model.ImageCardModel
-import com.cider.cider.domain.type.challenge.Challenge
-import com.cider.cider.domain.type.challenge.ParticipationStatus
+import com.cider.cider.domain.repository.ChallengeRepository
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.utils.getResourceUri
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ChallengeHomeViewModel @Inject constructor(
-
+    private val repository: ChallengeRepository
 ):ViewModel() {
 
     private val _feed = MutableLiveData<List<FeedModel>>()
     val feed: LiveData<List<FeedModel>> get() = _feed
 
-    private val _tabState = MutableLiveData<Challenge>()
-    val tabState: LiveData<Challenge> get() = _tabState
+    private val _tabState = MutableLiveData<Category>()
+    val tabState: LiveData<Category> get() = _tabState
 
     init {
-        _tabState.value = Challenge.INVESTING
+        _tabState.value = Category.INVESTING
     }
 
-    fun tabSelect(challenge: Challenge) {
+    fun tabSelect(challenge: Category) {
         _tabState.value = challenge
     }
 
-    fun testFeed(context: Context) {
-        val list: MutableList<FeedModel> = mutableListOf()
-
-        list.add(
-            FeedModel(
-                id = 1, profile = null, nickname = "오늘챌린지팅", lv = 1,
-                date = "23.05.15 14:45", title = "오늘 챌린지 인증하는데", content = "하루 만보 걷기 챌린지는 쉽고 재미있게 만보를 걸을 수있는 챌린지로, 제가 맨날 일하다가 한번 입원하고 나서 심각성을 느끼고 만들게 된 멋진 챌린지",
-                imageList = ImageCardModel(R.drawable.image_investing.getResourceUri(context)), challengeModel = ChallengeModel(id = 1, challengeType = Challenge.SAVING, title = "소비습관 하루에 열심히 해 화이팅 챌린지", people = 86), like = 346, likeCheck = false)
-        )
-        list.add(
-            FeedModel(
-                id = 2, profile = null, nickname = "오늘챌린지화팅", lv = 2,
-                date = "23.05.15 14:45", title = "오늘 챌린지 인증하는데", content = "하루 만보 걷기 챌린지는 쉽고 재미있게 만보를 걸을 수있는 챌린지로, 제가 맨날 일하다가 한번 입원하고 나서 심각성을 느끼고 만들게 된 멋진 챌린지",
-                imageList = ImageCardModel(R.drawable.image_saving.getResourceUri(context)), challengeModel = ChallengeModel(id = 1, challengeType = Challenge.INVESTING, title = "소비습관 하루에 열심히 해 화이팅 챌린지", people = 86), like = 36, likeCheck = false)
-        )
-        list.add(
-            FeedModel(
-                id = 3, profile = null, nickname = "오늘챌린지화이팅", lv = 3,
-                date = "23.05.15 14:45", title = "오늘 챌린지 인증하는데", content = "하루 만보 걷기 챌린지는 쉽고 재미있게 만보를 걸을 수있는 챌린지로, 제가 맨날 일하다가 한번 입원하고 나서 심각성을 느끼고 만들게 된 멋진 챌린지",
-                imageList = null, challengeModel = ChallengeModel(id = 1, challengeType = Challenge.MONEY_MANAGEMENT, title = "소비습관 하루에 열심히 해 화이팅 챌린지", people = 86), like = 46, likeCheck = false)
-        )
-        _feed.value = list
-    }
 
     fun changeFeedLike(targetId: Int) {
         val originalFeedList = _feed.value?: mutableListOf() // 이전 feed 리스트 가져오기

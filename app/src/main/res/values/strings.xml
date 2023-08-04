@@ -145,7 +145,23 @@
     <string name="challenge_detail_success">인증 기준</string>
     <string name="challenge_detail_fail">실패 기준</string>
     <string name="challenge_detail_mission_success">이렇게 인증하면 성공</string>
-    <string name="challenge_detail_mission_fail">이렇게 인증하면 성공</string>
+    <string name="challenge_detail_mission_fail">이렇게 인증하면 실패</string>
     <string name="challenge_detail_host">챌린지 호스트</string>
     <string name="challenge_detail_caution">유의사항</string>
+
+    <string name="challenge_detail_average_current">평균 현황</string>
+    <string name="challenge_detail_my_current">나의 현황</string>
+
+    <string name="my_authentication">나의 인증글</string>
+
+    <string name="challenge_authentication_title_title">인증하기</string>
+    <string name="challenge_authentication_photo">인증 사진</string>
+    <string name="challenge_authentication_photo_sub">최소 1개 이상의 사진을 첨부해주세요</string>
+    <string name="challenge_authentication_title">제목</string>
+    <string name="challenge_authentication_title_hint">오늘 인증 완료!</string>
+    <string name="challenge_authentication_content">내용</string>
+    <string name="challenge_authentication_content_hint">인증에 대한 이야기와 다양한 생각들, 사진에 대한 설명을 작성해보세요! </string>
+    <string name="challenge_authentication_btn">인증 완료하기</string>
+
+    <string name="my_page">마이페이지</string>
 </resources>

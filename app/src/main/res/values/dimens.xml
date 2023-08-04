@@ -7,7 +7,7 @@
     <dimen name="text_2xl">18sp</dimen>
     <dimen name="text_xl">16sp</dimen>
     <dimen name="text_lg">14sp</dimen>
-    <dimen name="text_base">14sp</dimen>
+    <dimen name="text_base">13sp</dimen>
     <dimen name="text_sm">12sp</dimen>
     <dimen name="text_xs">10sp</dimen>
 
@@ -75,4 +75,6 @@
     <dimen name="corner_4dp">4dp</dimen>
     
     <dimen name="challenge_review_tap_width">60dp</dimen>
+
+    <dimen name="progressbar_height">21dp</dimen>
 </resources>

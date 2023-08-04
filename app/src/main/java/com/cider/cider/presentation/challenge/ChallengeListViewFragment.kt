@@ -3,51 +3,65 @@ package com.cider.cider.presentation.challenge
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListViewBinding
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.Filter
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
-import com.cider.cider.presentation.viewmodel.ChallengeViewModel
-import com.cider.cider.utils.binding.BindingFragment
+import com.cider.cider.presentation.viewmodel.ChallengeListViewModel
+import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import com.cider.cider.utils.decoration.ItemSpacingDecoration
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ChallengeListViewFragment: BindingFragment<FragmentChallengeListViewBinding>(R.layout.fragment_challenge_list_view) {
+@AndroidEntryPoint
+class ChallengeListViewFragment(private val type: String): BindingFragmentNoNavi<FragmentChallengeListViewBinding>(R.layout.fragment_challenge_list_view) {
 
-    private val viewModel: ChallengeViewModel by viewModels()
+    private val viewModel: ChallengeListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle = arguments
 
-        when (bundle?.getString("type")) {
-            Challenge.INVESTING.text -> {
-                Log.d("TEST Tab", "investing")
+        Log.d("TEST ListView",type)
+        when (type) {
+            Category.INVESTING.text -> {
+                viewModel.getChallengeCategory(Category.INVESTING)
             }
-            Challenge.SAVING.text -> {
-                Log.d("TEST Tab", "saving")
+            Category.SAVING.text -> {
+                viewModel.getChallengeCategory(Category.SAVING)
             }
-            Challenge.MONEY_MANAGEMENT.text -> {
-                Log.d("TEST Tab", "money_management")
+            Category.MONEY_MANAGEMENT.text -> {
+                viewModel.getChallengeCategory(Category.MONEY_MANAGEMENT)
             }
-            Challenge.FINANCIAL_LEARNING.text -> {
-                Log.d("TEST Tab", "financial_learning")
+            Category.FINANCIAL_LEARNING.text -> {
+                viewModel.getChallengeCategory(Category.FINANCIAL_LEARNING)
             }
-            else -> {
-                Log.d("TEST Tab", "else ")
+            "popular" -> {
+                viewModel.getChallengePopular(Filter.LATEST)
+            }
+            "official" -> {
+                viewModel.getChallengeOfficial(Filter.LATEST)
             }
         }
         setChallengeView()
     }
 
     private fun setChallengeView() {
-
         //List 요청을 bundle 받아서 다르게
-        val cardAdapter = ChallengeCardAdapter()
+        val cardAdapter = ChallengeCardAdapter(viewModel)
+
+        cardAdapter.setOnItemClickListener(object : ChallengeCardAdapter.OnItemClickListener {
+            override fun onItemClick(id: Int) {
+                val bundle = bundleOf()
+                findNavController().navigate(R.id.action_challengeHomeFragment_to_challengeDetailFragment)
+            }
+        })
 
         binding.rvChallenge.apply {
             adapter = cardAdapter

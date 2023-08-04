@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.cider.cider.domain.type.challenge.Challenge"/>
+        <import type="com.cider.cider.domain.type.challenge.Category"/>
         <import type="com.cider.cider.domain.type.ReviewType"/>
         <variable
             name="challenge"

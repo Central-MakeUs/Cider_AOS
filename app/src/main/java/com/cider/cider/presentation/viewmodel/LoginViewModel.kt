@@ -1,14 +1,12 @@
 package com.cider.cider.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cider.cider.App
 import com.cider.cider.domain.repository.LoginRepository
 import com.cider.cider.domain.type.*
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,11 +53,16 @@ LoginViewModel @Inject constructor(
         }
     }
 
-    fun login(): Boolean {
-        viewModelScope.launch {
-            repository.postLogin() //402일 때 다시 요청 어쩌구
-        }
-        return false
+    /**
+     * 앱 실행 시 로그인 시도
+     * accessToken 을 가지고 me 호출
+     * repository 에서 200 일 경우, 로그인 성공
+     * 200 이외의 400 일 경우 로그인 실패로 간주
+     *
+     * 402 의 경우 토큰 만료 -> 만료 시 재로그인해야하기에 로그인 화면으로 넘어가면 됨
+     */
+    suspend fun login(): Boolean {
+        return repository.getLoginMe()
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
@@ -145,13 +148,13 @@ LoginViewModel @Inject constructor(
         checkButtonState()
     }
 
-    fun changeChallengeState(challenge: Challenge) {
+    fun changeChallengeState(challenge: Category) {
         val currentState = _challengeState.value
         val updateState = when (challenge) {
-            Challenge.INVESTING -> { currentState?.copy(investing = !currentState.investing) }
-            Challenge.FINANCIAL_LEARNING -> { currentState?.copy(financial_learning = !currentState.financial_learning)}
-            Challenge.MONEY_MANAGEMENT -> { currentState?.copy(money_management = !currentState.money_management)}
-            Challenge.SAVING -> { currentState?.copy(saving = !currentState.saving)}
+            Category.INVESTING -> { currentState?.copy(investing = !currentState.investing) }
+            Category.FINANCIAL_LEARNING -> { currentState?.copy(financial_learning = !currentState.financial_learning)}
+            Category.MONEY_MANAGEMENT -> { currentState?.copy(money_management = !currentState.money_management)}
+            Category.SAVING -> { currentState?.copy(saving = !currentState.saving)}
         }
         _challengeState.value = updateState?:ChallengeButtonState()
     }

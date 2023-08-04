@@ -1,14 +1,14 @@
 package com.cider.cider.domain.model
 
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 
 data class ChallengeCardModel(
     val id: Int,
     val participate: ParticipationStatus,
-    val like: Boolean = false,
+    var like: Boolean = false,
     val reward: Boolean = false,
-    val category: Challenge,
+    val category: Category,
     val duration: Int,
     val rank: Int?,
     val title: String,

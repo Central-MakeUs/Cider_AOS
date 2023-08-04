@@ -1,24 +1,14 @@
 package com.cider.cider.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.cider.cider.R
-import com.cider.cider.databinding.ItemChallengeCardBinding
 import com.cider.cider.databinding.ItemFeedBinding
-import com.cider.cider.domain.model.ChallengeCardModel
-import com.cider.cider.domain.model.ChallengeModel
 import com.cider.cider.domain.model.FeedModel
-import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
-import com.cider.cider.presentation.viewmodel.ChallengeViewModel
-import com.cider.cider.utils.ImageSliderTransformer
 import com.cider.cider.utils.ItemDiffCallback
 
 class FeedAdapter(
-    private val viewModel: ChallengeHomeViewModel
     ): ListAdapter<FeedModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<FeedModel>(
         onContentsTheSame = {old, new -> old == new},
@@ -45,7 +35,6 @@ class FeedAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FeedModel) {
             binding.feed = item
-            binding.viewmodel = viewModel
             binding.executePendingBindings()
 
             binding.tvMoreText.setOnClickListener {

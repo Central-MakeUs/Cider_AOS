@@ -4,7 +4,9 @@ import android.util.Log
 import com.cider.cider.App
 import com.cider.cider.data.remote.api.LoginApi
 import com.cider.cider.data.remote.model.RequestLoginModel
+import com.cider.cider.data.remote.model.ResponseMe
 import com.cider.cider.domain.repository.LoginRepository
+import com.cider.cider.utils.Constants
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
@@ -31,8 +33,12 @@ class LoginRepositoryImpl @Inject constructor(
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        } else {
+            App.prefs.setString("accessToken",Constants.TEST_API_KEY)
         }
     }
+
+
 
     override suspend fun getRandomNickName(): String {
         return try {
@@ -59,4 +65,26 @@ class LoginRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getLoginMe(): Boolean {
+        return try {
+            val data = apiService.getMe()
+            data.run {
+                when (code()) {
+                    200 -> true
+                    else -> false
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    override suspend fun getMe(): ResponseMe? {
+        return apiService.getMe().body()
+    }
+
+    override suspend fun postLogout() {
+        TODO("Not yet implemented")
+    }
 }

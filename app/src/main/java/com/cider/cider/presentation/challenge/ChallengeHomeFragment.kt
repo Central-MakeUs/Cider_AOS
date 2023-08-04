@@ -5,16 +5,18 @@ import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
-import com.cider.cider.domain.type.BottomSheetType
 import com.cider.cider.domain.type.WriteType
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
+import com.cider.cider.presentation.adapter.CertifyAdapter
 import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
+import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +27,7 @@ import kotlinx.coroutines.launch
 class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.layout.fragment_challenge_home) {
 
     private val viewModel: ChallengeHomeViewModel by activityViewModels()
+    private val certify: CertifyViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -100,9 +103,9 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
     private fun setChallengeList() {
         childFragmentManager.beginTransaction().apply {
-            add(R.id.fl_popular_challenge, ChallengeListViewFragment())
-            add(R.id.fl_official_challenge, ChallengeListViewFragment())
-            add(R.id.fl_category_challenge, ChallengeListViewFragment())
+            replace(R.id.fl_popular_challenge, ChallengeListViewFragment("popular"))
+            replace(R.id.fl_official_challenge, ChallengeListViewFragment("official"))
+            replace(R.id.fl_category_challenge, ChallengeListViewFragment(Category.INVESTING.text))
             commit()
         }
     }
@@ -111,16 +114,16 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         viewModel.tabState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 when (it) {
-                    Challenge.INVESTING -> {
+                    Category.INVESTING -> {
                         setCategoryFragment(it)
                     }
-                    Challenge.FINANCIAL_LEARNING -> {
+                    Category.FINANCIAL_LEARNING -> {
                         setCategoryFragment(it)
                     }
-                    Challenge.MONEY_MANAGEMENT -> {
+                    Category.MONEY_MANAGEMENT -> {
                         setCategoryFragment(it)
                     }
-                    Challenge.SAVING -> {
+                    Category.SAVING -> {
                         setCategoryFragment(it)
                     } //TODO(입력 값 다르게 호출하는 api가 각각 다름)
                 }
@@ -128,12 +131,8 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         }
 
     }
-    private fun setCategoryFragment(challenge: Challenge) {
-        val bundle = Bundle()
-        bundle.putString("type",challenge.text)
-        val fragment = ChallengeListViewFragment()
-        fragment.arguments = bundle
-
+    private fun setCategoryFragment(challenge: Category) {
+        val fragment = ChallengeListViewFragment(challenge.text)
         childFragmentManager.beginTransaction().apply {
             replace(R.id.fl_category_challenge, fragment)
             commit() //TODO(데이터 부를 때마다 초기화 되는 문제 해결)
@@ -141,18 +140,17 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val feedAdapter = FeedAdapter(viewModel)
-
-        viewModel.testFeed(requireContext())
+        val certifyAdapter = CertifyAdapter(certify)
 
         binding.rvRecommendFeed.apply {
-            adapter = feedAdapter
+            adapter = certifyAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        viewModel.feed.observe(viewLifecycleOwner) {
+        certify.certify.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                feedAdapter.submitList(it)
+                certifyAdapter.submitList(it)
+                Log.e("TEST 변경","$it")
             }
         }
     }
@@ -170,7 +168,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setBottomNavi() {
-        binding.btnTest.setOnNavigationItemSelectedListener {
+        binding.btnTest.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.item_challenge -> {
                     true
@@ -182,7 +180,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
                 R.id.item_my -> {
                     //TODO("Test용")
                     findNavController().navigate(
-                        R.id.action_challengeHomeFragment_to_challengeDetailFragment
+                        R.id.action_challengeHomeFragment_to_myPageFragment
                     )
                     false
                 }
@@ -203,7 +201,11 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
                             R.id.action_challengeHomeFragment_to_challengeCreateFragment
                         )
                     }
-                    WriteType.AUTH -> {}
+                    WriteType.AUTH -> {
+                        findNavController().navigate(
+                            R.id.action_challengeHomeFragment_to_certifyFragment
+                        )
+                    }
                 }
             }
 

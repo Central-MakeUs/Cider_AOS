@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCreateSelectBinding
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.presentation.dialog.ChallengeExitDialog
 import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
 import com.cider.cider.utils.binding.BindingFragment
@@ -29,19 +29,19 @@ class ChallengeCreateSelectFragment: BindingFragment<FragmentChallengeCreateSele
 
     private fun setButton() {
         binding.btnInvesting.setOnClickListener {
-            viewModel.changeChallenge(Challenge.INVESTING)
+            viewModel.changeChallenge(Category.INVESTING)
             nextFragment()
         }
         binding.btnFinancialLearning.setOnClickListener {
-            viewModel.changeChallenge(Challenge.FINANCIAL_LEARNING)
+            viewModel.changeChallenge(Category.FINANCIAL_LEARNING)
             nextFragment()
         }
         binding.btnSaving.setOnClickListener {
-            viewModel.changeChallenge(Challenge.SAVING)
+            viewModel.changeChallenge(Category.SAVING)
             nextFragment()
         }
         binding.btnMoneyManagement.setOnClickListener {
-            viewModel.changeChallenge(Challenge.MONEY_MANAGEMENT)
+            viewModel.changeChallenge(Category.MONEY_MANAGEMENT)
             nextFragment()
         }
         binding.btnToolbarBack.setOnClickListener {

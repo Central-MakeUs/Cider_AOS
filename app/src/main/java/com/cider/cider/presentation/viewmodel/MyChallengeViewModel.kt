@@ -1,16 +1,13 @@
 package com.cider.cider.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cider.cider.domain.model.ChallengeCardFinishModel
-import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.model.ChallengeOngoingModel
 import com.cider.cider.domain.model.ChallengeReviewModel
-import com.cider.cider.domain.type.ReviewTapState
 import com.cider.cider.domain.type.ReviewType
-import com.cider.cider.domain.type.challenge.Challenge
+import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 import javax.inject.Inject
 
@@ -38,7 +35,7 @@ class MyChallengeViewModel @Inject constructor(
         list.add(
             ChallengeCardFinishModel(
                 id = 1, participate = ParticipationStatus.RECRUITING,
-                like = false, reward = true, category = Challenge.SAVING,
+                like = false, reward = true, category = Category.SAVING,
                 duration = 1, rank = 1, title = "소비습관 고치기1", people = 5,
                 official = true, d_day = 23, success = true
             )
@@ -46,7 +43,7 @@ class MyChallengeViewModel @Inject constructor(
         list.add(
             ChallengeCardFinishModel(
                 id = 2, participate = ParticipationStatus.RECRUITING,
-                like = false, reward = true, category = Challenge.SAVING,
+                like = false, reward = true, category = Category.SAVING,
                 duration = 1, rank = 1, title = "소비습관 고치기2", people = 15,
                 official = true, d_day = 23, success = false
             )
@@ -59,13 +56,13 @@ class MyChallengeViewModel @Inject constructor(
 
         list.add(
             ChallengeOngoingModel(
-                id = 1, title = "소비습관 고치기", challenge =  Challenge.SAVING, total = 30,
+                id = 1, title = "소비습관 고치기", challenge =  Category.SAVING, total = 30,
                 current = 24, during = 10
             )
         )
         list.add(
             ChallengeOngoingModel(
-                id = 2, title = "소비습관 고치기2", challenge =  Challenge.SAVING, total = 30,
+                id = 2, title = "소비습관 고치기2", challenge =  Category.SAVING, total = 30,
                 current = 15, during = 7
             )
         )
@@ -77,25 +74,25 @@ class MyChallengeViewModel @Inject constructor(
 
         list.add(
             ChallengeReviewModel(
-                id = 1, title = "소비습관 고치기", challenge = Challenge.SAVING , reviewType = ReviewType.REVIEW,
+                id = 1, title = "소비습관 고치기", challenge = Category.SAVING , reviewType = ReviewType.REVIEW,
                 date = null
             )
         )
         list.add(
             ChallengeReviewModel(
-                id = 2, title = "소비습관 고치기2", challenge = Challenge.INVESTING , reviewType = ReviewType.APPROVED,
+                id = 2, title = "소비습관 고치기2", challenge = Category.INVESTING , reviewType = ReviewType.APPROVED,
                 date = null
             )
         )
         list.add(
             ChallengeReviewModel(
-                id = 3, title = "소비습관 고치기3", challenge = Challenge.FINANCIAL_LEARNING , reviewType = ReviewType.FAILED,
+                id = 3, title = "소비습관 고치기3", challenge = Category.FINANCIAL_LEARNING , reviewType = ReviewType.FAILED,
                 date = null
             )
         )
         list.add(
             ChallengeReviewModel(
-                id = 4, title = "소비습관 고치기4", challenge = Challenge.MONEY_MANAGEMENT , reviewType = ReviewType.REJECTED,
+                id = 4, title = "소비습관 고치기4", challenge = Category.MONEY_MANAGEMENT , reviewType = ReviewType.REJECTED,
                 date = null
             )
         )

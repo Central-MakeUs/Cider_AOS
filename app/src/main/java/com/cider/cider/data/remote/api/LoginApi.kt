@@ -2,6 +2,7 @@ package com.cider.cider.data.remote.api
 
 import com.cider.cider.data.remote.model.RequestLoginModel
 import com.cider.cider.data.remote.model.ResponseLoginModel
+import com.cider.cider.data.remote.model.ResponseMe
 import com.cider.cider.data.remote.model.ResponseNicknameExist
 import com.cider.cider.data.remote.model.ResponseRandomNickNameModel
 import retrofit2.Response
@@ -28,4 +29,7 @@ interface LoginApi {
     suspend fun getNicknameExist(
         @Path("nickname") nickname: String
     ): Response<ResponseNicknameExist>
+
+    @GET("/api/member/me")
+    suspend fun getMe(): Response<ResponseMe>
 }

@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cider.cider.databinding.ItemChallengeCardBinding
 import com.cider.cider.domain.model.ChallengeCardModel
+import com.cider.cider.presentation.viewmodel.ChallengeListViewModel
 import com.cider.cider.utils.ItemDiffCallback
 
-class ChallengeCardAdapter(): ListAdapter<ChallengeCardModel, RecyclerView.ViewHolder>(
+class ChallengeCardAdapter(private val viewModel : ChallengeListViewModel): ListAdapter<ChallengeCardModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<ChallengeCardModel>(
         onContentsTheSame = {old, new -> old == new},
         onItemsTheSame = {old, new -> old.id == new.id}
@@ -34,6 +35,21 @@ class ChallengeCardAdapter(): ListAdapter<ChallengeCardModel, RecyclerView.ViewH
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ChallengeCardModel) {
             binding.challenge = item
+            binding.vm = viewModel
+
+            itemView.setOnClickListener {
+                listener?.onItemClick(item.id)
+            }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(id:Int)
+    }
+
+    private var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
 }

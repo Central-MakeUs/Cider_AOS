@@ -176,4 +176,10 @@
         <item name="android:editTextColor">@color/text</item>
         <item name="colorControlNormal">@color/gray_6</item>
     </style>
+
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">@dimen/text_lg</item>
+
+    </style>
 </resources>

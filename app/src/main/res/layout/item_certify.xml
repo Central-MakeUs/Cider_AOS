@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="certify"
+            type="com.cider.cider.domain.model.CertifyModel" />
+        <variable
+            name="vm"
+            type="com.cider.cider.presentation.viewmodel.CertifyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_profile"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="@dimen/layout_padding"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteX="24dp">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/iv_profile"
+                android:layout_width="@dimen/profile_size"
+                android:layout_height="@dimen/profile_size"
+                android:background="@drawable/shape_profile"
+                android:src="@drawable/ic_investing"
+                app:imageUri="@{certify.profilePath}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/gray_6"
+                android:textSize="@dimen/text_sm"
+                android:text='@{certify.memberName}'
+                app:layout_constraintBottom_toTopOf="@id/tv_date"
+                app:layout_constraintStart_toEndOf="@id/iv_profile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="오늘챌린지화이팅" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textColor="@color/gray_4"
+                android:textSize="@dimen/text_sm"
+                android:text="@{certify.createdDate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_profile"
+                app:layout_constraintTop_toBottomOf="@id/tv_nickname"
+                tools:text="23.05.15 14:45" />
+
+            <TextView
+                android:id="@+id/tv_lv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_sm"
+                android:text='@{"LV "+String.valueOf(certify.memberLevel)}'
+                app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+                app:layout_constraintStart_toEndOf="@id/tv_nickname"
+                app:layout_constraintTop_toTopOf="@id/tv_nickname"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="LV 1" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btn_alert"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/line_more_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingHorizontal="@dimen/layout_padding"
+            app:layout_constraintTop_toBottomOf="@id/section_profile">
+
+            <TextView
+                android:id="@+id/tv_feed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="@dimen/text_xl"
+                android:lineSpacingExtra="3dp"
+                android:text="@{certify.certifyName}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="오늘 챌린지 인증하는데"/>
+
+            <TextView
+                android:id="@+id/tv_feed_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:textSize="@dimen/text_base"
+                android:textColor="#30313D"
+                android:lineSpacingExtra="3dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_marginTop="4dp"
+                android:text="@{certify.certifyContent}"
+                app:layout_constraintTop_toBottomOf="@id/tv_feed_title"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="저도 챌린지 하면 할수록 혼자 해서 의지가 약해지네요ㅠㅠㅠ 힘들지만 같이 열심히 마무리 해보아요 화이팅하세요" />
+
+            <TextView
+                android:id="@+id/tv_more_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="@dimen/text_sm"
+                android:textColor="@color/gray_5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_feed_content"
+                android:text="자세히 보기"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:visible="@{certify.certifyImage != null}"
+            app:layout_constraintTop_toBottomOf="@id/section_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/iv_image"
+                android:layout_width="@dimen/feed_image_size"
+                android:layout_height="@dimen/feed_image_size"
+                android:background="@drawable/shape_rec_round_4"
+                android:backgroundTint="#08000000"
+                app:imageUri="@{certify.certifyImage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="@dimen/feed_image_size"
+                android:layout_height="@dimen/feed_image_size"
+                android:background="@drawable/shape_rec_round_4"
+                android:backgroundTint="#08000000"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="@id/iv_image"
+                app:layout_constraintTop_toTopOf="@id/iv_image"
+                app:layout_constraintBottom_toBottomOf="@id/iv_image"
+                app:layout_constraintEnd_toEndOf="@id/iv_image"/>
+<!--
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_image"
+                android:layout_width="@dimen/feed_image_size"
+                android:layout_height="@dimen/feed_image_size"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/shape_rec_round_8" />
+
+            <TextView
+                android:id="@+id/tv_page_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:background="@drawable/shape_rec_round_8"
+                android:backgroundTint="#CC222222"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="2dp"
+                tools:text="0 / 0"
+                android:fontFamily="@font/pretendard_regular"
+                android:textColor="@color/gray_1"
+                android:textSize="@dimen/text_base"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@+id/vp_image"
+                app:layout_constraintEnd_toEndOf="@id/vp_image"/>
+                -->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_challenge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/layout_padding"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:background="@drawable/shape_challenge_feed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section_image">
+
+            <TextView
+                android:id="@+id/tv_challenge_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="@dimen/text_sm"
+                app:textColorChallenge="@{certify.challengeBranch}"
+                android:text="@{certify.challengeBranch.text}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="소비절약"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="6dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/pretendard_regular"
+                android:singleLine="true"
+                android:text="@{certify.challengeName}"
+                android:textSize="@dimen/text_sm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/section_people"
+                app:layout_constraintStart_toEndOf="@id/tv_challenge_type"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="소비습관 하루에 열심히 해 화이팅 챌린지 달성을 위하여" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/section_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_people"
+                    android:layout_width="@dimen/icon_size_16"
+                    android:layout_height="@dimen/icon_size_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_people"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_community" />
+
+                <TextView
+                    android:id="@+id/tv_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:textColor="@color/gray_5"
+                    android:textSize="@dimen/text_sm"
+                    android:layout_marginStart="2dp"
+                    android:text='@{String.valueOf(certify.participateNum)+"명"}'
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_people"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="89명" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="28dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section_challenge">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/section_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_comment"
+                    android:layout_width="@dimen/icon_size_16"
+                    android:layout_height="@dimen/icon_size_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_comment"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/line_comment_16" />
+
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textColor="@color/gray_5"
+                    android:textSize="@dimen/text_sm"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_comment"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="346" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/section_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/section_comment"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_like"
+                    android:layout_width="@dimen/icon_size_16"
+                    android:layout_height="@dimen/icon_size_16"
+                    android:background="@drawable/selector_like"
+                    android:onClick="@{() -> vm.changeLike(certify.id)}"
+                    app:select="@{certify.isLike}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_like"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/line_like_16" />
+
+                <TextView
+                    android:id="@+id/tv_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textColor="@color/gray_5"
+                    android:textSize="@dimen/text_sm"
+                    android:layout_marginStart="4dp"
+                    android:text="@{String.valueOf(certify.certifyLike)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_like"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="346" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@drawable/shape_feed_under_bar"
+            app:layout_constraintTop_toBottomOf="@id/section_info"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
