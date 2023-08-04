@@ -45,7 +45,7 @@ object RetrofitModule {
     class AppInterceptor: Interceptor {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
-            val accessToken = App.prefs.getString("accessToken","eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJhdWQiOiIyNCIsImlhdCI6MTY4OTc0Njg5MCwiZXhwIjoxNzIxMjgyODkwfQ.E6Mw7qtJIY4Pa9hYHDQNxT_OMZtimW_Xap3i2v2tAUf-wyVPYo8h94mcwiRgCDG7VT0ws_bhWwGWm-ZxEVVfQQ")
+            val accessToken = App.prefs.getString("accessToken","")
             val newRequest = request().newBuilder()
                 .addHeader("Authorization",accessToken)
                 .build()
