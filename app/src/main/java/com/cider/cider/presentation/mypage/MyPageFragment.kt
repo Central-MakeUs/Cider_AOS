@@ -9,12 +9,13 @@ import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListViewBinding
 import com.cider.cider.databinding.FragmentMyPageBinding
+import com.cider.cider.utils.binding.BindingFragment
 import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MyPageFragment: BindingFragmentNoNavi<FragmentMyPageBinding>(R.layout.fragment_my_page)  {
+class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page)  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,5 +63,10 @@ class MyPageFragment: BindingFragmentNoNavi<FragmentMyPageBinding>(R.layout.frag
                 R.id.action_myPageFragment_to_profileEditFragment
             )
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        findNavController().popBackStack()
     }
 }
