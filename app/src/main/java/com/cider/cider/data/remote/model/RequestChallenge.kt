@@ -7,3 +7,14 @@ data class RequestCertifyLike(
 data class RequestChallengeLike(
     val challengeId: Int
 )
+
+data class RequestChallengeCreate(
+    val certifyMission: String,
+    val challengeBranch: String,
+    val challengeCapacity: Int,
+    val challengeInfo: String,
+    val challengeName: String,
+    val challengePeriod: Int,
+    val isPublic: Boolean,
+    val recruitPeriod: Int
+)

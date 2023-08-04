@@ -44,3 +44,7 @@ data class ResponseCertifyLike(
 data class ResponseChallengeLike(
     val message: String,
 )
+
+data class ResponseChallengeCreate(
+    val challengeId: Int
+)
