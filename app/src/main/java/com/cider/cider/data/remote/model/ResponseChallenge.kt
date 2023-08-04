@@ -48,3 +48,7 @@ data class ResponseChallengeLike(
 data class ResponseChallengeCreate(
     val challengeId: Int
 )
+
+data class ResponseChallengeImageCreate(
+    val message: String
+)
