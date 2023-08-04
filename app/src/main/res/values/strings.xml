@@ -164,4 +164,12 @@
     <string name="challenge_authentication_btn">인증 완료하기</string>
 
     <string name="my_page">마이페이지</string>
+
+    <string name="challenge_look">챌린지 둘러보기</string>
+    <string name="challenge_none_certify">인증한 챌린지가 없습니다</string>
+    <string name="challenge_none_certify_sub">함께 인증하는 금융 챌린지를\n진행해보세요</string>
+
+    <string name="challenge_make">챌린지 만들러 가기</string>
+    <string name="challenge_none_interest">관심을 누른 챌린지가 없습니다</string>
+    <string name="challenge_none_interest_sub">마음에 드는 챌린지가 없나요?\n직접 챌린지를 만들어보세요</string>
 </resources>
