@@ -201,7 +201,11 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
                             R.id.action_challengeHomeFragment_to_challengeCreateFragment
                         )
                     }
-                    WriteType.AUTH -> {}
+                    WriteType.AUTH -> {
+                        findNavController().navigate(
+                            R.id.action_challengeHomeFragment_to_certifyFragment
+                        )
+                    }
                 }
             }
 
