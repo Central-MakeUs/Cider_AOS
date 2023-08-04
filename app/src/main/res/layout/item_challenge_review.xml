@@ -231,7 +231,7 @@
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:layout_width="@dimen/icon_size_16"
                     android:layout_height="@dimen/icon_size_16"
-                    android:src="@drawable/line_arrow_right_16"
+                    android:src="@drawable/filled_trash_16"
                     app:layout_constraintTop_toTopOf="@id/tv_delete"
                     app:layout_constraintBottom_toBottomOf="@id/tv_delete"
                     app:layout_constraintStart_toEndOf="@id/tv_delete"/>

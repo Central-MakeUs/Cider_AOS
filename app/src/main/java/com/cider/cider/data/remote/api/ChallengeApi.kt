@@ -1,16 +1,21 @@
 package com.cider.cider.data.remote.api
 
 import com.cider.cider.data.remote.model.RequestCertifyLike
+import com.cider.cider.data.remote.model.RequestChallengeCreate
 import com.cider.cider.data.remote.model.RequestChallengeLike
 import com.cider.cider.data.remote.model.ResponseCertifyItem
 import com.cider.cider.data.remote.model.ResponseCertifyLike
+import com.cider.cider.data.remote.model.ResponseChallengeCreate
+import com.cider.cider.data.remote.model.ResponseChallengeImageCreate
 import com.cider.cider.data.remote.model.ResponseChallengeItem
 import com.cider.cider.data.remote.model.ResponseChallengeLike
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ChallengeApi {
@@ -63,4 +68,16 @@ interface ChallengeApi {
     suspend fun deleteChallengeLike(
         @Path("challengeId") id: Int,
     ): Response<ResponseChallengeLike>
+
+    @POST("/api/challenge")
+    suspend fun postChallengeCreate(
+        @Body param: RequestChallengeCreate
+    ): Response<ResponseChallengeCreate>
+
+    @POST("/api/challenge/images/{challengeId}")
+    suspend fun postChallengeCreateImage(
+        @Path("challengeId") id: Int,
+        @Part successImageFile : List<MultipartBody.Part>,
+        @Part failImageFile : List<MultipartBody.Part>
+    ): Response<ResponseChallengeImageCreate>
 }

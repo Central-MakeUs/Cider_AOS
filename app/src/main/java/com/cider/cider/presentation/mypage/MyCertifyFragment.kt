@@ -12,6 +12,7 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setToolbar()
+        setButton()
     }
 
     private fun setToolbar() {
@@ -20,6 +21,14 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
             onBackPressed()
         }
         binding.toolbar.tvTotal.text = "총 n개"
+    }
+
+    private fun setButton() {
+        binding.btnChallengeLook.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_myCertifyFragment_to_challengeHomeFragment
+            )
+        }
     }
 
     override fun onBackPressed() {

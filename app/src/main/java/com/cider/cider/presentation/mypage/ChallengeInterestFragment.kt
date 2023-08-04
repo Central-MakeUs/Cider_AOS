@@ -12,6 +12,7 @@ class ChallengeInterestFragment: BindingFragment<FragmentInterestChallengeBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setToolbar()
+        setButton()
     }
 
     private fun setToolbar() {
@@ -21,6 +22,15 @@ class ChallengeInterestFragment: BindingFragment<FragmentInterestChallengeBindin
         }
         binding.toolbar.tvTotal.text = "총 n개"
     }
+
+    private fun setButton() {
+        binding.btnChallengeLook.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_challengeInterestFragment_to_challengeCreateFragment
+            )
+        }
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         findNavController().popBackStack()
