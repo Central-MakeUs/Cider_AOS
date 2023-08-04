@@ -78,11 +78,22 @@
     <fragment
         android:id="@+id/myCertifyFragment"
         android:name="com.cider.cider.presentation.mypage.MyCertifyFragment"
-        android:label="MyCertifyFragment" />
+        android:label="MyCertifyFragment" >
+        <action
+            android:id="@+id/action_myCertifyFragment_to_challengeHomeFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/challengeHomeFragment"
+            app:destination="@id/challengeHomeFragment"/>
+
+    </fragment>
     <fragment
         android:id="@+id/challengeInterestFragment"
         android:name="com.cider.cider.presentation.mypage.ChallengeInterestFragment"
-        android:label="ChallengeInterestFragment" />
+        android:label="ChallengeInterestFragment" >
+        <action
+            android:id="@+id/action_challengeInterestFragment_to_challengeCreateFragment"
+            app:destination="@id/challengeCreateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
         android:name="com.cider.cider.presentation.mypage.ProfileEditFragment"
