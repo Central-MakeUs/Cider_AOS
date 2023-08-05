@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCreateCheckBinding
 import com.cider.cider.databinding.FragmentChallengeCreateCompleteBinding
@@ -21,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ChallengeCreateCheckFragment: BindingFragment<FragmentChallengeCreateCheckBinding>(R.layout.fragment_challenge_create_check) {
 
-    private val viewModel: ChallengeCreateViewModel by activityViewModels()
+    private val viewModel: ChallengeCreateViewModel by navGraphViewModels(R.id.nav_challenge_create)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

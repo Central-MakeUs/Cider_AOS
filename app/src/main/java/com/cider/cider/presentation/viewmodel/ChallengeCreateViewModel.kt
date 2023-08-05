@@ -43,21 +43,6 @@ class ChallengeCreateViewModel @Inject constructor(
 
     private val _buttonState2 = MutableLiveData<Boolean>()
     val buttonState2: LiveData<Boolean> get() = _buttonState2
-    init {
-        _successImageList.value = mutableListOf()
-    }
-
-    fun onClear() {
-        challengeTitle.value = ""
-        challengeIntroduction.value = ""
-        challengeAuthentication.value = ""
-        _capacity.value = 3
-        _recruitmentPeriod.value = 1
-        _challengePeriod.value = 1
-        _successImageList.value = arrayListOf()
-        _failImageList.value = arrayListOf()
-        Log.d("TEST asdf","$123")
-    }
 
     fun changeChallenge(challenge: Category) {
         _challengeSelect.value = challenge
@@ -95,10 +80,6 @@ class ChallengeCreateViewModel @Inject constructor(
             currentList.add(imageCardModel)
         }
         _failImageList.value = (currentList)
-    }
-
-    fun replaceImageSuccess(imageCardModel: ImageCardModel) {
-
     }
 
     fun changeCapacity(value: Int) {
