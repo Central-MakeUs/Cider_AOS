@@ -74,6 +74,15 @@
         <action
             android:id="@+id/action_myPageFragment_to_profileEditFragment"
             app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_challengeHomeFragment"
+            app:destination="@id/challengeHomeFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_certifyFragment"
+            app:destination="@id/certifyFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_challengeCreateFragment"
+            app:destination="@id/challengeCreateFragment" />
     </fragment>
     <fragment
         android:id="@+id/myCertifyFragment"
