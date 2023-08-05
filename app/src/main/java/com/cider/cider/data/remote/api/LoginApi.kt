@@ -31,5 +31,7 @@ interface LoginApi {
     ): Response<ResponseNicknameExist>
 
     @GET("/api/member/me")
-    suspend fun getMe(): Response<ResponseMe>
+    suspend fun getMe(
+        @Header("Authorization") accessCode: String,
+    ): Response<ResponseMe>
 }

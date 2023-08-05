@@ -35,7 +35,6 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             add(R.id.fl_login, LoginFragment(), "Login")
             commit()
         }
-        moveToMain()
 
         lifecycleScope.launch {
             if (viewModel.login()) {
@@ -56,7 +55,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun moveToMain() {
+    fun moveToMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

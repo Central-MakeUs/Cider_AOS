@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cider.cider.App
 import com.cider.cider.domain.repository.LoginRepository
 import com.cider.cider.domain.type.*
 import com.cider.cider.domain.type.challenge.Category
@@ -47,10 +48,11 @@ LoginViewModel @Inject constructor(
     private val _challengeState = MutableLiveData<ChallengeButtonState>(ChallengeButtonState())
     val challengeState: LiveData<ChallengeButtonState> get() = _challengeState
 
-    fun loginFirst(header: String) {
-        viewModelScope.launch {
-            repository.postLoginFirst(header)
-        }
+    private var accessToken: String = ""
+    private var refreshToken: String = ""
+    suspend fun loginFirst(header: String): Boolean {
+        val data = repository.postLogin(header)
+        return data?.body()?.isNewMember != true //새로운 멤버면 false 아니면 true
     }
 
     /**
@@ -62,7 +64,7 @@ LoginViewModel @Inject constructor(
      * 402 의 경우 토큰 만료 -> 만료 시 재로그인해야하기에 로그인 화면으로 넘어가면 됨
      */
     suspend fun login(): Boolean {
-        return repository.getLoginMe()
+        return if (App.prefs.getString("accessToken","").isNotEmpty()) repository.getLoginMe() else false
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {

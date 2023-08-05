@@ -4,41 +4,25 @@ import android.util.Log
 import com.cider.cider.App
 import com.cider.cider.data.remote.api.LoginApi
 import com.cider.cider.data.remote.model.RequestLoginModel
+import com.cider.cider.data.remote.model.ResponseLoginModel
 import com.cider.cider.data.remote.model.ResponseMe
 import com.cider.cider.domain.repository.LoginRepository
 import com.cider.cider.utils.Constants
+import retrofit2.Response
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
     private val apiService: LoginApi
 ): LoginRepository {
 
-    override suspend fun postLoginFirst(header: String): Any {
-        val data = apiService.postLogin(header,RequestLoginModel())
-        Log.d("TEST Login","${data}")
-        return data
-    }
-
-    override suspend fun postLogin() {
-        val accessToken = App.prefs.getString("accessToken","")
-        if (accessToken.isNotEmpty()) {
-            try {
-                val data = apiService.postLogin(accessToken, RequestLoginModel())
-                Log.d(
-                    "Test Login2",
-                    "${data}\n${data.message()}\n${data.body()}\n${
-                        data.errorBody()?.string()
-                    }\n${data.isSuccessful}"
-                )
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        } else {
-            App.prefs.setString("accessToken",Constants.TEST_API_KEY)
+    override suspend fun postLogin(header: String): Response<ResponseLoginModel>? {
+        return try {
+            apiService.postLogin(header, RequestLoginModel())
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
     }
-
-
 
     override suspend fun getRandomNickName(): String {
         return try {
@@ -67,10 +51,16 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun getLoginMe(): Boolean {
         return try {
-            val data = apiService.getMe()
+            val accessToken = App.prefs.getString("accessToken","")
+            val data = apiService.getMe(accessToken)
             data.run {
                 when (code()) {
                     200 -> true
+                    401 -> {
+                        App.prefs.setString("refreshToken",apiService.getMe(App.prefs.getString("refreshToken", "")).headers().toString())
+                        //TODO(Refresh 만료 상황 필요)
+                        true
+                    }
                     else -> false
                 }
             }
@@ -78,10 +68,6 @@ class LoginRepositoryImpl @Inject constructor(
             e.printStackTrace()
             false
         }
-    }
-
-    override suspend fun getMe(): ResponseMe? {
-        return apiService.getMe().body()
     }
 
     override suspend fun postLogout() {
