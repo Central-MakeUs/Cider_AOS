@@ -46,26 +46,33 @@ class ChallengeListViewModel @Inject constructor(
 
     fun changeLike(targetId: Int) {
         val beforeList = _challenge.value?: mutableListOf()
+        var success: Boolean = true
+        var afterList = listOf<ChallengeCardModel>()
         viewModelScope.launch {
-            beforeList.map {
+            afterList = beforeList.map {
                 if (it.id == targetId) {
-
-                    Log.d("TEST API", "Before repo ${it.like}")
-
                     if (it.like) { //true 였다면 false 로 변경
-                        if (repository.postChallengeLike(targetId))
+                        if (repository.postChallengeLike(targetId)) {
                             it
-                        else
-                            it.copy(like = true)
-                    } else { //false 였다면 true 로 변경
-                        if (repository.deleteChallengeLike(targetId))
+                        } else {
+                            success = false
+                            it.copy(like = !it.like)
+                        }
+                    } else {
+                        if (repository.deleteChallengeLike(targetId)) {
                             it
-                        else
-                            it.copy(like = false)
+                        }
+                        else {
+                            success = false
+                            it.copy(like = !it.like)
+                        }
                     }
                 } else {
                     it
                 }
+            }
+            if (!success) {
+                _challenge.value = afterList
             }
         }
     }
