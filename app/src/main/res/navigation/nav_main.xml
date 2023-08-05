@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_challengeMyFragment_to_challengeCreateFragment"
             app:destination="@id/challengeCreateFragment" />
+        <action
+            android:id="@+id/action_challengeMyFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/challengeDetailFragment"
