@@ -141,8 +141,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/pretendard_bold"
-                                    android:paddingHorizontal="4dp"
-                                    android:paddingVertical="2dp"
                                     android:text="0번째 챌린지"
                                     android:textColor="@color/secondary"
                                     android:textSize="@dimen/text_sm"

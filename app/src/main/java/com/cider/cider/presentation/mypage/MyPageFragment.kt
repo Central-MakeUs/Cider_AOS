@@ -29,7 +29,7 @@ class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_m
 
     private fun setBottomSheet() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
             // Handle other states if necessary
@@ -44,7 +44,7 @@ class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_m
 
 
     private fun setBottomNavi() {
-
+        binding.btnTest.selectedItemId = R.id.item_my
         binding.btnTest.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.item_challenge -> {

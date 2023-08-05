@@ -2,6 +2,7 @@ package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -63,6 +64,13 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
             adapter = cardAdapter
             addItemDecoration(ChallengeListSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
         }
+
+        cardAdapter.setOnItemClickListener(object : ChallengeCardAdapter.OnItemClickListener {
+            override fun onItemClick(id: Int) {
+                val bundle = bundleOf()
+                findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailFragment)
+            }
+        })
 
         viewModel.challenge.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
