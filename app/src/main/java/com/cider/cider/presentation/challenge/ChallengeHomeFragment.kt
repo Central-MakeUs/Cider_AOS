@@ -79,7 +79,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         binding.toolbarCategoryChallenge.tvMore.text = "전체 챌린지 보기"
         binding.toolbarCategoryChallenge.btnMore.setOnClickListener {
             findNavController().navigate(
-                R.id.action_challengeHomeFragment_to_challengeListFragment
+                R.id.action_challengeHomeFragment_to_challengeListAllFragment
             )
         }
 
