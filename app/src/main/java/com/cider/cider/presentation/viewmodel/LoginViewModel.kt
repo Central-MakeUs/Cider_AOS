@@ -59,6 +59,11 @@ LoginViewModel @Inject constructor(
         return data?.body()?.isUpdatedMember != true //새로운 멤버면 false 아니면 true
     }
 
+    fun setToken() {
+        App.prefs.setString("accessToken", accessToken)
+        App.prefs.setString("refreshToken", refreshToken)
+    }
+
     suspend fun setMember(): Boolean {
         var interest:String = ""
         _challengeState.value.let {
