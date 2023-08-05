@@ -1,19 +1,12 @@
 package com.cider.cider.data.remote.api
 
-import com.cider.cider.data.remote.model.RequestCertifyLike
-import com.cider.cider.data.remote.model.RequestChallengeCreate
-import com.cider.cider.data.remote.model.RequestChallengeLike
-import com.cider.cider.data.remote.model.ResponseCertifyItem
-import com.cider.cider.data.remote.model.ResponseCertifyLike
-import com.cider.cider.data.remote.model.ResponseChallengeCreate
-import com.cider.cider.data.remote.model.ResponseChallengeImageCreate
-import com.cider.cider.data.remote.model.ResponseChallengeItem
-import com.cider.cider.data.remote.model.ResponseChallengeLike
+import com.cider.cider.data.remote.model.*
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
@@ -49,12 +42,12 @@ interface ChallengeApi {
         @Path("filter") filter: String,
     ): Response<ArrayList<ResponseChallengeItem>>
 
-    @POST("/api/certify/like/like")
+    @POST("/api/certify/like")
     suspend fun postCertifyLike(
         @Body param: RequestCertifyLike
     ): Response<ResponseCertifyLike>
 
-    @DELETE("/api/certify/like/like/{certifyId}")
+    @DELETE("/api/certify/like/{certifyId}")
     suspend fun deleteCertifyLike(
         @Path("certifyId") id: Int,
     ): Response<ResponseCertifyLike>
@@ -74,10 +67,17 @@ interface ChallengeApi {
         @Body param: RequestChallengeCreate
     ): Response<ResponseChallengeCreate>
 
+    @Multipart
     @POST("/api/challenge/images/{challengeId}")
     suspend fun postChallengeCreateImage(
         @Path("challengeId") id: Int,
         @Part successImageFile : List<MultipartBody.Part>,
         @Part failImageFile : List<MultipartBody.Part>
     ): Response<ResponseChallengeImageCreate>
+
+    @GET("/api/member/mypage")
+    suspend fun getMyPage(): Response<ResponseMyPage>
+
+    @GET("/api/challenge/my")
+    suspend fun getMyChallenge(): Response<ResponseMyChallenge>
 }

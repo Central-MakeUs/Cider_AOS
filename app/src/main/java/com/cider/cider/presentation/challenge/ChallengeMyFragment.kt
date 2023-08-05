@@ -37,7 +37,6 @@ class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.
 
     private fun setToolbar() {
         binding.toolbar.tvToolbarTitle.text = "내 챌린지"
-        binding.toolbar.btnToolbarIcon1.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.line_my_24))
         binding.toolbar.btnToolbarBack.setOnClickListener {
             onBackPressed()
         }

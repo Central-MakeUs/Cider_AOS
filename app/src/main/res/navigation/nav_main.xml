@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_challengeHomeFragment_to_certifyFragment"
             app:destination="@id/certifyFragment" />
+        <action
+            android:id="@+id/action_challengeHomeFragment_to_challengeListAllFragment"
+            app:destination="@id/challengeListAllFragment" />
     </fragment>
     <fragment
         android:id="@+id/challengeCreateFragment"
@@ -41,6 +44,9 @@
         <action
             android:id="@+id/action_challengeListFragment_to_challengeCreateFragment"
             app:destination="@id/challengeCreateFragment" />
+        <action
+            android:id="@+id/action_challengeListFragment_to_challengeDetailFragment"
+            app:destination="@id/challengeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/challengeMyFragment"
@@ -49,6 +55,9 @@
         <action
             android:id="@+id/action_challengeMyFragment_to_challengeCreateFragment"
             app:destination="@id/challengeCreateFragment" />
+        <action
+            android:id="@+id/action_challengeMyFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/challengeDetailFragment"
@@ -74,6 +83,15 @@
         <action
             android:id="@+id/action_myPageFragment_to_profileEditFragment"
             app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_challengeHomeFragment"
+            app:destination="@id/challengeHomeFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_certifyFragment"
+            app:destination="@id/certifyFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_challengeCreateFragment"
+            app:destination="@id/challengeCreateFragment" />
     </fragment>
     <fragment
         android:id="@+id/myCertifyFragment"
@@ -81,9 +99,7 @@
         android:label="MyCertifyFragment" >
         <action
             android:id="@+id/action_myCertifyFragment_to_challengeHomeFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/challengeHomeFragment"
-            app:destination="@id/challengeHomeFragment"/>
+            app:destination="@id/challengeListFragment"/>
 
     </fragment>
     <fragment
@@ -102,4 +118,12 @@
         android:id="@+id/certifyFragment"
         android:name="com.cider.cider.presentation.challenge.CertifyFragment"
         android:label="CertifyFragment" />
+    <fragment
+        android:id="@+id/challengeListAllFragment"
+        android:name="com.cider.cider.presentation.challenge.ChallengeListAllFragment"
+        android:label="ChallengeListAllFragment" >
+        <action
+            android:id="@+id/action_challengeListAllFragment_to_challengeDetailFragment"
+            app:destination="@id/challengeDetailFragment" />
+    </fragment>
 </navigation>

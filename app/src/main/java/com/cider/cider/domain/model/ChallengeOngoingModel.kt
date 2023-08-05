@@ -3,7 +3,6 @@ package com.cider.cider.domain.model
 import com.cider.cider.domain.type.challenge.Category
 
 data class ChallengeOngoingModel(
-    val id: Int,
     val title: String,
     val challenge: Category,
     val total: Int,

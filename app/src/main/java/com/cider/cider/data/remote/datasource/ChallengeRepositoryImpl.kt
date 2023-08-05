@@ -3,17 +3,18 @@ package com.cider.cider.data.remote.datasource
 import android.net.Uri
 import android.util.Log
 import com.cider.cider.data.remote.api.ChallengeApi
-import com.cider.cider.data.remote.model.RequestCertifyLike
-import com.cider.cider.data.remote.model.RequestChallengeLike
-import com.cider.cider.data.remote.model.ResponseCertifyItem
-import com.cider.cider.data.remote.model.ResponseChallengeItem
+import com.cider.cider.data.remote.model.*
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
+import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.getChallengeCategory
 import com.cider.cider.domain.type.challenge.getParticipationStatus
+import okhttp3.MultipartBody
+import retrofit2.Response
+import java.io.File
 import javax.inject.Inject
 
 class ChallengeRepositoryImpl @Inject constructor(
@@ -80,6 +81,20 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun createChallenge(param: RequestChallengeCreate, image1: List<MultipartBody.Part>, image2: List<MultipartBody.Part>): Boolean {
+        val data = apiService.postChallengeCreate(param)
+        Log.d("TEST CREATE API DATA1","$data")
+        if (data.body()?.challengeId != null) {
+            val data2 = apiService.postChallengeCreateImage(data.body()?.challengeId!!, image1, image2 )
+            return when (data2.code()) {
+                200 -> true
+                413 -> false
+                else -> false
+            }
+        }
+        return false
+    }
+
     override suspend fun postChallengeLike(id: Int): Boolean {
         val data = apiService.postChallengeLike(RequestChallengeLike(id))
         Log.d("TEST api","$data")
@@ -97,6 +112,21 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getMyPage(): MyPageModel? {
+        val data = apiService.getMyPage()
+        return when (data.code()) {
+            200 -> data.body()?.let { mapToMyPageModel(it) }
+            else -> null
+        }
+    }
+
+    override suspend fun getMyChallenge(): Response<ResponseMyChallenge>? {
+        val data = apiService.getMyChallenge()
+        return when (data.code()) {
+            200 -> data
+            else -> null
+        }
+    }
 
     private fun mapResponseToChallengeCardModel(responseList: List<ResponseChallengeItem>?)
     : List<ChallengeCardModel>? {
@@ -135,5 +165,23 @@ class ChallengeRepositoryImpl @Inject constructor(
                 certifyImage = if (response.certifyImageUrl != null ) Uri.parse(response.certifyImageUrl) else null
             )
         }
+    }
+
+    private fun mapToMyPageModel(response: ResponseMyPage) : MyPageModel {
+        return MyPageModel(
+            name = response.simpleMember.memberName,
+            profileUri = Uri.parse(response.simpleMember.profilePath),
+            participateNum = response.simpleMember.participateNum,
+            level = response.memberLevelInfo.myLevel,
+            certifyNum = response.memberActivityInfo.myCertifyNum,
+            likeChallengeNum = response.memberActivityInfo.myLikeChallengeNum,
+            experienceLeft = response.memberLevelInfo.experienceLeft,
+            levelPercent = response.memberLevelInfo.levelPercent,
+            percentComment = response.memberLevelInfo.percentComment,
+            myLevel = response.memberLevelInfo.myLevel,
+            myLevelName = response.memberLevelInfo.myLevelName,
+            nextLevel = response.memberLevelInfo.nextLevel.level,
+            nextLevelName = response.memberLevelInfo.nextLevel.levelName
+        )
     }
 }

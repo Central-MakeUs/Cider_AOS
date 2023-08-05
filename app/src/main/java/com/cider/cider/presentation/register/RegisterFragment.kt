@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterBinding
 import com.cider.cider.presentation.MainActivity
@@ -17,6 +18,7 @@ import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.model.Gender
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterFragment
@@ -104,11 +106,17 @@ class RegisterFragment
         }
 
         binding.tvToolbarComplete.setOnClickListener {
-            setFragment(RegisterCompletionFragment(), "RegisterCompletion")
-            binding.viewRegisterTap.visibility = View.INVISIBLE
-            binding.tvToolbarTitle.text = "회원가입 완료"
-            binding.btnRegister.visibility = View.VISIBLE
-            binding.tvToolbarComplete.visibility = View.GONE
+            lifecycleScope.launch {
+                if (viewModel.setMember()) {
+                    setFragment(RegisterCompletionFragment(), "RegisterCompletion")
+                    binding.viewRegisterTap.visibility = View.INVISIBLE
+                    binding.tvToolbarTitle.text = "회원가입 완료"
+                    binding.btnRegister.visibility = View.VISIBLE
+                    binding.tvToolbarComplete.visibility = View.GONE
+                } else {
+
+                }
+            }
         }
 
         binding.btnToolbarBack.setOnClickListener {

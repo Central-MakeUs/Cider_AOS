@@ -9,7 +9,8 @@ data class ResponseLoginModel(
     val memberId: Int,
     val memberName: String?,
     val birthday: String?,
-    val gender: String?
+    val gender: String?,
+    val isUpdatedMember: Boolean
 )
 
 data class ResponseRandomNickNameModel(
@@ -23,4 +24,12 @@ data class ResponseNicknameExist(
 data class ResponseMe(
     val memberId: Int,
     val memberName: String,
+)
+
+data class ResponseMember(
+    val memberId: Int,
+    val memberName: String,
+    val memberBirth: String,
+    val memberGender: String,
+    val interestChallenge: String
 )

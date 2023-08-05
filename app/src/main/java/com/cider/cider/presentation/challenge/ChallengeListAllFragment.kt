@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
+import com.cider.cider.databinding.FragmentChallengeListAllBinding
 import com.cider.cider.databinding.FragmentChallengeListBinding
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
@@ -19,36 +20,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.layout.fragment_challenge_list) {
+class ChallengeListAllFragment: BindingFragment<FragmentChallengeListAllBinding>(R.layout.fragment_challenge_list_all) {
 
     private val viewModel: ChallengeListViewModel by viewModels()
 
-    private var data: String? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val bundle = arguments
-
-        data = bundle?.getString("type")
         setToolbar()
         setRecyclerView()
-
         setButton()
 
     }
 
     private fun setToolbar() {
-        when (data) {
-            "popular" -> {
-                binding.toolbar.tvToolbarTitle.text = "인기 챌린지"
-                viewModel.getChallengePopular(filter = Filter.LATEST)
-            }
-            "official" -> {
-                binding.toolbar.tvToolbarTitle.text = "공식 챌린지"
-                viewModel.getChallengeOfficial(filter = Filter.LATEST)
-            }
-        }
-        binding.toolbar.btnToolbarBack.setOnClickListener {
+        binding.tvToolbarTitle.text = "전체 챌린지"
+        viewModel.getChallenge(filter = Filter.LATEST)
+
+        binding.btnToolbarBack.setOnClickListener {
             onBackPressed()
         }
     }
@@ -62,8 +50,7 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
 
         cardAdapter.setOnItemClickListener(object : ChallengeCardAdapter.OnItemClickListener {
             override fun onItemClick(id: Int) {
-                val bundle = bundleOf()
-                findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailFragment)
+                findNavController().navigate(R.id.action_challengeListAllFragment_to_challengeDetailFragment)
             }
         })
 
@@ -87,15 +74,7 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
     }
 
     private fun setFilter(filter: Filter){
-        when (data) {
-            "popular" -> {
-                viewModel.getChallengePopular(filter = filter)
-            }
-            "official" -> {
-                viewModel.getChallengeOfficial(filter = filter)
-            }
-        }
-
+        viewModel.getChallenge(filter = filter)
         when (filter) {
             Filter.LATEST -> binding.tvFilter.text = "최신순"
             Filter.LIKE -> binding.tvFilter.text = "인기순"

@@ -3,16 +3,20 @@ package com.cider.cider.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.cider.cider.domain.model.ChallengeCardFinishModel
 import com.cider.cider.domain.model.ChallengeOngoingModel
 import com.cider.cider.domain.model.ChallengeReviewModel
+import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.ReviewType
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.ParticipationStatus
+import com.cider.cider.domain.type.challenge.getChallengeCategory
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MyChallengeViewModel @Inject constructor(
-
+    private val repository: ChallengeRepository
 ):ViewModel(){
     private val _challengeFinish = MutableLiveData<List<ChallengeCardFinishModel>>()
     val challengeFinish: LiveData<List<ChallengeCardFinishModel>> get() = _challengeFinish
@@ -25,7 +29,6 @@ class MyChallengeViewModel @Inject constructor(
 
     init {
         test1()
-        test2()
         test3()
     }
 
@@ -51,23 +54,6 @@ class MyChallengeViewModel @Inject constructor(
         _challengeFinish.value = list
     }
 
-    fun test2() {
-        val list: MutableList<ChallengeOngoingModel> = mutableListOf()
-
-        list.add(
-            ChallengeOngoingModel(
-                id = 1, title = "소비습관 고치기", challenge =  Category.SAVING, total = 30,
-                current = 24, during = 10
-            )
-        )
-        list.add(
-            ChallengeOngoingModel(
-                id = 2, title = "소비습관 고치기2", challenge =  Category.SAVING, total = 30,
-                current = 15, during = 7
-            )
-        )
-        _challengeOngoing.value = list
-    }
 
     fun test3() {
         val list: MutableList<ChallengeReviewModel> = mutableListOf()
@@ -98,6 +84,35 @@ class MyChallengeViewModel @Inject constructor(
         )
 
         _challengeReview.value = list
+    }
+
+
+    fun setMyChallenge() {
+
+        viewModelScope.launch {
+            val data = repository.getMyChallenge()
+
+            if (data?.isSuccessful == true) {
+                _challengeOngoing.value = data.body()?.ongoingChallengeListResponseDto?.ongoingChallengeResponseDtoList?.map {
+                    ChallengeOngoingModel(
+                        title = it.challengeName,
+                        challenge = getChallengeCategory( it.challengeBranch ),
+                        total = it.challengePeriod,
+                        current = it.certifyNum,
+                        during = it.ongoingDate
+                    )
+                }
+
+/*                _challengeReview.value = data.body()?.judgingChallengeListResponseDto?.judgingChallengeResponseDtoList?.map {
+                    ChallengeReviewModel(
+
+                    )
+                }*/
+
+            }
+        }
+
+
     }
 
 }

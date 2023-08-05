@@ -1,9 +1,12 @@
 package com.cider.cider.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cider.cider.App
+import com.cider.cider.data.remote.model.RequestMember
 import com.cider.cider.domain.repository.LoginRepository
 import com.cider.cider.domain.type.*
 import com.cider.cider.domain.type.challenge.Category
@@ -47,9 +50,58 @@ LoginViewModel @Inject constructor(
     private val _challengeState = MutableLiveData<ChallengeButtonState>(ChallengeButtonState())
     val challengeState: LiveData<ChallengeButtonState> get() = _challengeState
 
-    fun loginFirst(header: String) {
-        viewModelScope.launch {
-            repository.postLoginFirst(header)
+    private var accessToken: String = ""
+    private var refreshToken: String = ""
+    suspend fun loginFirst(header: String): Boolean {
+        val data = repository.postLogin(header)
+        accessToken = data?.body()?.accessToken?:""
+        refreshToken = data?.body()?.refreshToken?:""
+        return data?.body()?.isUpdatedMember != true //새로운 멤버면 false 아니면 true
+    }
+
+    fun setToken() {
+        App.prefs.setString("accessToken", accessToken)
+        App.prefs.setString("refreshToken", refreshToken)
+    }
+
+    suspend fun setMember(): Boolean {
+        var interest:String = ""
+        _challengeState.value.let {
+            if (it?.investing == true ) {
+                interest += ("T,")
+            }
+            if (it?.money_management == true ) {
+                interest += ("M,")
+            }
+            if (it?.financial_learning == true ) {
+                interest += ("L,")
+            }
+            if (it?.saving == true ) {
+                interest += ("C,")
+            }
+        }
+        if (interest.isNotEmpty()) {
+            interest = interest.substring(0,interest.length-1)
+        }
+
+        val param = RequestMember(
+            memberName = nickname.value?:"",
+            memberBirth = "${_birth.value?.year}-${(_birth.value?.month ?:0) + 1}-${_birth.value?.day}",
+            memberGender = (_genderState.value?.api ?:"M"),
+            interestChallenge = interest
+        )
+
+        return try {
+            if (repository.patchMember(accessToken, param)) {
+                App.prefs.setString("accessToken", accessToken)
+                App.prefs.setString("refreshToken", refreshToken)
+                true
+            } else {
+                false
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
         }
     }
 
@@ -62,7 +114,7 @@ LoginViewModel @Inject constructor(
      * 402 의 경우 토큰 만료 -> 만료 시 재로그인해야하기에 로그인 화면으로 넘어가면 됨
      */
     suspend fun login(): Boolean {
-        return repository.getLoginMe()
+        return if (App.prefs.getString("accessToken","").isNotEmpty()) repository.getLoginMe() else false
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {

@@ -5,3 +5,10 @@ data class RequestLoginModel(
     val clientType: String = "ANDROID"
 ) {
 }
+
+data class RequestMember(
+    val memberName: String,
+    val memberBirth: String,
+    val memberGender: String,
+    val interestChallenge: String
+)

@@ -30,16 +30,17 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
 
         imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-        val transaction = supportFragmentManager
-        transaction.beginTransaction().apply {
-            add(R.id.fl_login, LoginFragment(), "Login")
-            commit()
-        }
-        moveToMain()
-
         lifecycleScope.launch {
             if (viewModel.login()) {
+                Log.d("TEST API","!@#")
                 moveToMain()
+            } else {
+                val transaction = supportFragmentManager
+                transaction.beginTransaction().apply {
+                    add(R.id.fl_login, LoginFragment(), "Login")
+                    commit()
+                }
+
             }
         }
         //Log.d("Kakao Test", "keyhash : ${Utility.getKeyHash(this)}")
@@ -56,9 +57,14 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun moveToMain() {
+    fun moveToMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
         finish()
     }
 }
