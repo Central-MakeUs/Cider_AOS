@@ -85,7 +85,11 @@ class ChallengeRepositoryImpl @Inject constructor(
         Log.d("TEST CREATE API DATA1","$data")
         if (data.body()?.challengeId != null) {
             val data2 = apiService.postChallengeCreateImage(data.body()?.challengeId!!, image1, image2 )
-            Log.d("TEST CREATE API DATA2","$data2")
+            return when (data2.code()) {
+                200 -> true
+                413 -> false
+                else -> false
+            }
         }
         return false
     }

@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
@@ -66,6 +67,7 @@ interface ChallengeApi {
         @Body param: RequestChallengeCreate
     ): Response<ResponseChallengeCreate>
 
+    @Multipart
     @POST("/api/challenge/images/{challengeId}")
     suspend fun postChallengeCreateImage(
         @Path("challengeId") id: Int,
