@@ -77,4 +77,7 @@ interface ChallengeApi {
 
     @GET("/api/member/mypage")
     suspend fun getMyPage(): Response<ResponseMyPage>
+
+    @GET("/api/challenge/my")
+    suspend fun getMyChallenge(): Response<ResponseMyChallenge>
 }

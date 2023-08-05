@@ -13,6 +13,7 @@ import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.getChallengeCategory
 import com.cider.cider.domain.type.challenge.getParticipationStatus
 import okhttp3.MultipartBody
+import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
 
@@ -115,6 +116,14 @@ class ChallengeRepositoryImpl @Inject constructor(
         val data = apiService.getMyPage()
         return when (data.code()) {
             200 -> data.body()?.let { mapToMyPageModel(it) }
+            else -> null
+        }
+    }
+
+    override suspend fun getMyChallenge(): Response<ResponseMyChallenge>? {
+        val data = apiService.getMyChallenge()
+        return when (data.code()) {
+            200 -> data
             else -> null
         }
     }

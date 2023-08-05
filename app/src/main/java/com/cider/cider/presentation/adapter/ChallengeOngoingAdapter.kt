@@ -11,7 +11,7 @@ import com.cider.cider.utils.ItemDiffCallback
 class ChallengeOngoingAdapter(): ListAdapter<ChallengeOngoingModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<ChallengeOngoingModel>(
         onContentsTheSame = {old, new -> old == new},
-        onItemsTheSame = {old, new -> old.id == new.id}
+        onItemsTheSame = {old, new -> old == new}
     )
 ){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

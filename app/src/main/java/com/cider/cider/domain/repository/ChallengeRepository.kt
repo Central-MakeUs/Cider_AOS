@@ -2,12 +2,14 @@ package com.cider.cider.domain.repository
 
 import android.net.Uri
 import com.cider.cider.data.remote.model.RequestChallengeCreate
+import com.cider.cider.data.remote.model.ResponseMyChallenge
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
 import okhttp3.MultipartBody
+import retrofit2.Response
 
 interface ChallengeRepository {
     suspend fun getChallengeList(filter: Filter): List<ChallengeCardModel>?
@@ -30,4 +32,6 @@ interface ChallengeRepository {
     ): Boolean
 
     suspend fun getMyPage(): MyPageModel?
+
+    suspend fun getMyChallenge(): Response<ResponseMyChallenge>?
 }
