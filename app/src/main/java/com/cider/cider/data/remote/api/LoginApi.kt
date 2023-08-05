@@ -1,17 +1,8 @@
 package com.cider.cider.data.remote.api
 
-import com.cider.cider.data.remote.model.RequestLoginModel
-import com.cider.cider.data.remote.model.ResponseLoginModel
-import com.cider.cider.data.remote.model.ResponseMe
-import com.cider.cider.data.remote.model.ResponseNicknameExist
-import com.cider.cider.data.remote.model.ResponseRandomNickNameModel
+import com.cider.cider.data.remote.model.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface LoginApi {
     @Headers("Content-Type: application/json")
@@ -34,4 +25,10 @@ interface LoginApi {
     suspend fun getMe(
         @Header("Authorization") accessCode: String,
     ): Response<ResponseMe>
+
+    @PATCH("/api/member")
+    suspend fun patchMember(
+        @Header("Authorization") accessToken: String,
+        @Body param: RequestMember
+    ): Response<ResponseMember>
 }

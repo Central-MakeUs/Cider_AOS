@@ -1,10 +1,12 @@
 package com.cider.cider.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cider.cider.App
+import com.cider.cider.data.remote.model.RequestMember
 import com.cider.cider.domain.repository.LoginRepository
 import com.cider.cider.domain.type.*
 import com.cider.cider.domain.type.challenge.Category
@@ -52,7 +54,50 @@ LoginViewModel @Inject constructor(
     private var refreshToken: String = ""
     suspend fun loginFirst(header: String): Boolean {
         val data = repository.postLogin(header)
-        return data?.body()?.isNewMember != true //새로운 멤버면 false 아니면 true
+        accessToken = data?.body()?.accessToken?:""
+        refreshToken = data?.body()?.refreshToken?:""
+        return data?.body()?.isUpdatedMember != true //새로운 멤버면 false 아니면 true
+    }
+
+    suspend fun setMember(): Boolean {
+        var interest:String = ""
+        _challengeState.value.let {
+            if (it?.investing == true ) {
+                interest += ("T,")
+            }
+            if (it?.money_management == true ) {
+                interest += ("M,")
+            }
+            if (it?.financial_learning == true ) {
+                interest += ("L,")
+            }
+            if (it?.saving == true ) {
+                interest += ("C,")
+            }
+        }
+        if (interest.isNotEmpty()) {
+            interest = interest.substring(0,interest.length-1)
+        }
+
+        val param = RequestMember(
+            memberName = nickname.value?:"",
+            memberBirth = "${_birth.value?.year}-${(_birth.value?.month ?:0) + 1}-${_birth.value?.day}",
+            memberGender = (_genderState.value?.api ?:"M"),
+            interestChallenge = interest
+        )
+
+        return try {
+            if (repository.patchMember(accessToken, param)) {
+                App.prefs.setString("accessToken", accessToken)
+                App.prefs.setString("refreshToken", refreshToken)
+                true
+            } else {
+                false
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
     }
 
     /**

@@ -4,6 +4,7 @@ import android.util.Log
 import com.cider.cider.App
 import com.cider.cider.data.remote.api.LoginApi
 import com.cider.cider.data.remote.model.RequestLoginModel
+import com.cider.cider.data.remote.model.RequestMember
 import com.cider.cider.data.remote.model.ResponseLoginModel
 import com.cider.cider.data.remote.model.ResponseMe
 import com.cider.cider.domain.repository.LoginRepository
@@ -21,6 +22,17 @@ class LoginRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             e.printStackTrace()
             null
+        }
+    }
+
+    override suspend fun patchMember(accessToken: String, param: RequestMember): Boolean {
+        return try {
+            val data = apiService.patchMember(accessToken, param)
+            Log.e("TEST API","PATCH MEMBER / ${data.code()} / ${data.errorBody()?.string()}")
+            data.isSuccessful
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
         }
     }
 
@@ -56,11 +68,6 @@ class LoginRepositoryImpl @Inject constructor(
             data.run {
                 when (code()) {
                     200 -> true
-                    401 -> {
-                        App.prefs.setString("refreshToken",apiService.getMe(App.prefs.getString("refreshToken", "")).headers().toString())
-                        //TODO(Refresh 만료 상황 필요)
-                        true
-                    }
                     else -> false
                 }
             }
