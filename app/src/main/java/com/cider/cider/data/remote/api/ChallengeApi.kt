@@ -49,12 +49,12 @@ interface ChallengeApi {
         @Path("filter") filter: String,
     ): Response<ArrayList<ResponseChallengeItem>>
 
-    @POST("/api/certify/like/like")
+    @POST("/api/certify/like")
     suspend fun postCertifyLike(
         @Body param: RequestCertifyLike
     ): Response<ResponseCertifyLike>
 
-    @DELETE("/api/certify/like/like/{certifyId}")
+    @DELETE("/api/certify/like/{certifyId}")
     suspend fun deleteCertifyLike(
         @Path("certifyId") id: Int,
     ): Response<ResponseCertifyLike>
