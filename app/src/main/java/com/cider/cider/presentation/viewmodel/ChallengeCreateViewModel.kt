@@ -1,17 +1,29 @@
 package com.cider.cider.presentation.viewmodel
 
+import android.content.ContentResolver
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.cider.cider.data.remote.model.RequestChallengeCreate
 import com.cider.cider.domain.model.ImageCardModel
+import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.challenge.Category
+import com.cider.cider.utils.FormDataUtil.getRealPathFromUri
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class ChallengeCreateViewModel @Inject constructor(
-
+    private val repository: ChallengeRepository
 ):ViewModel() {
     private val _challengeSelect = MutableLiveData<Category>()
     val challengeSelect: LiveData<Category> get() = _challengeSelect
@@ -109,5 +121,50 @@ class ChallengeCreateViewModel @Inject constructor(
 
     private fun checkButtonState2() {
         _buttonState2.value = _checkList.value?.all { it }
+    }
+
+    fun createChallenge(context: Context) {
+        val contentResolver: ContentResolver = context.contentResolver
+        val part1: MutableList<MultipartBody.Part> = mutableListOf()
+        val part2: MutableList<MultipartBody.Part> = mutableListOf()
+
+        _successImageList.value?.map {
+            val filePath = getRealPathFromUri(contentResolver, it.uri)
+            val imageFile = filePath?.let { it1 -> File(it1) }
+            val requestFile: RequestBody? = imageFile?.asRequestBody("multipart/form-data".toMediaType())
+            if (requestFile!=null) {
+                val body: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("uploaded_file", imageFile.name, requestFile)
+                part1.add(body)
+            }
+        }
+
+        _failImageList.value?.map {
+            val filePath = getRealPathFromUri(contentResolver, it.uri)
+            val imageFile = filePath?.let { it1 -> File(it1) }
+            val requestFile: RequestBody? = imageFile?.asRequestBody("multipart/form-data".toMediaType())
+            if (requestFile!=null) {
+                val body: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("uploaded_file", imageFile.name, requestFile)
+                part2.add(body)
+            }
+        }
+        viewModelScope.launch {
+            repository.createChallenge(
+                RequestChallengeCreate(
+                    certifyMission = challengeAuthentication.value?:"",
+                    challengeBranch = _challengeSelect.value?.api?:"",
+                    challengeCapacity = _capacity.value?:3,
+                    challengeInfo = challengeIntroduction.value?:"",
+                    challengeName = challengeTitle.value?:"",
+                    challengePeriod = challengePeriod.value?:1,
+                    isPublic = false,
+                    recruitPeriod = recruitmentPeriod.value?:1
+                ),
+                part1,
+                part2
+            )
+        }
+
     }
 }

@@ -3,10 +3,7 @@ package com.cider.cider.data.remote.datasource
 import android.net.Uri
 import android.util.Log
 import com.cider.cider.data.remote.api.ChallengeApi
-import com.cider.cider.data.remote.model.RequestCertifyLike
-import com.cider.cider.data.remote.model.RequestChallengeLike
-import com.cider.cider.data.remote.model.ResponseCertifyItem
-import com.cider.cider.data.remote.model.ResponseChallengeItem
+import com.cider.cider.data.remote.model.*
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.repository.ChallengeRepository
@@ -14,6 +11,8 @@ import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.getChallengeCategory
 import com.cider.cider.domain.type.challenge.getParticipationStatus
+import okhttp3.MultipartBody
+import java.io.File
 import javax.inject.Inject
 
 class ChallengeRepositoryImpl @Inject constructor(
@@ -78,6 +77,16 @@ class ChallengeRepositoryImpl @Inject constructor(
             200 -> true
             else -> false
         }
+    }
+
+    override suspend fun createChallenge(param: RequestChallengeCreate, image1: List<MultipartBody.Part>, image2: List<MultipartBody.Part>): Boolean {
+        val data = apiService.postChallengeCreate(param)
+        Log.d("TEST CREATE API DATA1","$data")
+        if (data.body()?.challengeId != null) {
+            val data2 = apiService.postChallengeCreateImage(data.body()?.challengeId!!, image1, image2 )
+            Log.d("TEST CREATE API DATA2","$data2")
+        }
+        return false
     }
 
     override suspend fun postChallengeLike(id: Int): Boolean {

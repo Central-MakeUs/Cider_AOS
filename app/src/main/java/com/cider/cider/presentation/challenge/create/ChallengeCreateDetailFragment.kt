@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -36,7 +37,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDetailBinding>(R.layout.fragment_challenge_create_detail) {
 
-    private val viewModel: ChallengeCreateViewModel by navGraphViewModels(R.id.nav_challenge_create)
+    private val viewModel: ChallengeCreateViewModel by hiltNavGraphViewModels(R.id.nav_challenge_create)
 
     private lateinit var imageType: ImageType
 
