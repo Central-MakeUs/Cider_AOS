@@ -90,9 +90,7 @@
         android:label="MyCertifyFragment" >
         <action
             android:id="@+id/action_myCertifyFragment_to_challengeHomeFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/challengeHomeFragment"
-            app:destination="@id/challengeHomeFragment"/>
+            app:destination="@id/challengeListFragment"/>
 
     </fragment>
     <fragment
