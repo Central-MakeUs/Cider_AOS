@@ -6,6 +6,7 @@ import com.cider.cider.data.remote.api.ChallengeApi
 import com.cider.cider.data.remote.model.*
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
+import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
@@ -106,6 +107,13 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getMyPage(): MyPageModel? {
+        val data = apiService.getMyPage()
+        return when (data.code()) {
+            200 -> data.body()?.let { mapToMyPageModel(it) }
+            else -> null
+        }
+    }
 
     private fun mapResponseToChallengeCardModel(responseList: List<ResponseChallengeItem>?)
     : List<ChallengeCardModel>? {
@@ -144,5 +152,23 @@ class ChallengeRepositoryImpl @Inject constructor(
                 certifyImage = if (response.certifyImageUrl != null ) Uri.parse(response.certifyImageUrl) else null
             )
         }
+    }
+
+    private fun mapToMyPageModel(response: ResponseMyPage) : MyPageModel {
+        return MyPageModel(
+            name = response.simpleMember.memberName,
+            profileUri = Uri.parse(response.simpleMember.profilePath),
+            participateNum = response.simpleMember.participateNum,
+            level = response.memberLevelInfo.myLevel,
+            certifyNum = response.memberActivityInfo.myCertifyNum,
+            likeChallengeNum = response.memberActivityInfo.myLikeChallengeNum,
+            experienceLeft = response.memberLevelInfo.experienceLeft,
+            levelPercent = response.memberLevelInfo.levelPercent,
+            percentComment = response.memberLevelInfo.percentComment,
+            myLevel = response.memberLevelInfo.myLevel,
+            myLevelName = response.memberLevelInfo.myLevelName,
+            nextLevel = response.memberLevelInfo.nextLevel.level,
+            nextLevelName = response.memberLevelInfo.nextLevel.levelName
+        )
     }
 }

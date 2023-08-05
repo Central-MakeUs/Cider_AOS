@@ -7,6 +7,7 @@ import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
@@ -187,5 +188,15 @@ fun setTapResource(view: TextView, tapState: ReviewType, tapCurrent: ReviewType)
             }
         }
     }
+}
 
+@BindingAdapter("percent_position")
+fun setPercentPosition(view: View, bias: Int) {
+    val layoutParams = view.layoutParams as ConstraintLayout.LayoutParams
+    if (bias > 0) {
+        layoutParams.horizontalBias = 0.0f
+    } else {
+        layoutParams.horizontalBias = bias/100.0f
+    }
+    view.layoutParams = layoutParams
 }

@@ -1,26 +1,28 @@
 package com.cider.cider.presentation.mypage
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
-import com.cider.cider.databinding.FragmentChallengeListViewBinding
 import com.cider.cider.databinding.FragmentMyPageBinding
 import com.cider.cider.domain.type.WriteType
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
+import com.cider.cider.presentation.viewmodel.MyPageViewModel
 import com.cider.cider.utils.binding.BindingFragment
-import com.cider.cider.utils.binding.BindingFragmentNoNavi
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page)  {
 
+    private val viewModel: MyPageViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.vm = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setBottomSheet()
         setButton()

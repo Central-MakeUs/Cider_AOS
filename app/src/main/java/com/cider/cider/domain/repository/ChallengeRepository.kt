@@ -4,6 +4,7 @@ import android.net.Uri
 import com.cider.cider.data.remote.model.RequestChallengeCreate
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
+import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
 import okhttp3.MultipartBody
@@ -27,4 +28,6 @@ interface ChallengeRepository {
         image1: List<MultipartBody.Part>,
         image2: List<MultipartBody.Part>
     ): Boolean
+
+    suspend fun getMyPage(): MyPageModel?
 }

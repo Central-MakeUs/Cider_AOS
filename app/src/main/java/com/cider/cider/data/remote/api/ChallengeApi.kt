@@ -1,14 +1,6 @@
 package com.cider.cider.data.remote.api
 
-import com.cider.cider.data.remote.model.RequestCertifyLike
-import com.cider.cider.data.remote.model.RequestChallengeCreate
-import com.cider.cider.data.remote.model.RequestChallengeLike
-import com.cider.cider.data.remote.model.ResponseCertifyItem
-import com.cider.cider.data.remote.model.ResponseCertifyLike
-import com.cider.cider.data.remote.model.ResponseChallengeCreate
-import com.cider.cider.data.remote.model.ResponseChallengeImageCreate
-import com.cider.cider.data.remote.model.ResponseChallengeItem
-import com.cider.cider.data.remote.model.ResponseChallengeLike
+import com.cider.cider.data.remote.model.*
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -80,4 +72,7 @@ interface ChallengeApi {
         @Part successImageFile : List<MultipartBody.Part>,
         @Part failImageFile : List<MultipartBody.Part>
     ): Response<ResponseChallengeImageCreate>
+
+    @GET("/api/member/mypage")
+    suspend fun getMyPage(): Response<ResponseMyPage>
 }
