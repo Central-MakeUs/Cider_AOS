@@ -105,7 +105,11 @@ class MyChallengeViewModel @Inject constructor(
 
 /*                _challengeReview.value = data.body()?.judgingChallengeListResponseDto?.judgingChallengeResponseDtoList?.map {
                     ChallengeReviewModel(
-
+                        id = it.challengeId,
+                        title = it.challengeName,
+                        challenge = getChallengeCategory( it.challengeBranch ),
+                        reviewType = it.judgingStatus,
+                        date = null
                     )
                 }*/
 
