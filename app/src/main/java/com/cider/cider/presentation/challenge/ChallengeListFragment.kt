@@ -1,7 +1,10 @@
 package com.cider.cider.presentation.challenge
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +17,8 @@ import com.cider.cider.presentation.dialog.FilterBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeListViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.cider.cider.utils.decoration.ChallengeListSpacingDecoration
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,8 +37,22 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
         data = bundle?.getString("type")
         setToolbar()
         setRecyclerView()
-
         setButton()
+        setAction()
+    }
+
+    private fun setAction() {
+        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+
+            Log.d("TEST AppBarOffset","$verticalOffset")
+
+            if (verticalOffset == 0) {
+                changeToolbar(true)
+            } else if (verticalOffset == -600) {
+                changeToolbar(false)
+            }
+        })
+
 
     }
 
@@ -41,15 +60,42 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
         when (data) {
             "popular" -> {
                 binding.toolbar.tvToolbarTitle.text = "인기 챌린지"
+                binding.backgroundBanner.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_mint))
+                binding.tvBanner.text = "사이다에서 가장 \n인기 있는 챌린지\nTop 10"
                 viewModel.getChallengePopular(filter = Filter.LATEST)
+                changeToolbar(true)
             }
             "official" -> {
                 binding.toolbar.tvToolbarTitle.text = "공식 챌린지"
+                binding.backgroundBanner.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_pink))
+                binding.tvBanner.text = "운영진이 함께하는\n공식 금융 챌린지"
                 viewModel.getChallengeOfficial(filter = Filter.LATEST)
+                changeToolbar(true)
             }
         }
         binding.toolbar.btnToolbarBack.setOnClickListener {
             onBackPressed()
+        }
+    }
+
+    private fun changeToolbar(isExpand: Boolean) {
+        if (isExpand) {
+            when (data) {
+                "popular" -> {
+                    binding.toolbar.toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_mint))
+                    binding.toolbar.tvToolbarTitle.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+                    binding.toolbar.btnToolbarBack.setColorFilter(ContextCompat.getColor(requireContext(),R.color.white))
+                }
+                "official" -> {
+                    binding.toolbar.toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_pink))
+                    binding.toolbar.tvToolbarTitle.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+                    binding.toolbar.btnToolbarBack.setColorFilter(ContextCompat.getColor(requireContext(),R.color.white))
+                }
+            }
+        } else {
+            binding.toolbar.toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+            binding.toolbar.tvToolbarTitle.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+            binding.toolbar.btnToolbarBack.setColorFilter(ContextCompat.getColor(requireContext(),R.color.black))
         }
     }
 
