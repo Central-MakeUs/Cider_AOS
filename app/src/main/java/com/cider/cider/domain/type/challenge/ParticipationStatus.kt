@@ -7,7 +7,7 @@ enum class ParticipationStatus(val title: String?, val text: String) {
     COMPLETED("종료","챌린지 성공")
 }
 
-fun getParticipationStatus(challengeStatus: String): ParticipationStatus {
+fun getParticipationStatus(challengeStatus: String?): ParticipationStatus {
     return when (challengeStatus) {
         "RECRUITING" -> ParticipationStatus.RECRUITING
         "POSSIBLE" -> ParticipationStatus.ON_GOING

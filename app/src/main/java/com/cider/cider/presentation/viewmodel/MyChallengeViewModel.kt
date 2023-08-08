@@ -13,9 +13,12 @@ import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 import com.cider.cider.domain.type.challenge.getChallengeCategory
 import com.cider.cider.domain.type.getReviewType
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MyChallengeViewModel @Inject constructor(
     private val repository: ChallengeRepository
 ):ViewModel(){
@@ -28,12 +31,15 @@ class MyChallengeViewModel @Inject constructor(
     private val _challengeReview = MutableLiveData<List<ChallengeReviewModel>>()
     val challengeReview: LiveData<List<ChallengeReviewModel>> get() = _challengeReview
 
+    private val _judgeNum = MutableLiveData<Int>(0)
+    val judgeNum: LiveData<Int> get() = _judgeNum
+
     init {
+        setMyChallenge()
     }
 
-
-    fun setMyChallenge() {
-        viewModelScope.launch {
+    private fun setMyChallenge() {
+        viewModelScope.launch(Dispatchers.Main) {
             val data = repository.getMyChallenge()
 
             if (data?.isSuccessful == true) {
@@ -56,6 +62,7 @@ class MyChallengeViewModel @Inject constructor(
                         date = null
                     )
                 }
+                _judgeNum.value = data.body()?.judgingChallengeListResponseDto?.completeNum
 
                 _challengeFinish.value = data.body()?.passedChallengeListResponseDto?.passedChallengeResponseDtoList?.map {
                     ChallengeCardFinishModel(
@@ -71,8 +78,6 @@ class MyChallengeViewModel @Inject constructor(
                 }
             }
         }
-
-
     }
 
 }
