@@ -127,7 +127,7 @@
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:visibleRank="@{challenge.rank}"
+                app:visibleRank="@{null}"
                 tools:text="1위" />
 
             <TextView
@@ -167,8 +167,7 @@
                     android:textColor="@color/gray_5"
                     app:layout_constraintStart_toEndOf="@+id/iv_challenge_community"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:infoPeople="@{challenge.people}"
-                    app:participation="@{challenge.participate}"
+                    android:text='@{String.valueOf(challenge.people)+"명 챌린지 성공"}'
                     tools:text="5명 대기중" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
