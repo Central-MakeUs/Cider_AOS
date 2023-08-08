@@ -34,6 +34,7 @@ class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.
         setRecyclerView()
         setToolbar()
         setButton()
+        setNoneChallenge()
     }
 
     private fun setToolbar() {
@@ -87,6 +88,12 @@ class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.
                 R.id.action_challengeMyFragment_to_challengeCreateFragment
             )
         }
+    }
+
+    private fun setNoneChallenge() {
+        binding.itemNone1.tvNone1.text = "진행중인 챌린지가 없습니다"
+        binding.itemNone2.tvNone1.text = "최근 종료된 챌린지가 없습니다"
+        binding.itemNone3.tvNone1.text = "심사중인 챌린지가 없습니다z"
     }
 
     override fun onBackPressed() {

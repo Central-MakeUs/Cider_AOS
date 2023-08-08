@@ -75,10 +75,24 @@
                         app:layout_constraintTop_toBottomOf="@id/toolbar_ongoing_challenge"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
+                    
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:visible="@{challenge.challengeOngoing.size()==0}"
+                        app:layout_constraintTop_toBottomOf="@id/toolbar_ongoing_challenge"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <include layout="@layout/item_none_challenge"
+                            android:id="@+id/item_none_1"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
+                        app:visible="@{challenge.challengeOngoing.size()!=0}"
                         android:background="@drawable/shape_feed_under_bar"
                         app:layout_constraintTop_toBottomOf="@id/rv_ongoing_challenge" />
 
@@ -131,10 +145,24 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:visible="@{challenge.challengeFinish.size()==0}"
+                        app:layout_constraintTop_toBottomOf="@id/toolbar_finish_challenge"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <include layout="@layout/item_none_challenge"
+                            android:id="@+id/item_none_2"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
                         android:background="@drawable/shape_feed_under_bar"
+                        app:visible="@{challenge.challengeFinish.size()!=0}"
                         app:layout_constraintTop_toBottomOf="@id/rv_finish_challenge" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -199,6 +227,19 @@
                         app:layout_constraintTop_toBottomOf="@id/toolbar_review_challenge"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:visible="@{challenge.challengeReview.size()==0}"
+                        app:layout_constraintTop_toBottomOf="@id/toolbar_review_challenge"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <include layout="@layout/item_none_challenge"
+                            android:id="@+id/item_none_3"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
