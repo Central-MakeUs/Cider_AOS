@@ -39,7 +39,7 @@ fun setVisibilityRank(view: TextView, rank: Int?) {
 @BindingAdapter("visibleDay")
 fun setVisibilityDDay(view: TextView, day: Int?) {
     view.visibility = if (day != null) View.VISIBLE else View.GONE
-    view.text = if (day == null) "" else if (day == 0) "" else "D${day}"
+    view.text = if (day == null) "" else if (day == 0) "" else if (day > 0) "D+${day}" else "D${day}"
 }
 
 @SuppressLint("SetTextI18n")
