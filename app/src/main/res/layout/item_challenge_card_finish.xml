@@ -138,6 +138,8 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:text="@{challenge.title}"
                 android:textSize="@dimen/text_xl"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_challenge_rank"
                 tools:text="소비습관 고치기" />
