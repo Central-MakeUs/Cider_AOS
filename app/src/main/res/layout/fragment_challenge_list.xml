@@ -7,128 +7,164 @@
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/section_toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/item_toolbar_challenge"/>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/section_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="0dp">
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/item_toolbar_challenge"/>
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:elevation="0dp">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vp_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="12dp">
-                    
-                    <TextView
-                        android:id="@+id/tv_filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="최신순"
-                        android:fontFamily="@font/pretendard_bold"
-                        android:textSize="@dimen/text_2xl"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                    <androidx.constraintlayout.utils.widget.ImageFilterButton
-                        android:id="@+id/btn_filter"
-                        android:layout_width="@dimen/icon_size"
-                        android:layout_height="@dimen/icon_size"
-                        android:layout_marginStart="4dp"
-                        android:src="@drawable/line_arrow_down_24"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_filter"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/background_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@color/btn_mint">
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+                        <TextView
+                            android:id="@+id/tv_banner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="운영진이 함께하는\n공식 금융 챌린지"
+                            android:textSize="24sp"
+                            android:lineSpacingExtra="5sp"
+                            android:layout_marginStart="24dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        </com.google.android.material.appbar.AppBarLayout>
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/iv_banner"
+                            android:layout_width="140dp"
+                            android:layout_height="140dp"
+                            android:layout_marginEnd="24dp"
+                            android:src="@drawable/image_money_management_icon"
+                            android:alpha="0.7"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_challenge_list"
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="2" />
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/btn_challenge_add"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/btn_height_48"
-                    android:layout_marginHorizontal="@dimen/layout_padding"
-                    android:layout_marginVertical="16dp"
-                    android:background="@drawable/shape_line_btn"
-                    app:layout_constraintTop_toBottomOf="@id/section_recommend_feed"
-                    app:layout_constraintBottom_toBottomOf="parent">
-
-                    <androidx.constraintlayout.utils.widget.ImageFilterView
-                        android:id="@+id/iv_challenge_add"
-                        android:layout_width="@dimen/icon_size_16"
-                        android:layout_height="@dimen/icon_size_16"
-                        android:src="@drawable/line_arrow_right_16"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_challenge_add"/>
-
-                    <TextView
-                        android:id="@+id/tv_challenge_add"
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_bold"
-                        android:textSize="@dimen/text_xl"
-                        android:text="@string/challenge_add"
-                        android:layout_marginEnd="4dp"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/iv_challenge_add"/>
+                        android:background="@color/white"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="12dp">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="최신순"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:textSize="@dimen/text_2xl"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
 
-        </androidx.core.widget.NestedScrollView>
+                        <androidx.constraintlayout.utils.widget.ImageFilterButton
+                            android:id="@+id/btn_filter"
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"
+                            android:layout_marginStart="4dp"
+                            android:src="@drawable/line_arrow_down_24"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_filter"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="16dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_challenge_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/btn_challenge_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/btn_height_48"
+                        android:layout_marginHorizontal="@dimen/layout_padding"
+                        android:layout_marginVertical="16dp"
+                        android:background="@drawable/shape_line_btn"
+                        app:layout_constraintTop_toBottomOf="@id/section_recommend_feed"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/iv_challenge_add"
+                            android:layout_width="@dimen/icon_size_16"
+                            android:layout_height="@dimen/icon_size_16"
+                            android:src="@drawable/line_arrow_right_16"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_challenge_add"/>
+
+                        <TextView
+                            android:id="@+id/tv_challenge_add"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:textSize="@dimen/text_xl"
+                            android:text="@string/challenge_add"
+                            android:layout_marginEnd="4dp"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/iv_challenge_add"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>
