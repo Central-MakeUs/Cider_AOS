@@ -71,7 +71,6 @@
                         android:id="@+id/rv_ongoing_challenge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_challenge_ongoing"
                         app:layout_constraintTop_toBottomOf="@id/toolbar_ongoing_challenge"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -140,7 +139,6 @@
                         android:id="@+id/rv_finish_challenge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_challenge_card_finish"
                         app:layout_constraintTop_toBottomOf="@id/toolbar_finish_challenge"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -195,7 +193,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{String.valueOf(challenge.judgeNum)+"개"}'
+                            android:text='@{"심사완료 "+String.valueOf(challenge.judgeNum)+"개"}'
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_sm"
                             android:textColor="@color/main"
@@ -223,7 +221,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/layout_padding"
-                        tools:listitem="@layout/item_challenge_review"
                         app:layout_constraintTop_toBottomOf="@id/toolbar_review_challenge"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -257,10 +254,9 @@
                         android:id="@+id/iv_challenge_add"
                         android:layout_width="@dimen/icon_size_16"
                         android:layout_height="@dimen/icon_size_16"
-                        android:layout_marginBottom="16dp"
                         android:src="@drawable/line_arrow_right_16"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_challenge_add"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_challenge_add"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_challenge_add" />
 
