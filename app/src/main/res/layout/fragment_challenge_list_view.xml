@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.cider.cider.presentation.viewmodel.ChallengeListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,9 +17,96 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/challenge_card_bottom_margin"
+            app:visible="@{vm.challenge.size() != 0}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_none"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:visible="@{vm.challenge.size() == 0 }"
+            android:background="@color/gray_3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/tv_none_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="아직 챌린지가 없습니다"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_2xl"
+                android:layout_marginTop="28dp"
+                app:layout_constraintBottom_toTopOf="@id/tv_none_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tv_none_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textSize="@dimen/text_base"
+                android:textColor="#6A6C85"
+                android:text="함께 인증하는 금융 챌린지를\n직접 만들어보세요"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/tv_none_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_challenge_look"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_challenge_look"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_rec_round_4"
+                android:backgroundTint="@color/main"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="28dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_none_2">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_challenge_look"
+                    android:layout_width="@dimen/icon_size_16"
+                    android:layout_height="@dimen/icon_size_16"
+                    android:src="@drawable/line_arrow_right_16"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_challenge_look"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_challenge_look"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/challenge_make"
+                    android:textColor="@color/gray_1"
+                    android:textSize="@dimen/text_base"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_challenge_look"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -28,10 +28,13 @@ class ChallengeListViewFragment(private val type: String): BindingFragmentNoNavi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("TEST ListView",type)
+        binding.vm = viewModel
+        binding.executePendingBindings()
+        binding.lifecycleOwner = viewLifecycleOwner
+
         when (type) {
             Category.INVESTING.text -> {
-                viewModel.getChallengeCategory(Category.INVESTING)
+                /*viewModel.getChallengeCategory(Category.INVESTING)*/
             }
             Category.SAVING.text -> {
                 viewModel.getChallengeCategory(Category.SAVING)
@@ -49,7 +52,15 @@ class ChallengeListViewFragment(private val type: String): BindingFragmentNoNavi
                 viewModel.getChallengeOfficial(Filter.LATEST)
             }
         }
+        Log.d("TEST ListView","$type : ${viewModel.challenge.value?.size}")
         setChallengeView()
+        setButton()
+    }
+
+    private fun setButton() {
+        binding.btnChallengeLook.setOnClickListener {
+            findNavController().navigate(R.id.action_challengeHomeFragment_to_challengeCreateFragment)
+        }
     }
 
     private fun setChallengeView() {
