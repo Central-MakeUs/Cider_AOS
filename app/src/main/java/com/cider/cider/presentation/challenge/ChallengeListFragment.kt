@@ -43,18 +43,12 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
 
     private fun setAction() {
         binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-
-            Log.d("TEST AppBarOffset","$verticalOffset")
-
             if (verticalOffset == 0) {
                 changeToolbar(true)
             } else if (verticalOffset == -600) {
                 changeToolbar(false)
             }
-        })
-
-
-    }
+        })    }
 
     private fun setToolbar() {
         when (data) {
