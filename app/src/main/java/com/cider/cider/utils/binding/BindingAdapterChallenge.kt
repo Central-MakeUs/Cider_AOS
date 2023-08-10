@@ -95,16 +95,34 @@ fun setImageDrawable(imageView: ImageView, drawable: Drawable?) {
 fun setImageDrawableWithType(imageView: ImageView, challenge: Category) {
     when (challenge) {
         Category.INVESTING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_investing))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_investing))
         }
         Category.MONEY_MANAGEMENT -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_money_management))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_money_management))
         }
         Category.SAVING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_saving))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_saving))
         }
         Category.FINANCIAL_LEARNING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_financial_learning))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_financial_learning))
+        }
+    }
+}
+
+@BindingAdapter("iconDrawableWithType")
+fun setIconDrawableWithType(imageView: ImageView, challenge: Category) {
+    when (challenge) {
+        Category.INVESTING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.home_contents))
+        }
+        Category.MONEY_MANAGEMENT -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.graph_contents))
+        }
+        Category.SAVING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.pig_contents))
+        }
+        Category.FINANCIAL_LEARNING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.card_contents))
         }
     }
 }
