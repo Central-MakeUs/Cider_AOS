@@ -11,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentMyCertifyBinding
 import com.cider.cider.utils.binding.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.fragment_my_certify) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
