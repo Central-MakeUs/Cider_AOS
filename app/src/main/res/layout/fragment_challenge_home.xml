@@ -142,7 +142,7 @@
                                 android:layout_width="@dimen/challenge_icon"
                                 android:layout_height="@dimen/challenge_icon"
                                 android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
-                                android:src="@drawable/ic_investing"
+                                android:src="@drawable/home_contents"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -179,7 +179,7 @@
                                 android:layout_width="@dimen/challenge_icon"
                                 android:layout_height="@dimen/challenge_icon"
                                 android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
-                                android:src="@drawable/ic_money_management"
+                                android:src="@drawable/graph_contents"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -215,7 +215,7 @@
                                 android:layout_width="@dimen/challenge_icon"
                                 android:layout_height="@dimen/challenge_icon"
                                 android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
-                                android:src="@drawable/ic_financial_learning"
+                                android:src="@drawable/card_contents"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -251,7 +251,7 @@
                                 android:layout_width="@dimen/challenge_icon"
                                 android:layout_height="@dimen/challenge_icon"
                                 android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
-                                android:src="@drawable/ic_saving"
+                                android:src="@drawable/pig_contents"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"/>
