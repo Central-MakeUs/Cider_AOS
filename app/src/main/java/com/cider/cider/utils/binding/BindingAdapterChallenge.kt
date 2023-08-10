@@ -217,7 +217,7 @@ fun setTapResource(view: TextView, tapState: ReviewType, tapCurrent: ReviewType)
 @BindingAdapter("percent_position")
 fun setPercentPosition(view: View, bias: Int) {
     val layoutParams = view.layoutParams as ConstraintLayout.LayoutParams
-    if (bias > 0) {
+    if (bias <= 0) {
         layoutParams.horizontalBias = 0.0f
     } else {
         layoutParams.horizontalBias = bias/100.0f
