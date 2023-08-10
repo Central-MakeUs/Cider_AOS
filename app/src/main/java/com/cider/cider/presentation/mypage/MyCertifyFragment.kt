@@ -1,7 +1,12 @@
 package com.cider.cider.presentation.mypage
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentMyCertifyBinding
@@ -13,6 +18,7 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
         super.onViewCreated(view, savedInstanceState)
         setToolbar()
         setButton()
+        setSpinner()
     }
 
     private fun setToolbar() {
@@ -29,6 +35,30 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
                 R.id.action_myCertifyFragment_to_challengeHomeFragment
             )
         }
+    }
+
+    private fun setSpinner() {
+        val itemArray = arrayOf("3", "4", "5", "6", "7", "8", "랜덤")
+        val spinnerAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.item_spinner_dropdown,
+            itemArray
+        )
+        spinnerAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
+        binding.spinnerChallenge.adapter = spinnerAdapter
+        binding.spinnerChallenge.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    // 선택됬을 경우
+
+                }
+                override fun onNothingSelected(parent: AdapterView<*>) {}
+            }
     }
 
     override fun onBackPressed() {
