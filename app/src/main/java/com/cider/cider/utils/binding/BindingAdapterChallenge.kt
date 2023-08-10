@@ -92,7 +92,7 @@ fun setImageDrawable(imageView: ImageView, drawable: Drawable?) {
 }
 
 @BindingAdapter("imageDrawableWithType")
-fun setImageDrawableWithType(imageView: ImageView, challenge: Category) {
+fun setImageDrawableWithType(imageView: ImageView, challenge: Category?) {
     when (challenge) {
         Category.INVESTING -> {
             imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_investing))
@@ -106,23 +106,29 @@ fun setImageDrawableWithType(imageView: ImageView, challenge: Category) {
         Category.FINANCIAL_LEARNING -> {
             imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_financial_learning))
         }
+        else -> {
+
+        }
     }
 }
 
 @BindingAdapter("iconDrawableWithType")
-fun setIconDrawableWithType(imageView: ImageView, challenge: Category) {
+fun setIconDrawableWithType(imageView: ImageView, challenge: Category?) {
     when (challenge) {
         Category.INVESTING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.home_contents))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.home_challengedetail))
         }
         Category.MONEY_MANAGEMENT -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.graph_contents))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.graph_challengedetail))
         }
         Category.SAVING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.pig_contents))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.pig_challengedetail))
         }
         Category.FINANCIAL_LEARNING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.card_contents))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.card_challengedetail))
+        }
+        else -> {
+
         }
     }
 }
