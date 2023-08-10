@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:paddingHorizontal="24dp"
-            android:background="@color/btn_blue"
+            android:background="@{vm.detail.category.colorResId}"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -43,7 +45,7 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/btn_blue"
+            android:background="@{vm.detail.category.colorResId}"
             app:layout_constraintTop_toBottomOf="@id/appbar"
             app:layout_constraintBottom_toTopOf="@id/section_bottom_bar">
 
@@ -51,14 +53,15 @@
                 android:id="@+id/background"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/btn_blue">
+                android:background="@{vm.detail.category.colorResId}">
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/iv_illust"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.5"
-                    android:src="@drawable/image_money_management_icon"
+                    tools:src="@drawable/graph_challengedetail"
+                    app:iconDrawableWithType="@{vm.detail.category}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +100,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            android:text="일단 냉장고 파먹기 챌린지(1:1 피드백 포함)"
+                            android:text="@{vm.detail.challengeName}"
                             tools:text="일단 냉장고 파먹기 챌린지(1:1 피드백 포함)"/>
 
                         <TextView
@@ -114,7 +117,7 @@
                             android:layout_marginTop="12dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_title"
-                            android:text="29/30"
+                            android:text='@{String.valueOf(vm.detail.participateNum)+"/"+String.valueOf(vm.detail.challengeCapacity)}'
                             tools:text="29/30"/>
 
                         <TextView
@@ -213,7 +216,7 @@
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/selector_like_24"
-                    app:select="@{true}"
+                    app:select="@{vm.detail.like}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -227,7 +230,7 @@
                     android:fontFamily="@font/pretendard_bold"
                     android:textSize="@dimen/text_xs"
                     android:textColor="@color/selector_like_text_color"
-                    app:select="@{true}"
+                    app:select="@{vm.detail.like}"
                     app:layout_constraintStart_toStartOf="@id/iv_like"
                     app:layout_constraintEnd_toEndOf="@id/iv_like"
                     app:layout_constraintTop_toBottomOf="@id/iv_like"

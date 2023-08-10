@@ -5,25 +5,40 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.cider.cider.R
+import com.cider.cider.domain.model.ChallengeDetailModel
 import com.cider.cider.domain.model.ChallengeModel
 import com.cider.cider.domain.model.FeedModel
 import com.cider.cider.domain.model.ImageCardModel
+import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.utils.getResourceUri
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ChallengeDetailViewModel @Inject constructor(
-
+    private val repository: ChallengeRepository
 ): ViewModel() {
+
+    private val _detail = MutableLiveData<ChallengeDetailModel>()
+    val detail: LiveData<ChallengeDetailModel> get() = _detail
 
     private val _feed = MutableLiveData<List<FeedModel>>()
     val feed: LiveData<List<FeedModel>> get() = _feed
 
     init {
         Log.d("TEST Lifecycle","ChallengeDetailViewModel ${hashCode()}")
-
     }
+
+    fun getDetail(id: Int) {
+        viewModelScope.launch {
+            _detail.value = repository.getChallengeDetail(id)
+        }
+    }
+
     fun testFeed(context: Context) {
         val list: MutableList<FeedModel> = mutableListOf()
 

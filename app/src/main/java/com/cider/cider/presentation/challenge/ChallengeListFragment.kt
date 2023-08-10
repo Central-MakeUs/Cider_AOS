@@ -102,8 +102,8 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
 
         cardAdapter.setOnItemClickListener(object : ChallengeCardAdapter.OnItemClickListener {
             override fun onItemClick(id: Int) {
-                val bundle = bundleOf()
-                findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailFragment)
+                val bundle = bundleOf("id" to id)
+                findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailFragment, bundle)
             }
         })
 

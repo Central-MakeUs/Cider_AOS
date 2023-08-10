@@ -5,6 +5,7 @@ import com.cider.cider.data.remote.model.RequestChallengeCreate
 import com.cider.cider.data.remote.model.ResponseMyChallenge
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
+import com.cider.cider.domain.model.ChallengeDetailModel
 import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
@@ -34,4 +35,6 @@ interface ChallengeRepository {
     suspend fun getMyPage(): MyPageModel?
 
     suspend fun getMyChallenge(): Response<ResponseMyChallenge>?
+
+    suspend fun getChallengeDetail(id: Int): ChallengeDetailModel?
 }

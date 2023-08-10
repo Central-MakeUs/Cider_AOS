@@ -12,7 +12,9 @@ import com.cider.cider.utils.binding.BindingFragment
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChallengeDetailInfoFragment: BindingFragment<FragmentChallengeDetailInfoBinding>(R.layout.fragment_challenge_detail_info) {
 
     private val viewModel: ChallengeDetailViewModel by activityViewModels()
