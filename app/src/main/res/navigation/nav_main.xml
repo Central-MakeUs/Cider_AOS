@@ -92,6 +92,9 @@
         <action
             android:id="@+id/action_myPageFragment_to_challengeCreateFragment"
             app:destination="@id/challengeCreateFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/myCertifyFragment"
@@ -126,4 +129,8 @@
             android:id="@+id/action_challengeListAllFragment_to_challengeDetailFragment"
             app:destination="@id/challengeDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.cider.cider.presentation.SettingFragment"
+        android:label="SettingFragment" />
 </navigation>
