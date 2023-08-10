@@ -12,5 +12,5 @@ interface LoginRepository {
     suspend fun patchMember(accessToken: String, param: RequestMember): Boolean
 
     suspend fun getLoginMe(): Boolean
-    suspend fun postLogout()
+    suspend fun postLogout(): Boolean
 }

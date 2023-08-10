@@ -33,3 +33,7 @@ data class ResponseMember(
     val memberGender: String,
     val interestChallenge: String
 )
+
+data class ResponseLogout(
+    val string: String
+)

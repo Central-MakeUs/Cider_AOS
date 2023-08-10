@@ -16,8 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class
-LoginViewModel @Inject constructor(
+class LoginViewModel @Inject constructor(
     private val repository: LoginRepository
 ): ViewModel() {
     //탭 상태
@@ -115,6 +114,10 @@ LoginViewModel @Inject constructor(
      */
     suspend fun login(): Boolean {
         return if (App.prefs.getString("accessToken","").isNotEmpty()) repository.getLoginMe() else false
+    }
+
+    suspend fun logout(): Boolean {
+        return repository.postLogout()
     }
 
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {

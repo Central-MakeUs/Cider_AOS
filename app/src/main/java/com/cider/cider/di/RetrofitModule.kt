@@ -4,6 +4,7 @@ import com.cider.cider.App
 import com.cider.cider.data.remote.api.ChallengeApi
 import com.cider.cider.data.remote.api.LoginApi
 import com.cider.cider.utils.Constants.BASE_URL
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,16 +18,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
+
+    var gson = GsonBuilder()
+        .setLenient()
+        .create()
 
     @Provides
     @Singleton
     fun provideRegisterApiService(): LoginApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(LoginApi::class.java)
     }
