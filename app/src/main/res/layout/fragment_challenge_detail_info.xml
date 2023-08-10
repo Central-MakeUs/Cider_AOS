@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -47,7 +49,7 @@
                     android:id="@+id/tv_current_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="30회 중 6회 진행"
+                    android:text='@{String.valueOf(vm.detail.condition.challengePeriod)+"회 중 "+String.valueOf(vm.detail.condition.ongoingDate)+"회 진행"}'
                     android:fontFamily="@font/pretendard_regular"
                     android:textSize="@dimen/text_base"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +121,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_sm"
                             android:textColor="@color/white"
-                            android:text="97%"
+                            android:text='@{String.valueOf(vm.detail.condition.averageCondition)+"%"}'
                             android:background="@drawable/shape_rec_round_4"
                             android:backgroundTint="@color/main"
                             android:gravity="center"
@@ -127,7 +129,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.97"/>
+                            app:percent_position="@{vm.detail.condition.averageCondition}"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -197,7 +199,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_sm"
                             android:textColor="@color/white"
-                            android:text="20%"
+                            android:text='@{String.valueOf(vm.detail.condition.myCondition)+"%"}'
                             android:background="@drawable/shape_rec_round_4"
                             android:backgroundTint="@color/secondary"
                             android:gravity="center"
@@ -205,7 +207,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.2"/>
+                            app:percent_position="@{vm.detail.condition.myCondition}"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -239,17 +241,7 @@
                     android:id="@+id/tv_challenge_intro_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='설문지를 통해 신청해주신 분들께 금융권 취업설명회
-안내 및 서류접수 지원서를 배부해드립니다.
-예비 금융인을 위한 겨울방학 "스펙업챌린지 7기"
-프로그램에 함께 하실 분들을 모집합니다!\n\n
-2. 지원 일정\n
-지원마감 : 2023년 06월 18일\n
-서류발표 : 2023년 06월 20일\n
-면접일시 : 2023년 06월 23, 24일\n
-최종발표 : 2023년 6월 27일\n\n
-3. 지원 방법링크 신청 및 지원서 홈페이지 제출\n\n
-📌 신청링크 : https://naver.me/GbcM8C8M'
+                    android:text='@{vm.detail.challengeIntro}'
                     android:fontFamily="@font/pretendard_regular"
                     android:textSize="@dimen/text_base"
                     android:lineSpacingExtra="3dp"
@@ -318,7 +310,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_base"
-                            android:text="06월 26일(월) - 06월 28일(수)"
+                            android:text="@{vm.detail.challengeInfo.recruitPeriod}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -354,7 +346,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_base"
-                            android:text="6월 30일(금) - 07월 7일(금)"
+                            android:text="@{vm.detail.challengeInfo.challengePeriod}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -390,7 +382,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_base"
-                            android:text="30명"
+                            android:text='@{String.valueOf(vm.detail.challengeInfo.challengeCapacity)+"명"}'
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -426,7 +418,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_base"
-                            android:text="총 14회"
+                            android:text='@{"총 "+String.valueOf(vm.detail.challengeInfo.certifyNum)+"회"}'
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -462,7 +454,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_base"
-                            android:text="매일 자정까지"
+                            android:text="@{vm.detail.challengeInfo.certifyTime}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -498,7 +490,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
                             android:textSize="@dimen/text_base"
-                            android:text="있음"
+                            android:text='@{vm.detail.challengeInfo.isReward ? "있음" : "없음" }'
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -598,7 +590,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pretendard_bold"
-                        android:text="11회 미만 인증"
+                        android:text="@{vm.detail.failureRule}"
                         android:textColor="#2A2B36"
                         android:textSize="@dimen/text_lg"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -672,7 +664,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pretendard_bold"
-                        android:text="실시간 사진촬영"
+                        android:text="@{vm.detail.certifyRule}"
                         android:textColor="#2A2B36"
                         android:textSize="@dimen/text_lg"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -710,8 +702,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_regular"
-                    android:text="하루 한번 아침에 일어나서 물이 담긴 컵사진 인증
-하루 한번 아침에 일어나서 물이 담긴 컵사진 인증"
+                    android:text="@{vm.detail.certifyMission}"
                     android:textSize="@dimen/text_base"
                     android:layout_marginTop="16dp"
                     android:paddingHorizontal="24dp"
@@ -719,6 +710,7 @@
                     android:background="@drawable/shape_rec_round_8"
                     android:backgroundTint="#F6F6F6"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_challenge_mission" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -771,6 +763,7 @@
                         android:background="@drawable/shape_rec_round_4"
                         android:backgroundTint="#08000000"
                         android:layout_marginTop="16dp"
+                        app:imageUri="@{vm.detail.successExampleImage}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/section_success_mission_tv">
@@ -828,6 +821,7 @@
                         android:background="@drawable/shape_rec_round_4"
                         android:backgroundTint="#08000000"
                         android:layout_marginTop="16dp"
+                        app:imageUri="@{vm.detail.failureExampleImage}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/section_fail_mission_tv">
@@ -881,6 +875,7 @@
                             android:layout_width="44dp"
                             android:layout_height="44dp"
                             android:src="@drawable/shape_profile"
+                            app:imageUri="@{vm.detail.member.profilePath}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -898,7 +893,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/pretendard_bold"
-                                android:text="지지"
+                                android:text="@{vm.detail.member.memberName}"
                                 android:textColor="#30313D"
                                 android:textSize="@dimen/text_lg"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -914,7 +909,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:paddingHorizontal="4dp"
                                 android:paddingVertical="2dp"
-                                android:text="0번째 챌린지"
+                                android:text='@{String.valueOf(vm.detail.member.participateNum)+"번째 챌린지"}'
                                 android:textColor="@color/gray_5"
                                 android:textSize="@dimen/text_sm"
                                 android:layout_marginStart="6dp"
@@ -932,7 +927,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:paddingHorizontal="4dp"
                                 android:paddingVertical="2dp"
-                                android:text="LV 5 능숙한 챌린저"
+                                android:text="@{vm.detail.member.memberLevelName}"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/text_sm"
                                 android:layout_marginTop="4dp"
@@ -976,6 +971,7 @@
                     android:id="@+id/iv_caution"
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
+                    android:clipToOutline="true"
                     android:src="@drawable/selector_expand_arrow"
                     app:select="@{false}"
                     app:layout_constraintEnd_toEndOf="parent"

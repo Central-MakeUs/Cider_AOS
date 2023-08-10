@@ -19,6 +19,7 @@ data class ChallengeDetailModel(
     val certifyRule: String,
     val failureRule: String,
     val challengeInfo: ChallengeInfoModel,
+    val condition: ChallengeCondition,
     val member: MemberModel
 ) {
 }

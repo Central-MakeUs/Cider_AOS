@@ -29,13 +29,11 @@ class ChallengeDetailViewModel @Inject constructor(
     private val _feed = MutableLiveData<List<FeedModel>>()
     val feed: LiveData<List<FeedModel>> get() = _feed
 
-    init {
-        Log.d("TEST Lifecycle","ChallengeDetailViewModel ${hashCode()}")
-    }
-
     fun getDetail(id: Int) {
         viewModelScope.launch {
             _detail.value = repository.getChallengeDetail(id)
+            Log.d("TEST Detail2","${_detail.value}")
+            repository.getDetailTest(id)
         }
     }
 

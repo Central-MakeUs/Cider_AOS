@@ -37,4 +37,5 @@ interface ChallengeRepository {
     suspend fun getMyChallenge(): Response<ResponseMyChallenge>?
 
     suspend fun getChallengeDetail(id: Int): ChallengeDetailModel?
+    suspend fun getDetailTest(id: Int)
 }

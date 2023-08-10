@@ -6,6 +6,7 @@ import com.cider.cider.data.remote.api.ChallengeApi
 import com.cider.cider.data.remote.model.*
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
+import com.cider.cider.domain.model.ChallengeCondition
 import com.cider.cider.domain.model.ChallengeDetailModel
 import com.cider.cider.domain.model.ChallengeInfoModel
 import com.cider.cider.domain.model.MemberModel
@@ -140,6 +141,10 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getDetailTest(id: Int) {
+        Log.d("TEST Detail","${apiService.getDetailTest(id).body()}")
+    }
+
     private fun mapToChallengeDetail(response: ResponseChallengeDetail): ChallengeDetailModel {
         return ChallengeDetailModel(
             challengeId = response.challengeId,
@@ -163,6 +168,12 @@ class ChallengeRepositoryImpl @Inject constructor(
                 challengePeriod = response.challengeInfoResponseDto.challengePeriod,
                 isReward = response.challengeInfoResponseDto.isReward,
                 recruitPeriod = response.challengeInfoResponseDto.recruitPeriod
+            ),
+            condition = ChallengeCondition(
+                averageCondition = response.challengeConditionResponseDto.averageCondition,
+                challengePeriod = response.challengeConditionResponseDto.challengePeriod,
+                myCondition = response.challengeConditionResponseDto.myCondition,
+                ongoingDate = response.challengeConditionResponseDto.ongoingDate
             ),
             member = MemberModel(
                 memberLevelName = response.simpleMemberResponseDto.memberLevelName,

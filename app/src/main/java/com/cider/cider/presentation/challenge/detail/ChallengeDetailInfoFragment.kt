@@ -22,6 +22,10 @@ class ChallengeDetailInfoFragment: BindingFragment<FragmentChallengeDetailInfoBi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.vm = viewModel
+        binding.executePendingBindings()
+        binding.lifecycleOwner = viewLifecycleOwner
+
         setCaution()
         setBalloon()
         setProgressView()
