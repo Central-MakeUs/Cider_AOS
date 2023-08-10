@@ -37,8 +37,8 @@
                 android:layout_marginHorizontal="24dp"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fl_category_certify"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_feed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
