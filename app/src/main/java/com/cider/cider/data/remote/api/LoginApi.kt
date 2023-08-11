@@ -12,6 +12,10 @@ interface LoginApi {
         @Body params: RequestLoginModel
     ): Response<ResponseLoginModel>
 
+    @POST("/api/oauth/logout")
+    suspend fun postLogout(
+        @Header("Authorization") accessCode: String,
+    )
 
     @GET("/api/member/nicknames")
     suspend fun getRandomNickname(): Response<ResponseRandomNickNameModel>

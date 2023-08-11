@@ -33,7 +33,7 @@ enum class Category(val text: String, val colorResId: Int, val imageResId: Int, 
     ),
 }
 
-fun getChallengeCategory(interestField: String): Category {
+fun getChallengeCategory(interestField: String?): Category {
     return when (interestField) {
         "TECHNOLOGY"-> Category.INVESTING
         "MONEY"-> Category.MONEY_MANAGEMENT

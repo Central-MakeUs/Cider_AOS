@@ -127,7 +127,7 @@
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:visibleRank="@{challenge.rank}"
+                app:visibleRank="@{null}"
                 tools:text="1위" />
 
             <TextView
@@ -138,6 +138,8 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:text="@{challenge.title}"
                 android:textSize="@dimen/text_xl"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_challenge_rank"
                 tools:text="소비습관 고치기" />
@@ -167,8 +169,7 @@
                     android:textColor="@color/gray_5"
                     app:layout_constraintStart_toEndOf="@+id/iv_challenge_community"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:infoPeople="@{challenge.people}"
-                    app:participation="@{challenge.participate}"
+                    android:text='@{String.valueOf(challenge.people)+"명 챌린지 성공"}'
                     tools:text="5명 대기중" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

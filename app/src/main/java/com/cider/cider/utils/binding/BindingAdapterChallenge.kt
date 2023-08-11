@@ -39,7 +39,7 @@ fun setVisibilityRank(view: TextView, rank: Int?) {
 @BindingAdapter("visibleDay")
 fun setVisibilityDDay(view: TextView, day: Int?) {
     view.visibility = if (day != null) View.VISIBLE else View.GONE
-    view.text = if (day == null) "" else if (day == 0) "" else "D${day}"
+    view.text = if (day == null) "" else if (day == 0) "" else if (day > 0) "D+${day}" else "D${day}"
 }
 
 @SuppressLint("SetTextI18n")
@@ -92,19 +92,43 @@ fun setImageDrawable(imageView: ImageView, drawable: Drawable?) {
 }
 
 @BindingAdapter("imageDrawableWithType")
-fun setImageDrawableWithType(imageView: ImageView, challenge: Category) {
+fun setImageDrawableWithType(imageView: ImageView, challenge: Category?) {
     when (challenge) {
         Category.INVESTING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_investing))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_investing))
         }
         Category.MONEY_MANAGEMENT -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_money_management))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_money_management))
         }
         Category.SAVING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_saving))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_saving))
         }
         Category.FINANCIAL_LEARNING -> {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.image_financial_learning))
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.contents_financial_learning))
+        }
+        else -> {
+
+        }
+    }
+}
+
+@BindingAdapter("iconDrawableWithType")
+fun setIconDrawableWithType(imageView: ImageView, challenge: Category?) {
+    when (challenge) {
+        Category.INVESTING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.home_challengedetail))
+        }
+        Category.MONEY_MANAGEMENT -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.graph_challengedetail))
+        }
+        Category.SAVING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.pig_challengedetail))
+        }
+        Category.FINANCIAL_LEARNING -> {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.card_challengedetail))
+        }
+        else -> {
+
         }
     }
 }
@@ -193,7 +217,7 @@ fun setTapResource(view: TextView, tapState: ReviewType, tapCurrent: ReviewType)
 @BindingAdapter("percent_position")
 fun setPercentPosition(view: View, bias: Int) {
     val layoutParams = view.layoutParams as ConstraintLayout.LayoutParams
-    if (bias > 0) {
+    if (bias <= 0) {
         layoutParams.horizontalBias = 0.0f
     } else {
         layoutParams.horizontalBias = bias/100.0f

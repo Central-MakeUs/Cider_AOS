@@ -6,6 +6,10 @@ import com.cider.cider.data.remote.api.ChallengeApi
 import com.cider.cider.data.remote.model.*
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
+import com.cider.cider.domain.model.ChallengeCondition
+import com.cider.cider.domain.model.ChallengeDetailModel
+import com.cider.cider.domain.model.ChallengeInfoModel
+import com.cider.cider.domain.model.MemberModel
 import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
@@ -128,8 +132,59 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
-    private fun mapResponseToChallengeCardModel(responseList: List<ResponseChallengeItem>?)
-    : List<ChallengeCardModel>? {
+    override suspend fun getChallengeDetail(id: Int): ChallengeDetailModel? {
+        val data = apiService.getChallengeDetail(id)
+        return if (data.isSuccessful) {
+            data.body()?.let { mapToChallengeDetail(it) }
+        } else {
+            null
+        }
+    }
+
+    override suspend fun getDetailTest(id: Int) {
+        Log.d("TEST Detail","${apiService.getDetailTest(id).body()}")
+    }
+
+    private fun mapToChallengeDetail(response: ResponseChallengeDetail): ChallengeDetailModel {
+        return ChallengeDetailModel(
+            challengeId = response.challengeId,
+            category = getChallengeCategory(response.challengeBranch),
+            challengeStatus = true,
+            challengeName = response.challengeName?:"",
+            challengeCapacity = response.challengeCapacity,
+            challengeIntro = response.challengeIntro,
+            challengeLikeNum = response.challengeLikeNum,
+            isLike = response.isLike,
+            participateNum = response.participateNum,
+            certifyMission =  response.certifyMissionResponseDto.certifyMission,
+            failureExampleImage = response.certifyMissionResponseDto.failureExampleImage?.let { Uri.parse(it) },
+            successExampleImage = response.certifyMissionResponseDto.successExampleImage?.let { Uri.parse(it) },
+            certifyRule = response.challengeRuleResponseDto.certifyRule,
+            failureRule = response.challengeRuleResponseDto.failureRule,
+            challengeInfo = ChallengeInfoModel(
+                certifyNum = response.challengeInfoResponseDto.certifyNum,
+                certifyTime = response.challengeInfoResponseDto.certifyTime,
+                challengeCapacity = response.challengeInfoResponseDto.challengeCapacity,
+                challengePeriod = response.challengeInfoResponseDto.challengePeriod,
+                isReward = response.challengeInfoResponseDto.isReward,
+                recruitPeriod = response.challengeInfoResponseDto.recruitPeriod
+            ),
+            condition = ChallengeCondition(
+                averageCondition = response.challengeConditionResponseDto.averageCondition,
+                challengePeriod = response.challengeConditionResponseDto.challengePeriod,
+                myCondition = response.challengeConditionResponseDto.myCondition,
+                ongoingDate = response.challengeConditionResponseDto.ongoingDate
+            ),
+            member = MemberModel(
+                memberLevelName = response.simpleMemberResponseDto.memberLevelName,
+                memberName = response.simpleMemberResponseDto.memberName,
+                participateNum = response.simpleMemberResponseDto.participateChallengeNum,
+                profilePath = Uri.parse(response.simpleMemberResponseDto.profilePath)
+            )
+        )
+    }
+
+    private fun mapResponseToChallengeCardModel(responseList: List<ResponseChallengeItem>?) : List<ChallengeCardModel>? {
         return responseList?.map { responseItem ->
             ChallengeCardModel(
                 id = responseItem.challengeId,
@@ -171,7 +226,7 @@ class ChallengeRepositoryImpl @Inject constructor(
         return MyPageModel(
             name = response.simpleMember.memberName,
             profileUri = Uri.parse(response.simpleMember.profilePath),
-            participateNum = response.simpleMember.participateNum,
+            participateNum = response.simpleMember.participateChallengeNum,
             level = response.memberLevelInfo.myLevel,
             certifyNum = response.memberActivityInfo.myCertifyNum,
             likeChallengeNum = response.memberActivityInfo.myLikeChallengeNum,

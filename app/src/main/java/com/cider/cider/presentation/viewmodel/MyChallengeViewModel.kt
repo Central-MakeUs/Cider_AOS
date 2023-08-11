@@ -12,9 +12,13 @@ import com.cider.cider.domain.type.ReviewType
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.ParticipationStatus
 import com.cider.cider.domain.type.challenge.getChallengeCategory
+import com.cider.cider.domain.type.getReviewType
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MyChallengeViewModel @Inject constructor(
     private val repository: ChallengeRepository
 ):ViewModel(){
@@ -27,69 +31,15 @@ class MyChallengeViewModel @Inject constructor(
     private val _challengeReview = MutableLiveData<List<ChallengeReviewModel>>()
     val challengeReview: LiveData<List<ChallengeReviewModel>> get() = _challengeReview
 
+    private val _judgeNum = MutableLiveData<Int>(0)
+    val judgeNum: LiveData<Int> get() = _judgeNum
+
     init {
-        test1()
-        test3()
+        setMyChallenge()
     }
 
-    fun test1() {
-        val list: MutableList<ChallengeCardFinishModel> = mutableListOf()
-
-        list.add(
-            ChallengeCardFinishModel(
-                id = 1, participate = ParticipationStatus.RECRUITING,
-                like = false, reward = true, category = Category.SAVING,
-                duration = 1, rank = 1, title = "소비습관 고치기1", people = 5,
-                official = true, d_day = 23, success = true
-            )
-        )
-        list.add(
-            ChallengeCardFinishModel(
-                id = 2, participate = ParticipationStatus.RECRUITING,
-                like = false, reward = true, category = Category.SAVING,
-                duration = 1, rank = 1, title = "소비습관 고치기2", people = 15,
-                official = true, d_day = 23, success = false
-            )
-        )
-        _challengeFinish.value = list
-    }
-
-
-    fun test3() {
-        val list: MutableList<ChallengeReviewModel> = mutableListOf()
-
-        list.add(
-            ChallengeReviewModel(
-                id = 1, title = "소비습관 고치기", challenge = Category.SAVING , reviewType = ReviewType.REVIEW,
-                date = null
-            )
-        )
-        list.add(
-            ChallengeReviewModel(
-                id = 2, title = "소비습관 고치기2", challenge = Category.INVESTING , reviewType = ReviewType.APPROVED,
-                date = null
-            )
-        )
-        list.add(
-            ChallengeReviewModel(
-                id = 3, title = "소비습관 고치기3", challenge = Category.FINANCIAL_LEARNING , reviewType = ReviewType.FAILED,
-                date = null
-            )
-        )
-        list.add(
-            ChallengeReviewModel(
-                id = 4, title = "소비습관 고치기4", challenge = Category.MONEY_MANAGEMENT , reviewType = ReviewType.REJECTED,
-                date = null
-            )
-        )
-
-        _challengeReview.value = list
-    }
-
-
-    fun setMyChallenge() {
-
-        viewModelScope.launch {
+    private fun setMyChallenge() {
+        viewModelScope.launch(Dispatchers.Main) {
             val data = repository.getMyChallenge()
 
             if (data?.isSuccessful == true) {
@@ -103,16 +53,31 @@ class MyChallengeViewModel @Inject constructor(
                     )
                 }
 
-/*                _challengeReview.value = data.body()?.judgingChallengeListResponseDto?.judgingChallengeResponseDtoList?.map {
+                _challengeReview.value = data.body()?.judgingChallengeListResponseDto?.judgingChallengeResponseDtoList?.map {
                     ChallengeReviewModel(
-
+                        id = it.challengeId,
+                        title = it.challengeName,
+                        challenge = getChallengeCategory( it.challengeBranch ),
+                        reviewType = getReviewType(it.judgingStatus),
+                        date = null
                     )
-                }*/
+                }
+                _judgeNum.value = data.body()?.judgingChallengeListResponseDto?.completeNum
 
+                _challengeFinish.value = data.body()?.passedChallengeListResponseDto?.passedChallengeResponseDtoList?.map {
+                    ChallengeCardFinishModel(
+                        id = it.challengeId,
+                        reward = false,
+                        category = getChallengeCategory( it.challengeBranch ),
+                        duration = 1,
+                        title = it.challengeName,
+                        people = it.successNum,
+                        official = it.isOfficial,
+                        success = it.isSuccess == "성공"
+                    )
+                }
             }
         }
-
-
     }
 
 }

@@ -38,6 +38,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <androidx.constraintlayout.utils.widget.ImageFilterButton
+                    android:id="@+id/btn_setting"
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/line_setting_24"

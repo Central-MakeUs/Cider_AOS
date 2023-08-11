@@ -6,7 +6,9 @@ import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentProfileEditBinding
 import com.cider.cider.utils.binding.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.fragment_profile_edit) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

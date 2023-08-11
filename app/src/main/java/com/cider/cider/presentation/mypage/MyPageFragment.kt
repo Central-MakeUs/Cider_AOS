@@ -91,6 +91,11 @@ class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_m
                 R.id.action_myPageFragment_to_profileEditFragment
             )
         }
+        binding.btnSetting.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_myPageFragment_to_settingFragment
+            )
+        }
     }
 
     override fun onBackPressed() {

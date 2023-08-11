@@ -6,7 +6,9 @@ import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentInterestChallengeBinding
 import com.cider.cider.utils.binding.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChallengeInterestFragment: BindingFragment<FragmentInterestChallengeBinding>(R.layout.fragment_interest_challenge) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

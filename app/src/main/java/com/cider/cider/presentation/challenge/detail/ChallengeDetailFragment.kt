@@ -15,7 +15,9 @@ import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R.layout.fragment_challenge_detail) {
 
     private val viewModel: ChallengeDetailViewModel by activityViewModels()
@@ -24,12 +26,24 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.vm = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
+
+        val id = arguments?.getInt("id")
+        if (id != null) {
+            Log.d("TEST Detail","$id")
+            viewModel.getDetail(id)
+        }
+
+        setBanner()
         setBehavior()
         setBottomSheet()
-        setBanner()
     }
 
     private fun setBanner() {
+
     }
 
     private fun setBehavior() {
@@ -39,10 +53,10 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_DRAGGING, BottomSheetBehavior.STATE_COLLAPSED -> {
-                        binding.appbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_blue))
+                        binding.appbar.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
                         binding.btnToolbarBack.setColorFilter(ContextCompat.getColor(requireContext(),R.color.white))
                         binding.btnToolbarIcon.setColorFilter(ContextCompat.getColor(requireContext(),R.color.white))
-                        binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_blue))
+                        binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
                         binding.viewProfile.visibility = View.VISIBLE
                     }
                     BottomSheetBehavior.STATE_EXPANDED -> {

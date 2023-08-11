@@ -13,9 +13,11 @@ import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.utils.binding.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ChallengeDetailFeedFragment: BindingFragment<FragmentChallengeDetailFeedBinding>(R.layout.fragment_challenge_detail_feed) {
 
     private val viewModel: ChallengeDetailViewModel by activityViewModels()

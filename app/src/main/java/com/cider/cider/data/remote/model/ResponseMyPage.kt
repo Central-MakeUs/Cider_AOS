@@ -9,7 +9,7 @@ data class ResponseMyPage(
 data class SimpleMember(
     val memberLevelName: String,
     val memberName: String,
-    val participateNum: Int,
+    val participateChallengeNum: Int,
     val profilePath: String
 )
 

@@ -80,4 +80,14 @@ interface ChallengeApi {
 
     @GET("/api/challenge/my")
     suspend fun getMyChallenge(): Response<ResponseMyChallenge>
+
+    @GET("/api/challenge/detail/info/{challengeId}")
+    suspend fun getChallengeDetail(
+        @Path("challengeId") id: Int,
+    ): Response<ResponseChallengeDetail>
+
+    @GET("/api/challenge/detail/info/{challengeId}")
+    suspend fun getDetailTest(
+        @Path("challengeId") id: Int,
+    ): Response<Any>
 }
