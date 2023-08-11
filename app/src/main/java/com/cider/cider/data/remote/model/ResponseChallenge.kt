@@ -36,7 +36,7 @@ data class SimpleMemberResponseDto(
     val memberName: String,
     val memberLevelName: String,
     val profilePath: String,
-    val participateNum: Int
+    val participateChallengeNum: Int,
 )
 
 data class ResponseCertifyLike(
