@@ -45,10 +45,10 @@ class CertifyAdapter(
             binding.tvMoreText.setOnClickListener {
                 if (binding.tvMoreText.text == "자세히 보기") {
                     binding.tvMoreText.text = "접기"
-                    binding.tvFeedContent.isSingleLine = false
+                    binding.tvFeedContent.maxLines = Int.MAX_VALUE
                 } else {
                     binding.tvMoreText.text = "자세히 보기"
-                    binding.tvFeedContent.isSingleLine = true
+                    binding.tvFeedContent.maxLines = 2
                 }
             }
 
