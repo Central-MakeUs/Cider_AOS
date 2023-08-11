@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:paddingHorizontal="24dp"
-            android:background="@{vm.detail.category.colorResId}"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -45,15 +44,13 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@{vm.detail.category.colorResId}"
             app:layout_constraintTop_toBottomOf="@id/appbar"
             app:layout_constraintBottom_toTopOf="@id/section_bottom_bar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/background"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@{vm.detail.category.colorResId}">
+                android:layout_height="200dp">
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/iv_illust"

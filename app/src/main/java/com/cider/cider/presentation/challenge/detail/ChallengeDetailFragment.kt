@@ -43,7 +43,8 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
     }
 
     private fun setBanner() {
-
+        binding.appbar.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
+        binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
     }
 
     private fun setBehavior() {
