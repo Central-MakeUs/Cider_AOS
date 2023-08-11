@@ -178,7 +178,7 @@ class ChallengeRepositoryImpl @Inject constructor(
             member = MemberModel(
                 memberLevelName = response.simpleMemberResponseDto.memberLevelName,
                 memberName = response.simpleMemberResponseDto.memberName,
-                participateNum = response.simpleMemberResponseDto.participateNum,
+                participateNum = response.simpleMemberResponseDto.participateChallengeNum,
                 profilePath = Uri.parse(response.simpleMemberResponseDto.profilePath)
             )
         )
@@ -226,7 +226,7 @@ class ChallengeRepositoryImpl @Inject constructor(
         return MyPageModel(
             name = response.simpleMember.memberName,
             profileUri = Uri.parse(response.simpleMember.profilePath),
-            participateNum = response.simpleMember.participateNum,
+            participateNum = response.simpleMember.participateChallengeNum,
             level = response.memberLevelInfo.myLevel,
             certifyNum = response.memberActivityInfo.myCertifyNum,
             likeChallengeNum = response.memberActivityInfo.myLikeChallengeNum,
