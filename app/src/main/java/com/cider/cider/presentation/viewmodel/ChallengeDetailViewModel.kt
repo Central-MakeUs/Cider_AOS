@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cider.cider.R
+import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.model.ChallengeDetailModel
 import com.cider.cider.domain.model.ChallengeModel
 import com.cider.cider.domain.model.FeedModel
@@ -74,5 +75,15 @@ class ChallengeDetailViewModel @Inject constructor(
             }
         }
         _feed.value = updatedFeedList
+    }
+
+    fun changeLike(isCheck: Boolean) {
+        viewModelScope.launch {
+            if (isCheck) {
+                _detail.value?.challengeId?.let { repository.deleteChallengeLike(it)}
+            } else {
+                _detail.value?.challengeId?.let { repository.postChallengeLike(it) }
+            }
+        }
     }
 }

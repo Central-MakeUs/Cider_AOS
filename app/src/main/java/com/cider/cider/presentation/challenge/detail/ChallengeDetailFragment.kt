@@ -40,6 +40,7 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         setBanner()
         setBehavior()
         setBottomSheet()
+        setBottomNavi()
     }
 
     private fun setBanner() {
@@ -90,6 +91,21 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         TabLayoutMediator(binding.tabLayout, binding.vpChallenge) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+    }
+
+    private fun setBottomNavi() {
+        binding.btnLike.setOnClickListener {
+            viewModel.changeLike(binding.ivLike.isSelected)
+            if (binding.ivLike.isSelected) {
+                binding.ivLike.isSelected = false
+                binding.tvLike.text = (binding.tvLike.text.toString().toInt() - 1).toString()
+            } else {
+                binding.ivLike.isSelected = true
+                binding.tvLike.text = (binding.tvLike.text.toString().toInt() + 1).toString()
+            }
+
+        }
+
     }
 
     override fun onBackPressed() {
