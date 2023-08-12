@@ -11,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
+import com.cider.cider.domain.model.BannerCardModel
 import com.cider.cider.domain.type.WriteType
 import com.cider.cider.domain.type.challenge.Category
+import com.cider.cider.presentation.adapter.BannerPagerAdapter
 import com.cider.cider.presentation.adapter.CertifyAdapter
 import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
@@ -42,7 +44,19 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         setScrollEvent()
         setCategory()
         setBottomNavi()
+        setBanner()
     }
+
+    private fun setBanner() {
+        val bannerAdapter = BannerPagerAdapter()
+        binding.bannerHome.adapter = bannerAdapter
+        val bannerItems = listOf(
+            BannerCardModel(1),
+            BannerCardModel(2)
+        )
+        bannerAdapter.submitList(bannerItems)
+    }
+
 
     private fun setAppBar() {
         binding.toolbar.tvToolbarTitle.text = "챌린지"
