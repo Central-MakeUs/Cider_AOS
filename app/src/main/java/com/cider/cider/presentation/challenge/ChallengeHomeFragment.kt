@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
 import com.cider.cider.domain.model.BannerCardModel
@@ -55,6 +56,23 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
             BannerCardModel(2)
         )
         bannerAdapter.submitList(bannerItems)
+
+        val current = 1
+        val total = bannerAdapter.itemCount
+
+        val indicator = "$current / $total"
+
+        binding.tvIndicator.text = indicator
+
+        binding.bannerHome.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                val currentPage = position + 1
+                val totalPages = bannerAdapter.itemCount
+
+                val indicatorText = "$currentPage / $totalPages"
+                binding.tvIndicator.text = indicatorText
+            }
+        })
     }
 
 
