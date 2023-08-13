@@ -121,7 +121,7 @@
                 android:textSize="@dimen/text_base"
                 android:textColor="#30313D"
                 android:lineSpacingExtra="3dp"
-                android:singleLine="true"
+                android:maxLines="2"
                 android:ellipsize="end"
                 android:layout_marginTop="4dp"
                 android:text="@{feed.content}"
