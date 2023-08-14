@@ -86,12 +86,14 @@
                 android:background="@drawable/shape_feed_under_bar"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="24dp"
                 android:paddingHorizontal="24dp">
 
                 <TextView
+                    android:id="@+id/tv_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="최신순"
@@ -100,6 +102,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.constraintlayout.utils.widget.ImageFilterButton
+                    android:id="@+id/iv_filter"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/line_arrow_down_24"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_filter"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView

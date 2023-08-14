@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeDetailFeedBinding
+import com.cider.cider.domain.type.Filter
 import com.cider.cider.presentation.adapter.CertifyAdapter
 import com.cider.cider.presentation.adapter.CertifyDetailAdapter
 import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
@@ -24,6 +25,19 @@ class ChallengeDetailFeedFragment: BindingFragment<FragmentChallengeDetailFeedBi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFeedList()
+        setFilter()
+    }
+
+    private fun setFilter() {
+        binding.btnFilter.setOnClickListener {
+            if (binding.tvFilter.text == "최신순") {
+                viewModel.detail.value?.let { it1 -> viewModel.getCertify(it1.challengeId, Filter.LIKE) }
+                binding.tvFilter.text = "좋아요순"
+            } else {
+                viewModel.detail.value?.let { it1 -> viewModel.getCertify(it1.challengeId, Filter.LATEST) }
+                binding.tvFilter.text = "최신순"
+            }
+        }
     }
 
     private fun setFeedList() {

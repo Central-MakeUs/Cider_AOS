@@ -75,6 +75,7 @@
                     app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/btn_filter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
@@ -92,7 +93,7 @@
                             app:layout_constraintTop_toTopOf="parent"/>
 
                         <androidx.constraintlayout.utils.widget.ImageFilterButton
-                            android:id="@+id/btn_filter"
+                            android:id="@+id/iv_filter"
                             android:layout_width="@dimen/icon_size"
                             android:layout_height="@dimen/icon_size"
                             android:layout_marginStart="4dp"
