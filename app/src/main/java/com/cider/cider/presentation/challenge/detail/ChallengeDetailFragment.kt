@@ -8,6 +8,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.cider.cider.R
@@ -18,6 +19,7 @@ import com.cider.cider.utils.binding.BindingFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.lang.Integer.max
 
 @AndroidEntryPoint
@@ -37,10 +39,11 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         val id = arguments?.getInt("id")
         if (id != null) {
             Log.d("TEST Detail","$id")
-            viewModel.getDetail(id)
+            lifecycleScope.launch {
+                viewModel.getDetail(id)
+                setBanner()
+            }
         }
-
-        setBanner()
         setBehavior()
         setBottomSheet()
         setBottomNavi()
@@ -87,7 +90,6 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
 
         pagerAdapter.addFragment(ChallengeDetailInfoFragment())
         pagerAdapter.addFragment(ChallengeDetailFeedFragment())
-        Log.d("TEST detail","??")
         binding.vpChallenge.adapter = pagerAdapter
 
         val tabTitle = listOf<String>("챌린지 정보","피드")
@@ -112,7 +114,6 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
                 val layoutParams = binding.vpChallenge.layoutParams
                 layoutParams.height = maxHeight
                 binding.vpChallenge.layoutParams = layoutParams
-                Log.d("TEST ViewPager","$position : $maxHeight")
             }
         })
 

@@ -35,12 +35,9 @@ class ChallengeDetailViewModel @Inject constructor(
     private val _certify = MutableLiveData<List<CertifyDetailModel>>()
     val certify: LiveData<List<CertifyDetailModel>> get() = _certify
 
-    fun getDetail(id: Int) {
-        viewModelScope.launch {
-            _detail.value = repository.getChallengeDetail(id)
-            Log.d("TEST Detail2","${_detail.value}")
-            getCertify(id, Filter.LATEST)
-        }
+    suspend fun getDetail(id: Int) {
+        _detail.value = repository.getChallengeDetail(id)
+        getCertify(id, Filter.LATEST)
     }
 
     fun changeFeedLike(targetId: Int) {
