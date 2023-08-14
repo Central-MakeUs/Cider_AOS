@@ -4,122 +4,185 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:visible="@{vm.certify.size() != 0}"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:paddingHorizontal="24dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_my_write"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="24dp">
+
+                    <TextView
+                        android:id="@+id/tv_my_write"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_authentication"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textSize="@dimen/text_2xl"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_write_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textSize="@dimen/text_sm"
+                        android:textColor="@color/main"
+                        android:layout_marginStart="6dp"
+                        app:layout_constraintStart_toEndOf="@id/tv_my_write"
+                        app:layout_constraintTop_toTopOf="@id/tv_my_write"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_my_write"/>
+
+                    <androidx.constraintlayout.utils.widget.ImageFilterButton
+                        android:id="@+id/iv_my_write_btn"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:src="@drawable/line_arrow_right_16"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_my_write"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_my_write"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="24dp"
+                    android:paddingHorizontal="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="활동 한눈에 보기"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textSize="@dimen/text_2xl"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/my_authentication"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textSize="@dimen/text_2xl"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-                <TextView
-                    android:id="@+id/tv_write_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="24"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textSize="@dimen/text_sm"
-                    android:textColor="@color/main"
-                    android:layout_marginStart="6dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_my_write"
-                    app:layout_constraintTop_toTopOf="@id/tv_my_write"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_my_write"/>
-
-                <androidx.constraintlayout.utils.widget.ImageFilterButton
-                    android:id="@+id/iv_my_write_btn"
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:src="@drawable/line_arrow_right_16"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar_recommend_feed"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_my_write"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_my_write"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="24dp"
-                android:paddingHorizontal="24dp">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@drawable/shape_feed_under_bar"/>
 
-                <TextView
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="24dp"
+                    android:paddingHorizontal="24dp">
+
+                    <TextView
+                        android:id="@+id/tv_filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="최신순"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textSize="@dimen/text_2xl"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <androidx.constraintlayout.utils.widget.ImageFilterButton
+                        android:id="@+id/iv_filter"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/line_arrow_down_24"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_filter"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_feed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="활동 한눈에 보기"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textSize="@dimen/text_2xl"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@id/toolbar_recommend_feed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_image"
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_none"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/gray_3"
+            app:visible="@{vm.certify.size() == 0}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/iv_none_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/image_money_management_icon"
+                app:layout_constraintBottom_toTopOf="@id/tv_none_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tv_none_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/toolbar_recommend_feed"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="@dimen/text_2xl"
+                android:textColor="@color/text"
+                android:text="아직 챌린지 활동이 없습니다"
+                app:layout_constraintTop_toBottomOf="@id/iv_none_icon"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintBottom_toTopOf="@id/tv_none_2"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:background="@drawable/shape_feed_under_bar"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_filter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="24dp"
-                android:paddingHorizontal="24dp">
-
-                <TextView
-                    android:id="@+id/tv_filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="최신순"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textSize="@dimen/text_2xl"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-                <androidx.constraintlayout.utils.widget.ImageFilterButton
-                    android:id="@+id/iv_filter"
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/line_arrow_down_24"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_filter"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_feed"
+            <TextView
+                android:id="@+id/tv_none_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/toolbar_recommend_feed"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textSize="@dimen/text_base"
+                android:textColor="#6A6C85"
+                android:text="이 챌린지의 활동 기록이\n존재하지 않습니다"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/tv_none_1"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.core.widget.NestedScrollView>
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

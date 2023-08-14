@@ -24,6 +24,9 @@ class ChallengeDetailFeedFragment: BindingFragment<FragmentChallengeDetailFeedBi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.vm = viewModel
+
         setFeedList()
         setFilter()
     }

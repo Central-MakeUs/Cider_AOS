@@ -1,5 +1,6 @@
 package com.cider.cider.presentation.challenge.detail
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeDetailBinding
 import com.cider.cider.presentation.adapter.ChallengeDetailViewPagerAdapter
@@ -91,8 +93,10 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         TabLayoutMediator(binding.tabLayout, binding.vpChallenge) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setBottomNavi() {
         binding.btnLike.setOnClickListener {
             viewModel.changeLike(binding.ivLike.isSelected)
