@@ -280,6 +280,7 @@
                                     tools:text="11" />
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/btn_my_certify"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
@@ -299,7 +300,6 @@
                                         app:layout_constraintTop_toTopOf="parent" />
 
                                     <androidx.constraintlayout.utils.widget.ImageFilterButton
-                                        android:id="@+id/btn_my_certify"
                                         android:layout_width="@dimen/icon_size_16"
                                         android:layout_height="@dimen/icon_size_16"
                                         android:src="@drawable/line_arrow_right_16"
@@ -335,6 +335,7 @@
                                     tools:text="11" />
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/btn_interest"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
@@ -354,7 +355,6 @@
                                         app:layout_constraintTop_toTopOf="parent" />
 
                                     <androidx.constraintlayout.utils.widget.ImageFilterButton
-                                        android:id="@+id/btn_interest"
                                         android:layout_width="@dimen/icon_size_16"
                                         android:layout_height="@dimen/icon_size_16"
                                         android:src="@drawable/line_arrow_right_16"
