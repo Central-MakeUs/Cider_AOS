@@ -9,10 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeHomeBinding
+import com.cider.cider.domain.model.BannerCardModel
 import com.cider.cider.domain.type.WriteType
 import com.cider.cider.domain.type.challenge.Category
+import com.cider.cider.presentation.adapter.BannerPagerAdapter
 import com.cider.cider.presentation.adapter.CertifyAdapter
 import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
@@ -42,7 +45,36 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         setScrollEvent()
         setCategory()
         setBottomNavi()
+        setBanner()
     }
+
+    private fun setBanner() {
+        val bannerAdapter = BannerPagerAdapter()
+        binding.bannerHome.adapter = bannerAdapter
+        val bannerItems = listOf(
+            BannerCardModel(1),
+            BannerCardModel(2)
+        )
+        bannerAdapter.submitList(bannerItems)
+
+        val current = 1
+        val total = bannerAdapter.itemCount
+
+        val indicator = "$current / $total"
+
+        binding.tvIndicator.text = indicator
+
+        binding.bannerHome.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                val currentPage = position + 1
+                val totalPages = bannerAdapter.itemCount
+
+                val indicatorText = "$currentPage / $totalPages"
+                binding.tvIndicator.text = indicatorText
+            }
+        })
+    }
+
 
     private fun setAppBar() {
         binding.toolbar.tvToolbarTitle.text = "챌린지"
@@ -140,7 +172,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val certifyAdapter = CertifyAdapter(certify)
+        val certifyAdapter = CertifyAdapter()
 
         binding.rvRecommendFeed.apply {
             adapter = certifyAdapter

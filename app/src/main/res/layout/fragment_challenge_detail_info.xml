@@ -290,7 +290,7 @@
                             android:id="@+id/iv_recruit_period"
                             android:layout_width="@dimen/icon_size_16"
                             android:layout_height="@dimen/icon_size_16"
-                            android:src="@drawable/line_calender_16"
+                            android:src="@drawable/filled_calender_16"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -326,7 +326,7 @@
                             android:id="@+id/iv_challenge_period"
                             android:layout_width="@dimen/icon_size_16"
                             android:layout_height="@dimen/icon_size_16"
-                            android:src="@drawable/line_noti_16"
+                            android:src="@drawable/filled_noti_16"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -710,6 +710,7 @@
                     android:paddingVertical="8dp"
                     android:background="@drawable/shape_rec_round_8"
                     android:backgroundTint="#F6F6F6"
+                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_challenge_mission" />
@@ -875,7 +876,9 @@
                             android:id="@+id/iv_profile"
                             android:layout_width="44dp"
                             android:layout_height="44dp"
-                            android:src="@drawable/shape_profile"
+                            android:background="@drawable/shape_profile"
+                            android:clipToOutline="true"
+                            android:scaleType="centerInside"
                             app:imageUri="@{vm.detail.member.profilePath}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

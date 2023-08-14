@@ -12,7 +12,6 @@ import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.utils.ItemDiffCallback
 
 class CertifyAdapter(
-    val viewModel: CertifyViewModel
     ): ListAdapter<CertifyModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<CertifyModel>(
         onContentsTheSame = {old, new -> old == new},
@@ -39,18 +38,22 @@ class CertifyAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CertifyModel) {
             binding.certify = item
-            binding.vm = viewModel
             binding.executePendingBindings()
 
             binding.tvMoreText.setOnClickListener {
                 if (binding.tvMoreText.text == "자세히 보기") {
                     binding.tvMoreText.text = "접기"
-                    binding.tvFeedContent.isSingleLine = false
+                    binding.tvFeedContent.maxLines = Int.MAX_VALUE
                 } else {
                     binding.tvMoreText.text = "자세히 보기"
-                    binding.tvFeedContent.isSingleLine = true
+                    binding.tvFeedContent.maxLines = 2
                 }
             }
+
+            binding.ivLike.setOnClickListener {
+                listener?.onItemClick(item.id)
+            }
+
 
 /*            val feedImageAdapter = FeedImageAdapter()
             binding.vpImage.adapter = feedImageAdapter
@@ -81,5 +84,11 @@ class CertifyAdapter(
             }*/
 
         }
+    }
+
+    private var listener: ChallengeCardAdapter.OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: ChallengeCardAdapter.OnItemClickListener) {
+        this.listener = listener
     }
 }

@@ -1,5 +1,6 @@
 package com.cider.cider.presentation.challenge.detail
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +8,9 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeDetailBinding
 import com.cider.cider.presentation.adapter.ChallengeDetailViewPagerAdapter
@@ -16,6 +19,8 @@ import com.cider.cider.utils.binding.BindingFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import java.lang.Integer.max
 
 @AndroidEntryPoint
 class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R.layout.fragment_challenge_detail) {
@@ -34,16 +39,19 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         val id = arguments?.getInt("id")
         if (id != null) {
             Log.d("TEST Detail","$id")
-            viewModel.getDetail(id)
+            lifecycleScope.launch {
+                viewModel.getDetail(id)
+                setBanner()
+            }
         }
-
-        setBanner()
         setBehavior()
         setBottomSheet()
+        setBottomNavi()
     }
 
     private fun setBanner() {
-
+        binding.appbar.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
+        binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
     }
 
     private fun setBehavior() {
@@ -82,13 +90,49 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
 
         pagerAdapter.addFragment(ChallengeDetailInfoFragment())
         pagerAdapter.addFragment(ChallengeDetailFeedFragment())
-        Log.d("TEST detail","??")
         binding.vpChallenge.adapter = pagerAdapter
 
         val tabTitle = listOf<String>("챌린지 정보","피드")
         TabLayoutMediator(binding.tabLayout, binding.vpChallenge) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+
+        binding.vpChallenge.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback () {
+            override fun onPageSelected(position: Int) {
+                var maxHeight = 0
+
+                val fragment = pagerAdapter.fragments[position]
+                val fragmentView = fragment.view
+
+                fragmentView?.let {
+                    it.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+                    val fragmentHeight = it.measuredHeight
+                    maxHeight = max(maxHeight, fragmentHeight)
+                }
+
+
+                val layoutParams = binding.vpChallenge.layoutParams
+                layoutParams.height = maxHeight
+                binding.vpChallenge.layoutParams = layoutParams
+            }
+        })
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setBottomNavi() {
+        binding.btnLike.setOnClickListener {
+            viewModel.changeLike(binding.ivLike.isSelected)
+            if (binding.ivLike.isSelected) {
+                binding.ivLike.isSelected = false
+                binding.tvLike.text = (binding.tvLike.text.toString().toInt() - 1).toString()
+            } else {
+                binding.ivLike.isSelected = true
+                binding.tvLike.text = (binding.tvLike.text.toString().toInt() + 1).toString()
+            }
+
+        }
+
     }
 
     override fun onBackPressed() {

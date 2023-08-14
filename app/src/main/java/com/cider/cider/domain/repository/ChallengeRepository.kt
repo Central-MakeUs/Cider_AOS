@@ -2,6 +2,7 @@ package com.cider.cider.domain.repository
 
 import android.net.Uri
 import com.cider.cider.data.remote.model.RequestChallengeCreate
+import com.cider.cider.data.remote.model.ResponseCertifyDetail
 import com.cider.cider.data.remote.model.ResponseMyChallenge
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
@@ -37,5 +38,5 @@ interface ChallengeRepository {
     suspend fun getMyChallenge(): Response<ResponseMyChallenge>?
 
     suspend fun getChallengeDetail(id: Int): ChallengeDetailModel?
-    suspend fun getDetailTest(id: Int)
+    suspend fun getCertifyDetail(id: Int, filter: Filter): Response<ResponseCertifyDetail>?
 }

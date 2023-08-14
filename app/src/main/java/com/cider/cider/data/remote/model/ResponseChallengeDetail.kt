@@ -44,3 +44,22 @@ data class ChallengeRuleResponseDto(
     val certifyRule: String,
     val failureRule: String
 )
+
+data class ResponseCertifyDetail(
+    val certifyImageUrlList: List<String>,
+    val challengeBranch: String,
+    val challengeCapacity: Int,
+    val challengeId: Int,
+    val challengeName: String,
+    val participateNum: Int,
+    val simpleCertifyResponseDtoList: List<SimpleCertifyResponseDto>
+)
+
+data class SimpleCertifyResponseDto(
+    val certifyContent: String,
+    val certifyLike: Int,
+    val certifyName: String,
+    val createdDate: String,
+    val isLike: Boolean,
+    val simpleMemberResponseDto: SimpleMemberResponseDto
+)

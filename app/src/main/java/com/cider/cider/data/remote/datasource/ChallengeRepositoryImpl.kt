@@ -141,8 +141,12 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getDetailTest(id: Int) {
-        Log.d("TEST Detail","${apiService.getDetailTest(id).body()}")
+    override suspend fun getCertifyDetail(id: Int, filter: Filter): Response<ResponseCertifyDetail>? {
+        val data = apiService.getCertifyDetail(id, filter = filter.string)
+        return when (data.code()) {
+            200 -> data
+            else -> null
+        }
     }
 
     private fun mapToChallengeDetail(response: ResponseChallengeDetail): ChallengeDetailModel {

@@ -2,7 +2,7 @@ package com.cider.cider.domain.model
 
 data class BannerCardModel(
     val id: Int,
-    val title: String,
+/*    val title: String,
     val content: String,
-    val type: String, //TODO(실제 타입 설정)
+    val type: String, //TODO(실제 타입 설정)*/
 )
