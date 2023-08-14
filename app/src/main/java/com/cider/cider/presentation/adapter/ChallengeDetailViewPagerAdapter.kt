@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ChallengeDetailViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity){
-    private val fragments: ArrayList<Fragment> = ArrayList()
+    val fragments: ArrayList<Fragment> = ArrayList()
 
     override fun getItemCount(): Int {
         return fragments.size

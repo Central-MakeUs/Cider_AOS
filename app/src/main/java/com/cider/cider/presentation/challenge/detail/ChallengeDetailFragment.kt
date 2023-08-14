@@ -18,6 +18,7 @@ import com.cider.cider.utils.binding.BindingFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Integer.max
 
 @AndroidEntryPoint
 class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R.layout.fragment_challenge_detail) {
@@ -93,6 +94,27 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         TabLayoutMediator(binding.tabLayout, binding.vpChallenge) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+
+        binding.vpChallenge.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback () {
+            override fun onPageSelected(position: Int) {
+                var maxHeight = 0
+
+                val fragment = pagerAdapter.fragments[position]
+                val fragmentView = fragment.view
+
+                fragmentView?.let {
+                    it.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+                    val fragmentHeight = it.measuredHeight
+                    maxHeight = max(maxHeight, fragmentHeight)
+                }
+
+
+                val layoutParams = binding.vpChallenge.layoutParams
+                layoutParams.height = maxHeight
+                binding.vpChallenge.layoutParams = layoutParams
+                Log.d("TEST ViewPager","$position : $maxHeight")
+            }
+        })
 
     }
 
