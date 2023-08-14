@@ -86,8 +86,9 @@ interface ChallengeApi {
         @Path("challengeId") id: Int,
     ): Response<ResponseChallengeDetail>
 
-    @GET("/api/challenge/detail/info/{challengeId}")
-    suspend fun getDetailTest(
+    @GET("/api/challenge/detail/feed/{challengeId}/{filter}")
+    suspend fun getCertifyDetail(
         @Path("challengeId") id: Int,
-    ): Response<Any>
+        @Path("filter") filter: String,
+    ): Response<ResponseCertifyDetail>
 }

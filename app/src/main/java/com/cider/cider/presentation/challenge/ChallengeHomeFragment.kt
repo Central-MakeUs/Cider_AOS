@@ -172,7 +172,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val certifyAdapter = CertifyAdapter(certify)
+        val certifyAdapter = CertifyAdapter()
 
         binding.rvRecommendFeed.apply {
             adapter = certifyAdapter

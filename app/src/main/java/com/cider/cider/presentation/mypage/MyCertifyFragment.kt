@@ -44,7 +44,7 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
     }
 
     private fun setRecyclerView() {
-        val certifyAdapter = CertifyAdapter(certify)
+        val certifyAdapter = CertifyAdapter()
 
         binding.rvFeed.apply {
             adapter = certifyAdapter

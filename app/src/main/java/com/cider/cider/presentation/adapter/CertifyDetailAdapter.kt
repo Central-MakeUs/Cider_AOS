@@ -5,22 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cider.cider.databinding.ItemCertifyBinding
+import com.cider.cider.databinding.ItemCertifyInDetailBinding
 import com.cider.cider.databinding.ItemFeedBinding
+import com.cider.cider.domain.model.CertifyDetailModel
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.FeedModel
 import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.utils.ItemDiffCallback
 
-class CertifyAdapter(
-    ): ListAdapter<CertifyModel, RecyclerView.ViewHolder>(
-    ItemDiffCallback<CertifyModel>(
+class CertifyDetailAdapter(
+    ): ListAdapter<CertifyDetailModel, RecyclerView.ViewHolder>(
+    ItemDiffCallback<CertifyDetailModel>(
         onContentsTheSame = {old, new -> old == new},
         onItemsTheSame = {old, new -> old == new}
     )
 ){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return CertifyVieHolder(ItemCertifyBinding.inflate(inflater, parent, false))
+        return CertifyVieHolder(ItemCertifyInDetailBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -34,9 +36,9 @@ class CertifyAdapter(
     }
 
     inner class CertifyVieHolder(
-        private val binding: ItemCertifyBinding
+        private val binding: ItemCertifyInDetailBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CertifyModel) {
+        fun bind(item: CertifyDetailModel) {
             binding.certify = item
             binding.executePendingBindings()
 
@@ -51,7 +53,7 @@ class CertifyAdapter(
             }
 
             binding.ivLike.setOnClickListener {
-                listener?.onItemClick(item.id)
+                /*listener?.onItemClick(item.id)*/
             }
 
 
