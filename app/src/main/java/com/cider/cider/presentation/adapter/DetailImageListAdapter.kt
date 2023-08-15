@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.cider.cider.databinding.ItemImageDetailListBinding
 import com.cider.cider.databinding.ItemImageListBinding
 import com.cider.cider.domain.model.ImageCardModel
 import com.cider.cider.utils.ItemDiffCallback
@@ -17,7 +18,7 @@ class DetailImageListAdapter (
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ImageViewHolder(ItemImageListBinding.inflate(inflater, parent, false))
+        return ImageViewHolder(ItemImageDetailListBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -30,7 +31,7 @@ class DetailImageListAdapter (
     }
 
     inner class ImageViewHolder(
-        private val binding: ItemImageListBinding,
+        private val binding: ItemImageDetailListBinding,
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ImageCardModel) {
