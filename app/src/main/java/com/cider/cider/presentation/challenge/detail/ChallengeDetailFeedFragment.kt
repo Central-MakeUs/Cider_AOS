@@ -1,16 +1,21 @@
 package com.cider.cider.presentation.challenge.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeDetailFeedBinding
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.presentation.adapter.CertifyAdapter
 import com.cider.cider.presentation.adapter.CertifyDetailAdapter
+import com.cider.cider.presentation.adapter.DetailImageListAdapter
+import com.cider.cider.presentation.adapter.ImageListAdapter
 import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +34,23 @@ class ChallengeDetailFeedFragment: BindingFragment<FragmentChallengeDetailFeedBi
 
         setFeedList()
         setFilter()
+        setRecyclerView()
+    }
+
+    private fun setRecyclerView() {
+        val imageListAdapter = DetailImageListAdapter()
+
+        binding.rvImage.apply {
+            adapter = imageListAdapter
+            layoutManager = GridLayoutManager(requireContext(),
+                3, RecyclerView.VERTICAL, false)
+        }
+
+        viewModel.imageList.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                imageListAdapter.submitList(it)
+            }
+        }
     }
 
     private fun setFilter() {

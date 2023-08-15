@@ -35,6 +35,9 @@ class ChallengeDetailViewModel @Inject constructor(
     private val _certify = MutableLiveData<List<CertifyDetailModel>>()
     val certify: LiveData<List<CertifyDetailModel>> get() = _certify
 
+    private val _imageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
+    val imageList: LiveData<List<ImageCardModel>> get() = _imageList
+
     suspend fun getDetail(id: Int) {
         _detail.value = repository.getChallengeDetail(id)
         getCertify(id, Filter.LATEST)
@@ -49,7 +52,6 @@ class ChallengeDetailViewModel @Inject constructor(
             val data = repository.getCertifyDetail(id,filter)
 
             if (data?.isSuccessful == true) {
-
                 _certify.value = data.body()?.simpleCertifyResponseDtoList?.map {
                     CertifyDetailModel(
                         certifyContent = it.certifyContent,
@@ -63,6 +65,11 @@ class ChallengeDetailViewModel @Inject constructor(
                         certifyImage = null
                     )
                 }
+
+                _imageList.value = data.body()?.certifyImageUrlList?.map {
+                    ImageCardModel(Uri.parse(it))
+                }
+
             }
         }
     }
