@@ -54,6 +54,7 @@ class ChallengeDetailViewModel @Inject constructor(
             if (data?.isSuccessful == true) {
                 _certify.value = data.body()?.simpleCertifyResponseDtoList?.map {
                     CertifyDetailModel(
+                        id = it.certifyId,
                         certifyContent = it.certifyContent,
                         certifyLike = it.certifyLike,
                         certifyName = it.certifyName,
@@ -75,12 +76,55 @@ class ChallengeDetailViewModel @Inject constructor(
     }
 
 
-    fun changeLike(isCheck: Boolean) {
+    fun changeLike2(isCheck: Boolean) {
         viewModelScope.launch {
             if (isCheck) {
                 _detail.value?.challengeId?.let { repository.deleteChallengeLike(it)}
             } else {
                 _detail.value?.challengeId?.let { repository.postChallengeLike(it) }
+            }
+        }
+    }
+
+    fun changeLike(targetId: Int) {
+        val beforeList = _certify.value?: mutableListOf()
+        viewModelScope.launch {
+            _certify.value =  beforeList.map {
+                if (it.id == targetId) {
+                    Log.e("TEST Detail","$targetId ${it.isLike}")
+                    if (it.isLike) { //true 였다면 false 로 변경
+                        if (repository.deleteCertifyLike(targetId)) {
+                            Log.e("TEST Detail", "$targetId delete ${it.isLike}")
+                            it.copy(isLike = false, certifyLike = it.certifyLike - 1)
+                        }
+                        else {
+                            Log.e("TEST Detail", "$targetId fail ${it.isLike}")
+                            it
+                        }
+                    } else { //false 였다면 true 로 변경
+                        if (repository.postCertifyLike(targetId)) {
+                            Log.e("TEST Detail", "$targetId post ${it.isLike}")
+                            it.copy(isLike = true, certifyLike = it.certifyLike + 1)
+                        }
+                        else{
+                            Log.e("TEST Detail", "$targetId fail ${it.isLike}")
+                            it
+                        }
+                    }
+                } else {
+                    it
+                }
+            }
+        }
+    }
+
+    fun changeExpand(targetId: Int, isExpand: Boolean) {
+        val beforeList = _certify.value?: mutableListOf()
+        _certify.value =  beforeList.map {
+            if (it.id == targetId) {
+                it.copy(isExpand = !isExpand)
+            } else {
+                it
             }
         }
     }

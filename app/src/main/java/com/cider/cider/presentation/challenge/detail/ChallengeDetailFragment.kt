@@ -123,7 +123,7 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
     @SuppressLint("SetTextI18n")
     private fun setBottomNavi() {
         binding.btnLike.setOnClickListener {
-            viewModel.changeLike(binding.ivLike.isSelected)
+            viewModel.changeLike2(binding.ivLike.isSelected)
             if (binding.ivLike.isSelected) {
                 binding.ivLike.isSelected = false
                 binding.tvLike.text = (binding.tvLike.text.toString().toInt() - 1).toString()

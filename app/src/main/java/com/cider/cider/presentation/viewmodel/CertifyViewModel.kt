@@ -32,12 +32,10 @@ class CertifyViewModel @Inject constructor(
     }
 
     fun changeLike(targetId: Int) {
-        Log.e("TEST certify","$targetId")
         val beforeList = _certify.value?: mutableListOf()
         viewModelScope.launch {
             _certify.value =  beforeList.map {
                 if (it.id == targetId) {
-                    Log.e("TEST certify","$targetId ${it.isLike}")
                     if (it.isLike) { //true 였다면 false 로 변경
                         if (repository.deleteCertifyLike(targetId))
                             it.copy(isLike = false, certifyLike = it.certifyLike - 1)
@@ -58,7 +56,6 @@ class CertifyViewModel @Inject constructor(
 
     fun changeExpand(targetId: Int, isExpand: Boolean) {
         val beforeList = _certify.value?: mutableListOf()
-        Log.d("TEST","$targetId $isExpand")
         _certify.value =  beforeList.map {
             if (it.id == targetId) {
                 it.copy(isExpand = !isExpand)
@@ -66,6 +63,5 @@ class CertifyViewModel @Inject constructor(
                 it
             }
         }
-        Log.d("TEST2","$targetId $isExpand")
     }
 }

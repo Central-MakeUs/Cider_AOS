@@ -66,7 +66,7 @@ class ChallengeDetailFeedFragment: BindingFragment<FragmentChallengeDetailFeedBi
     }
 
     private fun setFeedList() {
-        val certifyAdapter = CertifyDetailAdapter()
+        val certifyAdapter = CertifyDetailAdapter(viewModel)
 
         binding.rvFeed.apply {
             adapter = certifyAdapter
