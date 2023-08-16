@@ -18,6 +18,7 @@ import com.cider.cider.domain.model.ImageCardModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
+import com.cider.cider.utils.cutInt
 import com.cider.cider.utils.getResourceUri
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -60,7 +61,7 @@ class ChallengeDetailViewModel @Inject constructor(
                         certifyName = it.certifyName,
                         createdDate = it.createdDate,
                         isLike = it.isLike,
-                        memberLevel = it.simpleMemberResponseDto.memberLevel,
+                        memberLevel = cutInt(it.simpleMemberResponseDto.memberLevelName),
                         memberName = it.simpleMemberResponseDto.memberName,
                         profilePath = Uri.parse(it.simpleMemberResponseDto.profilePath),
                         certifyImage = it.certifyImageUrl.let { it1 -> Uri.parse(it1) }
@@ -94,20 +95,16 @@ class ChallengeDetailViewModel @Inject constructor(
                     Log.e("TEST Detail","$targetId ${it.isLike}")
                     if (it.isLike) { //true 였다면 false 로 변경
                         if (repository.deleteCertifyLike(targetId)) {
-                            Log.e("TEST Detail", "$targetId delete ${it.isLike}")
                             it.copy(isLike = false, certifyLike = it.certifyLike - 1)
                         }
                         else {
-                            Log.e("TEST Detail", "$targetId fail ${it.isLike}")
                             it
                         }
                     } else { //false 였다면 true 로 변경
                         if (repository.postCertifyLike(targetId)) {
-                            Log.e("TEST Detail", "$targetId post ${it.isLike}")
                             it.copy(isLike = true, certifyLike = it.certifyLike + 1)
                         }
                         else{
-                            Log.e("TEST Detail", "$targetId fail ${it.isLike}")
                             it
                         }
                     }

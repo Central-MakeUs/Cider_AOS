@@ -16,6 +16,7 @@ import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.getChallengeCategory
 import com.cider.cider.domain.type.challenge.getParticipationStatus
+import com.cider.cider.utils.cutInt
 import okhttp3.MultipartBody
 import retrofit2.Response
 import java.io.File
@@ -218,7 +219,7 @@ class ChallengeRepositoryImpl @Inject constructor(
                 challengeBranch = getChallengeCategory(response.simpleChallengeResponseDto.challengeBranch),
                 challengeName = response.simpleChallengeResponseDto.challengeName,
                 participateNum = response.simpleChallengeResponseDto.participateNum,
-                memberLevel = response.simpleMemberResponseDto.memberLevel,
+                memberLevel = cutInt(response.simpleMemberResponseDto.memberLevelName),
                 memberName = response.simpleMemberResponseDto.memberName,
                 profilePath = Uri.parse(response.simpleMemberResponseDto.profilePath),
                 certifyImage = if (response.certifyImageUrl != null ) Uri.parse(response.certifyImageUrl) else null
