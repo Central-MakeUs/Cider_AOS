@@ -62,7 +62,7 @@ class ChallengeDetailViewModel @Inject constructor(
                         memberLevel = it.simpleMemberResponseDto.memberLevel,
                         memberName = it.simpleMemberResponseDto.memberName,
                         profilePath = Uri.parse(it.simpleMemberResponseDto.profilePath),
-                        certifyImage = null
+                        certifyImage = it.certifyImageUrl.let { it1 -> Uri.parse(it1) }
                     )
                 }
 
