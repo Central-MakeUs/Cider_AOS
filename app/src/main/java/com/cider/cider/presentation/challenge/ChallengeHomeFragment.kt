@@ -172,7 +172,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val certifyAdapter = CertifyAdapter()
+        val certifyAdapter = CertifyAdapter(certify)
 
         binding.rvRecommendFeed.apply {
             adapter = certifyAdapter
@@ -182,7 +182,6 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         certify.certify.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 certifyAdapter.submitList(it)
-                Log.e("TEST 변경","$it")
             }
         }
     }

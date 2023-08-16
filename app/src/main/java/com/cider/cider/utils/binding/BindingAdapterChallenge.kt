@@ -224,3 +224,21 @@ fun setPercentPosition(view: View, bias: Int) {
     }
     view.layoutParams = layoutParams
 }
+
+@BindingAdapter("textExpand")
+fun setTextExpand(view: TextView, isExpand: Boolean) {
+    if (isExpand) {
+        view.text = "접기"
+    } else {
+        view.text = "자세히보기"
+    }
+}
+
+@BindingAdapter("textExpand2")
+fun setTextExpand2(view: TextView, isExpand: Boolean) {
+    if (isExpand) {
+        view.maxLines = Int.MAX_VALUE
+    } else {
+        view.maxLines = 2
+    }
+}

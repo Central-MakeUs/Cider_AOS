@@ -12,10 +12,11 @@ import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.utils.ItemDiffCallback
 
 class CertifyAdapter(
+    private val vm: CertifyViewModel
     ): ListAdapter<CertifyModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<CertifyModel>(
         onContentsTheSame = {old, new -> old == new},
-        onItemsTheSame = {old, new -> old == new}
+        onItemsTheSame = {old, new -> old.id == new.id}
     )
 ){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -38,21 +39,12 @@ class CertifyAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CertifyModel) {
             binding.certify = item
+            binding.vm = vm
             binding.executePendingBindings()
 
-            binding.tvMoreText.setOnClickListener {
-                if (binding.tvMoreText.text == "자세히 보기") {
-                    binding.tvMoreText.text = "접기"
-                    binding.tvFeedContent.maxLines = Int.MAX_VALUE
-                } else {
-                    binding.tvMoreText.text = "자세히 보기"
-                    binding.tvFeedContent.maxLines = 2
-                }
-            }
-
-            binding.ivLike.setOnClickListener {
+/*            binding.ivLike.setOnClickListener {
                 listener?.onItemClick(item.id)
-            }
+            }*/
 
 
 /*            val feedImageAdapter = FeedImageAdapter()
