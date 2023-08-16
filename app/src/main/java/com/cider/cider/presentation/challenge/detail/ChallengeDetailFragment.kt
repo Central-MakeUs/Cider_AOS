@@ -54,6 +54,7 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
     }
 
+
     private fun setBehavior() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
 
