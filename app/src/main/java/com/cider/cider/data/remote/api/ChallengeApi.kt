@@ -91,4 +91,9 @@ interface ChallengeApi {
         @Path("challengeId") id: Int,
         @Path("filter") filter: String,
     ): Response<ResponseCertifyDetail>
+
+    @DELETE("/api/challenge/{challengeId}")
+    suspend fun deleteChallenge(
+        @Path("challengeId") id: Int,
+    ): Response<Any>
 }

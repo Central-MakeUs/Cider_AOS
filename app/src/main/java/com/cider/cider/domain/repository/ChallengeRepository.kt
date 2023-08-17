@@ -33,6 +33,8 @@ interface ChallengeRepository {
         image2: List<MultipartBody.Part>
     ): Boolean
 
+    suspend fun deleteChallenge(id: Int): Boolean
+
     suspend fun getMyPage(): MyPageModel?
 
     suspend fun getMyChallenge(): Response<ResponseMyChallenge>?

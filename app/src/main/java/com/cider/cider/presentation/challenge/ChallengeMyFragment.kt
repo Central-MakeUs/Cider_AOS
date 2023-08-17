@@ -1,6 +1,7 @@
 package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -66,7 +67,6 @@ class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.
         viewModel.challengeOngoing.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 ongoingAdapter.submitList(it)
-
             }
         }
 
@@ -75,6 +75,29 @@ class ChallengeMyFragment: BindingFragment<FragmentMyChallengeBinding>(R.layout.
             adapter = reviewAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+        reviewAdapter.setOnItemClickListener(object : ChallengeReviewAdapter.OnItemClickListener {
+            override fun onItemClick(id: Int, type: Int) {
+                Log.d("TEST item Click", "$type")
+
+                when (type) {
+                    0 -> { //삭제
+                        lifecycleScope.launch(Dispatchers.Main) {
+                            viewModel.deleteReviewChallenge(id)
+                        }
+                    }
+                    1 -> { //실패
+
+                    }
+                    2 -> { //반려
+
+                    }
+                    3 -> { //성공
+
+                    }
+                }
+            }
+        })
+
         viewModel.challengeReview.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 reviewAdapter.submitList(it)

@@ -100,6 +100,11 @@ class ChallengeRepositoryImpl @Inject constructor(
         return false
     }
 
+    override suspend fun deleteChallenge(id: Int): Boolean {
+        val data = apiService.deleteChallenge(id)
+        return data.isSuccessful
+    }
+
     override suspend fun postChallengeLike(id: Int): Boolean {
         val data = apiService.postChallengeLike(RequestChallengeLike(id))
         Log.d("TEST api","$data")
