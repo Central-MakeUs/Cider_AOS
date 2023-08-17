@@ -1,10 +1,12 @@
 package com.cider.cider.presentation.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
@@ -13,6 +15,8 @@ import com.cider.cider.presentation.adapter.CertifyAdapter
 import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.fragment_my_certify) {
@@ -21,6 +25,10 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewmodel = certify
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
         setToolbar()
         setButton()
         setSpinner()
@@ -32,7 +40,16 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
         binding.toolbar.btnToolbarBack.setOnClickListener {
             onBackPressed()
         }
-        binding.toolbar.tvTotal.text = "총 n개"
+
+        certify.certifyList.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
+                if (it != null) {
+                    binding.toolbar.tvTotal.text = "총 ${it.size}개"
+                } else {
+                    binding.toolbar.tvTotal.text = "총 0개"
+                }
+            }
+        }
     }
 
     private fun setButton() {
@@ -50,31 +67,38 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
             adapter = certifyAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+
+        certify.certifyList.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
+                certifyAdapter.submitList(it)
+            }
+        }
     }
 
     private fun setSpinner() {
-        val itemArray = arrayOf("3", "4", "5", "6", "7", "8", "랜덤")
-        val spinnerAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.item_spinner_dropdown,
-            itemArray
-        )
-        spinnerAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
-        binding.spinnerChallenge.adapter = spinnerAdapter
-        binding.spinnerChallenge.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    // 선택됬을 경우
+        lifecycleScope.launch {
+            val itemArray = certify.getChallengeList()
+            val spinnerAdapter = ArrayAdapter(
+                requireContext(),
+                R.layout.item_spinner_dropdown,
+                itemArray?.map {it.challengeName} ?: mutableListOf()
+            )
 
-
+            spinnerAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
+            binding.spinnerChallenge.adapter = spinnerAdapter
+            binding.spinnerChallenge.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        itemArray?.get(position)?.let { certify.getCertify(it.id) }
+                    }
+                    override fun onNothingSelected(parent: AdapterView<*>) {}
                 }
-                override fun onNothingSelected(parent: AdapterView<*>) {}
-            }
+        }
     }
 
     override fun onBackPressed() {

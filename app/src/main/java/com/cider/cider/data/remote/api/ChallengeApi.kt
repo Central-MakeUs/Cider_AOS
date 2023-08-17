@@ -96,4 +96,14 @@ interface ChallengeApi {
     suspend fun deleteChallenge(
         @Path("challengeId") id: Int,
     ): Response<Any>
+
+    @GET("/api/challenge/participate")
+    suspend fun getChallengeParticipate(
+
+    ): Response<List<ResponseChallengeParticipate>>
+
+    @GET("/api/certify/mypage/{challengeId}")
+    suspend fun getChallengeCertifyList(
+        @Path("challengeId") id: Int,
+    ): Response<ResponseChallengeCertifyList>
 }

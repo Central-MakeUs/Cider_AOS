@@ -1,11 +1,11 @@
 package com.cider.cider.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cider.cider.domain.model.CertifyModel
+import com.cider.cider.domain.model.ChallengeListModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,25 +16,25 @@ class CertifyViewModel @Inject constructor(
     private val repository: ChallengeRepository
 ): ViewModel() {
 
-    private val _certify = MutableLiveData<List<CertifyModel>>()
-    val certify: LiveData<List<CertifyModel>> get() = _certify
+    private val _certifyList = MutableLiveData<List<CertifyModel>>()
+    val certifyList: LiveData<List<CertifyModel>> get() = _certifyList
+
+    private val _challengeList = MutableLiveData<List<ChallengeListModel>>()
+    val challengeList : LiveData<List<ChallengeListModel>> get() = _challengeList
 
     init {
         getCertify()
-
-        Log.e("TEST certify","생성됨")
     }
-
-    private fun getCertify() {
+    fun getCertify() {
         viewModelScope.launch {
-            _certify.value = repository.getCertifyHome()
+            _certifyList.value = repository.getCertifyHome()
         }
     }
 
     fun changeLike(targetId: Int) {
-        val beforeList = _certify.value?: mutableListOf()
+        val beforeList = _certifyList.value?: mutableListOf()
         viewModelScope.launch {
-            _certify.value =  beforeList.map {
+            _certifyList.value =  beforeList.map {
                 if (it.id == targetId) {
                     if (it.isLike) { //true 였다면 false 로 변경
                         if (repository.deleteCertifyLike(targetId))
@@ -55,13 +55,23 @@ class CertifyViewModel @Inject constructor(
     }
 
     fun changeExpand(targetId: Int, isExpand: Boolean) {
-        val beforeList = _certify.value?: mutableListOf()
-        _certify.value =  beforeList.map {
+        val beforeList = _certifyList.value?: mutableListOf()
+        _certifyList.value =  beforeList.map {
             if (it.id == targetId) {
                 it.copy(isExpand = !isExpand)
             } else {
                 it
             }
         }
+    }
+
+    fun getCertify(id: Int) {
+        viewModelScope.launch {
+            _certifyList.value = repository.getChallengeCertify(id)
+        }
+    }
+
+    suspend fun getChallengeList(): List<ChallengeListModel>? {
+        return repository.getChallengeParticipate()
     }
 }

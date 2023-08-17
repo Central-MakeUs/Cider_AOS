@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel" />
+            type="com.cider.cider.presentation.viewmodel.CertifyViewModel" />
 
         <import type="com.cider.cider.domain.type.challenge.Category"/>
     </data>
@@ -42,7 +42,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:paddingBottom="48dp"
+                app:visible="@{viewmodel.certifyList.size() != 0}"
+                app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintTop_toBottomOf="@id/spinner_challenge"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,6 +55,7 @@
                 android:layout_height="0dp"
                 android:background="@color/gray_3"
                 android:layout_marginTop="16dp"
+                app:visible="@{viewmodel.certifyList.size() == 0}"
                 app:layout_constraintTop_toBottomOf="@id/spinner_challenge"
                 app:layout_constraintBottom_toBottomOf="parent">
 

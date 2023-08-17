@@ -25,6 +25,22 @@ data class ResponseCertifyItem(
     val simpleMemberResponseDto: SimpleMemberResponseDto
 )
 
+data class ResponseChallengeCertifyList(
+    val simpleChallengeResponseDto: SimpleChallengeResponseDto,
+    val simpleMemberResponseDto: SimpleMemberResponseDto,
+    val certifyResponseDtoList: List<CertifyResponseDtoList>
+)
+
+data class CertifyResponseDtoList(
+    val certifyId: Int,
+    val certifyContent: String,
+    val certifyImageUrl: String?,
+    val certifyLike: Int,
+    val certifyName: String,
+    val createdDate: String,
+    val isLike: Boolean,
+)
+
 data class SimpleChallengeResponseDto(
     val challengeBranch: String,
     val challengeName: String,
@@ -53,4 +69,10 @@ data class ResponseChallengeCreate(
 
 data class ResponseChallengeImageCreate(
     val message: String
+)
+
+data class ResponseChallengeParticipate(
+    val challengeId: Int,
+    val challengeName: String,
+    val participateStatus: String,
 )
