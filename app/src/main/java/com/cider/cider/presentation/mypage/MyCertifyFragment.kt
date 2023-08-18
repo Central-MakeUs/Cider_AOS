@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentMyCertifyBinding
 import com.cider.cider.presentation.adapter.CertifyAdapter
+import com.cider.cider.presentation.adapter.CertifyCheckAdapter
 import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +62,7 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
     }
 
     private fun setRecyclerView() {
-        val certifyAdapter = CertifyAdapter(certify)
+        val certifyAdapter = CertifyCheckAdapter(certify)
 
         binding.rvFeed.apply {
             adapter = certifyAdapter
