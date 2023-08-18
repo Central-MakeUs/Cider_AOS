@@ -22,9 +22,6 @@ class CertifyViewModel @Inject constructor(
     private val _challengeList = MutableLiveData<List<ChallengeListModel>>()
     val challengeList : LiveData<List<ChallengeListModel>> get() = _challengeList
 
-    init {
-        getCertify()
-    }
     fun getCertify() {
         viewModelScope.launch {
             _certifyList.value = repository.getCertifyHome()
