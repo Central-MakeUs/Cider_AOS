@@ -181,8 +181,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_detail_profile"
-                    android:backgroundTint="@color/btn_blue"
+                    android:backgroundTint="@color/main"
                     android:src="@drawable/image_money_management_icon"
+                    android:clipToOutline="true"
+                    android:scaleType="centerInside"
+                    app:imageUri="@{vm.detail.member.profilePath}"
                     android:layout_margin="4dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
