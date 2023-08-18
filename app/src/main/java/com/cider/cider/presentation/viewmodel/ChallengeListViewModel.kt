@@ -44,6 +44,12 @@ class ChallengeListViewModel @Inject constructor(
         }
     }
 
+    fun getChallengeLike() {
+        viewModelScope.launch {
+            _challenge.value = repository.getChallengeLike()
+        }
+    }
+
     fun changeLike(targetId: Int) {
         val beforeList = _challenge.value?: mutableListOf()
         var success: Boolean = true

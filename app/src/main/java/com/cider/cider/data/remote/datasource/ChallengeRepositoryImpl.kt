@@ -183,6 +183,15 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getChallengeLike(): List<ChallengeCardModel>? {
+        val data = apiService.getChallengeLike()
+        return if (data.isSuccessful) {
+            mapResponseToChallengeCardModel(data.body())
+        } else {
+            null
+        }
+    }
+
     private fun mapToChallengeDetail(response: ResponseChallengeDetail): ChallengeDetailModel {
         return ChallengeDetailModel(
             challengeId = response.challengeId,

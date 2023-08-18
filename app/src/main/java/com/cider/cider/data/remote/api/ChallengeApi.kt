@@ -106,4 +106,8 @@ interface ChallengeApi {
     suspend fun getChallengeCertifyList(
         @Path("challengeId") id: Int,
     ): Response<ResponseChallengeCertifyList>
+
+    @GET("/api/challenge/like")
+    suspend fun getChallengeLike(
+    ): Response<ArrayList<ResponseChallengeItem>>
 }

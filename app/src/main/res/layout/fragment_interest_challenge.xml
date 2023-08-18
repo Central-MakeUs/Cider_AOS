@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewmodel"
+            type="com.cider.cider.presentation.viewmodel.ChallengeListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +29,7 @@
                 android:id="@+id/rv_challenge_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:visible="@{viewmodel.challenge.size() != 0}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2" />
 
@@ -37,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/gray_3"
+            app:visible="@{viewmodel.challenge.size() == 0}"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent">
 
