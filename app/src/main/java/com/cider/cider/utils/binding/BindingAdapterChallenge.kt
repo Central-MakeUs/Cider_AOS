@@ -1,9 +1,12 @@
 package com.cider.cider.utils.binding
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,9 +18,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.cider.cider.R
+import com.cider.cider.domain.model.ChallengeDetailModel
 import com.cider.cider.domain.type.ReviewType
 import com.cider.cider.domain.type.challenge.Category
+import com.cider.cider.domain.type.challenge.ChallengeStatus
 import com.cider.cider.domain.type.challenge.ParticipationStatus
+import java.util.regex.Pattern
 
 
 @BindingAdapter("select")
@@ -242,3 +248,22 @@ fun setTextExpand2(view: TextView, isExpand: Boolean) {
         view.maxLines = 2
     }
 }
+
+@BindingAdapter("detailChallengeEnable")
+fun setDetailChallengeEnable(view: View, detail: String?) {
+    if (detail == "오늘 참여 인증하기" ) {
+        view.isEnabled = true
+        view.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#009DFF"))
+    } else if (detail == "이 챌린지 참여하기" ) {
+        view.isEnabled = true
+        view.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#009DFF"))
+    } else if (detail?.matches(Regex("챌린지 기다리기 D-\\d+")) == true) {
+        view.isEnabled = true
+        view.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#009DFF"))
+    } else  {
+        view.isEnabled = false
+        view.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#C1C6CA"))
+    }
+
+}
+
