@@ -21,7 +21,7 @@ class MyPageViewModel @Inject constructor(
         getMyPageData()
     }
 
-    private fun getMyPageData() {
+    fun getMyPageData() {
         viewModelScope.launch {
             _myPageData.value = repository.getMyPage()
         }
