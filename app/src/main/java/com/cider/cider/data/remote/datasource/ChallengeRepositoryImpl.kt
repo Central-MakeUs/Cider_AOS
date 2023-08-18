@@ -16,6 +16,7 @@ import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.getChallengeCategory
+import com.cider.cider.domain.type.challenge.getChallengeStatus
 import com.cider.cider.domain.type.challenge.getParticipationStatus
 import com.cider.cider.utils.cutInt
 import okhttp3.MultipartBody
@@ -196,7 +197,8 @@ class ChallengeRepositoryImpl @Inject constructor(
         return ChallengeDetailModel(
             challengeId = response.challengeId,
             category = getChallengeCategory(response.challengeBranch),
-            challengeStatus = true,
+            challengeStatus = getChallengeStatus(response.challengeStatus),
+            myStatus = response.myChallengeStatus,
             challengeName = response.challengeName ?: "",
             challengeCapacity = response.challengeCapacity,
             challengeIntro = response.challengeIntro,
