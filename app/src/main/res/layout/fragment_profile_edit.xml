@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.cider.cider.presentation.viewmodel.MyPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +51,8 @@
                     android:layout_width="82dp"
                     android:layout_height="82dp"
                     android:background="@drawable/shape_profile"
-                    android:src="@drawable/ic_investing"
+                    app:imageUri="@{vm.profileUri}"
+                    android:clipToOutline="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -85,7 +88,7 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <EditText
-                android:id="@+id/et_challenge_title"
+                android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/EditTextStyle"
@@ -93,8 +96,8 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="45dp"
                 android:hint="@string/challenge_title_hint"
-                android:text=""
-                android:maxLength="30"
+                android:text="@={vm.profileName}"
+                android:maxLength="10"
                 android:maxLines="1"
                 app:layout_constraintTop_toBottomOf="@id/tv_challenge_title"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,24 +105,24 @@
                 android:inputType="text" />
 
             <androidx.constraintlayout.utils.widget.ImageFilterButton
-                android:id="@+id/btn_challenge_title_delete"
+                android:id="@+id/btn_name_edit"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
                 android:layout_marginEnd="12dp"
                 android:src="@drawable/line_edit_24"
                 android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@id/et_challenge_title"
-                app:layout_constraintTop_toTopOf="@id/et_challenge_title"
-                app:layout_constraintBottom_toBottomOf="@id/et_challenge_title"
+                app:layout_constraintEnd_toEndOf="@id/et_name"
+                app:layout_constraintTop_toTopOf="@id/et_name"
+                app:layout_constraintBottom_toBottomOf="@id/et_name"
                 tools:visibility="visible"/>
 
             <TextView
                 android:id="@+id/tv_challenge_title_count"
                 style="@style/CountTextStyle"
-                app:countText='@{"0"}'
+                app:countText="@{vm.profileName}"
                 app:maxCount="@{10}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_challenge_title"
+                app:layout_constraintTop_toBottomOf="@id/et_name"
                 tools:text="0/10"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -128,6 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/layout_padding"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/layout_nickname">
 
             <TextView
@@ -181,14 +185,13 @@
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height_48"
-            android:enabled="true"
+            android:enabled="@{vm.profileName != vm.myPageModel.name || vm.profileUri != vm.myPageModel.profileUri}"
             android:text="수정완료"
             android:textSize="@dimen/text_2xl"
             android:fontFamily="@font/pretendard_bold"
             android:layout_marginHorizontal="24dp"
             android:layout_marginVertical="16dp"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
