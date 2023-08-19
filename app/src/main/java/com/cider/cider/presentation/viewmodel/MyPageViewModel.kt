@@ -37,7 +37,13 @@ class MyPageViewModel @Inject constructor(
         profileUri.value = _myPageData.value?.profileUri
     }
 
-    fun setProfile() {
-
+    suspend fun setProfile(): Boolean {
+        return if (profileName.value == _myPageData.value?.name) {
+            repository.patchProfile(profileName.value ?: "")
+        } else if (profileUri.value == _myPageData.value?.profileUri) {
+            repository.patchProfile(profileName.value ?: "")
+        } else {
+            false
+        }
     }
 }

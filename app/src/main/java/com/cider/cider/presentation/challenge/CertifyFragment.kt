@@ -129,7 +129,6 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImageUri = result.data?.extras
-                Log.d("TEST Camera","$selectedImageUri")
 
                 binding.ivImage.setImageBitmap(selectedImageUri?.get("data") as Bitmap)
                 // Call a function to set the image from the URI to the ImageView

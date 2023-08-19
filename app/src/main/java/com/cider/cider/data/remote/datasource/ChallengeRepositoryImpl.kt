@@ -14,6 +14,7 @@ import com.cider.cider.domain.model.MemberModel
 import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
+import com.cider.cider.domain.type.ProfileEdit
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.getChallengeCategory
 import com.cider.cider.domain.type.challenge.getChallengeStatus
@@ -191,6 +192,10 @@ class ChallengeRepositoryImpl @Inject constructor(
         } else {
             null
         }
+    }
+
+    override suspend fun patchProfile(name: String): Boolean {
+        return apiService.patchProfile(RequestProfile(memberName = name)).isSuccessful
     }
 
     private fun mapToChallengeDetail(response: ResponseChallengeDetail): ChallengeDetailModel {

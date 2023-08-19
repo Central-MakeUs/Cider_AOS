@@ -46,4 +46,6 @@ interface ChallengeRepository {
     suspend fun getChallengeParticipate(): List<ChallengeListModel>?
     suspend fun getChallengeCertify(id: Int): List<CertifyModel>?
     suspend fun getChallengeLike(): List<ChallengeCardModel>?
+
+    suspend fun patchProfile(name: String): Boolean
 }

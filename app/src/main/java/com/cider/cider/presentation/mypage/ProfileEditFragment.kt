@@ -2,25 +2,31 @@ package com.cider.cider.presentation.mypage
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentProfileEditBinding
 import com.cider.cider.domain.type.ProfileEdit
 import com.cider.cider.presentation.dialog.ProfileEditBottomSheetDialog
-import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.MyPageViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
+
 
 @AndroidEntryPoint
 class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.fragment_profile_edit) {
@@ -48,7 +54,13 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
             binding.etName.requestFocus()
         }
         binding.btnRegister.setOnClickListener {
-            Log.d("TEST profile","${viewModel.profileName.value == viewModel.myPageModel.value?.name}")
+            lifecycleScope.launch {
+                if (viewModel.setProfile()) {
+                    onBackPressed()
+                } else {
+                    Toast.makeText(requireContext(), "프로필 수정에 실패했습니다.",Toast.LENGTH_SHORT).show()
+                }
+            }
         }
         binding.ivCamera.setOnClickListener {
             showBottomSheetDialog()
@@ -154,14 +166,21 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImageUri = result.data?.extras
                 Log.d("TEST Camera","$selectedImageUri")
-                //viewModel.profileUri.value = (selectedImageUri?.get("data") as Uri)
-                // Call a function to set the image from the URI to the ImageView
-                //setImageFromUri(selectedImageUri)
+
+                setImageFromUri(getImageUri(requireContext(),selectedImageUri?.get("data") as Bitmap))
             }
         }
 
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraLauncher.launch(intent)
+    }
+
+    private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path =
+            MediaStore.Images.Media.insertImage(context.contentResolver, inImage, "Title", null)
+        return Uri.parse(path)
     }
 }
