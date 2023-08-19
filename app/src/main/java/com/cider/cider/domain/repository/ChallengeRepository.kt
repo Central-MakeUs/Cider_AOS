@@ -48,4 +48,5 @@ interface ChallengeRepository {
     suspend fun getChallengeLike(): List<ChallengeCardModel>?
 
     suspend fun patchProfile(name: String): Boolean
+    suspend fun patchProfileImage(image: MultipartBody.Part): Boolean
 }

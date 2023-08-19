@@ -198,6 +198,11 @@ class ChallengeRepositoryImpl @Inject constructor(
         return apiService.patchProfile(RequestProfile(memberName = name)).isSuccessful
     }
 
+    override suspend fun patchProfileImage(image: MultipartBody.Part): Boolean {
+        return apiService.patchProfileImage(image).isSuccessful
+    }
+
+
     private fun mapToChallengeDetail(response: ResponseChallengeDetail): ChallengeDetailModel {
         return ChallengeDetailModel(
             challengeId = response.challengeId,

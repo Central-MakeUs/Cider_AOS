@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -55,10 +56,21 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
         }
         binding.btnRegister.setOnClickListener {
             lifecycleScope.launch {
-                if (viewModel.setProfile()) {
-                    onBackPressed()
-                } else {
-                    Toast.makeText(requireContext(), "프로필 수정에 실패했습니다.",Toast.LENGTH_SHORT).show()
+                if (viewModel.profileName.value != viewModel.myPageModel.value?.name) {
+                    if (viewModel.setProfile()) {
+                        onBackPressed()
+                    } else {
+                        Toast.makeText(requireContext(), "프로필 수정에 실패했습니다.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+                if (viewModel.profileUri.value != viewModel.myPageModel.value?.profileUri) {
+                    if (viewModel.setProfileImage(requireContext())) {
+                        onBackPressed()
+                    } else {
+                        Toast.makeText(requireContext(), "프로필 수정에 실패했습니다.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
         }
