@@ -32,7 +32,6 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
 
         lifecycleScope.launch {
             if (viewModel.login()) {
-                Log.d("TEST API","!@#")
                 moveToMain()
             } else {
                 val transaction = supportFragmentManager
