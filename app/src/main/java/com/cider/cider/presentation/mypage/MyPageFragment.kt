@@ -2,7 +2,7 @@ package com.cider.cider.presentation.mypage
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentMyPageBinding
@@ -16,17 +16,23 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page)  {
 
-    private val viewModel: MyPageViewModel by viewModels()
+    private val viewModel: MyPageViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
 
         setBottomSheet()
         setButton()
         setBottomNavi()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMyPageData()
     }
 
     private fun setBottomSheet() {

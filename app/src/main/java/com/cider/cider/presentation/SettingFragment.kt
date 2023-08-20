@@ -26,6 +26,7 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvVersionNum.text = BuildConfig.VERSION_CODE.toString()
+        binding.tvKakaoEmail.text = App.prefs.getString("email","")
 
         binding.toolbar.btnToolbarBack.setOnClickListener {
             onBackPressed()
@@ -38,6 +39,7 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
                     Log.d("TEST 로그아웃","성공")
                     App.prefs.setString("accessToken","")
                     App.prefs.setString("refreshToken","")
+                    App.prefs.setString("email","")
                     val intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
                     activity?.finish()

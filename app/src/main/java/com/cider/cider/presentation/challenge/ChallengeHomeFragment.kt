@@ -1,7 +1,6 @@
 package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -17,7 +16,6 @@ import com.cider.cider.domain.type.WriteType
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.presentation.adapter.BannerPagerAdapter
 import com.cider.cider.presentation.adapter.CertifyAdapter
-import com.cider.cider.presentation.adapter.FeedAdapter
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
@@ -172,19 +170,19 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setFeedList() {
-        val certifyAdapter = CertifyAdapter()
+        val certifyAdapter = CertifyAdapter(certify)
 
         binding.rvRecommendFeed.apply {
             adapter = certifyAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        certify.certify.observe(viewLifecycleOwner) {
+        certify.certifyList.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 certifyAdapter.submitList(it)
-                Log.e("TEST 변경","$it")
             }
         }
+        certify.getCertify()
     }
 
     private fun setButton() {

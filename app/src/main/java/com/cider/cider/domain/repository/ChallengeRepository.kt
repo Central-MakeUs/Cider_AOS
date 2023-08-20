@@ -7,6 +7,7 @@ import com.cider.cider.data.remote.model.ResponseMyChallenge
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.model.ChallengeDetailModel
+import com.cider.cider.domain.model.ChallengeListModel
 import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.type.Filter
 import com.cider.cider.domain.type.challenge.Category
@@ -33,10 +34,19 @@ interface ChallengeRepository {
         image2: List<MultipartBody.Part>
     ): Boolean
 
+    suspend fun deleteChallenge(id: Int): Boolean
+
     suspend fun getMyPage(): MyPageModel?
 
     suspend fun getMyChallenge(): Response<ResponseMyChallenge>?
 
     suspend fun getChallengeDetail(id: Int): ChallengeDetailModel?
     suspend fun getCertifyDetail(id: Int, filter: Filter): Response<ResponseCertifyDetail>?
+
+    suspend fun getChallengeParticipate(): List<ChallengeListModel>?
+    suspend fun getChallengeCertify(id: Int): List<CertifyModel>?
+    suspend fun getChallengeLike(): List<ChallengeCardModel>?
+
+    suspend fun patchProfile(name: String): Boolean
+    suspend fun patchProfileImage(image: MultipartBody.Part): Boolean
 }

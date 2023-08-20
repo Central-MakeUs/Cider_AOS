@@ -123,7 +123,7 @@ class ChallengeCreateViewModel @Inject constructor(
         _buttonState2.value = _checkList.value?.all { it }
     }
 
-    fun createChallenge(context: Context) {
+    suspend fun createChallenge(context: Context) : Boolean {
         val contentResolver: ContentResolver = context.contentResolver
         val part1: MutableList<MultipartBody.Part> = mutableListOf()
         val part2: MutableList<MultipartBody.Part> = mutableListOf()
@@ -149,8 +149,8 @@ class ChallengeCreateViewModel @Inject constructor(
                 part2.add(body)
             }
         }
-        viewModelScope.launch {
-            repository.createChallenge(
+
+        return repository.createChallenge(
                 RequestChallengeCreate(
                     certifyMission = challengeAuthentication.value?:"",
                     challengeBranch = _challengeSelect.value?.api?:"",
@@ -164,7 +164,7 @@ class ChallengeCreateViewModel @Inject constructor(
                 part1,
                 part2
             )
-        }
+
 
     }
 }

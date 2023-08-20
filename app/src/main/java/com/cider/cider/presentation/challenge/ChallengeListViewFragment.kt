@@ -34,7 +34,7 @@ class ChallengeListViewFragment(private val type: String): BindingFragmentNoNavi
 
         when (type) {
             Category.INVESTING.text -> {
-                /*viewModel.getChallengeCategory(Category.INVESTING)*/
+                viewModel.getChallengeCategory(Category.INVESTING)
             }
             Category.SAVING.text -> {
                 viewModel.getChallengeCategory(Category.SAVING)

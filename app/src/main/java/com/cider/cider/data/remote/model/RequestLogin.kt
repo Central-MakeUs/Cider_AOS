@@ -12,3 +12,8 @@ data class RequestMember(
     val memberGender: String,
     val interestChallenge: String
 )
+
+data class RequestProfile(
+    val memberName: String,
+    val memberIntro: String = ""
+)

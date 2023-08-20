@@ -49,10 +49,16 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         setBottomNavi()
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        viewModel.clear()
+    }
+
     private fun setBanner() {
         binding.appbar.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
         binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
     }
+
 
     private fun setBehavior() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
@@ -122,7 +128,7 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
     @SuppressLint("SetTextI18n")
     private fun setBottomNavi() {
         binding.btnLike.setOnClickListener {
-            viewModel.changeLike(binding.ivLike.isSelected)
+            viewModel.changeLike2(binding.ivLike.isSelected)
             if (binding.ivLike.isSelected) {
                 binding.ivLike.isSelected = false
                 binding.tvLike.text = (binding.tvLike.text.toString().toInt() - 1).toString()

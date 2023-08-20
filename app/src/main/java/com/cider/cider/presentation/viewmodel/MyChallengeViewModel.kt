@@ -80,4 +80,19 @@ class MyChallengeViewModel @Inject constructor(
         }
     }
 
+    fun deleteReviewChallenge(id: Int) {
+        viewModelScope.launch {
+            if (repository.deleteChallenge(id)) {
+                val updatedItems = _challengeReview.value?.toMutableList() ?: mutableListOf()
+                val itemToRemove = updatedItems.find { it.id == id }
+                if (itemToRemove != null) {
+                    updatedItems.remove(itemToRemove)
+                    _challengeReview.value = updatedItems
+                }
+            }
+        }
+
+    }
+
+
 }

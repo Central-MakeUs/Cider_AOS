@@ -127,6 +127,7 @@
                 android:ellipsize="end"
                 android:layout_marginTop="4dp"
                 android:text="@{certify.certifyContent}"
+                app:textExpand2="@{certify.expand}"
                 app:layout_constraintTop_toBottomOf="@id/tv_feed_title"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="저도 챌린지 하면 할수록 혼자 해서 의지가 약해지네요ㅠㅠㅠ 힘들지만 같이 열심히 마무리 해보아요 화이팅하세요" />
@@ -139,9 +140,10 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:textSize="@dimen/text_sm"
                 android:textColor="@color/gray_5"
+                android:onClick="@{()->vm.changeExpand(certify.id,certify.isExpand)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_feed_content"
-                android:text="자세히 보기"/>
+                app:textExpand="@{certify.expand}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -269,6 +271,7 @@
                     android:layout_height="@dimen/icon_size_16"
                     android:background="@drawable/selector_like"
                     android:src="@drawable/line_like_16"
+                    android:onClick="@{() -> vm.changeLike(certify.id)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_like"
                     app:layout_constraintHorizontal_chainStyle="packed"

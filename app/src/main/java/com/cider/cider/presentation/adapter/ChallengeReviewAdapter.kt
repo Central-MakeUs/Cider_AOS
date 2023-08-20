@@ -36,6 +36,32 @@ class ChallengeReviewAdapter(): ListAdapter<ChallengeReviewModel, RecyclerView.V
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ChallengeReviewModel) {
             binding.challenge = item
+
+            binding.btnDelete.setOnClickListener {
+                listener?.onItemClick(item.id,0)
+            }
+
+            binding.btnFail.setOnClickListener {
+                listener?.onItemClick(item.id,1)
+            }
+
+            binding.btnReturn.setOnClickListener {
+                listener?.onItemClick(item.id,2)
+            }
+
+            binding.btnSuccess.setOnClickListener {
+                listener?.onItemClick(item.id,3)
+            }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(id:Int, type: Int)
+    }
+
+    private var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
 }

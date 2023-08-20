@@ -56,9 +56,11 @@ data class ResponseCertifyDetail(
 )
 
 data class SimpleCertifyResponseDto(
+    val certifyId: Int,
     val certifyContent: String,
     val certifyLike: Int,
     val certifyName: String,
+    val certifyImageUrl: String,
     val createdDate: String,
     val isLike: Boolean,
     val simpleMemberResponseDto: SimpleMemberResponseDto

@@ -10,6 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.cider.cider.App
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentRegisterBinding
 import com.cider.cider.presentation.MainActivity

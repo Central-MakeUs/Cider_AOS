@@ -180,6 +180,19 @@
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">@dimen/text_lg</item>
+    </style>
 
+    <style name="notice_title_text" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:textColor">@color/gray_5</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="notice_content_text" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:textColor">@color/gray_5</item>
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 </resources>

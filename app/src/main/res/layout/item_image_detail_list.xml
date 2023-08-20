@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="image"
+            type="com.cider.cider.domain.model.ImageCardModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginEnd="12dp">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/iv_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/shape_rec_round_4"
+            app:imageUri="@{image.uri}"
+            android:clipToOutline="true"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/shape_rec_round_4"
+            android:backgroundTint="#08000000"
+            app:layout_constraintStart_toStartOf="@id/iv_image"
+            app:layout_constraintTop_toTopOf="@id/iv_image"
+            app:layout_constraintBottom_toBottomOf="@id/iv_image"
+            app:layout_constraintEnd_toEndOf="@id/iv_image"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

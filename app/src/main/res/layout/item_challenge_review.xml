@@ -28,6 +28,8 @@
             tools:text="소비습관 고치기"
             android:textColor="@color/gray_7"
             android:textSize="@dimen/text_lg"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:fontFamily="@font/pretendard_bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -250,7 +252,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2023.07.11 챌린지 모집 시작"
+                    android:text="챌린지 모집 시작"
                     android:fontFamily="@font/pretendard_regular"
                     android:textSize="@dimen/text_xs"
                     android:textColor="@color/gray_6"

@@ -9,13 +9,17 @@ import com.cider.cider.domain.model.ChallengeCardModel
 import com.cider.cider.domain.model.ChallengeCondition
 import com.cider.cider.domain.model.ChallengeDetailModel
 import com.cider.cider.domain.model.ChallengeInfoModel
+import com.cider.cider.domain.model.ChallengeListModel
 import com.cider.cider.domain.model.MemberModel
 import com.cider.cider.domain.model.MyPageModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.Filter
+import com.cider.cider.domain.type.ProfileEdit
 import com.cider.cider.domain.type.challenge.Category
 import com.cider.cider.domain.type.challenge.getChallengeCategory
+import com.cider.cider.domain.type.challenge.getChallengeStatus
 import com.cider.cider.domain.type.challenge.getParticipationStatus
+import com.cider.cider.utils.cutInt
 import okhttp3.MultipartBody
 import retrofit2.Response
 import java.io.File
@@ -37,16 +41,17 @@ class ChallengeRepositoryImpl @Inject constructor(
         val data = apiService.getCertifyHome()
         return when (data.code()) {
             200 -> {
-                Log.d("Test certify","${data.body()}")
+                Log.d("Test certifyList", "${data.body()}")
                 mapToCertifyModelList(data.body())
             }
+
             else -> null
         }
     }
 
     override suspend fun getChallengeCategory(challenge: Category): List<ChallengeCardModel>? {
         val data = apiService.getChallengeCategory(category = challenge.api)
-        Log.d("TEST API","${data.body()}")
+        Log.d("TEST API", "${data.body()}")
         return when (data.code()) {
             200 -> mapResponseToChallengeCardModel(data.body())
             else -> null
@@ -85,11 +90,16 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun createChallenge(param: RequestChallengeCreate, image1: List<MultipartBody.Part>, image2: List<MultipartBody.Part>): Boolean {
+    override suspend fun createChallenge(
+        param: RequestChallengeCreate,
+        image1: List<MultipartBody.Part>,
+        image2: List<MultipartBody.Part>
+    ): Boolean {
         val data = apiService.postChallengeCreate(param)
-        Log.d("TEST CREATE API DATA1","$data")
+        Log.d("TEST CREATE API DATA1", "$data")
         if (data.body()?.challengeId != null) {
-            val data2 = apiService.postChallengeCreateImage(data.body()?.challengeId!!, image1, image2 )
+            val data2 =
+                apiService.postChallengeCreateImage(data.body()?.challengeId!!, image1, image2)
             return when (data2.code()) {
                 200 -> true
                 413 -> false
@@ -99,9 +109,14 @@ class ChallengeRepositoryImpl @Inject constructor(
         return false
     }
 
+    override suspend fun deleteChallenge(id: Int): Boolean {
+        val data = apiService.deleteChallenge(id)
+        return data.isSuccessful
+    }
+
     override suspend fun postChallengeLike(id: Int): Boolean {
         val data = apiService.postChallengeLike(RequestChallengeLike(id))
-        Log.d("TEST api","$data")
+        Log.d("TEST api", "$data")
         return when (data.code()) {
             200 -> true
             else -> false
@@ -141,7 +156,10 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCertifyDetail(id: Int, filter: Filter): Response<ResponseCertifyDetail>? {
+    override suspend fun getCertifyDetail(
+        id: Int,
+        filter: Filter
+    ): Response<ResponseCertifyDetail>? {
         val data = apiService.getCertifyDetail(id, filter = filter.string)
         return when (data.code()) {
             200 -> data
@@ -149,20 +167,65 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getChallengeParticipate(): List<ChallengeListModel>? {
+        val data = apiService.getChallengeParticipate()
+        return data.body()?.let { it1 ->
+            it1.map {
+                ChallengeListModel(it.challengeId, it.challengeName)
+            }
+        }
+    }
+
+    override suspend fun getChallengeCertify(id: Int): List<CertifyModel>? {
+        val data = apiService.getChallengeCertifyList(id)
+        return if (data.isSuccessful) {
+            mapToChallengeCertifyModelList(data.body())
+        } else {
+            null
+        }
+    }
+
+    override suspend fun getChallengeLike(): List<ChallengeCardModel>? {
+        val data = apiService.getChallengeLike()
+        return if (data.isSuccessful) {
+            mapResponseToChallengeCardModel(data.body())
+        } else {
+            null
+        }
+    }
+
+    override suspend fun patchProfile(name: String): Boolean {
+        return apiService.patchProfile(RequestProfile(memberName = name)).isSuccessful
+    }
+
+    override suspend fun patchProfileImage(image: MultipartBody.Part): Boolean {
+        return apiService.patchProfileImage(image).isSuccessful
+    }
+
+
     private fun mapToChallengeDetail(response: ResponseChallengeDetail): ChallengeDetailModel {
         return ChallengeDetailModel(
             challengeId = response.challengeId,
             category = getChallengeCategory(response.challengeBranch),
-            challengeStatus = true,
-            challengeName = response.challengeName?:"",
+            challengeStatus = getChallengeStatus(response.challengeStatus),
+            myStatus = response.myChallengeStatus,
+            challengeName = response.challengeName ?: "",
             challengeCapacity = response.challengeCapacity,
             challengeIntro = response.challengeIntro,
             challengeLikeNum = response.challengeLikeNum,
             isLike = response.isLike,
             participateNum = response.participateNum,
-            certifyMission =  response.certifyMissionResponseDto.certifyMission,
-            failureExampleImage = response.certifyMissionResponseDto.failureExampleImage?.let { Uri.parse(it) },
-            successExampleImage = response.certifyMissionResponseDto.successExampleImage?.let { Uri.parse(it) },
+            certifyMission = response.certifyMissionResponseDto.certifyMission,
+            failureExampleImage = response.certifyMissionResponseDto.failureExampleImage?.let {
+                Uri.parse(
+                    it
+                )
+            },
+            successExampleImage = response.certifyMissionResponseDto.successExampleImage?.let {
+                Uri.parse(
+                    it
+                )
+            },
             certifyRule = response.challengeRuleResponseDto.certifyRule,
             failureRule = response.challengeRuleResponseDto.failureRule,
             challengeInfo = ChallengeInfoModel(
@@ -188,7 +251,7 @@ class ChallengeRepositoryImpl @Inject constructor(
         )
     }
 
-    private fun mapResponseToChallengeCardModel(responseList: List<ResponseChallengeItem>?) : List<ChallengeCardModel>? {
+    private fun mapResponseToChallengeCardModel(responseList: List<ResponseChallengeItem>?): List<ChallengeCardModel>? {
         return responseList?.map { responseItem ->
             ChallengeCardModel(
                 id = responseItem.challengeId,
@@ -218,15 +281,38 @@ class ChallengeRepositoryImpl @Inject constructor(
                 challengeBranch = getChallengeCategory(response.simpleChallengeResponseDto.challengeBranch),
                 challengeName = response.simpleChallengeResponseDto.challengeName,
                 participateNum = response.simpleChallengeResponseDto.participateNum,
-                memberLevel = response.simpleMemberResponseDto.memberLevel,
+                memberLevel = cutInt(response.simpleMemberResponseDto.memberLevelName),
                 memberName = response.simpleMemberResponseDto.memberName,
                 profilePath = Uri.parse(response.simpleMemberResponseDto.profilePath),
-                certifyImage = if (response.certifyImageUrl != null ) Uri.parse(response.certifyImageUrl) else null
+                certifyImage = if (response.certifyImageUrl != null) Uri.parse(response.certifyImageUrl) else null
             )
         }
     }
 
-    private fun mapToMyPageModel(response: ResponseMyPage) : MyPageModel {
+    private fun mapToChallengeCertifyModelList(responseList: ResponseChallengeCertifyList?): List<CertifyModel>? {
+        return responseList?.let { response ->
+            response.certifyResponseDtoList.map {
+                CertifyModel(
+                    id = it.certifyId,
+                    certifyContent = it.certifyContent,
+                    certifyLike = it.certifyLike,
+                    certifyName = it.certifyName,
+                    createdDate = it.createdDate,
+                    isLike = it.isLike,
+                    challengeBranch = getChallengeCategory(response.simpleChallengeResponseDto.challengeBranch),
+                    challengeName = response.simpleChallengeResponseDto.challengeName,
+                    participateNum = response.simpleChallengeResponseDto.participateNum,
+                    memberLevel = cutInt(response.simpleMemberResponseDto.memberLevelName),
+                    memberName = response.simpleMemberResponseDto.memberName,
+                    profilePath = Uri.parse(response.simpleMemberResponseDto.profilePath),
+                    certifyImage = if (it.certifyImageUrl != null) Uri.parse(it.certifyImageUrl) else null
+                )
+            }
+
+        }
+    }
+
+    private fun mapToMyPageModel(response: ResponseMyPage): MyPageModel {
         return MyPageModel(
             name = response.simpleMember.memberName,
             profileUri = Uri.parse(response.simpleMember.profilePath),
@@ -243,4 +329,5 @@ class ChallengeRepositoryImpl @Inject constructor(
             nextLevelName = response.memberLevelInfo.nextLevel.levelName
         )
     }
+
 }

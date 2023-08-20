@@ -5,26 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cider.cider.databinding.ItemCertifyBinding
-import com.cider.cider.databinding.ItemCertifyInDetailBinding
+import com.cider.cider.databinding.ItemCertifyCheckBinding
 import com.cider.cider.databinding.ItemFeedBinding
-import com.cider.cider.domain.model.CertifyDetailModel
 import com.cider.cider.domain.model.CertifyModel
 import com.cider.cider.domain.model.FeedModel
 import com.cider.cider.presentation.viewmodel.CertifyViewModel
-import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
 import com.cider.cider.utils.ItemDiffCallback
 
-class CertifyDetailAdapter(
-    private val vm: ChallengeDetailViewModel
-    ): ListAdapter<CertifyDetailModel, RecyclerView.ViewHolder>(
-    ItemDiffCallback<CertifyDetailModel>(
+class CertifyCheckAdapter(
+    private val vm: CertifyViewModel
+    ): ListAdapter<CertifyModel, RecyclerView.ViewHolder>(
+    ItemDiffCallback<CertifyModel>(
         onContentsTheSame = {old, new -> old == new},
-        onItemsTheSame = {old, new -> old.id == new.id }
+        onItemsTheSame = {old, new -> old.id == new.id}
     )
 ){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return CertifyVieHolder(ItemCertifyInDetailBinding.inflate(inflater, parent, false))
+        return CertifyVieHolder(ItemCertifyCheckBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -38,12 +36,16 @@ class CertifyDetailAdapter(
     }
 
     inner class CertifyVieHolder(
-        private val binding: ItemCertifyInDetailBinding
+        private val binding: ItemCertifyCheckBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CertifyDetailModel) {
+        fun bind(item: CertifyModel) {
             binding.certify = item
             binding.vm = vm
             binding.executePendingBindings()
+
+/*            binding.ivLike.setOnClickListener {
+                listener?.onItemClick(item.id)
+            }*/
 
 
 /*            val feedImageAdapter = FeedImageAdapter()

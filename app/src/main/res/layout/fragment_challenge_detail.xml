@@ -181,8 +181,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_detail_profile"
-                    android:backgroundTint="@color/btn_blue"
+                    android:backgroundTint="@color/main"
                     android:src="@drawable/image_money_management_icon"
+                    android:clipToOutline="true"
+                    android:scaleType="centerInside"
+                    app:imageUri="@{vm.detail.member.profilePath}"
                     android:layout_margin="4dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -242,6 +245,7 @@
                 android:layout_marginStart="8dp"
                 android:background="@drawable/shape_rec_round_4"
                 android:backgroundTint="@color/main"
+                app:detailChallengeEnable="@{vm.detail.myStatus}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_like"
@@ -252,7 +256,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_bold"
-                    android:text="이 챌린지 참여하기"
+                    android:text="@{vm.detail.myStatus}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_lg"
                     app:layout_constraintBottom_toBottomOf="parent"
