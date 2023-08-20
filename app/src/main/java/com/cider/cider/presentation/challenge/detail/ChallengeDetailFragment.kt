@@ -49,6 +49,11 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         setBottomNavi()
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        viewModel.clear()
+    }
+
     private fun setBanner() {
         binding.appbar.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
         binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))

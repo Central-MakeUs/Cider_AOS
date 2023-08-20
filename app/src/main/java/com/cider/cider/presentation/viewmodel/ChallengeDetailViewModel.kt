@@ -30,7 +30,7 @@ class ChallengeDetailViewModel @Inject constructor(
     private val repository: ChallengeRepository
 ): ViewModel() {
 
-    private val _detail = MutableLiveData<ChallengeDetailModel>()
+    private var _detail = MutableLiveData<ChallengeDetailModel>()
     val detail: LiveData<ChallengeDetailModel> get() = _detail
 
     private val _certify = MutableLiveData<List<CertifyDetailModel>>()
@@ -38,6 +38,10 @@ class ChallengeDetailViewModel @Inject constructor(
 
     private val _imageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
     val imageList: LiveData<List<ImageCardModel>> get() = _imageList
+
+    fun clear() {
+        _detail = MutableLiveData()
+    }
 
     suspend fun getDetail(id: Int) {
         _detail.value = repository.getChallengeDetail(id)
