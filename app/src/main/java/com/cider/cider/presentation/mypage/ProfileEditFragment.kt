@@ -93,7 +93,7 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
                         requestPermission()
                     }
                     ProfileEdit.RANDOM -> {
-                        //랜덤
+                        getRandomImageResource()
                     }
                 }
             }
@@ -101,6 +101,20 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
         })
         dialog.show(parentFragmentManager, "Capacity")
     }
+
+    private fun getRandomImageResource() {
+        val imageResourceIds = arrayOf(
+            R.drawable.profile_bear,
+            R.drawable.profile_chick,
+            R.drawable.profile_chicken,
+            R.drawable.profile_pig,
+            R.drawable.profile_rabbit,
+            R.drawable.profile_dog
+        )
+        val randomIndex = (imageResourceIds.indices).random()
+        setImageFromUri(Uri.parse("android.resource://${context?.packageName}/${imageResourceIds[randomIndex]}"))
+    }
+
 
     override fun onBackPressed() {
         super.onBackPressed()
