@@ -18,8 +18,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/appbar_dialog"
-            android:layout_width="match_parent"
+            android:layout_width="232dp"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -35,7 +37,7 @@
                 android:layout_height="@dimen/icon_size"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:src="@drawable/line_delete_24" />
+                android:src="@drawable/line_delete_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,7 +95,7 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:textSize="@dimen/text_base"
                 android:lineSpacingExtra="4dp"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +144,7 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:textSize="@dimen/text_base"
                 android:lineSpacingExtra="4dp"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -191,7 +193,7 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:textSize="@dimen/text_base"
                 android:lineSpacingExtra="4dp"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

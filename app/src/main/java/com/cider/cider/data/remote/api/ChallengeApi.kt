@@ -121,4 +121,9 @@ interface ChallengeApi {
     suspend fun patchProfileImage(
         @Part profileImage : MultipartBody.Part
     ): Response<Any>
+
+    @POST("/api/challenge/participate")
+    suspend fun postParticipate(
+        @Body param: RequestParticipate
+    ): Response<Any>
 }
