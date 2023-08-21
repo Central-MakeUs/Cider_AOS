@@ -22,3 +22,9 @@ data class RequestChallengeCreate(
 data class RequestParticipate(
     val challengeId: Int
 )
+
+data class RequestCertify(
+    val challengeId: Int,
+    val certifyName: String,
+    val certifyContent: String
+)

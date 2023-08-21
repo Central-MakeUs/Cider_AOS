@@ -126,4 +126,17 @@ interface ChallengeApi {
     suspend fun postParticipate(
         @Body param: RequestParticipate
     ): Response<Any>
+
+    @POST("/api/certify")
+    suspend fun postCertify(
+        @Body param: RequestCertify
+    ): Response<ResponseCertify>
+
+    @Multipart
+    @POST("/api/certify/images/{certifyId}")
+    suspend fun postCertifyImage(
+        @Path("certifyId") id: Int,
+        @Part certifyImage : List<MultipartBody.Part>,
+    ): Response<Any>
+
 }

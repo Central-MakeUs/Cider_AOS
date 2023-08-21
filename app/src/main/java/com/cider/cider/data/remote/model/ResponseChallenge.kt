@@ -76,3 +76,7 @@ data class ResponseChallengeParticipate(
     val challengeName: String,
     val participateStatus: String,
 )
+
+data class ResponseCertify(
+    val certifyId: Int
+)
