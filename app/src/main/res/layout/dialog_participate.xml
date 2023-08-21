@@ -57,161 +57,232 @@
             android:text="@{vm.detail.challengeName}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_challenge_period"
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_dialog_title">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_challenge_period"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec_round_4_border"
+                android:layout_marginTop="10dp"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_challenge_period"
+                    android:layout_width="@dimen/icon_size_16"
+                    android:layout_height="@dimen/icon_size_16"
+                    android:src="@drawable/filled_noti_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_challenge_period"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_challenge_period"/>
+
+                <TextView
+                    android:id="@+id/tv_challenge_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:textSize="@dimen/text_lg"
+                    android:text="@string/challenge_detail_challenge_period"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintStart_toEndOf="@id/iv_challenge_period"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_dialog_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textSize="@dimen/text_base"
+                    android:lineSpacingExtra="4dp"
+                    android:gravity="start"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_challenge_period"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@{vm.detail.challengeInfo.recruitPeriod}"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_mission_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec_round_4_border"
+                android:layout_marginTop="10dp"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_challenge_period"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_mission_time"
+                    android:layout_width="@dimen/icon_size_16"
+                    android:layout_height="@dimen/icon_size_16"
+                    android:src="@drawable/filled_clock_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_mission_time"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mission_time"/>
+
+                <TextView
+                    android:id="@+id/tv_mission_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:textSize="@dimen/text_lg"
+                    android:text="@string/challenge_detail_mission_time"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintStart_toEndOf="@id/iv_mission_time"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_dialog_mission_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textSize="@dimen/text_base"
+                    android:lineSpacingExtra="4dp"
+                    android:gravity="start"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mission_time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@{vm.detail.challengeInfo.certifyTime}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_mission_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec_round_4_border"
+                android:layout_marginTop="10dp"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_mission_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_mission_count"
+                    android:layout_width="@dimen/icon_size_16"
+                    android:layout_height="@dimen/icon_size_16"
+                    android:src="@drawable/filled_checkbox_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_mission_count"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mission_count"/>
+
+                <TextView
+                    android:id="@+id/tv_mission_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:textSize="@dimen/text_lg"
+                    android:text="@string/challenge_detail_mission_count"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintStart_toEndOf="@id/iv_mission_count"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_dialog_mission_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textSize="@dimen/text_base"
+                    android:lineSpacingExtra="4dp"
+                    android:gravity="start"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mission_count"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text='@{"총 "+String.valueOf(vm.detail.challengeInfo.certifyNum)+"회"}' />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_challenge_success"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_rec_round_4_border"
             android:layout_marginTop="10dp"
             android:paddingVertical="8dp"
             android:paddingHorizontal="16dp"
+            android:background="@color/white"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/iv_challenge_period"
-                android:layout_width="@dimen/icon_size_16"
-                android:layout_height="@dimen/icon_size_16"
-                android:src="@drawable/filled_noti_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_challenge_period"
-                app:layout_constraintBottom_toBottomOf="@id/tv_challenge_period"/>
-
-            <TextView
-                android:id="@+id/tv_challenge_period"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:textSize="@dimen/text_lg"
-                android:text="@string/challenge_detail_challenge_period"
-                android:layout_marginStart="4dp"
-                app:layout_constraintStart_toEndOf="@id/iv_challenge_period"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/tv_dialog_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
-                android:textSize="@dimen/text_base"
-                android:lineSpacingExtra="4dp"
-                android:gravity="start"
-                android:layout_marginTop="4dp"
+                android:id="@+id/iv_challenge_success"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/image_notice"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_challenge_period"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text="@{vm.detail.challengeInfo.recruitPeriod}"/>
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_get_exp"
+                app:layout_constraintTop_toBottomOf="@id/iv_challenge_success"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:textSize="@dimen/text_lg"
+                    android:text="획득 경험치"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_exp_num"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_exp_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:textSize="@dimen/text_lg"
+                    android:textColor="@color/main"
+                    android:text="+ 150"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_exp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_mission_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_rec_round_4_border"
-            android:layout_marginTop="10dp"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="16dp"
-            app:layout_constraintTop_toBottomOf="@id/layout_challenge_period"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/iv_mission_time"
-                android:layout_width="@dimen/icon_size_16"
-                android:layout_height="@dimen/icon_size_16"
-                android:src="@drawable/filled_clock_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_mission_time"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mission_time"/>
-
-            <TextView
-                android:id="@+id/tv_mission_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:textSize="@dimen/text_lg"
-                android:text="@string/challenge_detail_mission_time"
-                android:layout_marginStart="4dp"
-                app:layout_constraintStart_toEndOf="@id/iv_mission_time"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/tv_dialog_mission_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
-                android:textSize="@dimen/text_base"
-                android:lineSpacingExtra="4dp"
-                android:gravity="start"
-                android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_mission_time"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text="@{vm.detail.challengeInfo.certifyTime}" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_mission_count"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_rec_round_4_border"
-            android:layout_marginTop="10dp"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="16dp"
-            app:layout_constraintTop_toBottomOf="@id/layout_mission_time"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/iv_mission_count"
-                android:layout_width="@dimen/icon_size_16"
-                android:layout_height="@dimen/icon_size_16"
-                android:src="@drawable/filled_checkbox_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_mission_count"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mission_count"/>
-
-            <TextView
-                android:id="@+id/tv_mission_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:textSize="@dimen/text_lg"
-                android:text="@string/challenge_detail_mission_count"
-                android:layout_marginStart="4dp"
-                app:layout_constraintStart_toEndOf="@id/iv_mission_count"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/tv_dialog_mission_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
-                android:textSize="@dimen/text_base"
-                android:lineSpacingExtra="4dp"
-                android:gravity="start"
-                android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_mission_count"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text='@{"총 "+String.valueOf(vm.detail.challengeInfo.certifyNum)+"회"}' />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_check_btn"
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_mission_count"
+            app:layout_constraintTop_toBottomOf="@id/layout"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatButton
@@ -227,6 +298,27 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_challenge_success"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_check2"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="@dimen/text_lg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="오늘 챌린지 인증하기" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

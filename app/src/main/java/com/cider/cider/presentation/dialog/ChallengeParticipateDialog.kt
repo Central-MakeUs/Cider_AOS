@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.DialogParticipateBinding
 import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
@@ -31,8 +32,21 @@ class ChallengeParticipateDialog: BindingDialog<DialogParticipateBinding>(R.layo
             lifecycleScope.launch {
                 if (!viewModel.participateChallenge()) {
                    Toast.makeText(requireContext(), "챌린지 참여에 실패했습니다",Toast.LENGTH_SHORT).show()
+                } else {
+                    binding.layout.visibility = View.GONE
+                    binding.layoutChallengeSuccess.visibility = View.VISIBLE
+                    binding.btnCheck.visibility = View.GONE
+                    binding.btnCheck2.visibility = View.VISIBLE
                 }
             }
+        }
+
+        binding.btnCheck2.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id",viewModel.detail.value?.challengeId?:0)
+            findNavController().navigate(
+                R.id.action_challengeDetailFragment_to_certifyFragment
+            )
             dismiss()
         }
 
@@ -40,4 +54,5 @@ class ChallengeParticipateDialog: BindingDialog<DialogParticipateBinding>(R.layo
             dismiss()
         }
     }
+
 }
