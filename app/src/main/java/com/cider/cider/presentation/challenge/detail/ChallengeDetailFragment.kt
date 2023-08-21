@@ -68,6 +68,9 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
                 showDialog()
             }
         }
+        binding.btnToolbarBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun showDialog() {
