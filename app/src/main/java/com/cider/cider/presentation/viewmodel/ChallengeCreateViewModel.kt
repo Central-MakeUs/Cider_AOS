@@ -2,6 +2,8 @@ package com.cider.cider.presentation.viewmodel
 
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
+import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +13,8 @@ import com.cider.cider.data.remote.model.RequestChallengeCreate
 import com.cider.cider.domain.model.ImageCardModel
 import com.cider.cider.domain.repository.ChallengeRepository
 import com.cider.cider.domain.type.challenge.Category
+import com.cider.cider.utils.Constant
+import com.cider.cider.utils.FormDataUtil
 import com.cider.cider.utils.FormDataUtil.getRealPathFromUri
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,6 +23,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import java.io.FileOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
@@ -71,7 +76,9 @@ class ChallengeCreateViewModel @Inject constructor(
     fun checkChallengeInput(): Boolean {
         return !challengeAuthentication.value.isNullOrEmpty() ||
         !challengeIntroduction.value.isNullOrEmpty() ||
-        !challengeTitle.value.isNullOrEmpty()
+        !challengeTitle.value.isNullOrEmpty() ||
+        !_successImageList.value.isNullOrEmpty() ||
+        !_failImageList.value.isNullOrEmpty()
     } //값이 하나 라도 있으면 true
 
     fun addImageSuccess(imageCardModel: ImageCardModel) {
@@ -131,10 +138,23 @@ class ChallengeCreateViewModel @Inject constructor(
         _successImageList.value?.map {
             val filePath = getRealPathFromUri(contentResolver, it.uri)
             val imageFile = filePath?.let { it1 -> File(it1) }
-            val requestFile: RequestBody? = imageFile?.asRequestBody("multipart/form-data".toMediaType())
-            if (requestFile!=null) {
+            // 압축 비율 계산
+            val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, it.uri)
+
+            val maxFileSizeKB = Constant.IMAGE_MAX_SIZE
+            val quality = if ((maxFileSizeKB * 100) / (bitmap.byteCount / 1024) >= 100) 100 else (maxFileSizeKB * 100) / (bitmap.byteCount / 1024)
+
+            bitmap.let { compressedBitmap ->
+                // Bitmap을 압축
+                val compressedFile = File(context.cacheDir, imageFile?.name.toString())
+                val outputStream = FileOutputStream(compressedFile)
+                compressedBitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+                outputStream.flush()
+                outputStream.close()
+
+                val requestFile: RequestBody = compressedFile.asRequestBody("multipart/form-data".toMediaType())
                 val body: MultipartBody.Part =
-                    MultipartBody.Part.createFormData("uploaded_file", imageFile.name, requestFile)
+                    MultipartBody.Part.createFormData("successExampleImages", imageFile?.name, requestFile)
                 part1.add(body)
             }
         }
@@ -142,10 +162,23 @@ class ChallengeCreateViewModel @Inject constructor(
         _failImageList.value?.map {
             val filePath = getRealPathFromUri(contentResolver, it.uri)
             val imageFile = filePath?.let { it1 -> File(it1) }
-            val requestFile: RequestBody? = imageFile?.asRequestBody("multipart/form-data".toMediaType())
-            if (requestFile!=null) {
+            // 압축 비율 계산
+            val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, it.uri)
+
+            val maxFileSizeKB = Constant.IMAGE_MAX_SIZE
+            val quality = if ((maxFileSizeKB * 100) / (bitmap.byteCount / 1024) >= 100) 100 else (maxFileSizeKB * 100) / (bitmap.byteCount / 1024)
+
+            bitmap.let { compressedBitmap ->
+                // Bitmap을 압축
+                val compressedFile = File(context.cacheDir, imageFile?.name.toString())
+                val outputStream = FileOutputStream(compressedFile)
+                compressedBitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+                outputStream.flush()
+                outputStream.close()
+
+                val requestFile: RequestBody = compressedFile.asRequestBody("multipart/form-data".toMediaType())
                 val body: MultipartBody.Part =
-                    MultipartBody.Part.createFormData("uploaded_file", imageFile.name, requestFile)
+                    MultipartBody.Part.createFormData("failureExampleImages", imageFile?.name, requestFile)
                 part2.add(body)
             }
         }
