@@ -6,7 +6,7 @@
     <data>
         <variable
             name="challenge"
-            type="com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel" />
+            type="com.cider.cider.presentation.viewmodel.ChallengeCertifyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_regular"
-                    android:text='@{String.valueOf(challenge.failImageList.size) + "/1"}'
+                    android:text='@{String.valueOf(challenge.certifyImageList.size) + "/1"}'
                     android:textColor="@color/gray_5"
                     android:textSize="@dimen/text_base"
                     tools:text="0/1"
@@ -125,10 +125,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_rec_round_4"
+                    app:imageUri="@{challenge.certifyImageList[0].uri}"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"/>
-
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -163,7 +162,7 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="45dp"
                 android:hint="@string/challenge_authentication_title_hint"
-                android:text="@={challenge.challengeTitle}"
+                android:text="@={challenge.title}"
                 android:maxLength="30"
                 android:maxLines="1"
                 app:layout_constraintTop_toBottomOf="@id/tv_challenge_title"
@@ -182,13 +181,13 @@
                 app:layout_constraintEnd_toEndOf="@id/et_challenge_title"
                 app:layout_constraintTop_toTopOf="@id/et_challenge_title"
                 app:layout_constraintBottom_toBottomOf="@id/et_challenge_title"
-                app:visible="@{challenge.challengeTitle.length()>0}"
+                app:visible="@{challenge.title.length()>0}"
                 tools:visibility="visible"/>
 
             <TextView
                 android:id="@+id/tv_challenge_title_count"
                 style="@style/CountTextStyle"
-                app:countText='@{"1"}'
+                app:countText='@{challenge.title}'
                 app:maxCount="@{30}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_challenge_title"
@@ -224,7 +223,7 @@
                 android:gravity="top"
                 android:scrollbars="vertical"
                 android:lineSpacingExtra="3dp"
-                android:text="@={challenge.challengeIntroduction}"
+                android:text="@={challenge.content}"
                 android:hint="@string/challenge_authentication_content_hint"
                 app:layout_constraintTop_toBottomOf="@id/tv_challenge_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +233,7 @@
             <TextView
                 android:id="@+id/tv_challenge_content_count"
                 style="@style/CountTextStyle"
-                app:countText='@{"1"}'
+                app:countText='@{challenge.content}'
                 app:maxCount="@{500}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_challenge_content"

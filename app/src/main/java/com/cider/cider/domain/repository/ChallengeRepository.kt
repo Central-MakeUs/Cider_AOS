@@ -1,6 +1,7 @@
 package com.cider.cider.domain.repository
 
 import android.net.Uri
+import com.cider.cider.data.remote.model.RequestCertify
 import com.cider.cider.data.remote.model.RequestChallengeCreate
 import com.cider.cider.data.remote.model.ResponseCertifyDetail
 import com.cider.cider.data.remote.model.ResponseMyChallenge
@@ -51,4 +52,8 @@ interface ChallengeRepository {
     suspend fun patchProfileImage(image: MultipartBody.Part): Boolean
 
     suspend fun participateChallenge(id: Int): Boolean
+    suspend fun postChallengeCertify(
+        param: RequestCertify,
+        image1: List<MultipartBody.Part>
+    ): Boolean
 }

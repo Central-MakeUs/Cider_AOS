@@ -199,7 +199,6 @@ class ChallengeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun patchProfileImage(image: MultipartBody.Part): Boolean {
-        Log.d("TEST image","$image")
         return apiService.patchProfileImage(image).isSuccessful
     }
 
@@ -207,6 +206,18 @@ class ChallengeRepositoryImpl @Inject constructor(
         return apiService.postParticipate(RequestParticipate(id)).isSuccessful
     }
 
+    override suspend fun postChallengeCertify(
+        param: RequestCertify,
+        image1: List<MultipartBody.Part>,
+    ): Boolean {
+        val data = apiService.postCertify(param)
+        if (data.body()?.certifyId != null) {
+            val data2 =
+                apiService.postCertifyImage(data.body()?.certifyId!!, image1)
+            return data2.isSuccessful
+        }
+        return false
+    }
 
     private fun mapToChallengeDetail(response: ResponseChallengeDetail): ChallengeDetailModel {
         return ChallengeDetailModel(

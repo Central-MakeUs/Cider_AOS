@@ -2,6 +2,7 @@ package com.cider.cider.presentation.challenge
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -24,21 +25,27 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCertifyBinding
+import com.cider.cider.domain.model.ChallengeListModel
 import com.cider.cider.domain.model.ImageCardModel
 import com.cider.cider.domain.type.challenge.ImageType
 import com.cider.cider.presentation.viewmodel.CertifyViewModel
+import com.cider.cider.presentation.viewmodel.ChallengeCertifyViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 import java.util.logging.Logger
 
 @AndroidEntryPoint
 class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout.fragment_challenge_certify) {
 
-    private val certify : CertifyViewModel by viewModels()
-
+    private val certify : ChallengeCertifyViewModel by viewModels()
+    private var itemArray:List<ChallengeListModel>? = listOf<ChallengeListModel>()
     private var data: Int? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.challenge = certify
+        binding.executePendingBindings()
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val bundle = arguments
 
@@ -56,11 +63,21 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         }
     }
 
-
-
     private fun setButton() {
         binding.btnToolbarBack.setOnClickListener {
             onBackPressed()
+        }
+
+        binding.btnBottom.setOnClickListener {
+            lifecycleScope.launch {
+                if (itemArray?.get(binding.spinnerChallenge.selectedItemPosition)
+                        ?.let { it1 -> certify.setCertify(requireContext(), it1.id) } == true) {
+                    //TODO(인증 성공 팝업)
+                    onBackPressed()
+                } else {
+                    Toast.makeText(requireContext(),"인증에 실패했습니다",Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -69,22 +86,9 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         findNavController().popBackStack()
     }
 
-    private fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissionLauncher.launch(Manifest.permission.CAMERA)
-        } else {
-            openCamera()
-        }
-    }
-
-
     private fun setSpinner() {
         lifecycleScope.launch {
-            val itemArray = certify.getChallengeList()
+            itemArray = certify.getChallengeList()
             val spinnerAdapter = ArrayAdapter(
                 requireContext(),
                 R.layout.item_spinner_dropdown,
@@ -101,27 +105,82 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
                         position: Int,
                         id: Long
                     ) {
-                        itemArray?.get(position)?.let { certify.getCertify(it.id) }
                     }
                     override fun onNothingSelected(parent: AdapterView<*>) {}
                 }
             if (itemArray != null && data != null) {
-                for ((position, item) in itemArray.withIndex()) {
+                for ((position, item) in itemArray!!.withIndex()) {
                     if (item.id == data ) {
                         binding.spinnerChallenge.setSelection(position)
                     }
                 }
             }
-
         }
     }
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
+                openGallery()
+            } else {
+                requestPermission()
+            }
+        }
+
+    private fun requestPermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_MEDIA_IMAGES
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+        } else {
+            openGallery()
+        }
+    }
+
+    private val galleryLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val selectedImageUri = result.data?.data
+                // Call a function to set the image from the URI to the ImageView
+                setImageFromUri(selectedImageUri)
+            }
+        }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        galleryLauncher.launch(intent)
+    }
+
+    private fun setImageFromUri(imageUri: Uri?) {
+        try {
+            if (imageUri != null) {
+                certify.addImage(ImageCardModel(uri = imageUri))
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun requestPermissionCamera() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionCameraLauncher.launch(Manifest.permission.CAMERA)
+        } else {
+            openCamera()
+        }
+    }
+
+    private val requestPermissionCameraLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
                 openCamera()
             } else {
-
+                requestPermissionCamera()
             }
         }
 
@@ -129,10 +188,9 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImageUri = result.data?.extras
+                Log.d("TEST Camera","$selectedImageUri")
 
-                binding.ivImage.setImageBitmap(selectedImageUri?.get("data") as Bitmap)
-                // Call a function to set the image from the URI to the ImageView
-                //setImageFromUri(selectedImageUri)
+                setImageFromUri(getImageUri(requireContext(),selectedImageUri?.get("data") as Bitmap))
             }
         }
 
@@ -141,19 +199,11 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         cameraLauncher.launch(intent)
     }
 
-    private fun setImageFromUri(imageUri: Uri?) {
-        try {
-            if (imageUri != null) {
-                Log.d("TEST image", "add Image success $imageUri")
-
-                Glide.with(this)
-                    .load(imageUri)
-                    .into(binding.ivImage)
-            } else {
-                Log.d("TEST image", "add Image fail")
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path =
+            MediaStore.Images.Media.insertImage(context.contentResolver, inImage, "Title", null)
+        return Uri.parse(path)
     }
 }
