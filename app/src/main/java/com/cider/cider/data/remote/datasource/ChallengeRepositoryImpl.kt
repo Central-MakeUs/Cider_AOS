@@ -199,6 +199,7 @@ class ChallengeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun patchProfileImage(image: MultipartBody.Part): Boolean {
+        Log.d("TEST image","$image")
         return apiService.patchProfileImage(image).isSuccessful
     }
 

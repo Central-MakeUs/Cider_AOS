@@ -56,21 +56,23 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
         }
         binding.btnRegister.setOnClickListener {
             lifecycleScope.launch {
+                var check = true
                 if (viewModel.profileName.value != viewModel.myPageModel.value?.name) {
-                    if (viewModel.setProfile()) {
-                        onBackPressed()
-                    } else {
+                    if (!viewModel.setProfile()) {
                         Toast.makeText(requireContext(), "프로필 수정에 실패했습니다.", Toast.LENGTH_SHORT)
                             .show()
+                        check = false
                     }
                 }
                 if (viewModel.profileUri.value != viewModel.myPageModel.value?.profileUri) {
-                    if (viewModel.setProfileImage(requireContext())) {
-                        onBackPressed()
-                    } else {
+                    if (!viewModel.setProfileImage(requireContext())) {
                         Toast.makeText(requireContext(), "프로필 수정에 실패했습니다.", Toast.LENGTH_SHORT)
                             .show()
+                        check = false
                     }
+                }
+                if (check) {
+                    onBackPressed()
                 }
             }
         }
