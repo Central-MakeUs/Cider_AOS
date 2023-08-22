@@ -147,7 +147,7 @@
                 android:id="@+id/iv_none_icon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/image_money_management_icon"
+                android:src="@drawable/image_notice"
                 app:layout_constraintBottom_toTopOf="@id/tv_none_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
