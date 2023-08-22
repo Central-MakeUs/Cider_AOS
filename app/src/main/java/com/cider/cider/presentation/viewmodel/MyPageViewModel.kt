@@ -63,8 +63,8 @@ class MyPageViewModel @Inject constructor(
         // 압축 비율 계산
         val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, profileUri.value)
 
-        val maxFileSizeKB = IMAGE_MAX_SIZE // 예시: 1MB 이하로 압축하려면 1024로 설정
-        val quality = (maxFileSizeKB * 100) / (bitmap.byteCount / 1024)
+        val maxFileSizeKB = IMAGE_MAX_SIZE
+        val quality = if ((maxFileSizeKB * 100) / (bitmap.byteCount / 1024) >= 100) 100 else (maxFileSizeKB * 100) / (bitmap.byteCount / 1024)
 
         bitmap.let { compressedBitmap ->
             // Bitmap을 압축
