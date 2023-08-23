@@ -51,7 +51,6 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         binding.bannerHome.adapter = bannerAdapter
         val bannerItems = listOf(
             BannerCardModel(1),
-            BannerCardModel(2)
         )
         bannerAdapter.submitList(bannerItems)
 
