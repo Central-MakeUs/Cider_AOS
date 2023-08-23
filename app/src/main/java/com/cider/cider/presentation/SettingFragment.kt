@@ -35,13 +35,13 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
 
         binding.btnAccessTerm1.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse("https://www.naver.com/")
+            i.data = Uri.parse("https://spiced-pentagon-516.notion.site/f54a1839ae5f43b6a839eda20124675d?pvs=4")
             startActivity(i)
         }
 
         binding.btnAccessTerm2.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse("https://www.naver.com/")
+            i.data = Uri.parse("https://spiced-pentagon-516.notion.site/ccea6cb2cb6845d597cf76118fb6615c?pvs=4")
             startActivity(i)
         }
 

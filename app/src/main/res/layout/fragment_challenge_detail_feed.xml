@@ -25,12 +25,12 @@
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tv_my_write"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:paddingHorizontal="24dp">
 
                     <TextView
-                        android:id="@+id/tv_my_write"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/my_authentication"
@@ -48,6 +48,7 @@
                         android:fontFamily="@font/pretendard_bold"
                         android:textSize="@dimen/text_sm"
                         android:textColor="@color/main"
+                        android:visibility="gone"
                         android:layout_marginStart="6dp"
                         app:layout_constraintStart_toEndOf="@id/tv_my_write"
                         app:layout_constraintTop_toTopOf="@id/tv_my_write"
@@ -139,6 +140,7 @@
             android:layout_height="wrap_content"
             android:background="@color/gray_3"
             android:paddingVertical="200dp"
+            android:visibility="gone"
             app:visible="@{vm.certify.size() == 0}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,10 +32,18 @@ class ChallengeDetailFeedFragment: BindingFragment<FragmentChallengeDetailFeedBi
         super.onViewCreated(view, savedInstanceState)
 
         binding.vm = viewModel
-
+        setButton()
         setFeedList()
         setFilter()
         setRecyclerView()
+    }
+
+    private fun setButton() {
+        binding.ivMyWriteBtn.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_challengeDetailFragment_to_myCertifyFragment
+            )
+        }
     }
 
     private fun setRecyclerView() {
