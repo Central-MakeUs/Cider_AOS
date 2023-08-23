@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         android:background="@color/white"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
         <!--app:layout_scrollFlags="scroll|enterAlways|snap"-->
 
@@ -23,7 +25,7 @@
                 android:id="@+id/btn_toolbar_back"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
-                tools:src="@drawable/ic_left_arrow"
+                android:src="@drawable/ic_logo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />

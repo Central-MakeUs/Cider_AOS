@@ -36,6 +36,7 @@
                 android:layout_height="@dimen/icon_size"
                 android:tint="@color/white"
                 android:src="@drawable/line_more_24"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -130,6 +131,7 @@
                             android:backgroundTint="#FFF0D4"
                             android:layout_marginTop="12dp"
                             android:layout_marginStart="6dp"
+                            android:visibility="gone"
                             app:layout_constraintStart_toEndOf="@id/tv_people"
                             app:layout_constraintTop_toBottomOf="@id/tv_title"
                             android:text="진행중"
@@ -181,7 +183,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_detail_profile"
-                    android:backgroundTint="@color/main"
                     android:src="@drawable/image_money_management_icon"
                     android:clipToOutline="true"
                     android:scaleType="centerInside"
