@@ -59,7 +59,7 @@
                     android:id="@+id/iv_character"
                     android:layout_width="216dp"
                     android:layout_height="216dp"
-                    android:src="@drawable/image_character1"
+                    android:src="@drawable/character_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -70,10 +70,11 @@
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/coordinator"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/section_character"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="-155dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/bottom_sheet"
@@ -247,7 +248,6 @@
                                         android:layout_width="@dimen/icon_size_16"
                                         android:layout_height="@dimen/icon_size_16"
                                         android:src="@drawable/line_info_16"
-                                        android:visibility="gone"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toEndOf="@id/tv_my_lv_text"
                                         app:layout_constraintTop_toTopOf="parent" />
@@ -422,7 +422,6 @@
                                 android:layout_width="@dimen/icon_size"
                                 android:layout_height="@dimen/icon_size"
                                 android:src="@drawable/line_info_24"
-                                android:visibility="gone"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
