@@ -76,7 +76,6 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
 
     private fun setAppBar() {
         binding.toolbar.tvToolbarTitle.text = "챌린지"
-        binding.toolbar.btnToolbarBack.visibility = View.INVISIBLE
         binding.toolbar.btnToolbarIcon1.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.line_my_24))
 
         binding.toolbar.btnToolbarIcon1.setOnClickListener {
