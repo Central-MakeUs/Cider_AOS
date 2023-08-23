@@ -89,6 +89,7 @@ class ChallengeCreateViewModel @Inject constructor(
             currentList.add(imageCardModel)
         }
         _successImageList.value = (currentList)
+        checkButtonState()
     }
 
     fun addImageFail(imageCardModel: ImageCardModel) {
@@ -99,6 +100,7 @@ class ChallengeCreateViewModel @Inject constructor(
             currentList.add(imageCardModel)
         }
         _failImageList.value = (currentList)
+        checkButtonState()
     }
 
     fun changeCapacity(value: Int) {
@@ -123,7 +125,8 @@ class ChallengeCreateViewModel @Inject constructor(
 
     fun checkButtonState() {
         _buttonState.value = (challengeTitle.value?.length!! >= 5 &&
-        challengeIntroduction.value?.length!! >= 30 && challengeAuthentication.value?.length!! >= 5)
+        challengeIntroduction.value?.length!! >= 30 && challengeAuthentication.value?.length!! >= 5 &&
+        !_successImageList.value.isNullOrEmpty() && !_failImageList.value.isNullOrEmpty())
     }
 
     private fun checkButtonState2() {

@@ -33,6 +33,9 @@ class ChallengeCertifyViewModel @Inject constructor(
     private val _certifyImageList: MutableLiveData<List<ImageCardModel>> = MutableLiveData()
     val certifyImageList: LiveData<List<ImageCardModel>> get() = _certifyImageList
 
+    private val _buttonState = MutableLiveData<Boolean>(false)
+    val buttonState: LiveData<Boolean> get() = _buttonState
+
     fun clearTitle() {
         title.value = ""
     }
@@ -45,6 +48,13 @@ class ChallengeCertifyViewModel @Inject constructor(
             currentList.add(imageCardModel)
         }
         _certifyImageList.value = (currentList)
+        checkButtonState()
+    }
+
+    fun checkButtonState() {
+        _buttonState.value = (title.value?.length!! >= 1 &&
+                content.value?.length!! >= 1 &&
+                !_certifyImageList.value.isNullOrEmpty())
     }
 
     suspend fun getChallengeList(): List<ChallengeListModel>? {

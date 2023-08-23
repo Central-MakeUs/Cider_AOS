@@ -32,6 +32,7 @@ import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeCertifyViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.util.logging.Logger
@@ -54,12 +55,26 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         super.onViewCreated(view, savedInstanceState)
         setButton()
         setCamera()
+        setObserve()
         setSpinner()
     }
 
     private fun setCamera() {
         binding.btnImage.setOnClickListener {
             requestPermission()
+        }
+    }
+
+    private fun setObserve() {
+        certify.title.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                certify.checkButtonState()
+            }
+        }
+        certify.content.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                certify.checkButtonState()
+            }
         }
     }
 
@@ -72,7 +87,7 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
             lifecycleScope.launch {
                 if (itemArray?.get(binding.spinnerChallenge.selectedItemPosition)
                         ?.let { it1 -> certify.setCertify(requireContext(), it1.id) } == true) {
-                    //TODO(인증 성공 팝업)
+                    Toast.makeText(requireContext(),"인증에 성공했습니다",Toast.LENGTH_SHORT).show()
                     onBackPressed()
                 } else {
                     Toast.makeText(requireContext(),"인증에 실패했습니다",Toast.LENGTH_SHORT).show()
