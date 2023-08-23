@@ -49,6 +49,4 @@ interface ChallengeRepository {
 
     suspend fun patchProfile(name: String): Boolean
     suspend fun patchProfileImage(image: MultipartBody.Part): Boolean
-
-    suspend fun participateChallenge(id: Int): Boolean
 }

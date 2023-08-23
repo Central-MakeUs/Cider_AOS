@@ -14,8 +14,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeDetailBinding
 import com.cider.cider.presentation.adapter.ChallengeDetailViewPagerAdapter
-import com.cider.cider.presentation.dialog.ChallengeExitDialog
-import com.cider.cider.presentation.dialog.ChallengeParticipateDialog
 import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -49,7 +47,6 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         setBehavior()
         setBottomSheet()
         setBottomNavi()
-        setButton()
     }
 
     override fun onDetach() {
@@ -62,21 +59,6 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         binding.background.setBackgroundColor(ContextCompat.getColor(requireContext(),viewModel.detail.value?.category?.colorResId?:R.color.btn_blue))
     }
 
-    private fun setButton() {
-        binding.btnBottom.setOnClickListener {
-            if (binding.tvChallengeBtn.text == "이 챌린지 참여하기") {
-                showDialog()
-            }
-        }
-        binding.btnToolbarBack.setOnClickListener {
-            onBackPressed()
-        }
-    }
-
-    private fun showDialog() {
-        val dialog = ChallengeParticipateDialog()
-        dialog.show(parentFragmentManager,null)
-    }
 
     private fun setBehavior() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
