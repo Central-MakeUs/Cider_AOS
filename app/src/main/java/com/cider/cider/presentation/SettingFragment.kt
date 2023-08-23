@@ -1,6 +1,7 @@
 package com.cider.cider.presentation
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -30,6 +31,18 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
 
         binding.toolbar.btnToolbarBack.setOnClickListener {
             onBackPressed()
+        }
+
+        binding.btnAccessTerm1.setOnClickListener {
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse("https://www.naver.com/")
+            startActivity(i)
+        }
+
+        binding.btnAccessTerm2.setOnClickListener {
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse("https://www.naver.com/")
+            startActivity(i)
         }
 
         binding.btnLogout.setOnClickListener {

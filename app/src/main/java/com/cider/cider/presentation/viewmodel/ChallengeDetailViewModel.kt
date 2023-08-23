@@ -52,6 +52,10 @@ class ChallengeDetailViewModel @Inject constructor(
 
     }
 
+    suspend fun participateChallenge(): Boolean {
+        return repository.participateChallenge(_detail.value?.challengeId?:0)
+    }
+
     fun getCertify(id: Int, filter: Filter) {
         viewModelScope.launch(Dispatchers.Main) {
             val data = repository.getCertifyDetail(id,filter)
