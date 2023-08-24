@@ -13,4 +13,5 @@ interface LoginRepository {
 
     suspend fun getLoginMe(): Boolean
     suspend fun postLogout(): Boolean
+    suspend fun postSignOut(): Boolean
 }

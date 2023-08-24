@@ -61,6 +61,22 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
                 }
             }
         }
+
+        binding.tvWithdraw.setOnClickListener {
+            lifecycleScope.launch {
+                if (viewModel.signOut()) {
+                    Log.d("TEST 탈퇴","성공")
+                    App.prefs.setString("accessToken","")
+                    App.prefs.setString("refreshToken","")
+                    App.prefs.setString("email","")
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                } else {
+                    Log.d("TEST 탈퇴","실패")
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {

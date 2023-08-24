@@ -120,6 +120,11 @@ class LoginViewModel @Inject constructor(
         return repository.postLogout()
     }
 
+    suspend fun signOut(): Boolean {
+        return repository.postLogout()
+    }
+
+
     fun getRegisterData(name: String?, date: Int?, gender: Gender?) {
         if (name != null) nickname.value = name?:""
         if (date != null) _birth.value = Birth(0, date/100-1, date%100)

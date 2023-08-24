@@ -15,7 +15,12 @@ interface LoginApi {
     @POST("/api/oauth/logout")
     suspend fun postLogout(
         @Header("Authorization") accessCode: String,
-    )
+    ): Response<Any>
+
+    @POST("/api/oauth/signout")
+    suspend fun postSignOut(
+        @Header("Authorization") accessCode: String,
+    ): Response<Any>
 
     @GET("/api/member/nicknames")
     suspend fun getRandomNickname(): Response<ResponseRandomNickNameModel>

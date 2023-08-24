@@ -87,4 +87,13 @@ class LoginRepositoryImpl @Inject constructor(
             false
         }
     }
+
+    override suspend fun postSignOut(): Boolean {
+        return try {
+            apiService.postSignOut(App.prefs.getString("refreshToken","")).isSuccessful
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
 }
