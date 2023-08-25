@@ -262,7 +262,7 @@ class ChallengeRepositoryImpl @Inject constructor(
                 memberLevelName = response.simpleMemberResponseDto.memberLevelName,
                 memberName = response.simpleMemberResponseDto.memberName,
                 participateNum = response.simpleMemberResponseDto.participateChallengeNum,
-                profilePath = Uri.parse(response.simpleMemberResponseDto.profilePath)
+                profilePath = response.simpleMemberResponseDto.profilePath.let { Uri.parse(it) }
             )
         )
     }
