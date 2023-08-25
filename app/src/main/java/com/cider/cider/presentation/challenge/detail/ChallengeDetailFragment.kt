@@ -67,6 +67,15 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
             if (binding.tvChallengeBtn.text == "이 챌린지 참여하기") {
                 showDialog()
             }
+            if (binding.tvChallengeBtn.text == "오늘 참여 인증하기") {
+                val bundle = Bundle().apply {
+                    putInt("id",id)
+                }
+
+                findNavController().navigate(
+                    R.id.action_challengeDetailFragment_to_certifyFragment, bundle
+                )
+            }
         }
         binding.btnToolbarBack.setOnClickListener {
             onBackPressed()
