@@ -119,6 +119,10 @@ class ChallengeDetailViewModel @Inject constructor(
         }
     }
 
+    suspend fun participateChallenge(): Boolean {
+        return repository.participateChallenge(_detail.value?.challengeId?:0)
+    }
+
     fun changeExpand(targetId: Int, isExpand: Boolean) {
         val beforeList = _certify.value?: mutableListOf()
         _certify.value =  beforeList.map {

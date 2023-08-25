@@ -18,3 +18,7 @@ data class RequestChallengeCreate(
     val isPublic: Boolean,
     val recruitPeriod: Int
 )
+
+data class RequestParticipate(
+    val challengeId: Int
+)
