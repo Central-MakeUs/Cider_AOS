@@ -2,6 +2,7 @@ package com.cider.cider.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cider.cider.databinding.ItemCertifyBinding
@@ -42,7 +43,15 @@ class CertifyCheckAdapter(
             binding.certify = item
             binding.vm = vm
             binding.executePendingBindings()
-
+            binding.ivImage.setOnClickListener {
+                binding.ivImage.let {
+                    if (it.scaleType == ImageView.ScaleType.CENTER_CROP) {
+                        it.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    } else {
+                        it.scaleType = ImageView.ScaleType.CENTER_CROP
+                    }
+                }
+            }
 /*            binding.ivLike.setOnClickListener {
                 listener?.onItemClick(item.id)
             }*/
