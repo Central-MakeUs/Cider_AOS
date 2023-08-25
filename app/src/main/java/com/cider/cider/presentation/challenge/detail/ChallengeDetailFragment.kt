@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -28,9 +29,7 @@ import java.lang.Integer.max
 class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R.layout.fragment_challenge_detail) {
 
     private val viewModel: ChallengeDetailViewModel by activityViewModels()
-    init {
-        Log.d("TEST Lifecycle","ChallengeDetailFragment")
-    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -75,6 +74,17 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
                 findNavController().navigate(
                     R.id.action_challengeDetailFragment_to_certifyFragment, bundle
                 )
+            }
+            if (binding.tvChallengeBtn.text?.matches(Regex("챌린지 기다리기 D-\\d+")) == true) {
+                lifecycleScope.launch {
+                    if (viewModel.participateChallenge()) {
+                        Toast.makeText(requireContext(), "챌린지 시작시 자동으로 참여됩니다", Toast.LENGTH_SHORT).show()
+                        viewModel.getDetail(viewModel.detail.value?.challengeId?:0)
+                    } else {
+                        Toast.makeText(requireContext(), "챌린지 참여에 실패했습니다", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             }
         }
         binding.btnToolbarBack.setOnClickListener {
