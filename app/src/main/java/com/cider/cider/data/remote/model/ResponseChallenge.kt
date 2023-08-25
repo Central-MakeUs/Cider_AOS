@@ -48,7 +48,7 @@ data class SimpleChallengeResponseDto(
 )
 
 data class SimpleMemberResponseDto(
-    val memberLevel: Int,
+    val memberId: Int,
     val memberName: String,
     val memberLevelName: String,
     val profilePath: String,
