@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -15,8 +14,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeDetailBinding
 import com.cider.cider.presentation.adapter.ChallengeDetailViewPagerAdapter
-import com.cider.cider.presentation.dialog.ChallengeExitDialog
-import com.cider.cider.presentation.dialog.ChallengeParticipateDialog
 import com.cider.cider.presentation.viewmodel.ChallengeDetailViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -29,7 +26,9 @@ import java.lang.Integer.max
 class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R.layout.fragment_challenge_detail) {
 
     private val viewModel: ChallengeDetailViewModel by activityViewModels()
-
+    init {
+        Log.d("TEST Lifecycle","ChallengeDetailFragment")
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

@@ -18,13 +18,3 @@ data class RequestChallengeCreate(
     val isPublic: Boolean,
     val recruitPeriod: Int
 )
-
-data class RequestParticipate(
-    val challengeId: Int
-)
-
-data class RequestCertify(
-    val challengeId: Int,
-    val certifyName: String,
-    val certifyContent: String
-)
