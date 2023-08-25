@@ -58,6 +58,13 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
                     activity?.finish()
                 } else {
                     Log.d("TEST 로그아웃","실패")
+                    //TODO(강제 로그아웃 처리)
+                    App.prefs.setString("accessToken","")
+                    App.prefs.setString("refreshToken","")
+                    App.prefs.setString("email","")
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
                 }
             }
         }
