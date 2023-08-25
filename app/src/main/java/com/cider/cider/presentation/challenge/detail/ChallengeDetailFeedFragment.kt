@@ -40,8 +40,11 @@ class ChallengeDetailFeedFragment: BindingFragment<FragmentChallengeDetailFeedBi
 
     private fun setButton() {
         binding.ivMyWriteBtn.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("id",viewModel.detail.value?.challengeId?:0)
+            }
             findNavController().navigate(
-                R.id.action_challengeDetailFragment_to_myCertifyFragment
+                R.id.action_challengeDetailFragment_to_myCertifyFragment, bundle
             )
         }
     }

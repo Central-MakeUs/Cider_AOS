@@ -51,6 +51,7 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         val bundle = arguments
 
         data = bundle?.getInt("id")
+        Log.d("TEST Bundle","$data")
 
         super.onViewCreated(view, savedInstanceState)
         setButton()

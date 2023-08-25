@@ -69,7 +69,7 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
             }
             if (binding.tvChallengeBtn.text == "오늘 참여 인증하기") {
                 val bundle = Bundle().apply {
-                    putInt("id",id)
+                    putInt("id",viewModel.detail.value?.challengeId?:0)
                 }
 
                 findNavController().navigate(
