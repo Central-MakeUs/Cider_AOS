@@ -27,7 +27,10 @@ import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCertifyBinding
 import com.cider.cider.domain.model.ChallengeListModel
 import com.cider.cider.domain.model.ImageCardModel
+import com.cider.cider.domain.type.ProfileEdit
 import com.cider.cider.domain.type.challenge.ImageType
+import com.cider.cider.presentation.dialog.CertifyImageBottomSheetDialog
+import com.cider.cider.presentation.dialog.ProfileEditBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.CertifyViewModel
 import com.cider.cider.presentation.viewmodel.ChallengeCertifyViewModel
 import com.cider.cider.utils.binding.BindingFragment
@@ -61,7 +64,7 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
 
     private fun setCamera() {
         binding.btnImage.setOnClickListener {
-            requestPermission()
+            showBottomSheetDialog()
         }
     }
 
@@ -134,6 +137,27 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
                 }
             }
         }
+    }
+
+    private fun showBottomSheetDialog() {
+        val dialog = CertifyImageBottomSheetDialog()
+
+        dialog.setOnValueChangedListener(object : CertifyImageBottomSheetDialog.OnValueChangedListener {
+
+            override fun onValueUpdated(type: ProfileEdit) {
+                when (type) {
+                    ProfileEdit.CAMERA -> {
+                        requestPermissionCamera()
+                    }
+                    ProfileEdit.GALLERY -> {
+                        requestPermission()
+                    }
+                    ProfileEdit.RANDOM -> TODO()
+                }
+            }
+
+        })
+        dialog.show(parentFragmentManager, "Capacity")
     }
 
     private val requestPermissionLauncher =
@@ -211,6 +235,8 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
                 setImageFromUri(getImageUri(requireContext(),selectedImageUri?.get("data") as Bitmap))
             }
         }
+
+
 
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
