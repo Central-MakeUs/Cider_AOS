@@ -26,7 +26,7 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvVersionNum.text = BuildConfig.VERSION_CODE.toString()
+        binding.tvVersionNum.text = BuildConfig.VERSION_NAME
         binding.tvKakaoEmail.text = App.prefs.getString("email","")
 
         binding.toolbar.btnToolbarBack.setOnClickListener {
