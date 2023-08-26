@@ -122,7 +122,7 @@ class LoginViewModel @Inject constructor(
     }
 
     suspend fun signOut(): Boolean {
-        return repository.postLogout()
+        return repository.postSignOut()
     }
 
 

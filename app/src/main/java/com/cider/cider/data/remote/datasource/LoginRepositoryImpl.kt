@@ -28,6 +28,7 @@ class LoginRepositoryImpl @Inject constructor(
     override suspend fun patchMember(accessToken: String, param: RequestMember): Boolean {
         return try {
             val data = apiService.patchMember(accessToken, param)
+            Log.e("TEST 로그인","$data")
             data.isSuccessful
         } catch (e: Exception) {
             e.printStackTrace()
@@ -78,10 +79,8 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun postLogout():Boolean {
         return try {
-            val data = apiService.postLogout(App.prefs.getString("refreshToken",""))
-            Log.d("TEST 로그아웃","${data} ${App.prefs.getString("refreshToken","")}")
-            //TODO("진짜 된건진 모르겠다")
-            true
+            val data = apiService.postLogout(App.prefs.getString("refreshToken","")) == "로그아웃이 완료되었습니다."
+            data
         } catch (e: Exception) {
             e.printStackTrace()
             false
@@ -90,7 +89,8 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun postSignOut(): Boolean {
         return try {
-            apiService.postSignOut(App.prefs.getString("refreshToken","")).isSuccessful
+            val data = apiService.postSignOut(App.prefs.getString("refreshToken",""))
+            data.isSuccessful
         } catch (e: Exception) {
             e.printStackTrace()
             false
