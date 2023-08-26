@@ -14,7 +14,7 @@ import retrofit2.http.Path
 
 interface ChallengeApi {
 
-    @GET("/api/challenge/{filter}")
+    @GET("/api/challenge/list/{filter}")
     suspend fun getChallengeList(
         @Path("filter") filter: String,
     ): Response<ArrayList<ResponseChallengeItem>>
@@ -135,7 +135,7 @@ interface ChallengeApi {
     @Multipart
     @PATCH("/api/certify/images/{certifyId}")
     suspend fun postCertifyImage(
-        @Path("certify") id: Int,
+        @Path("certifyId") id: Int,
         @Part profileImage :List<MultipartBody.Part>
     ): Response<Any>
 
