@@ -10,12 +10,14 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
@@ -177,7 +179,7 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         ) {
             requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
         } else {
-            openGallery()
+            showPermissionDeniedDialog()
         }
     }
 
@@ -222,7 +224,7 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
             if (isGranted) {
                 openCamera()
             } else {
-                requestPermissionCamera()
+                showPermissionDeniedDialog()
             }
         }
 
@@ -236,11 +238,31 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
             }
         }
 
-
-
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraLauncher.launch(intent)
+    }
+
+    private fun showPermissionDeniedDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("권한이 필요합니다.")
+        builder.setMessage("이 앱은 미디어 이미지에 접근하는 권한이 필요합니다. 권한을 부여하시겠습니까?")
+        builder.setPositiveButton("네") { _, _ ->
+            // Open app settings to allow the user to grant the permission
+            openAppSettings()
+        }
+        builder.setNegativeButton("아니오") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun openAppSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", requireContext().packageName, null)
+        intent.data = uri
+        startActivity(intent)
     }
 
     private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
