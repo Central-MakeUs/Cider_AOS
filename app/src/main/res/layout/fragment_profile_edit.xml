@@ -95,7 +95,7 @@
                 android:layout_marginTop="8dp"
                 android:paddingStart="12dp"
                 android:paddingEnd="45dp"
-                android:hint="@string/challenge_title_hint"
+                android:hint="닉네임"
                 android:text="@={vm.profileName}"
                 android:maxLength="10"
                 android:maxLines="1"
