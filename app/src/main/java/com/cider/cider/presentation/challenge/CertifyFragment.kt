@@ -17,6 +17,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -167,19 +168,31 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
             if (isGranted) {
                 openGallery()
             } else {
-                requestPermission()
+                showPermissionDeniedDialog()
             }
         }
 
     private fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_MEDIA_IMAGES
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            } else {
+                openGallery()
+            }
         } else {
-            showPermissionDeniedDialog()
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_MEDIA_IMAGES
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+            } else {
+                openGallery()
+            }
         }
     }
 
@@ -232,8 +245,6 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImageUri = result.data?.extras
-                Log.d("TEST Camera","$selectedImageUri")
-
                 setImageFromUri(getImageUri(requireContext(),selectedImageUri?.get("data") as Bitmap))
             }
         }
