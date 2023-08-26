@@ -32,25 +32,12 @@ class ChallengeParticipateDialog: BindingDialog<DialogParticipateBinding>(R.layo
                 if (!viewModel.participateChallenge()) {
                     Toast.makeText(requireContext(), "챌린지 참여에 실패했습니다", Toast.LENGTH_SHORT).show()
                 } else {
+                    Toast.makeText(requireContext(), "챌린지 참여가 완료되었습니다", Toast.LENGTH_SHORT).show()
                     binding.tvDialogTitle.text = "챌린지에 참여했어요\n인증하러 가요"
-                    binding.layout.visibility = View.GONE
-                    binding.layoutChallengeSuccess.visibility = View.VISIBLE
                     binding.btnCheck.visibility = View.GONE
-                    binding.btnCheck2.visibility = View.VISIBLE
-                    binding.layoutCheckBtn.visibility = View.GONE
-                    binding.layoutBtnCheck2.visibility = View.VISIBLE
                 }
                 dismiss()
             }
-        }
-
-        binding.btnCheck2.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putInt("id",viewModel.detail.value?.challengeId?:0)
-            findNavController().navigate(
-                R.id.action_challengeDetailFragment_to_certifyFragment
-            )
-            dismiss()
         }
 
         binding.icon2.setOnClickListener {
