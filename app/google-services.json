@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "555125470180",
+    "project_id": "cider-cider",
+    "storage_bucket": "cider-cider.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555125470180:android:e26a22faa81872ceb34df1",
+        "android_client_info": {
+          "package_name": "com.cider.cider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555125470180-1k34fu7g859vjg32u9918uv0gklk0cro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIJMTKOePHl3_ZTIFSS5VUZXLCQVA5Pdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555125470180-1k34fu7g859vjg32u9918uv0gklk0cro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

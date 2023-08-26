@@ -15,5 +15,4 @@ data class RequestMember(
 
 data class RequestProfile(
     val memberName: String,
-    val memberIntro: String = ""
 )

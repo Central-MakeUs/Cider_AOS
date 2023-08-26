@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -59,17 +60,21 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
                 } else {
                     Log.d("TEST 로그아웃","실패")
                     //TODO(강제 로그아웃 처리)
-                    App.prefs.setString("accessToken","")
-                    App.prefs.setString("refreshToken","")
-                    App.prefs.setString("email","")
-                    val intent = Intent(activity, LoginActivity::class.java)
-                    startActivity(intent)
-                    activity?.finish()
+
                 }
             }
         }
 
         binding.tvWithdraw.setOnClickListener {
+            showPermissionDeniedDialog()
+        }
+    }
+
+    private fun showPermissionDeniedDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("정말 탈퇴하시겠습니까?")
+        builder.setMessage("회원 탈퇴시 챌린지 내역과 내가 쓴 글이 영구적으로 삭제되며, 7일간 재가입이 불가해요.")
+        builder.setPositiveButton("탈퇴하기") { _, _ ->
             lifecycleScope.launch {
                 if (viewModel.signOut()) {
                     Log.d("TEST 탈퇴","성공")
@@ -84,6 +89,11 @@ class SettingFragment: BindingFragment<FragmentSettingBinding>(R.layout.fragment
                 }
             }
         }
+        builder.setNegativeButton("돌아가기") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onBackPressed() {

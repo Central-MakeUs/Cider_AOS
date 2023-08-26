@@ -15,6 +15,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.IOException
 import javax.inject.Singleton
 
@@ -32,6 +33,7 @@ object RetrofitModule {
     fun provideRegisterApiService(): LoginApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(LoginApi::class.java)

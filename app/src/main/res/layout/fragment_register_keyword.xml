@@ -22,6 +22,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <TextView
+            android:id="@+id/tv_keyword_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선택해주시면 추후 취향을 반영한\n피드를 추천해드릴게요"
+            android:fontFamily="@font/pretendard_bold"
+            android:textColor="@color/main"
+            android:textSize="@dimen/text_lg"
+            android:layout_marginTop="16dp"
+            android:lineSpacingExtra="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_keyword_title"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view_challenge"
             android:layout_width="match_parent"

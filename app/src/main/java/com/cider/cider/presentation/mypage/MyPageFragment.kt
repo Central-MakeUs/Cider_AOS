@@ -1,6 +1,7 @@
 package com.cider.cider.presentation.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -24,7 +25,8 @@ class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_m
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.executePendingBindings()
-
+        binding.sectionCharacter.scaleX = 0.66f
+        binding.sectionCharacter.scaleY = 0.66f
         setBottomSheet()
         setButton()
         setBottomNavi()
@@ -44,6 +46,7 @@ class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_m
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                Log.d("TEST slide","$slideOffset")
                 binding.sectionCharacter.animate().scaleX(1-slideOffset * 0.34f).scaleY(1-slideOffset * 0.34f).setDuration(0).start();
             }
 

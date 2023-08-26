@@ -1,5 +1,7 @@
 package com.cider.cider.presentation.register
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup.LayoutParams
@@ -31,10 +33,16 @@ class RegisterConsentFragment
     private fun setButton() {
         binding.btnConsent2.setOnClickListener {
             viewModel.setTermDetail(1)
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse("https://spiced-pentagon-516.notion.site/f54a1839ae5f43b6a839eda20124675d?pvs=4")
+            startActivity(i)
         }
 
         binding.btnConsent3.setOnClickListener {
             viewModel.setTermDetail(2)
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse("https://spiced-pentagon-516.notion.site/ccea6cb2cb6845d597cf76118fb6615c?pvs=4")
+            startActivity(i)
         }
     }
 
@@ -61,7 +69,7 @@ class RegisterConsentFragment
         }
         viewModel.detailState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                if (viewModel.detailState.value == 1) {
+/*                if (viewModel.detailState.value == 1) {
                     binding.sv1.visibility = View.VISIBLE
                     binding.sv2.visibility = View.GONE
 
@@ -86,7 +94,7 @@ class RegisterConsentFragment
                     binding.layoutService.layoutParams.height = LayoutParams.WRAP_CONTENT
 
                     binding.tvConsentTitle.visibility = View.VISIBLE
-                }
+                }*/
             }
         }
     }

@@ -8,12 +8,15 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -123,24 +126,37 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
         findNavController().popBackStack()
     }
 
+
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
                 openGallery()
             } else {
-                requestPermission()
+                showPermissionDeniedDialog()
             }
         }
 
     private fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_MEDIA_IMAGES
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            } else {
+                openGallery()
+            }
         } else {
-            openGallery()
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_MEDIA_IMAGES
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+            } else {
+                openGallery()
+            }
         }
     }
 
@@ -168,6 +184,29 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
         }
     }
 
+    private fun showPermissionDeniedDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("권한이 필요합니다.")
+        builder.setMessage("이 앱은 미디어 이미지에 접근하는 권한이 필요합니다. 권한을 부여하시겠습니까?")
+        builder.setPositiveButton("네") { _, _ ->
+            // Open app settings to allow the user to grant the permission
+            openAppSettings()
+        }
+        builder.setNegativeButton("아니오") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun openAppSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", requireContext().packageName, null)
+        intent.data = uri
+        startActivity(intent)
+    }
+
+
     private fun requestPermissionCamera() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -185,7 +224,7 @@ class ProfileEditFragment: BindingFragment<FragmentProfileEditBinding>(R.layout.
             if (isGranted) {
                 openCamera()
             } else {
-                requestPermissionCamera()
+                showPermissionDeniedDialog()
             }
         }
 

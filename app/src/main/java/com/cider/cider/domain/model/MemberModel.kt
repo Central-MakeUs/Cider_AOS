@@ -6,5 +6,5 @@ data class MemberModel(
     val memberLevelName: String,
     val memberName: String,
     val participateNum: Int,
-    val profilePath: Uri
+    val profilePath: Uri?
 )

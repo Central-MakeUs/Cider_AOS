@@ -37,7 +37,6 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                     // 서비스 코드에서는 간단하게 로그인 요청하고 oAuthToken 을 받아올 수 있다.
                     val oAuthToken = UserApiClient.loginWithKakao(requireContext())
 
-
                     if (viewModel.loginFirst(oAuthToken.accessToken)) { //새로운 멤버면 false
                         viewModel.setToken()
 

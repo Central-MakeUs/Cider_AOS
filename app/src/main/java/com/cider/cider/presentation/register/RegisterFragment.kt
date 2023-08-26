@@ -115,7 +115,8 @@ class RegisterFragment
                     binding.btnRegister.visibility = View.VISIBLE
                     binding.tvToolbarComplete.visibility = View.GONE
                 } else {
-
+                    Log.e("TEST 로그인","실패")
+                    Toast.makeText(requireContext(),"회원가입 실패",Toast.LENGTH_SHORT).show()
                 }
             }
         }
