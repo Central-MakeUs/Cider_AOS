@@ -55,7 +55,8 @@ class LoginViewModel @Inject constructor(
         val data = repository.postLogin(header)
         accessToken = data?.body()?.accessToken?:""
         refreshToken = data?.body()?.refreshToken?:""
-        return data?.body()?.isUpdatedMember == true //새로운 멤버면 false 아니면 true
+        Log.d("TEST login","${data?.body()}")
+        return data?.body()?.isUpdatedMember == true //회원가입 했으면 true, 안했으면 false
     }
 
     fun setToken() {
