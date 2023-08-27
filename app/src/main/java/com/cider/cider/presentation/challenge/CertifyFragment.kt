@@ -92,14 +92,19 @@ class CertifyFragment: BindingFragment<FragmentChallengeCertifyBinding>(R.layout
         binding.btnBottom.setOnClickListener {
             lifecycleScope.launch {
                 binding.btnBottom.isEnabled = false
-                if (itemArray?.get(binding.spinnerChallenge.selectedItemPosition)
-                        ?.let { it1 -> certify.setCertify(requireContext(), it1.id) } == true) {
-                    Toast.makeText(requireContext(),"인증에 성공했습니다",Toast.LENGTH_SHORT).show()
-                    binding.btnBottom.isEnabled = true
-                    onBackPressed()
+                if (!itemArray.isNullOrEmpty()) {
+                    if (itemArray?.get(binding.spinnerChallenge.selectedItemPosition)
+                            ?.let { it1 -> certify.setCertify(requireContext(), it1.id) } == true
+                    ) {
+                        Toast.makeText(requireContext(), "인증에 성공했습니다", Toast.LENGTH_SHORT).show()
+                        binding.btnBottom.isEnabled = true
+                        onBackPressed()
+                    } else {
+                        Toast.makeText(requireContext(), "인증에 실패했습니다", Toast.LENGTH_SHORT).show()
+                        binding.btnBottom.isEnabled = true
+                    }
                 } else {
-                    Toast.makeText(requireContext(),"인증에 실패했습니다",Toast.LENGTH_SHORT).show()
-                    binding.btnBottom.isEnabled = true
+                    Toast.makeText(requireContext(), "인증할 챌린지가 없습니다", Toast.LENGTH_SHORT).show()
                 }
             }
         }
