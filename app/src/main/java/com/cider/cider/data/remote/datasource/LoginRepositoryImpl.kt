@@ -18,7 +18,9 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun postLogin(header: String): Response<ResponseLoginModel>? {
         return try {
-            apiService.postLogin(header, RequestLoginModel())
+            val data = apiService.postLogin(header, RequestLoginModel())
+            Log.e("TEST 로그인"," POST Login : $header\n$data")
+            data
         } catch (e: Exception) {
             e.printStackTrace()
             null

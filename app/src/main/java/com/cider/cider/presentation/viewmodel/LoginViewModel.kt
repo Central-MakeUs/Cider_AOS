@@ -51,12 +51,16 @@ class LoginViewModel @Inject constructor(
 
     private var accessToken: String = ""
     private var refreshToken: String = ""
-    suspend fun loginFirst(header: String): Boolean {
+    suspend fun loginFirst(header: String): Boolean? {
         val data = repository.postLogin(header)
-        accessToken = data?.body()?.accessToken?:""
-        refreshToken = data?.body()?.refreshToken?:""
-        Log.d("TEST login","${data?.body()}")
-        return data?.body()?.isUpdatedMember == true //회원가입 했으면 true, 안했으면 false
+        return if (data?.body() != null) {
+            accessToken = data.body()?.accessToken ?: ""
+            refreshToken = data.body()?.refreshToken ?: ""
+            Log.d("TEST login", "${data.body()}")
+            data.body()?.isUpdatedMember == true //회원가입 했으면 true, 안했으면 false
+        } else {
+            null
+        }
     }
 
     fun setToken() {
