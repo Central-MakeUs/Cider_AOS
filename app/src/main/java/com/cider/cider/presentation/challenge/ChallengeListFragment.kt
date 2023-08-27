@@ -55,7 +55,7 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
             "popular" -> {
                 binding.toolbar.tvToolbarTitle.text = "인기 챌린지"
                 binding.backgroundBanner.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_mint))
-                binding.tvBanner.text = "사이다에서 가장 \n인기 있는 챌린지\nTop 10"
+                binding.tvBanner.text = "지금에서 가장 \n인기 있는 챌린지\nTop 10"
                 viewModel.getChallengePopular(filter = Filter.LATEST)
                 changeToolbar(true)
             }
