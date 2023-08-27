@@ -294,7 +294,7 @@ class ChallengeRepositoryImpl @Inject constructor(
                 certifyName = response.certifyName,
                 createdDate = response.createdDate,
                 isLike = response.isLike,
-                challengeBranch = getChallengeCategory(response.simpleChallengeResponseDto.challengeBranch),
+                challengeBranch = getChallengeCategory(response.simpleChallengeResponseDto.challengeBranch)?:Category.INVESTING,
                 challengeName = response.simpleChallengeResponseDto.challengeName,
                 participateNum = response.simpleChallengeResponseDto.participateNum,
                 memberLevel = cutInt(response.simpleMemberResponseDto.memberLevelName),

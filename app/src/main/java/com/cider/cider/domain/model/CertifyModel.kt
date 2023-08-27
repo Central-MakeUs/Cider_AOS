@@ -12,7 +12,7 @@ data class CertifyModel(
     val createdDate: String,
     val isLike: Boolean,
     val isExpand: Boolean = false,
-    val challengeBranch: Category,
+    val challengeBranch: Category? = Category.INVESTING,
     val challengeName: String,
     val participateNum: Int,
     val memberLevel: Int,

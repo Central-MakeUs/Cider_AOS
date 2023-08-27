@@ -66,7 +66,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         Log.d("KaKao Test", "사용자가 명시적으로 취소")
                     } else {
-                        Log.e("KaKao Test", "인증 에러 발생", error)
+                        Toast.makeText(requireContext(),"KaKao 인증 에러 발생 $error",Toast.LENGTH_SHORT).show()
                     }
                 }
             }
