@@ -16,7 +16,7 @@
             android:id="@+id/tv_intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사이다 소개"
+            android:text="지금 소개"
             android:fontFamily="@font/pretendard_bold"
             android:textColor="@color/white"
             android:textSize="@dimen/text_base"
