@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -84,12 +85,15 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
                         Toast.makeText(requireContext(), "챌린지 참여에 실패했습니다", Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
         }
         binding.btnToolbarBack.setOnClickListener {
             onBackPressed()
         }
+        binding.fabTop.setOnClickListener {
+            binding.bottomSheet.scrollY = 0
+        }
+
     }
 
     private fun showDialog() {
@@ -134,6 +138,7 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
         pagerAdapter.addFragment(ChallengeDetailInfoFragment())
         pagerAdapter.addFragment(ChallengeDetailFeedFragment())
         binding.vpChallenge.adapter = pagerAdapter
+        binding.vpChallenge.offscreenPageLimit = 1
 
         val tabTitle = listOf<String>("챌린지 정보","피드")
         TabLayoutMediator(binding.tabLayout, binding.vpChallenge) { tab, position ->
@@ -151,6 +156,7 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
                     it.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
                     val fragmentHeight = it.measuredHeight
                     maxHeight = max(maxHeight, fragmentHeight)
+                    Log.d("TEST layout","$fragmentHeight")
                 }
 
                 val layoutParams = binding.vpChallenge.layoutParams
