@@ -264,3 +264,12 @@ fun setDetailChallengeEnable(view: View, detail: String?) {
         view.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#C1C6CA"))
     }
 }
+
+@BindingAdapter("setAlphaSelection")
+fun setAlphaSelection(view: View, selected: Boolean) {
+    if (selected) {
+        view.alpha = 1.0f
+    } else {
+        view.alpha = 0.5f
+    }
+}
