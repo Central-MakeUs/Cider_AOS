@@ -3,21 +3,26 @@ package com.cider.cider.presentation.mypage
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentMyPageBinding
 import com.cider.cider.domain.type.WriteType
 import com.cider.cider.presentation.dialog.WriteBottomSheetDialog
+import com.cider.cider.presentation.viewmodel.ChallengeHomeViewModel
 import com.cider.cider.presentation.viewmodel.MyPageViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page)  {
 
     private val viewModel: MyPageViewModel by activityViewModels()
+    private val viewModel2: ChallengeHomeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -125,9 +130,15 @@ class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_m
                         )
                     }
                     WriteType.AUTH -> {
-                        findNavController().navigate(
-                            R.id.action_myPageFragment_to_certifyFragment
-                        )
+                        lifecycleScope.launch {
+                            if (viewModel2.checkChallengeParticipateList()) {
+                                Toast.makeText(requireContext(),"인증 가능한 챌린지가 없습니다.", Toast.LENGTH_SHORT).show()
+                            } else {
+                                findNavController().navigate(
+                                    R.id.action_myPageFragment_to_certifyFragment
+                                )
+                            }
+                        }
                     }
                 }
             }

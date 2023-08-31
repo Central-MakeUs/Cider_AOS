@@ -346,7 +346,6 @@
                     android:layout_width="@dimen/icon_size_16"
                     android:layout_height="@dimen/icon_size_16"
                     android:background="@drawable/selector_like"
-                    android:onClick="@{() -> viewmodel.changeFeedLike(feed.id)}"
                     app:select="@{feed.likeCheck}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_like"
