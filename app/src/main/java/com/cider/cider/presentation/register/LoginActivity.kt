@@ -15,7 +15,9 @@ import com.cider.cider.databinding.ActivityLoginBinding
 import com.cider.cider.presentation.MainActivity
 import com.cider.cider.presentation.viewmodel.LoginViewModel
 import com.cider.cider.utils.binding.BindingActivity
+import com.cider.cider.utils.loginWithKakao
 import com.kakao.sdk.common.util.Utility
+import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

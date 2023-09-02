@@ -59,6 +59,10 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
                 R.id.action_myCertifyFragment_to_challengeHomeFragment
             )
         }
+
+        binding.fabTop.setOnClickListener {
+            binding.scrollView.scrollY = 0
+        }
     }
 
     private fun setRecyclerView() {

@@ -10,6 +10,7 @@ import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListAllBinding
 import com.cider.cider.databinding.FragmentChallengeListBinding
 import com.cider.cider.domain.type.Filter
+import com.cider.cider.presentation.adapter.ChallengeCard2Adapter
 import com.cider.cider.presentation.adapter.ChallengeCardAdapter
 import com.cider.cider.presentation.dialog.FilterBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeListViewModel
@@ -42,15 +43,15 @@ class ChallengeListAllFragment: BindingFragment<FragmentChallengeListAllBinding>
     }
 
     private fun setRecyclerView() {
-        val cardAdapter = ChallengeCardAdapter(viewModel)
+        val cardAdapter = ChallengeCard2Adapter(viewModel)
         binding.rvChallengeList.apply {
             adapter = cardAdapter
-            addItemDecoration(ChallengeListSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
         }
 
-        cardAdapter.setOnItemClickListener(object : ChallengeCardAdapter.OnItemClickListener {
+        cardAdapter.setOnItemClickListener(object : ChallengeCard2Adapter.OnItemClickListener {
             override fun onItemClick(id: Int) {
-                findNavController().navigate(R.id.action_challengeListAllFragment_to_challengeDetailFragment)
+                val bundle = bundleOf("id" to id)
+                findNavController().navigate(R.id.action_challengeListAllFragment_to_challengeDetailFragment, bundle)
             }
         })
 

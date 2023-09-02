@@ -144,6 +144,7 @@
                                 android:layout_height="@dimen/challenge_icon"
                                 android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
                                 android:src="@drawable/home_contents"
+                                app:setAlphaSelection="@{viewmodel.tabState == Category.INVESTING}"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -181,6 +182,7 @@
                                 android:layout_height="@dimen/challenge_icon"
                                 android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
                                 android:src="@drawable/graph_contents"
+                                app:setAlphaSelection="@{viewmodel.tabState == Category.MONEY_MANAGEMENT}"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -217,6 +219,7 @@
                                 android:layout_height="@dimen/challenge_icon"
                                 android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
                                 android:src="@drawable/card_contents"
+                                app:setAlphaSelection="@{viewmodel.tabState == Category.FINANCIAL_LEARNING}"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -253,6 +256,7 @@
                                 android:layout_height="@dimen/challenge_icon"
                                 android:layout_marginHorizontal="@dimen/challenge_category_btn_padding_horizontal"
                                 android:src="@drawable/pig_contents"
+                                app:setAlphaSelection="@{viewmodel.tabState == Category.SAVING}"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -303,17 +307,21 @@
                     android:id="@+id/section_recommend_feed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/section_category_challenge">
 
-                    <include android:id="@+id/toolbar_recommend_feed"
-                        layout="@layout/item_toolbar_more"/>
+                    <include
+                        android:id="@+id/toolbar_recommend_feed"
+                        layout="@layout/item_toolbar_more" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_recommend_feed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/toolbar_recommend_feed"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/toolbar_recommend_feed" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

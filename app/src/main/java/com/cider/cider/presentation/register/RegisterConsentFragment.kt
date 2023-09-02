@@ -3,6 +3,7 @@ package com.cider.cider.presentation.register
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.fragment.app.activityViewModels
@@ -23,6 +24,8 @@ class RegisterConsentFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.register = viewModel
+        binding.executePendingBindings()
+        binding.lifecycleOwner = viewLifecycleOwner
         viewModel.changeRegisterState(RegisterType.SERVICE_AGREEMENT)
 
         setButton()
@@ -50,11 +53,29 @@ class RegisterConsentFragment
         binding.cbConsentAll.setOnClickListener {
             viewModel.changeCheckBox(30)
         }
+        binding.tvConsent4.setOnClickListener {
+            Log.d("TEST Touch","1")
+            viewModel.changeCheckBox(30)
+        }
+
+
+        binding.tvConsent1.setOnClickListener {
+            Log.d("TEST Touch","1")
+            viewModel.changeCheckBox(2)
+        }
         binding.cbConsent1.setOnClickListener {
             viewModel.changeCheckBox(2)
         }
+        binding.tvConsent2.setOnClickListener {
+            Log.d("TEST Touch","2")
+            viewModel.changeCheckBox(3)
+        }
         binding.cbConsent2.setOnClickListener {
             viewModel.changeCheckBox(3)
+        }
+        binding.tvConsent3.setOnClickListener {
+            Log.d("TEST Touch","3")
+            viewModel.changeCheckBox(5)
         }
         binding.cbConsent3.setOnClickListener {
             viewModel.changeCheckBox(5)
@@ -62,11 +83,6 @@ class RegisterConsentFragment
     }
 
     private fun setObserver() {
-        viewModel.checkBoxState.observe(viewLifecycleOwner) {
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                checkAllCheckBox()
-            }
-        }
         viewModel.detailState.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
 /*                if (viewModel.detailState.value == 1) {
@@ -96,24 +112,6 @@ class RegisterConsentFragment
                     binding.tvConsentTitle.visibility = View.VISIBLE
                 }*/
             }
-        }
-    }
-
-    private fun checkAllCheckBox() {
-        if (viewModel.checkBoxState.value == 30) {
-            binding.cbConsentAll.isChecked = true
-            binding.cbConsent1.isChecked = true
-            binding.cbConsent2.isChecked = true
-            binding.cbConsent3.isChecked = true
-            binding.viewConsentAll.isSelected = true
-        } else if (viewModel.checkBoxState.value == 1) {
-            binding.cbConsent1.isChecked = false
-            binding.cbConsent2.isChecked = false
-            binding.cbConsent3.isChecked = false
-            binding.viewConsentAll.isSelected = false
-        } else if (viewModel.checkBoxState.value != 30) {
-            binding.cbConsentAll.isChecked = false
-            binding.viewConsentAll.isSelected = false
         }
     }
 }

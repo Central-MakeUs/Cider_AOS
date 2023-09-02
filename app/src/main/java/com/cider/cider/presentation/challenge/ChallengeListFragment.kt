@@ -1,8 +1,6 @@
 package com.cider.cider.presentation.challenge
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -12,13 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeListBinding
 import com.cider.cider.domain.type.Filter
-import com.cider.cider.presentation.adapter.ChallengeCardAdapter
+import com.cider.cider.presentation.adapter.ChallengeCard2Adapter
 import com.cider.cider.presentation.dialog.FilterBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeListViewModel
 import com.cider.cider.utils.binding.BindingFragment
-import com.cider.cider.utils.decoration.ChallengeListSpacingDecoration
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,7 +51,7 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
             "popular" -> {
                 binding.toolbar.tvToolbarTitle.text = "인기 챌린지"
                 binding.backgroundBanner.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.btn_mint))
-                binding.tvBanner.text = "사이다에서 가장 \n인기 있는 챌린지\nTop 10"
+                binding.tvBanner.text = "지금에서 가장 \n인기 있는 챌린지\nTop 10"
                 viewModel.getChallengePopular(filter = Filter.LATEST)
                 changeToolbar(true)
             }
@@ -94,13 +90,12 @@ class ChallengeListFragment: BindingFragment<FragmentChallengeListBinding>(R.lay
     }
 
     private fun setRecyclerView() {
-        val cardAdapter = ChallengeCardAdapter(viewModel)
+        val cardAdapter = ChallengeCard2Adapter(viewModel)
         binding.rvChallengeList.apply {
             adapter = cardAdapter
-            addItemDecoration(ChallengeListSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.challenge_card_between)))
         }
 
-        cardAdapter.setOnItemClickListener(object : ChallengeCardAdapter.OnItemClickListener {
+        cardAdapter.setOnItemClickListener(object : ChallengeCard2Adapter.OnItemClickListener {
             override fun onItemClick(id: Int) {
                 val bundle = bundleOf("id" to id)
                 findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailFragment, bundle)

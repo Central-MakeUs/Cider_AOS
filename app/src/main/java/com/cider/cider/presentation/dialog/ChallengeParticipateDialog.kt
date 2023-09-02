@@ -33,6 +33,9 @@ class ChallengeParticipateDialog: BindingDialog<DialogParticipateBinding>(R.layo
                     Toast.makeText(requireContext(), "챌린지 참여에 실패했습니다", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(requireContext(), "챌린지 참여가 완료되었습니다", Toast.LENGTH_SHORT).show()
+
+                    viewModel.getDetail(viewModel.detail.value?.challengeId?:0)
+
                     binding.tvDialogTitle.text = "챌린지에 참여했어요\n인증하러 가요"
                     binding.btnCheck.visibility = View.GONE
                 }

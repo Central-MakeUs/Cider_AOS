@@ -18,6 +18,22 @@
         <include android:id="@+id/toolbar"
             layout="@layout/item_toolbar_my"/>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_top"
+            android:layout_width="@dimen/fab_size"
+            android:layout_height="@dimen/fab_size"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/line_position_up_24"
+            android:background="@drawable/shape_fab_background"
+            android:backgroundTint="@color/white"
+            app:fabCustomSize="@dimen/fab_size"
+            app:borderWidth="0dp"
+            app:visible="@{viewmodel.certifyList.size() != 0}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/section_category_challenge"
             android:layout_width="match_parent"
@@ -38,24 +54,31 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.core.widget.NestedScrollView
+                android:id="@+id/scroll_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintTop_toBottomOf="@id/spinner_challenge"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_feed"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="60dp"
-                    app:visible="@{viewmodel.certifyList.size() != 0}"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:layout_constraintTop_toBottomOf="@id/spinner_challenge"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_feed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="60dp"
+                        android:layout_marginTop="16dp"
+                        app:visible="@{viewmodel.certifyList.size() != 0}"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.core.widget.NestedScrollView>
 
@@ -64,7 +87,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@color/gray_3"
-                android:layout_marginTop="16dp"
                 app:visible="@{viewmodel.certifyList.size() == 0}"
                 app:layout_constraintTop_toBottomOf="@id/spinner_challenge"
                 app:layout_constraintBottom_toBottomOf="parent">

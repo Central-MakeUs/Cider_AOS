@@ -31,8 +31,16 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideRegisterApiService(): LoginApi {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor) // OkHttp Logging Interceptor 추가
+            .build()
+
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(okHttpClient)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

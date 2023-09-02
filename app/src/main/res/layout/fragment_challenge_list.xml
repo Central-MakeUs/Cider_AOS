@@ -119,8 +119,9 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_challenge_list"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="2" />

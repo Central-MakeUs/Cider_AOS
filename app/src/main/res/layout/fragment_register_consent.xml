@@ -43,11 +43,13 @@
                     android:id="@+id/cb_consent_1"
                     android:layout_width="@dimen/checkbox_size"
                     android:layout_height="@dimen/checkbox_size"
+                    android:checked="@{register.checkBoxState%2==0}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_consent_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -73,11 +75,13 @@
                     android:id="@+id/cb_consent_2"
                     android:layout_width="@dimen/checkbox_size"
                     android:layout_height="@dimen/checkbox_size"
+                    android:checked="@{register.checkBoxState%3==0}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_consent_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -124,11 +128,13 @@
                     android:id="@+id/cb_consent_3"
                     android:layout_width="@dimen/checkbox_size"
                     android:layout_height="@dimen/checkbox_size"
+                    android:checked="@{register.checkBoxState%5==0}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_consent_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -180,11 +186,13 @@
                 android:id="@+id/cb_consent_all"
                 android:layout_width="@dimen/checkbox_size"
                 android:layout_height="@dimen/checkbox_size"
+                android:checked="@{register.checkBoxState%30==0}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
+                android:id="@+id/tv_consent_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/consent_body4"

@@ -1,7 +1,9 @@
 package com.cider.cider.presentation.challenge
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -72,7 +74,6 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
         })
     }
 
-
     private fun setAppBar() {
         binding.toolbar.tvToolbarTitle.text = "챌린지"
         binding.toolbar.btnToolbarIcon1.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.line_my_24))
@@ -127,7 +128,6 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
             binding.scrollView.isRefreshing = false
         }*/
     }
-
 
     private fun setChallengeList() {
         childFragmentManager.beginTransaction().apply {
@@ -230,9 +230,15 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
                         )
                     }
                     WriteType.AUTH -> {
-                        findNavController().navigate(
-                            R.id.action_challengeHomeFragment_to_certifyFragment
-                        )
+                        lifecycleScope.launch {
+                            if (viewModel.checkChallengeParticipateList()) {
+                                Toast.makeText(requireContext(),"인증 가능한 챌린지가 없습니다.",Toast.LENGTH_SHORT).show()
+                            } else {
+                                findNavController().navigate(
+                                    R.id.action_challengeHomeFragment_to_certifyFragment
+                                )
+                            }
+                        }
                     }
                 }
             }

@@ -248,6 +248,7 @@
                                         android:layout_width="@dimen/icon_size_16"
                                         android:layout_height="@dimen/icon_size_16"
                                         android:src="@drawable/line_info_16"
+                                        android:visibility="gone"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toEndOf="@id/tv_my_lv_text"
                                         app:layout_constraintTop_toTopOf="parent" />
@@ -422,6 +423,7 @@
                                 android:layout_width="@dimen/icon_size"
                                 android:layout_height="@dimen/icon_size"
                                 android:src="@drawable/line_info_24"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 

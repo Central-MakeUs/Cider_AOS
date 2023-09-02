@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -28,14 +29,17 @@ import com.cider.cider.R
 import com.cider.cider.databinding.FragmentChallengeCreateDetailBinding
 import com.cider.cider.domain.model.ImageCardModel
 import com.cider.cider.domain.type.BottomSheetType
+import com.cider.cider.domain.type.ProfileEdit
 import com.cider.cider.domain.type.challenge.ImageType
 import com.cider.cider.presentation.adapter.ImageListAdapter
+import com.cider.cider.presentation.dialog.CertifyImageBottomSheetDialog
 import com.cider.cider.presentation.dialog.NumPickerBottomSheetDialog
 import com.cider.cider.presentation.viewmodel.ChallengeCreateViewModel
 import com.cider.cider.utils.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 @AndroidEntryPoint
 class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDetailBinding>(R.layout.fragment_challenge_create_detail) {
@@ -132,12 +136,12 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
 
         binding.btnImageAddSuccess.setOnClickListener {
             imageType = ImageType.SUCCESS
-            requestPermission()
+            showBottomSheetDialog()
         }
 
         binding.btnImageAddFail.setOnClickListener {
             imageType = ImageType.FAIL
-            requestPermission()
+            showBottomSheetDialog()
         }
     }
 
@@ -237,6 +241,27 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         }
     }
 
+    private fun showBottomSheetDialog() {
+        val dialog = CertifyImageBottomSheetDialog()
+
+        dialog.setOnValueChangedListener(object : CertifyImageBottomSheetDialog.OnValueChangedListener {
+
+            override fun onValueUpdated(type: ProfileEdit) {
+                when (type) {
+                    ProfileEdit.CAMERA -> {
+                        requestPermissionCamera()
+                    }
+                    ProfileEdit.GALLERY -> {
+                        requestPermission()
+                    }
+                    ProfileEdit.RANDOM -> TODO()
+                }
+            }
+
+        })
+        dialog.show(parentFragmentManager, "Capacity")
+    }
+
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
@@ -279,6 +304,40 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
             }
         }
 
+    private val requestPermissionCameraLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                openCamera()
+            } else {
+                showPermissionDeniedDialog()
+            }
+        }
+
+    private fun requestPermissionCamera() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionCameraLauncher.launch(Manifest.permission.CAMERA)
+        } else {
+            openCamera()
+        }
+    }
+
+    private val cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val selectedImageUri = result.data?.extras
+                setImageFromUri(getImageUri(requireContext(),selectedImageUri?.get("data") as Bitmap))
+            }
+        }
+
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraLauncher.launch(intent)
+    }
+
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         galleryLauncher.launch(intent)
@@ -301,4 +360,11 @@ class ChallengeCreateDetailFragment: BindingFragment<FragmentChallengeCreateDeta
         }
     }
 
+    private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path =
+            MediaStore.Images.Media.insertImage(context.contentResolver, inImage, "Title", null)
+        return Uri.parse(path)
+    }
 }

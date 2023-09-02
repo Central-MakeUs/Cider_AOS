@@ -136,7 +136,7 @@ fun setIconDrawableWithType(imageView: ImageView, challenge: Category?) {
 }
 
 @BindingAdapter("textColorChallenge")
-fun setTextColorChallenge(view: TextView, challenge: Category) {
+fun setTextColorChallenge(view: TextView, challenge: Category?) {
     when (challenge) {
         Category.INVESTING -> {
             view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_mint))
@@ -149,6 +149,9 @@ fun setTextColorChallenge(view: TextView, challenge: Category) {
         }
         Category.FINANCIAL_LEARNING -> {
             view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_purple))
+        }
+        else -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.btn_mint))
         }
     }
 }
@@ -259,5 +262,14 @@ fun setDetailChallengeEnable(view: View, detail: String?) {
     } else {
         view.isEnabled = false
         view.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#C1C6CA"))
+    }
+}
+
+@BindingAdapter("setAlphaSelection")
+fun setAlphaSelection(view: View, selected: Boolean) {
+    if (selected) {
+        view.alpha = 1.0f
+    } else {
+        view.alpha = 0.5f
     }
 }

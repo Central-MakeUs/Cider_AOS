@@ -22,10 +22,6 @@ import javax.inject.Inject
 class ChallengeHomeViewModel @Inject constructor(
     private val repository: ChallengeRepository
 ):ViewModel() {
-
-    private val _feed = MutableLiveData<List<FeedModel>>()
-    val feed: LiveData<List<FeedModel>> get() = _feed
-
     private val _tabState = MutableLiveData<Category>()
     val tabState: LiveData<Category> get() = _tabState
 
@@ -37,19 +33,7 @@ class ChallengeHomeViewModel @Inject constructor(
         _tabState.value = challenge
     }
 
-
-    fun changeFeedLike(targetId: Int) {
-        val originalFeedList = _feed.value?: mutableListOf() // 이전 feed 리스트 가져오기
-
-        val updatedFeedList = originalFeedList.map { feed ->
-            if (feed.id == targetId) { // 변경하려는 FeedModel의 id를 확인하고 해당 객체를 변경
-                Log.d("TEST feed click1","$feed")
-                feed.copy(likeCheck = !feed.likeCheck) // 변경된 값을 포함한 객체 복사본 생성
-            } else {
-                Log.d("TEST feed click2","$feed")
-                feed // 변경하지 않을 경우 기존 객체 반환
-            }
-        }
-        _feed.value = updatedFeedList
+    suspend fun checkChallengeParticipateList(): Boolean {
+        return repository.getChallengeParticipate().isNullOrEmpty() //비어있으면 true
     }
 }
