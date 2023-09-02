@@ -45,31 +45,151 @@
             android:layout_marginBottom="@dimen/bottom_navi_height"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/banner_home"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/viewpager_height"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_height="wrap_content">
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/banner_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/viewpager_height"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-                <TextView
-                    android:id="@+id/tv_indicator"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="24dp"
+                        android:background="@drawable/shape_rec_round_8"
+                        android:backgroundTint="#CC222222"
+                        android:paddingHorizontal="4dp"
+                        android:paddingVertical="2dp"
+                        android:text="0 / 0"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:textColor="@color/gray_1"
+                        android:textSize="@dimen/text_base"
+                        app:layout_constraintTop_toTopOf="@+id/banner_home"
+                        app:layout_constraintEnd_toEndOf="@id/banner_home"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/toolbar_challenge_certify"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="24dp"
-                    android:background="@drawable/shape_rec_round_8"
-                    android:backgroundTint="#CC222222"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="2dp"
-                    android:text="0 / 0"
-                    android:fontFamily="@font/pretendard_regular"
-                    android:textColor="@color/gray_1"
-                    android:textSize="@dimen/text_base"
-                    app:layout_constraintTop_toTopOf="@+id/banner_home"
-                    app:layout_constraintEnd_toEndOf="@id/banner_home"/>
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="12dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_challenge_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="9월 1일 인증"
+                        android:textSize="@dimen/text_2xl"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text='1개'
+                        android:textColor="@color/gray_5"
+                        android:textSize="@dimen/text_lg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="2개" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/section_lv_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:visibility="gone"
+                    android:paddingHorizontal="@dimen/layout_padding"
+                    app:layout_constraintTop_toBottomOf="@id/section_comment">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/progress_current"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:layout_marginEnd="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_current"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <View
+                            android:id="@+id/view_background_lv_current"
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp"
+                            android:background="@drawable/shape_progressbar_background"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view_progress_lv_current"
+                            android:layout_width="0dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/shape_progressbar_background"
+                            android:backgroundTint="@color/main"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/tv_progress_lv_current"
+                            app:layout_constraintStart_toStartOf="@id/view_background_lv_current"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_progress_lv_current"
+                            android:layout_width="37dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_rec_round_4"
+                            android:backgroundTint="@color/main"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:gravity="center"
+                            android:padding="2dp"
+                            android:text='0%'
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_sm"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:percent_position="@{0}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tv_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_rec_round_4"
+                        android:backgroundTint="@color/light_blue"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:paddingHorizontal="4dp"
+                        android:paddingVertical="2dp"
+                        android:text='총 0%'
+                        android:textColor="@color/main"
+                        android:textSize="@dimen/text_sm"
+                        app:layout_constraintStart_toEndOf="@id/progress_current"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="총 0%" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/section_popular_challenge"
@@ -360,7 +480,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.core.widget.NestedScrollView>
 

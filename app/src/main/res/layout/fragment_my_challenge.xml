@@ -109,30 +109,32 @@
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="24dp"
                         android:paddingVertical="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/tv_finish_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/challenge_finish_title"
                             android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/challenge_finish_title"
                             android:textSize="@dimen/text_2xl"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{String.valueOf(challenge.challengeFinish.size())+"개"}'
-                            tools:text="2개"
                             android:fontFamily="@font/pretendard_bold"
-                            android:textSize="@dimen/text_lg"
+                            android:text='@{String.valueOf(challenge.challengeFinish.size())+"개"}'
                             android:textColor="@color/gray_5"
-                            app:layout_constraintTop_toTopOf="parent"
+                            android:textSize="@dimen/text_lg"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="2개" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
