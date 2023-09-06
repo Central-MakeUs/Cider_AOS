@@ -1,7 +1,11 @@
 package com.cider.cider.presentation.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cider.cider.databinding.ItemBannerBinding
@@ -10,7 +14,7 @@ import com.cider.cider.domain.model.BannerCardModel
 import com.cider.cider.domain.model.ImageCardModel
 import com.cider.cider.utils.ItemDiffCallback
 
-class BannerPagerAdapter() : ListAdapter<BannerCardModel, RecyclerView.ViewHolder>(
+class BannerPagerAdapter(val context: Context) : ListAdapter<BannerCardModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<BannerCardModel>(
         onContentsTheSame = {old, new -> old == new},
         onItemsTheSame = {old, new -> old.id == new.id}
@@ -20,6 +24,11 @@ class BannerPagerAdapter() : ListAdapter<BannerCardModel, RecyclerView.ViewHolde
         private val binding: ItemBannerBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BannerCardModel) {
+            binding.tvDirect.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse("https://jigeum.oopy.io/ ")
+                startActivity(context, i, null)
+            }
         }
     }
 
