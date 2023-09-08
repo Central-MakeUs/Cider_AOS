@@ -156,7 +156,6 @@ class ChallengeDetailFragment: BindingFragment<FragmentChallengeDetailBinding>(R
                     it.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
                     val fragmentHeight = it.measuredHeight
                     maxHeight = max(maxHeight, fragmentHeight)
-                    Log.d("TEST layout","$fragmentHeight")
                 }
 
                 val layoutParams = binding.vpChallenge.layoutParams
