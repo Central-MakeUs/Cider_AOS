@@ -56,7 +56,7 @@ class ChallengeDetailInfoFragment: BindingFragment<FragmentChallengeDetailInfoBi
     }
 
     private fun setCaution() {
-        binding.ivCaution.setOnClickListener {
+        binding.sectionCaution.setOnClickListener {
             it.isSelected = !it.isSelected
             if (it.isSelected) {
                 binding.tvCaution.visibility = View.VISIBLE
