@@ -23,10 +23,15 @@ import kotlinx.coroutines.launch
 class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.fragment_my_certify) {
 
     private val certify: CertifyViewModel by viewModels()
+    private var selectId: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bundle = arguments
+        if (bundle != null ) {
+            selectId = bundle.getInt("id")
+        }
         binding.viewmodel = certify
         binding.lifecycleOwner = viewLifecycleOwner
         binding.executePendingBindings()
@@ -88,7 +93,6 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
                 R.layout.item_spinner_dropdown,
                 itemArray?.map {it.challengeName} ?: mutableListOf()
             )
-
             spinnerAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
             binding.spinnerChallenge.adapter = spinnerAdapter
             binding.spinnerChallenge.onItemSelectedListener =
@@ -103,6 +107,15 @@ class MyCertifyFragment: BindingFragment<FragmentMyCertifyBinding>(R.layout.frag
                     }
                     override fun onNothingSelected(parent: AdapterView<*>) {}
                 }
+
+            if (!itemArray.isNullOrEmpty()) {
+                for ((position, item) in itemArray.withIndex()) {
+                    if (item.id == selectId) {
+                        binding.spinnerChallenge.setSelection(position)
+                        Log.d("TEST my certify","$selectId / ${itemArray[position]}")
+                    }
+                }
+            }
         }
     }
 

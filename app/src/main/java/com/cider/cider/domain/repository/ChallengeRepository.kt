@@ -45,6 +45,7 @@ interface ChallengeRepository {
     suspend fun getCertifyDetail(id: Int, filter: Filter): Response<ResponseCertifyDetail>?
 
     suspend fun getChallengeParticipate(): List<ChallengeListModel>?
+    suspend fun getChallengeMyPageParticipate(): List<ChallengeListModel>?
     suspend fun getChallengeCertify(id: Int): List<CertifyModel>?
     suspend fun getChallengeLike(): List<ChallengeCardModel>?
 

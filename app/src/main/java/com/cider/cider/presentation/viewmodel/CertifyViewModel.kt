@@ -69,6 +69,6 @@ class CertifyViewModel @Inject constructor(
     }
 
     suspend fun getChallengeList(): List<ChallengeListModel>? {
-        return repository.getChallengeParticipate()
+        return repository.getChallengeMyPageParticipate()
     }
 }

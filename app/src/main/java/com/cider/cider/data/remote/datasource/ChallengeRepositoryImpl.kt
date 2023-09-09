@@ -176,6 +176,16 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getChallengeMyPageParticipate(): List<ChallengeListModel>? {
+        val data = apiService.getChallengeMyPageParticipate()
+        return data.body()?.let { it1 ->
+            it1.map {
+                ChallengeListModel(it.challengeId, it.challengeName)
+            }
+        }
+    }
+
+
     override suspend fun getChallengeCertify(id: Int): List<CertifyModel>? {
         val data = apiService.getChallengeCertifyList(id)
         return if (data.isSuccessful) {

@@ -102,6 +102,10 @@ interface ChallengeApi {
     suspend fun getChallengeParticipate(
     ): Response<List<ResponseChallengeParticipate>>
 
+    @GET("/api/challenge/mypage/participate")
+    suspend fun getChallengeMyPageParticipate(
+    ): Response<List<ResponseChallengeParticipate>>
+
     @GET("/api/certify/mypage/{challengeId}")
     suspend fun getChallengeCertifyList(
         @Path("challengeId") id: Int,
@@ -133,7 +137,7 @@ interface ChallengeApi {
     ): Response<ResponseCertify>
 
     @Multipart
-    @PATCH("/api/certify/images/{certifyId}")
+    @POST("/api/certify/images/{certifyId}")
     suspend fun postCertifyImage(
         @Path("certifyId") id: Int,
         @Part profileImage :List<MultipartBody.Part>
