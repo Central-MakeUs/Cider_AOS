@@ -49,7 +49,7 @@ class ChallengeHomeFragment: BindingFragment<FragmentChallengeHomeBinding>(R.lay
     }
 
     private fun setBanner() {
-        val bannerAdapter = BannerPagerAdapter()
+        val bannerAdapter = BannerPagerAdapter(requireContext())
         binding.bannerHome.adapter = bannerAdapter
         val bannerItems = listOf(
             BannerCardModel(1),

@@ -29,7 +29,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="금융과 소비 고민을\n시원하게 해결하다"
+            android:text="실천하는 금융 챌린지\n지금을 소개합니다"
             android:fontFamily="@font/pretendard_regular"
             android:textColor="@color/white"
             android:textSize="@dimen/text_4xl"
@@ -46,7 +46,6 @@
             android:fontFamily="@font/pretendard_bold"
             android:textColor="@color/white"
             android:textSize="@dimen/text_lg"
-            android:visibility="gone"
             android:layout_marginBottom="24dp"
             android:layout_marginStart="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -61,6 +60,7 @@
             android:textSize="@dimen/text_lg"
             android:layout_marginBottom="24dp"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/illust_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

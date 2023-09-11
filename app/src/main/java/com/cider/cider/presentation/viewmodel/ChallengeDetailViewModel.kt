@@ -75,6 +75,7 @@ class ChallengeDetailViewModel @Inject constructor(
                 _imageList.value = data.body()?.certifyImageUrlList?.map {
                     ImageCardModel(Uri.parse(it))
                 }
+                _imageList.value = _imageList.value?.take(6)
 
             }
         }
